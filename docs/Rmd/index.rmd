@@ -1,0 +1,12 @@
+---
+title: 'Intro to your Terminal, git, & GitHub'
+author: "[Angus Watters](https://anguswg-ucsb.github.io/)"
+output:
+  mikedown::ucsb:
+    toc: TRUE
+    number_sections: FALSE
+    code_folding: "show"
+subtitle: 'Big data in water - Debra Perrone'
+---
+
+# Index page

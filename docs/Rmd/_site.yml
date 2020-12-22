@@ -1,0 +1,7 @@
+name: "Angus Watters"
+output_dir: '.'
+navbar:
+  title: "Big water data"
+  left:
+    - text: "Week 1"
+      href: github.html
