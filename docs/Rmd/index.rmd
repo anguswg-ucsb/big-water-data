@@ -1,0 +1,40 @@
+---
+title: "[Water & big data](index.html)"
+author: "Home"
+date: "[Angus Watters](https://github.com/anguswg-ucsb)"
+mail: "adwattersgrubstein@ucsb.edu"
+github: "anguswg-ucsb"
+class_name: 'ES - Big data & Water'
+class_github: 'big-water-data'
+output:
+  mikedown::ucsb:
+    toc: TRUE
+    number_sections: FALSE
+    code_folding: "show"
+subtitle: 'Intro to the Terminal, git, and Github'
+---
+
+```{r, echo = FALSE}
+library(rmarkdown)
+library(mikedown)
+#![](img/ucsb-bren-school.png)
+```
+
+# Welcome to ES - Data & Water
+
+***
+
+This is home page **ES - Big data and water class** for the Winter 2021 quarter, offered at UCSB. The course is taught by Professor D. Perrone from the Bren School of Environmental science at UCSB. 
+
+Data science allows us to analyze and parse through data and eventually draw conclusions. In the real world, data very rarely "friendly" and needs to be coerced and manipulated before any meaningful analysis can take place. This course will be taught in R but no prior knowledge of the language is needed! Prior experience in other programming languages will benefit you but is not necessary.
+
+<br>
+
+***
+
+> **"The purpose of programming is to find a sequence of instructions that will automate the performance of a task on a computer, to solve a given problem."**
+
+
+
+
+

@@ -15,18 +15,18 @@ library(readr)
 
 # STEP 2 --- READ IN DATA FROM DATA FOLDER
 
-
+data()
 # aquastat = read_csv(file ='data/aquastat-data-02.csv')
 #
 # tmp1 = aquastat %>% mutate(row = 1:n()) %>%
 #   pivot_wider(names_from = 'Variable Name', values_from = Value)
 base::Sys.which("bash")
-pop = read_csv(file ='data/aquastat-pop.csv') %>%
-  pivot_wider(names_from = 'Variable Name', values_from = Value) %>%
+pop = read_csv(file ='data/aquastat-pop.csv')
+pop = pop %>% pivot_wider(names_from = 'Variable Name', values_from = 'Values') %>%
   select(country = Area,
          year = Year,
          total_pop = `Total population`)
-
+huron = LakeHuron
 pop = pop %>% slice(n = 1:2220)
 
 water = read_csv(file ='data/aquastat-water-resources.csv') %>%

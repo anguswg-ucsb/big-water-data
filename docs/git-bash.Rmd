@@ -1,12 +1,18 @@
 ---
-title: 'Intro to your Terminal, git, & GitHub'
-author: "[Angus Watters](https://anguswg-ucsb.github.io/)"
+title: "[Water & big data](index.html)"
+author: "Week 1 exercise"
+date: "[Angus Watters](https://github.com/anguswg-ucsb)"
+mail: "adwattersgrubstein@ucsb.edu"
+github: "anguswg-ucsb"
+class_name: 'Water & big data'
+class_github: 'big-water-data'
+home: ""
 output:
   mikedown::ucsb:
     toc: TRUE
     number_sections: FALSE
     code_folding: "show"
-subtitle: 'Big data in water - Debra Perrone'
+subtitle: 'Intro to the Terminal, git, and Github'
 ---
 
 
@@ -23,42 +29,38 @@ span.code {
 </style>
 ***
 
-
-
-```{r, message = FALSE, warning = FALSE, echo = FALSE}
-library(mikedown)
-library(rmarkdown)
-library(knitr)
-
-# !
-```
-
-
-# **RStudio terminal**
-
-> The RStudio terminal provides access to the **operating system (OS)** shell from within the RStudio IDE. Beneath the surface of any OS is an entire world that can only be accessed only from the **command line.** <br><br>The terminal is a gateway to that command line. <br><br>With it, instead of pointing and clicking, you can type commands and have your computer respond.
-
+> The RStudio terminal provides access to the **operating system (OS)** shell from within the RStudio IDE. Beneath the surface of any OS is an entire world that can only be accessed only from the **command line**. <br><br>The terminal is a gateway to that command line. <br><br>With it, instead of pointing and clicking, you can type commands and have your computer respond.
 
 
 ***
 
-<br>
+# Goals
 
-# **Locate the terminal**
-
-The terminal is a computer application. On a Mac, it is most frequently accessed via your Terminal application , and on Windows, through PowerShell. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The Terminal tab can be found next to the Console tab. If it is not visible, show it via Shift+Alt+T (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
-
+- Brief crash course in terminal commands
+- Overcome the initial (and understandable!) anxiety associated with the terminal
+- Install git on your machine 
+- Learn to execute simple tasks such as creating a file and navigating our system directory in the RStudio terminal
+- Setup your Github account
 
 ***
 
-# **Terminal commands**
+# Locate the Terminal
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+![](../img/r-panels.png)
+
+***
+
+# Useful Terminal Commands
 
 Using the terminal expedites basic tasks such as creating new files and folders, exploring folder structures, and seeing what it can tell us about our computer system. Here are 6 common commands that are useful for navigating a file system and creating files.
 
 ### <span class= "code" >pwd</span> - print working directory
 
 pwd displays directory or folder you are currently in
-```{bash, eval = TRUE}
+
+```{bash,  engine="sh"}
 pwd
 ```
 
@@ -66,7 +68,7 @@ pwd
 
 ls shows the files in the current working directory. This is equivalent to looking at the files in your Finder/Explorer/File Manager. Use ls -a to also list hidden files, such as `.Rhistory` and `.git`. Here we look at all the files in current working directory:
 
-```{bash, eval = TRUE}
+```{bash}
 ls
 ```
 
@@ -74,10 +76,10 @@ ls
 
 mkdir creates a new folder (directory) inside your current working directory
 
-to make a new folder called 'my-folder'
+to make a new folder called 'my_folder'
 
-```{bash, eval = TRUE}
-mkdir my-folder
+```{bash}
+mkdir my_folder
 ls
 ```
 
@@ -88,71 +90,70 @@ Notably we see our my-folder directory!
 cd allows you to navigate through directories by changing working directory. There are many ways to navigate:
 
 #### go to subdirectory of current working directory:
-```{bash, eval = TRUE}
+
+```{bash}
 pwd # start here
 cd my-folder
 pwd # end here
 ```
 
-
-
 #### go to parent (one folder up) of current working directory: cd ..
-```{bash, eval = TRUE}
+
+```{bash}
 pwd
 cd ..
 pwd
 ```
-
-
-
 #### go to your “home” directory: cd ~ or simply cd
-```{bash, eval = TRUE}
+
+```{bash}
 pwd
 cd ~
 pwd
 ```
 
 #### Using absolute path, works regardless of your current working directory:. 
-```{bash, eval = TRUE}
+
+```{bash}
 pwd
-cd /cygdrive/c/Users/angus/OneDrive/Documents
+cd /Users/anguswg-ucsb/github/spds
 pwd
 ```
 
 Windows uses a slightly different syntax with the slashes between the folder names reversed, \, e.g. cd C:\Users\MY_USERNAME\Desktop.
 
-Pro tip 1: Dragging and dropping a file or folder into the terminal window will paste the absolute path into the window.
-Pro tip 2: Use the tab key to autocomplete unambiguous directory and file names. Hit tab twice to see all ambiguous options.
+**Pro tip 1:** Dragging and dropping a file or folder into the terminal window will paste the absolute path into the window.
 
+**Pro tip 2:** Use the tab key to autocomplete unambiguous directory and file names. Hit tab twice to see all ambiguous options.
 
-### <span class= "code">touch</span> - create a file
+### Create a file
 
-On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</span>  can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file in our working directory as follows:
+On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</span>  can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file named `new_r_file.R` in our working directory as follows:
 
 ```{bash, eval = TRUE}
-touch new-r-file.R
+touch new_r_file.R
 ls
 ```
 
 On a Windows machine (anything running Powershell) <span class = "code">$null ></span>  can be used to create a new file with a defined name and extension in the working directory. Essentially, this is piping no data (null) into a new file. For example, we can create a new R file in our working directory as follows:
 
-```{bash, eval = TRUE}
+```{bash, eval = FALSE}
 $null > new-r-file.R
 ```
 
 ### <span class= "code">clear</span> - clear your terminal window
 
-```{bash, eval = TRUE}
+```{r, eval = FALSE}
 clear
 ```
 
-```{bash, eval = TRUE}
-rm -R my-folder
-rm new-r-file.R
+```{bash, echo = FALSE}
+rm -R my_folder
+rm new_r_file.R
 ```
 
 
-# **Installing git**
+# Installing git
 
 Now we are going to use our terminal to find/install git. But what is git?
 
@@ -162,26 +163,28 @@ Now we are going to use our terminal to find/install git. But what is git?
 
 <br> 
 
-## **Step 1. See if git is already installed**
+## Step 1. See if git is already installed
 
-In your terminal, type the following (note: PC USERS type <span class = "code">where git</span>) and hit Enter.  
+In your terminal, type the following (note: PC USERS type <span class = "code">where git</span>) and hit `Enter`.  
 
-If git is installed, it will return a path like below. 
-```{bash, eval = TRUE}
+If `git` is installed, it will return a path like below. 
+
+```{bash}
 which git
 ```
+
 If prompted to install git do it, if not process to Step 2 to manually install
 
 If you have git installed, or it automatically installed, consider yourself fortunate and move to section 3. Otherwise...
 
-
-## **Step 2: Manually install git**
+## Step 2: Manually install git
 
 <span class= "code">You should only have to do this if git was **NOT** found in Step 1 !!!</span>
 
 ### MacOS <i class="fa fa-apple" aria-hidden="true"></i>
 
 Install the Xcode command line tools (not all of Xcode), which includes Git, by typing the following in your terminal:
+
 ```{bash, eval = FALSE}
 xcode-select --install
 ```
@@ -197,122 +200,99 @@ When asked about “Adjusting your PATH environment”, make sure to select
 
 Once git is installed - restart RStudio and make sure that you can see the git pathway (which/where git) in the terminal. Once installed, continue to Step 3.
 
+## Step 3: Check the version
 
-## **Step 3: Check the version**
+Once you have git installed, enter `git --version` into your terminal to see the version of git you have. Like this:
 
-Once you have git installed, you can also type `git --version` (then press Enter) to see the version of git you have. Like this:
-```{bash, eval = TRUE}
+```{bash}
 git --version
 ```
 
-
-# **Github**
+# Github
 
 > GitHub provides a platform for hosting software developed using Git. It offers the version control functionality of Git, plus its own features. While Git is a **command line tool**, GitHub provides a Web-based graphical interface. 
 
 ## <i class="fa fa-github" aria-hidden="true"></i> Your GitHub
 
- 
- - Go to [GitHub](https://github.com) and make an account
- - Choose your email and user name wisely as it will appear on all websites and repos you
- 
+ - Create an account on [GitHub](https://github.com) 
+ - Choose your email and username wisely as it will appear on all websites and repositories you create
+ - Take note of your user.name and email as we will need to reference them again shortly
+
 
 ## <i class="fa fa-search" aria-hidden="true"></i> Finding Open Source code
 
-### Find and fork a repository
-- Through GitHub you can find, share, and use open source code uploaded by other people.
-- In the top right hand corner, enter `anguswg-ucsb/big-water-data` into the search bar to find your first repository
+GitHub allows for us to find, borrow, and share open source. In the top left hand corner, enter`anguswg-ucsb/big-water-data`. into the search bar to find your first repository
 
 <img src="act-img/02-class-repo.png">
-
 
 In the upper right hand corner you see three options:
 
 1. **watch**: will notify you via email when changes to the repo are made (notifications can be a lot)
 2. **star**: places the repo in “stared” repositories section making it convenient to find
-3. **fork**: this makes a copy of the current repo in your account that you can modify and build on.
+3. **fork**: makes a copy of the current repo in your account that you can modify and build on
 
 
-
-## <i class="fa fa-user" aria-hidden="true"></i> Connect Git and GitHub
+## <i class="fa fa-user" aria-hidden="true"></i> Telling Git who we are
 
 You now have a local Git and a GitHub account, the next step is to connect them:
 
-  The first thing we need to do is tell git who we are. Git comes with a tool called `git config` that lets us set the configuration variables that control how Git looks and operates.
+First, we need to tell git who we are. Git comes with a tool called `git config` that lets us set the configuration variables that control how Git looks and operates.
 
 In the RStudio Terminal, enter the following, where `YOUR NAME` is what you want git to know you by (this can be your user.name or real name)
-```{bash, eval = TRUE}
+
+```{bash, eval = FALSE}
 git config --global user.name 'YOUR NAME'
 ```
 
-**What happend:** We used the terminal to the local Git program to set a global configuration variable, called **user.name** to the specified **'YOUR NAME'**
+**What happened:** We used the terminal to the local Git program to set a global configuration variable, called **user.name** to the specified `YOUR NAME`
 
-
-Next, we will do the same process to tell Git what email is associated with your new GitHub account
-```{bash, eval = TRUE}
+Next, we will do the same process to tell Git what `email` is associated with your new GitHub account
+```{bash, eval = FALSE}
 git config --global user.email 'Your Email Here'
 ```
 
-
 After you have done both, enter the following into your terminal to list your global configuration variables:
+
 ```{bash, eval = TRUE}
 git config --list --global
 ```
 
-Make sure to check that your **user.name** and **user.email** are the same as what you inputted previously
+Make sure to check that your **user.name** and **user.email** are the same as what you inputted previously 
 
 ## <i class="fa fa-home" aria-hidden="true"></i> GitHub's local home
 
 The last thing we will do is make a folder in our **home** directory named `github`. This is not a necessary step but it helps a lot to keep files organized and conveniently situated 
 
+To do this, create a folder called `github` in the **home** directory of your computer. We can quickly do this by changing to our home directory (`cd`) and making a new folder (`mkdir`) called github:
 
-Change to home directory (`cd~`) and making a new folder called github (`mkdir github`):
 ```{bash, eval = FALSE}
 cd ~
-mkdir temp_file
+mkdir github
 ```
 
-<br>
-<br>
 
+# Assignment
+
+For this assignment two things must be submitted:
+
+1. Screenshot of your git config global variables (e.g.)
+
+```{bash, eval = FALSE}
+git config --list --global
+```
+
+2. a URL to your github account (e.g.) .
+
+```{r, eval = FALSE}
+https://github.com/anguswg-ucsb
+```
+ 
+ 
+Going to your link, should show something like this (image, info, and star count > 1)
+
+<img src="act-img/assignment-02.png">
+
+These should be submitted on the Guachospace dropbox.
 
 ## END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,0 +1,15 @@
+
+name: "Angus Watters"
+output_dir: '.'
+navbar:
+  title: "Water & big data"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Week 1"
+      href: git-bash.html
+output:
+  mikedown::ucsb:
+    toc: TRUE
+    number_sections: FALSE
+    code_folding: "hide"
