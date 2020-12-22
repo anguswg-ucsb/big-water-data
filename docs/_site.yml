@@ -2,10 +2,10 @@
 name: "Angus Watters"
 output_dir: '.'
 navbar:
-  title: "Big water data"
+  title: "Water & big data"
   left:
     - text: "Week 1"
-      href: github.html
+      href: git-bash.html
 output:
   mikedown::ucsb:
     toc: TRUE

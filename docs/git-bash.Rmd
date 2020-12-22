@@ -48,7 +48,8 @@ span.code {
 
 The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
 
-![](../img/r-panels.png)
+![](img/r-panels.png)
+
 
 ***
 

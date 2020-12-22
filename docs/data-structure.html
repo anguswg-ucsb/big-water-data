@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<!-- Github Logo -->
+
+
+
+<meta name="author" content="Angus Watters" />
+
+
+<title>Geography 176A</title>
+
+<script src="data-structure_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="data-structure_files/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="data-structure_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="data-structure_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="data-structure_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="data-structure_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="data-structure_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="data-structure_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="data-structure_files/navigation-1.1/tabsets.js"></script>
+<script src="data-structure_files/navigation-1.1/codefolding.js"></script>
+<script src="data-structure_files/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="data-structure_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="data-structure_files/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="data-structure_files/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="C:/Users/angus/OneDrive/Documents/R/win-library/4.0/mikedown/rmarkdown/templates/ucsb/resources/style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 54px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+
+.section h2 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h3 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h4 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h5 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h6 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+    <img style="margin-bottom: 20px" src="https://github.com/mikejohnson51/mikedown/raw/master/inst/rmarkdown/templates/ucsb/resources/ucsb-navy-white.png" alt="logo">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Big water data</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="github.html">Week 1</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Geography 176A</h1>
+<h3 class="subtitle"><em>Lecture 04: Data Type &amp; Structure</em></h3>
+<h4 class="author" style="text-align: center;"><em>Angus Watters - </em></h4>
+
+</div>
+
+
+<div id="reminder" class="section level2">
+<h2>Reminder</h2>
+<center>
+<img src="lec-img/01-learning-curve.png" width="75%">
+</center>
+<hr />
+<p>“I feel like I’m learning a new language right now”</p>
+<p>–</p>
+<p>“there is a difference between practical knowledge and understanding the concepts”</p>
+<p>–</p>
+<p>“I am still confused on the meaning of things, like why exactly do we need to use GitHub, what the difference is between the terminal and console, and the differences between file types. I know these are all very simple things, but I feel like I’m learning a new language right now.”</p>
+<p>–</p>
+<p><img src="lec-img/week-01-gforms.png" width ="35%"></p>
+<hr />
+</div>
+<div id="changes" class="section level1">
+<h1>Changes:</h1>
+<ul>
+<li>Daily Assignments will be due at <strong>5pm</strong> the following class</li>
+<li>I will start <strong>recording</strong> lectures on Monday</li>
+<li>Today, after lab, I will hang on from <strong>5 - 6</strong> to walk through parts of the lab in some detail</li>
+</ul>
+<p>–</p>
+<div id="if-you-are-having-trouble-setting-up-r-rstudio-ect-email-me-asap" class="section level3">
+<h3>If you are having trouble setting up R, RStudio, ect email me ASAP!</h3>
+<hr />
+</div>
+</div>
+<div id="computers-convert-bytes---hex---value" class="section level1">
+<h1>Computers convert bytes &lt;-&gt; hex &lt;-&gt; value</h1>
+<p><img src="lec-img/04-ascii-hex-binary.png"></p>
+<hr />
+</div>
+<div id="whats-the-difference-between-3-the-number-and-3-the-character" class="section level1">
+<h1>What’s the difference between 3 (the number) and ‘3’ (the character)?</h1>
+<p><code>To us</code>: meaning <code>To software</code>: hows its handled <code>To a computer</code>: nothing</p>
+<p>–</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">3</span><span class="op">+</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<pre><code>[1] 6</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="st">&#39;3&#39;</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<pre><code>Error in &quot;3&quot; + 3: non-numeric argument to binary operator</code></pre>
+<hr />
+<p>class: inverse, center, middle</p>
+</div>
+<div class="section level1">
+<h1><i class="fas  fa-layer-group " style="color:#003660;"></i></h1>
+</div>
+<div id="data-types" class="section level1">
+<h1>Data Types</h1>
+<div id="numeric" class="section level2">
+<h2>1. Numeric</h2>
+<ul>
+<li>Values with decimals</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Of type “double” in computer science terms</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Default computational data type in R.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Doubles can be specified in decimal (0.1234), scientific (1.23e4), or hexadecimal (0xcafe) form.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>There are three special values unique to doubles: <code>Inf</code>, <code>-Inf</code>, and <code>NaN</code> (not a number).</li>
+</ul>
+<hr />
+<p>count: false</p>
+<p>.panel1-numerics-auto[</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>(<span class="dt">x =</span> <span class="fl">4.75</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-numerics-auto[</p>
+<pre><code>[1] 4.75</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-numerics-auto[</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>(<span class="dt">x =</span> <span class="fl">4.75</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">class</span>(x)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">typeof</span>(x)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-numerics-auto[</p>
+<pre><code>[1] 4.75</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-numerics-auto[</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>(<span class="dt">x =</span> <span class="fl">4.75</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">class</span>(x)</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">typeof</span>(x)</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span>  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-numerics-auto[</p>
+<pre><code>[1] 4.75</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 9.5</code></pre>
+<pre><code>[1] 6.75</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-numerics-auto[</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>(<span class="dt">x =</span> <span class="fl">4.75</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">class</span>(x)</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">typeof</span>(x)</span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>x <span class="op">-</span><span class="st"> </span><span class="dv">5</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>x <span class="op">/</span><span class="st"> </span><span class="dv">4</span>  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-numerics-auto[</p>
+<pre><code>[1] 4.75</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 9.5</code></pre>
+<pre><code>[1] 6.75</code></pre>
+<pre><code>[1] -0.25</code></pre>
+<pre><code>[1] 1.1875</code></pre>
+<p>]</p>
+<div id="integer" class="section level3">
+<h3>2. Integer</h3>
+<ul>
+<li>Values without decimals</li>
+</ul>
+<p>–</p>
+<ul>
+<li>To create an integer in R you must follow the a number with an uppercase L.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Take less memory then doubles but this is rarely an issue</li>
+</ul>
+<p>–</p>
+<ul>
+<li>One byte is <strong>8</strong> bits,</li>
+<li>Each <strong>bit</strong> can represent two values (0,1),</li>
+<li>One <strong>byte</strong> can hold 2<sup>8</sup>=256 values.</li>
+<li>used for (0 to 255) –or– (−128 to 127).</li>
+</ul>
+<p>count: false</p>
+<p>.panel1-integers-auto[</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>(<span class="dt">x =</span> <span class="dv">2</span>)  <span class="co"># defaults to numeric</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">typeof</span>(x)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-integers-auto[</p>
+<pre><code>[1] 2</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-integers-auto[</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>(<span class="dt">x =</span> <span class="dv">2</span>)  <span class="co"># defaults to numeric</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="kw">typeof</span>(x)</span>
+<span id="cb28-3"><a href="#cb28-3"></a>(<span class="dt">y =</span> 2L)  <span class="co"># specifies integer</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="kw">typeof</span>(y)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-integers-auto[</p>
+<pre><code>[1] 2</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 2</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-integers-auto[</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>(<span class="dt">x =</span> <span class="dv">2</span>)  <span class="co"># defaults to numeric</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="kw">typeof</span>(x)</span>
+<span id="cb33-3"><a href="#cb33-3"></a>(<span class="dt">y =</span> 2L)  <span class="co"># specifies integer</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="kw">typeof</span>(y)</span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="kw">class</span>(y)</span>
+<span id="cb33-6"><a href="#cb33-6"></a></span>
+<span id="cb33-7"><a href="#cb33-7"></a>(<span class="dt">t =</span> 1L <span class="op">/</span><span class="st"> </span>5L)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-integers-auto[</p>
+<pre><code>[1] 2</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 2</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre><code>[1] 0.2</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-integers-auto[</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>(<span class="dt">x =</span> <span class="dv">2</span>)  <span class="co"># defaults to numeric</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="kw">typeof</span>(x)</span>
+<span id="cb40-3"><a href="#cb40-3"></a>(<span class="dt">y =</span> 2L)  <span class="co"># specifies integer</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="kw">typeof</span>(y)</span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="kw">class</span>(y)</span>
+<span id="cb40-6"><a href="#cb40-6"></a></span>
+<span id="cb40-7"><a href="#cb40-7"></a>(<span class="dt">t =</span> 1L <span class="op">/</span><span class="st"> </span>5L)</span>
+<span id="cb40-8"><a href="#cb40-8"></a><span class="kw">typeof</span>(t)</span>
+<span id="cb40-9"><a href="#cb40-9"></a></span>
+<span id="cb40-10"><a href="#cb40-10"></a><span class="co">## Casting</span></span>
+<span id="cb40-11"><a href="#cb40-11"></a></span>
+<span id="cb40-12"><a href="#cb40-12"></a><span class="kw">as.integer</span>(<span class="kw">c</span>(<span class="fl">4.1</span>, <span class="fl">5.2</span>, <span class="fl">6.3</span>, <span class="fl">6.4</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-integers-auto[</p>
+<pre><code>[1] 2</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 2</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre><code>[1] 0.2</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 4 5 6 6</code></pre>
+<p>]</p>
+<style>
+.panel1-integers-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-integers-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-integers-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<p>count: false</p>
+<p>.panel1-character-auto[</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>(<span class="dt">x =</span> <span class="st">&quot;a&quot;</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-character-auto[</p>
+<pre><code>[1] &quot;a&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-character-auto[</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>(<span class="dt">x =</span> <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb51-2"><a href="#cb51-2"></a>(<span class="dt">y =</span> <span class="st">&quot;bc&quot;</span>)</span>
+<span id="cb51-3"><a href="#cb51-3"></a>(<span class="dt">z =</span> <span class="st">&quot;GIS is Great!!!&quot;</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-character-auto[</p>
+<pre><code>[1] &quot;a&quot;</code></pre>
+<pre><code>[1] &quot;bc&quot;</code></pre>
+<pre><code>[1] &quot;GIS is Great!!!&quot;</code></pre>
+<p>]</p>
+<style>
+.panel1-character-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-character-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-character-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<hr />
+</div>
+<div id="logical" class="section level3">
+<h3>4. Logical</h3>
+<ul>
+<li>Logical values store boolean values (<code>TRUE</code> and <code>FALSE</code>).</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Usefull for checking conditions and controlling the flow of a program.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Or, for checking binary conditions (like on,off; open/closed; &gt;100)</li>
+</ul>
+<p>–</p>
+<ul>
+<li>The idea of the T/F boolean will be one of the most important in this class</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Logicals can be written in full (TRUE or FALSE), or abbreviated (T or F).</li>
+</ul>
+<hr />
+<p>count: false</p>
+<p>.panel1-logical-auto[</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>u =<span class="st"> </span><span class="ot">TRUE</span>  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-logical-auto[]</p>
+<p>count: false</p>
+<p>.panel1-logical-auto[</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>u =<span class="st"> </span><span class="ot">TRUE</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>v =<span class="st"> </span><span class="ot">FALSE</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="kw">typeof</span>(u)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-logical-auto[</p>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-logical-auto[</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>u =<span class="st"> </span><span class="ot">TRUE</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>v =<span class="st"> </span><span class="ot">FALSE</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a><span class="kw">typeof</span>(u)</span>
+<span id="cb58-4"><a href="#cb58-4"></a></span>
+<span id="cb58-5"><a href="#cb58-5"></a><span class="co"># if u AND v are TRUE</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a>u <span class="op">&amp;</span><span class="st"> </span>v</span>
+<span id="cb58-7"><a href="#cb58-7"></a><span class="co"># if u OR v are TRUE</span></span>
+<span id="cb58-8"><a href="#cb58-8"></a>u <span class="op">|</span><span class="st"> </span>v  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-logical-auto[</p>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-logical-auto[</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>u =<span class="st"> </span><span class="ot">TRUE</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>v =<span class="st"> </span><span class="ot">FALSE</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="kw">typeof</span>(u)</span>
+<span id="cb62-4"><a href="#cb62-4"></a></span>
+<span id="cb62-5"><a href="#cb62-5"></a><span class="co"># if u AND v are TRUE</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a>u <span class="op">&amp;</span><span class="st"> </span>v</span>
+<span id="cb62-7"><a href="#cb62-7"></a><span class="co"># if u OR v are TRUE</span></span>
+<span id="cb62-8"><a href="#cb62-8"></a>u <span class="op">|</span><span class="st"> </span>v</span>
+<span id="cb62-9"><a href="#cb62-9"></a><span class="co"># The opposite</span></span>
+<span id="cb62-10"><a href="#cb62-10"></a><span class="op">!</span>u</span>
+<span id="cb62-11"><a href="#cb62-11"></a></span>
+<span id="cb62-12"><a href="#cb62-12"></a><span class="co"># Equality / conditions</span></span>
+<span id="cb62-13"><a href="#cb62-13"></a><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">6</span>  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-logical-auto[</p>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-logical-auto[</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>u =<span class="st"> </span><span class="ot">TRUE</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a>v =<span class="st"> </span><span class="ot">FALSE</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a><span class="kw">typeof</span>(u)</span>
+<span id="cb68-4"><a href="#cb68-4"></a></span>
+<span id="cb68-5"><a href="#cb68-5"></a><span class="co"># if u AND v are TRUE</span></span>
+<span id="cb68-6"><a href="#cb68-6"></a>u <span class="op">&amp;</span><span class="st"> </span>v</span>
+<span id="cb68-7"><a href="#cb68-7"></a><span class="co"># if u OR v are TRUE</span></span>
+<span id="cb68-8"><a href="#cb68-8"></a>u <span class="op">|</span><span class="st"> </span>v</span>
+<span id="cb68-9"><a href="#cb68-9"></a><span class="co"># The opposite</span></span>
+<span id="cb68-10"><a href="#cb68-10"></a><span class="op">!</span>u</span>
+<span id="cb68-11"><a href="#cb68-11"></a></span>
+<span id="cb68-12"><a href="#cb68-12"></a><span class="co"># Equality / conditions</span></span>
+<span id="cb68-13"><a href="#cb68-13"></a><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">6</span></span>
+<span id="cb68-14"><a href="#cb68-14"></a><span class="dv">2</span> <span class="op">!=</span><span class="st"> </span><span class="dv">6</span></span>
+<span id="cb68-15"><a href="#cb68-15"></a></span>
+<span id="cb68-16"><a href="#cb68-16"></a><span class="st">&quot;test&quot;</span> <span class="op">==</span><span class="st"> &quot;test&quot;</span>  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-logical-auto[</p>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<p>]</p>
+</div>
+<div id="raw" class="section level3">
+<h3>5. Raw</h3>
+<ul>
+<li>The raw type is intended to hold raw bytes.</li>
+<li>Useful to introduce, but will only be used at a conceptual level.</li>
+</ul>
+<hr />
+<p>count: false</p>
+<p>.panel1-raw-auto[</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>(x &lt;-<span class="st"> </span><span class="kw">charToRaw</span>(<span class="st">&quot;GIS is great!&quot;</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-raw-auto[</p>
+<pre><code> [1] 47 49 53 20 69 73 20 67 72 65 61 74 21</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-raw-auto[</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>(x &lt;-<span class="st"> </span><span class="kw">charToRaw</span>(<span class="st">&quot;GIS is great!&quot;</span>))</span>
+<span id="cb78-2"><a href="#cb78-2"></a><span class="kw">typeof</span>(x)</span>
+<span id="cb78-3"><a href="#cb78-3"></a></span>
+<span id="cb78-4"><a href="#cb78-4"></a><span class="kw">rawToChar</span>(x[<span class="dv">1</span>])  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-raw-auto[</p>
+<pre><code> [1] 47 49 53 20 69 73 20 67 72 65 61 74 21</code></pre>
+<pre><code>[1] &quot;raw&quot;</code></pre>
+<pre><code>[1] &quot;G&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-raw-auto[</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>(x &lt;-<span class="st"> </span><span class="kw">charToRaw</span>(<span class="st">&quot;GIS is great!&quot;</span>))</span>
+<span id="cb82-2"><a href="#cb82-2"></a><span class="kw">typeof</span>(x)</span>
+<span id="cb82-3"><a href="#cb82-3"></a></span>
+<span id="cb82-4"><a href="#cb82-4"></a><span class="kw">rawToChar</span>(x[<span class="dv">1</span>])</span>
+<span id="cb82-5"><a href="#cb82-5"></a><span class="kw">rawToChar</span>(x)</span>
+<span id="cb82-6"><a href="#cb82-6"></a><span class="kw">rawToBits</span>(x)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-raw-auto[</p>
+<pre><code> [1] 47 49 53 20 69 73 20 67 72 65 61 74 21</code></pre>
+<pre><code>[1] &quot;raw&quot;</code></pre>
+<pre><code>[1] &quot;G&quot;</code></pre>
+<pre><code>[1] &quot;GIS is great!&quot;</code></pre>
+<pre><code>  [1] 01 01 01 00 00 00 01 00 01 00 00 01 00 00 01 00 01 01 00 00 01 00 01 00 00
+ [26] 00 00 00 00 01 00 00 01 00 00 01 00 01 01 00 01 01 00 00 01 01 01 00 00 00
+ [51] 00 00 00 01 00 00 01 01 01 00 00 01 01 00 00 01 00 00 01 01 01 00 01 00 01
+ [76] 00 00 01 01 00 01 00 00 00 00 01 01 00 00 00 01 00 01 01 01 00 01 00 00 00
+[101] 00 01 00 00</code></pre>
+<p>]</p>
+<style>
+.panel1-raw-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-raw-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-raw-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<p>count: false</p>
+<p>.panel1-time-auto[</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a>(start &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2020-08-03&#39;</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-time-auto[</p>
+<pre><code>[1] &quot;2020-08-03&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-time-auto[</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>(start &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2020-08-03&#39;</span>))</span>
+<span id="cb90-2"><a href="#cb90-2"></a>(end   &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2020-09-11&#39;</span>))</span>
+<span id="cb90-3"><a href="#cb90-3"></a><span class="kw">typeof</span>(start)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-time-auto[</p>
+<pre><code>[1] &quot;2020-08-03&quot;</code></pre>
+<pre><code>[1] &quot;2020-09-11&quot;</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-time-auto[</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a>(start &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2020-08-03&#39;</span>))</span>
+<span id="cb94-2"><a href="#cb94-2"></a>(end   &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2020-09-11&#39;</span>))</span>
+<span id="cb94-3"><a href="#cb94-3"></a><span class="kw">typeof</span>(start)</span>
+<span id="cb94-4"><a href="#cb94-4"></a></span>
+<span id="cb94-5"><a href="#cb94-5"></a>end <span class="op">-</span><span class="st"> </span>start</span>
+<span id="cb94-6"><a href="#cb94-6"></a></span>
+<span id="cb94-7"><a href="#cb94-7"></a><span class="kw">format</span>(start, <span class="st">&quot;%m&quot;</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-time-auto[</p>
+<pre><code>[1] &quot;2020-08-03&quot;</code></pre>
+<pre><code>[1] &quot;2020-09-11&quot;</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>Time difference of 39 days</code></pre>
+<pre><code>[1] &quot;08&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-time-auto[</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a>(start &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2020-08-03&#39;</span>))</span>
+<span id="cb100-2"><a href="#cb100-2"></a>(end   &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2020-09-11&#39;</span>))</span>
+<span id="cb100-3"><a href="#cb100-3"></a><span class="kw">typeof</span>(start)</span>
+<span id="cb100-4"><a href="#cb100-4"></a></span>
+<span id="cb100-5"><a href="#cb100-5"></a>end <span class="op">-</span><span class="st"> </span>start</span>
+<span id="cb100-6"><a href="#cb100-6"></a></span>
+<span id="cb100-7"><a href="#cb100-7"></a><span class="kw">format</span>(start, <span class="st">&quot;%m&quot;</span>)</span>
+<span id="cb100-8"><a href="#cb100-8"></a><span class="kw">format</span>(start, <span class="st">&quot;%y&quot;</span>)</span>
+<span id="cb100-9"><a href="#cb100-9"></a><span class="kw">format</span>(start, <span class="st">&quot;%Y&quot;</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-time-auto[</p>
+<pre><code>[1] &quot;2020-08-03&quot;</code></pre>
+<pre><code>[1] &quot;2020-09-11&quot;</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>Time difference of 39 days</code></pre>
+<pre><code>[1] &quot;08&quot;</code></pre>
+<pre><code>[1] &quot;20&quot;</code></pre>
+<pre><code>[1] &quot;2020&quot;</code></pre>
+<p>]</p>
+<style>
+.panel1-time-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-time-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-time-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<hr />
+<p>And there are more advanced classes as well that capture date and time. We will get into these latter in class.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a><span class="kw">as.POSIXlt</span>(start)</span></code></pre></div>
+<pre><code>[1] &quot;2020-08-03 UTC&quot;</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="kw">as.POSIXct</span>(start)</span></code></pre></div>
+<pre><code>[1] &quot;2020-08-02 17:00:00 PDT&quot;</code></pre>
+<hr />
+<p>class: inverse, center, middle</p>
+</div>
+</div>
+</div>
+<div class="section level1">
+<h1><i class="fas  fa-database " style="color:#003660;"></i></h1>
+</div>
+<div id="data-structures" class="section level1">
+<h1>Data Structures</h1>
+<div id="storing-more-then-one-value-requires-structure." class="section level3">
+<h3>Storing more then one value requires structure.</h3>
+<hr />
+<ul>
+<li>Vectors come in two types: <strong>atomic</strong> and <strong>lists</strong></li>
+</ul>
+<p>–</p>
+<ul>
+<li>For atomic vectors, all elements must have the same <strong>type</strong>;</li>
+</ul>
+<p>–</p>
+<ul>
+<li>For lists, elements can have different types.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>NULL serves as a generic zero length vector.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>This diagram - taken from <a href="https://adv-r.hadley.nz/vectors-chap.html">here</a> illustrates the basic relationships:</li>
+</ul>
+<p><img src="lec-img/04-vec-list-01.png"></p>
+<hr />
+</div>
+<div id="atomic-vectors" class="section level3">
+<h3>Atomic Vectors</h3>
+<p>A vector containing on type of data is called an “atom” - Can created using the <code>c()</code> (combine) function. - The length can be checked with <code>length()</code></p>
+<ul>
+<li><p>There are four primary types of atomic vectors: logical, integer, double, and character (which contains strings).</p></li>
+<li><p>Collectively integer and double vectors are known as numeric vectors.</p></li>
+<li><p>Complex and raw atomic vectors are rare.</p></li>
+</ul>
+<p><img src="lec-img/04-data-types.png" width="40%"></p>
+<hr />
+<p><img src="lec-img/04-vec-list-02.png"></p>
+<hr />
+<p>count: false</p>
+<p>.panel1-atom-auto[</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a><span class="co"># Numeric</span></span>
+<span id="cb112-2"><a href="#cb112-2"></a>(<span class="dt">dbl_vec =</span> <span class="kw">c</span>(<span class="fl">1.9</span>,<span class="dv">2</span>,<span class="fl">3.5</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atom-auto[</p>
+<pre><code>[1] 1.9 2.0 3.5</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-atom-auto[</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1"></a><span class="co"># Numeric</span></span>
+<span id="cb114-2"><a href="#cb114-2"></a>(<span class="dt">dbl_vec =</span> <span class="kw">c</span>(<span class="fl">1.9</span>,<span class="dv">2</span>,<span class="fl">3.5</span>))</span>
+<span id="cb114-3"><a href="#cb114-3"></a><span class="kw">typeof</span>(dbl_vec)</span>
+<span id="cb114-4"><a href="#cb114-4"></a><span class="kw">length</span>(dbl_vec)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atom-auto[</p>
+<pre><code>[1] 1.9 2.0 3.5</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 3</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-atom-auto[</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1"></a><span class="co"># Numeric</span></span>
+<span id="cb118-2"><a href="#cb118-2"></a>(<span class="dt">dbl_vec =</span> <span class="kw">c</span>(<span class="fl">1.9</span>,<span class="dv">2</span>,<span class="fl">3.5</span>))</span>
+<span id="cb118-3"><a href="#cb118-3"></a><span class="kw">typeof</span>(dbl_vec)</span>
+<span id="cb118-4"><a href="#cb118-4"></a><span class="kw">length</span>(dbl_vec)</span>
+<span id="cb118-5"><a href="#cb118-5"></a></span>
+<span id="cb118-6"><a href="#cb118-6"></a>(<span class="dt">int_vec =</span> <span class="kw">c</span>(1L, 17L, 3L))</span>
+<span id="cb118-7"><a href="#cb118-7"></a><span class="kw">typeof</span>(int_vec)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atom-auto[</p>
+<pre><code>[1] 1.9 2.0 3.5</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre><code>[1]  1 17  3</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-atom-auto[</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1"></a><span class="co"># Numeric</span></span>
+<span id="cb124-2"><a href="#cb124-2"></a>(<span class="dt">dbl_vec =</span> <span class="kw">c</span>(<span class="fl">1.9</span>,<span class="dv">2</span>,<span class="fl">3.5</span>))</span>
+<span id="cb124-3"><a href="#cb124-3"></a><span class="kw">typeof</span>(dbl_vec)</span>
+<span id="cb124-4"><a href="#cb124-4"></a><span class="kw">length</span>(dbl_vec)</span>
+<span id="cb124-5"><a href="#cb124-5"></a></span>
+<span id="cb124-6"><a href="#cb124-6"></a>(<span class="dt">int_vec =</span> <span class="kw">c</span>(1L, 17L, 3L))</span>
+<span id="cb124-7"><a href="#cb124-7"></a><span class="kw">typeof</span>(int_vec)</span>
+<span id="cb124-8"><a href="#cb124-8"></a><span class="kw">length</span>(int_vec)</span>
+<span id="cb124-9"><a href="#cb124-9"></a></span>
+<span id="cb124-10"><a href="#cb124-10"></a>(<span class="dt">lg_vec =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, F, T))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atom-auto[</p>
+<pre><code>[1] 1.9 2.0 3.5</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre><code>[1]  1 17  3</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre><code>[1]  TRUE FALSE FALSE  TRUE</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-atom-auto[</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1"></a><span class="co"># Numeric</span></span>
+<span id="cb132-2"><a href="#cb132-2"></a>(<span class="dt">dbl_vec =</span> <span class="kw">c</span>(<span class="fl">1.9</span>,<span class="dv">2</span>,<span class="fl">3.5</span>))</span>
+<span id="cb132-3"><a href="#cb132-3"></a><span class="kw">typeof</span>(dbl_vec)</span>
+<span id="cb132-4"><a href="#cb132-4"></a><span class="kw">length</span>(dbl_vec)</span>
+<span id="cb132-5"><a href="#cb132-5"></a></span>
+<span id="cb132-6"><a href="#cb132-6"></a>(<span class="dt">int_vec =</span> <span class="kw">c</span>(1L, 17L, 3L))</span>
+<span id="cb132-7"><a href="#cb132-7"></a><span class="kw">typeof</span>(int_vec)</span>
+<span id="cb132-8"><a href="#cb132-8"></a><span class="kw">length</span>(int_vec)</span>
+<span id="cb132-9"><a href="#cb132-9"></a></span>
+<span id="cb132-10"><a href="#cb132-10"></a>(<span class="dt">lg_vec =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, F, T))</span>
+<span id="cb132-11"><a href="#cb132-11"></a><span class="kw">typeof</span>(lg_vec)</span>
+<span id="cb132-12"><a href="#cb132-12"></a><span class="kw">length</span>(lg_vec)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atom-auto[</p>
+<pre><code>[1] 1.9 2.0 3.5</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre><code>[1]  1 17  3</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre><code>[1]  TRUE FALSE FALSE  TRUE</code></pre>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<pre><code>[1] 4</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-atom-auto[</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1"></a><span class="co"># Numeric</span></span>
+<span id="cb142-2"><a href="#cb142-2"></a>(<span class="dt">dbl_vec =</span> <span class="kw">c</span>(<span class="fl">1.9</span>,<span class="dv">2</span>,<span class="fl">3.5</span>))</span>
+<span id="cb142-3"><a href="#cb142-3"></a><span class="kw">typeof</span>(dbl_vec)</span>
+<span id="cb142-4"><a href="#cb142-4"></a><span class="kw">length</span>(dbl_vec)</span>
+<span id="cb142-5"><a href="#cb142-5"></a></span>
+<span id="cb142-6"><a href="#cb142-6"></a>(<span class="dt">int_vec =</span> <span class="kw">c</span>(1L, 17L, 3L))</span>
+<span id="cb142-7"><a href="#cb142-7"></a><span class="kw">typeof</span>(int_vec)</span>
+<span id="cb142-8"><a href="#cb142-8"></a><span class="kw">length</span>(int_vec)</span>
+<span id="cb142-9"><a href="#cb142-9"></a></span>
+<span id="cb142-10"><a href="#cb142-10"></a>(<span class="dt">lg_vec =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, F, T))</span>
+<span id="cb142-11"><a href="#cb142-11"></a><span class="kw">typeof</span>(lg_vec)</span>
+<span id="cb142-12"><a href="#cb142-12"></a><span class="kw">length</span>(lg_vec)</span>
+<span id="cb142-13"><a href="#cb142-13"></a></span>
+<span id="cb142-14"><a href="#cb142-14"></a>(<span class="dt">char_vec =</span> <span class="kw">c</span>(<span class="st">&quot;GIS&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;Great!&quot;</span>, <span class="st">&quot;GIS is Great!&quot;</span>))</span>
+<span id="cb142-15"><a href="#cb142-15"></a><span class="kw">typeof</span>(char_vec)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atom-auto[</p>
+<pre><code>[1] 1.9 2.0 3.5</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre><code>[1]  1 17  3</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre><code>[1]  TRUE FALSE FALSE  TRUE</code></pre>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<pre><code>[1] 4</code></pre>
+<pre><code>[1] &quot;GIS&quot;           &quot;is&quot;            &quot;Great!&quot;        &quot;GIS is Great!&quot;</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<p>]</p>
+</div>
+</div>
+<div id="missing-values" class="section level1">
+<h1>Missing Values!</h1>
+<ul>
+<li>Missing values still need a place holder</li>
+<li>Missing values are denoted with <code>NA</code> (short for not applicable).</li>
+<li>Missing values are ‘infectious’: most computations involving a missing value will return another missing value.</li>
+</ul>
+<p>count: false</p>
+<p>.panel1-na-auto[</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1"></a>(<span class="dt">vec =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="ot">NA</span>))</span>
+<span id="cb154-2"><a href="#cb154-2"></a><span class="kw">mean</span>(vec)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-na-auto[</p>
+<pre><code>[1]  5  6  7  8 NA</code></pre>
+<pre><code>[1] NA</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-na-auto[</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1"></a>(<span class="dt">vec =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="ot">NA</span>))</span>
+<span id="cb157-2"><a href="#cb157-2"></a><span class="kw">mean</span>(vec)</span>
+<span id="cb157-3"><a href="#cb157-3"></a><span class="kw">mean</span>(vec, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb157-4"><a href="#cb157-4"></a></span>
+<span id="cb157-5"><a href="#cb157-5"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">50</span>, <span class="ot">NA</span>, <span class="dv">9</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-na-auto[</p>
+<pre><code>[1]  5  6  7  8 NA</code></pre>
+<pre><code>[1] NA</code></pre>
+<pre><code>[1] 6.5</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-na-auto[</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1"></a>(<span class="dt">vec =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="ot">NA</span>))</span>
+<span id="cb161-2"><a href="#cb161-2"></a><span class="kw">mean</span>(vec)</span>
+<span id="cb161-3"><a href="#cb161-3"></a><span class="kw">mean</span>(vec, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb161-4"><a href="#cb161-4"></a></span>
+<span id="cb161-5"><a href="#cb161-5"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">50</span>, <span class="ot">NA</span>, <span class="dv">9</span>)</span>
+<span id="cb161-6"><a href="#cb161-6"></a>x <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb161-7"><a href="#cb161-7"></a></span>
+<span id="cb161-8"><a href="#cb161-8"></a><span class="kw">is.na</span>(x)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-na-auto[</p>
+<pre><code>[1]  5  6  7  8 NA</code></pre>
+<pre><code>[1] NA</code></pre>
+<pre><code>[1] 6.5</code></pre>
+<pre><code>[1] NA NA NA NA</code></pre>
+<pre><code>[1]  TRUE FALSE  TRUE FALSE</code></pre>
+<p>]</p>
+<style>
+.panel1-na-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-na-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-na-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1"></a>(<span class="dt">vec =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="ot">NA</span>))</span></code></pre></div>
+<pre><code>[1]  5  6  7  8 NA</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1"></a><span class="kw">mean</span>(vec)</span></code></pre></div>
+<pre><code>[1] NA</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1"></a><span class="kw">mean</span>(vec, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>[1] 6.5</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">50</span>, <span class="ot">NA</span>, <span class="dv">9</span>)</span>
+<span id="cb173-2"><a href="#cb173-2"></a>x <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
+<pre><code>[1] NA NA NA NA</code></pre>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1"></a><span class="kw">is.na</span>(x)</span></code></pre></div>
+<pre><code>[1]  TRUE FALSE  TRUE FALSE</code></pre>
+<p>count: false</p>
+<p>.panel1-atoms-auto[</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1"></a><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">1</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atoms-auto[</p>
+<pre><code>[1] &quot;a&quot; &quot;1&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-atoms-auto[</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1"></a><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">1</span>)</span>
+<span id="cb179-2"><a href="#cb179-2"></a></span>
+<span id="cb179-3"><a href="#cb179-3"></a><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">TRUE</span>)</span>
+<span id="cb179-4"><a href="#cb179-4"></a></span>
+<span id="cb179-5"><a href="#cb179-5"></a><span class="kw">c</span>(<span class="fl">4.5</span>, 1L)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atoms-auto[</p>
+<pre><code>[1] &quot;a&quot; &quot;1&quot;</code></pre>
+<pre><code>[1] &quot;a&quot;    &quot;TRUE&quot;</code></pre>
+<pre><code>[1] 4.5 1.0</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-atoms-auto[</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1"></a><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">1</span>)</span>
+<span id="cb183-2"><a href="#cb183-2"></a></span>
+<span id="cb183-3"><a href="#cb183-3"></a><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">TRUE</span>)</span>
+<span id="cb183-4"><a href="#cb183-4"></a></span>
+<span id="cb183-5"><a href="#cb183-5"></a><span class="kw">c</span>(<span class="fl">4.5</span>, 1L)</span>
+<span id="cb183-6"><a href="#cb183-6"></a></span>
+<span id="cb183-7"><a href="#cb183-7"></a><span class="kw">c</span>(<span class="fl">4.5</span>, 1L)</span>
+<span id="cb183-8"><a href="#cb183-8"></a></span>
+<span id="cb183-9"><a href="#cb183-9"></a><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="dv">18</span>, <span class="st">&quot;GIS&quot;</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atoms-auto[</p>
+<pre><code>[1] &quot;a&quot; &quot;1&quot;</code></pre>
+<pre><code>[1] &quot;a&quot;    &quot;TRUE&quot;</code></pre>
+<pre><code>[1] 4.5 1.0</code></pre>
+<pre><code>[1] 4.5 1.0</code></pre>
+<pre><code>[1] &quot;1&quot;   &quot;18&quot;  &quot;GIS&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-atoms-auto[</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="#cb189-1"></a><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">1</span>)</span>
+<span id="cb189-2"><a href="#cb189-2"></a></span>
+<span id="cb189-3"><a href="#cb189-3"></a><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">TRUE</span>)</span>
+<span id="cb189-4"><a href="#cb189-4"></a></span>
+<span id="cb189-5"><a href="#cb189-5"></a><span class="kw">c</span>(<span class="fl">4.5</span>, 1L)</span>
+<span id="cb189-6"><a href="#cb189-6"></a></span>
+<span id="cb189-7"><a href="#cb189-7"></a><span class="kw">c</span>(<span class="fl">4.5</span>, 1L)</span>
+<span id="cb189-8"><a href="#cb189-8"></a></span>
+<span id="cb189-9"><a href="#cb189-9"></a><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="dv">18</span>, <span class="st">&quot;GIS&quot;</span>)</span>
+<span id="cb189-10"><a href="#cb189-10"></a></span>
+<span id="cb189-11"><a href="#cb189-11"></a><span class="kw">as.numeric</span>(<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="dv">18</span>, <span class="st">&quot;GIS&quot;</span>))</span>
+<span id="cb189-12"><a href="#cb189-12"></a></span>
+<span id="cb189-13"><a href="#cb189-13"></a><span class="kw">as.logical</span>(<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="dv">18</span>, <span class="st">&quot;GIS&quot;</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-atoms-auto[</p>
+<pre><code>[1] &quot;a&quot; &quot;1&quot;</code></pre>
+<pre><code>[1] &quot;a&quot;    &quot;TRUE&quot;</code></pre>
+<pre><code>[1] 4.5 1.0</code></pre>
+<pre><code>[1] 4.5 1.0</code></pre>
+<pre><code>[1] &quot;1&quot;   &quot;18&quot;  &quot;GIS&quot;</code></pre>
+<pre><code>[1]  1 18 NA</code></pre>
+<pre><code>[1] NA NA NA</code></pre>
+<p>]</p>
+<style>
+.panel1-atoms-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-atoms-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-atoms-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<hr />
+</div>
+<div id="names" class="section level1">
+<h1>Names</h1>
+<ul>
+<li>In addition to naming the object, you can name the elements</li>
+<li>names should be unique, and non-missing</li>
+</ul>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1"></a>(x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>, <span class="dt">c =</span> <span class="dv">3</span>))</span></code></pre></div>
+<pre><code>a b c 
+1 2 3 </code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="#cb199-1"></a><span class="co"># Using the attribute names()</span></span>
+<span id="cb199-2"><a href="#cb199-2"></a><span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>)</span>
+<span id="cb199-3"><a href="#cb199-3"></a><span class="kw">names</span>(x)</span></code></pre></div>
+<pre><code>[1] &quot;d&quot; &quot;e&quot; &quot;f&quot;</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="#cb201-1"></a>x</span></code></pre></div>
+<pre><code>d e f 
+1 2 3 </code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="#cb203-1"></a><span class="co"># With the function setNames():</span></span>
+<span id="cb203-2"><a href="#cb203-2"></a>x &lt;-<span class="st"> </span><span class="kw">setNames</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(<span class="st">&quot;g&quot;</span>, <span class="st">&quot;h&quot;</span>, <span class="st">&quot;i&quot;</span>))</span></code></pre></div>
+<hr />
+</div>
+<div id="diminsions" class="section level1">
+<h1>Diminsions</h1>
+<ul>
+<li><p>You probably noticed that the set of atomic vectors do not include a number of important structures like matrices (2D) or arrays (3D), factors, or date-times.</p></li>
+<li><p>These types are built on top of atomic vectors by adding attributes.</p></li>
+<li><p>Adding a <code>dim</code> attribute to a vector allows it to behave like a 2D matrix or a XD array.</p></li>
+</ul>
+<p>count: false</p>
+<p>.panel1-matrix-auto[</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="#cb204-1"></a><span class="co"># Use matrix</span></span>
+<span id="cb204-2"><a href="#cb204-2"></a>(<span class="dt">mat =</span> <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-matrix-auto[</p>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-matrix-auto[</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="#cb206-1"></a><span class="co"># Use matrix</span></span>
+<span id="cb206-2"><a href="#cb206-2"></a>(<span class="dt">mat =</span> <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>))</span>
+<span id="cb206-3"><a href="#cb206-3"></a></span>
+<span id="cb206-4"><a href="#cb206-4"></a><span class="co"># Use matrix</span></span>
+<span id="cb206-5"><a href="#cb206-5"></a>(<span class="dt">mat2 =</span> <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb206-6"><a href="#cb206-6"></a></span>
+<span id="cb206-7"><a href="#cb206-7"></a><span class="co">## dim returns dimensions of an object</span></span>
+<span id="cb206-8"><a href="#cb206-8"></a><span class="kw">dim</span>(mat2)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-matrix-auto[</p>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9</code></pre>
+<pre><code>[1] 3 3</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-matrix-auto[</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="#cb210-1"></a><span class="co"># Use matrix</span></span>
+<span id="cb210-2"><a href="#cb210-2"></a>(<span class="dt">mat =</span> <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>))</span>
+<span id="cb210-3"><a href="#cb210-3"></a></span>
+<span id="cb210-4"><a href="#cb210-4"></a><span class="co"># Use matrix</span></span>
+<span id="cb210-5"><a href="#cb210-5"></a>(<span class="dt">mat2 =</span> <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb210-6"><a href="#cb210-6"></a></span>
+<span id="cb210-7"><a href="#cb210-7"></a><span class="co">## dim returns dimensions of an object</span></span>
+<span id="cb210-8"><a href="#cb210-8"></a><span class="kw">dim</span>(mat2)</span>
+<span id="cb210-9"><a href="#cb210-9"></a></span>
+<span id="cb210-10"><a href="#cb210-10"></a><span class="co"># set names using colnames</span></span>
+<span id="cb210-11"><a href="#cb210-11"></a><span class="kw">colnames</span>(mat2) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb210-12"><a href="#cb210-12"></a>mat2  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-matrix-auto[</p>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9</code></pre>
+<pre><code>[1] 3 3</code></pre>
+<pre><code>     A B C
+[1,] 1 2 3
+[2,] 4 5 6
+[3,] 7 8 9</code></pre>
+<p>]</p>
+<div id="arrays" class="section level3">
+<h3>Arrays</h3>
+</div>
+<div id="an-array-is-a-3d-atom-row-column-slice" class="section level2">
+<h2>An array is a 3D atom [row, column, slice]</h2>
+<p>count: false</p>
+<p>.panel1-arrays-auto[</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1"></a><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-arrays-auto[</p>
+<pre><code>, , 1
+
+     [,1] [,2]
+[1,]    1    4
+[2,]    2    5
+[3,]    3    6
+
+, , 2
+
+     [,1] [,2]
+[1,]    7   10
+[2,]    8   11
+[3,]    9   12</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-arrays-auto[</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1"></a><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb217-2"><a href="#cb217-2"></a></span>
+<span id="cb217-3"><a href="#cb217-3"></a>(<span class="dt">arr =</span> <span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>)))</span>
+<span id="cb217-4"><a href="#cb217-4"></a></span>
+<span id="cb217-5"><a href="#cb217-5"></a>arr[<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-arrays-auto[</p>
+<pre><code>, , 1
+
+     [,1] [,2]
+[1,]    1    4
+[2,]    2    5
+[3,]    3    6
+
+, , 2
+
+     [,1] [,2]
+[1,]    7   10
+[2,]    8   11
+[3,]    9   12</code></pre>
+<pre><code>, , 1
+
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,]    7    9   11
+[2,]    8   10   12</code></pre>
+<pre><code>[1] 1</code></pre>
+<p>]</p>
+<style>
+.panel1-arrays-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-arrays-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-arrays-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<hr />
+<ul>
+<li><p>A vector without a <code>dim</code> attribute set is often thought of as 1-dimensional, but actually has NULL dimensions.</p></li>
+<li><p>Why?</p></li>
+<li><p>Matrices with a single row or single column, or arrays with a single dimension are 1D. They may print similarly, but will behave differently. The differences aren’t too important, but it’s useful to know they exist in case you get strange output from a function (tapply() is a frequent offender). As always, use str() to reveal the differences.</p></li>
+</ul>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="#cb221-1"></a><span class="kw">str</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>))                   <span class="co"># 1d vector</span></span></code></pre></div>
+<pre><code> int [1:3] 1 2 3</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1"></a><span class="kw">str</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">1</span>))   <span class="co"># column vector</span></span></code></pre></div>
+<pre><code> int [1:3, 1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1"></a><span class="kw">str</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">1</span>))   <span class="co"># row vector</span></span></code></pre></div>
+<pre><code> int [1, 1:3] 1 2 3</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1"></a><span class="kw">str</span>(<span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">3</span>))           <span class="co"># &quot;array&quot; vector</span></span></code></pre></div>
+<pre><code> int [1:3(1d)] 1 2 3</code></pre>
+<hr />
+</div>
+</div>
+<div id="lists" class="section level1">
+<h1>Lists</h1>
+<p>Lists <code>extend</code> atomic vectors and allow each element can be any type.</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1"></a>(my_list &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb229-2"><a href="#cb229-2"></a>  <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, </span>
+<span id="cb229-3"><a href="#cb229-3"></a>  <span class="st">&quot;GIS is great!&quot;</span>, </span>
+<span id="cb229-4"><a href="#cb229-4"></a>  <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), </span>
+<span id="cb229-5"><a href="#cb229-5"></a>  <span class="kw">c</span>(<span class="fl">2.3</span>, <span class="fl">5.9</span>)</span>
+<span id="cb229-6"><a href="#cb229-6"></a>))</span></code></pre></div>
+<pre><code>[[1]]
+[1] 1 2 3 4 5
+
+[[2]]
+[1] &quot;GIS is great!&quot;
+
+[[3]]
+[1]  TRUE FALSE  TRUE
+
+[[4]]
+[1] 2.3 5.9</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1"></a><span class="kw">typeof</span>(my_list)</span></code></pre></div>
+<pre><code>[1] &quot;list&quot;</code></pre>
+<div id="data-frames" class="section level3">
+<h3>Data Frames</h3>
+<p>A <code>data.frame</code> is a data structure built on top of lists</p>
+<p>–</p>
+<ul>
+<li>a named <em>list of vectors</em>.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>data.frames are one of the biggest and most important ideas in R, and one of the things that make R different from other programming languages</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Unlike a regular list, in a <code>data.frame</code>, the length of each vector <strong>must</strong> be the same.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>This gives data frames their rectangular structure and explains why they share the properties of both matrices and lists</li>
+</ul>
+<hr />
+<p>count: false</p>
+</div>
+</div>
+<div id="a-small-data.frame" class="section level1">
+<h1>A small data.frame</h1>
+<p>.panel1-smalldf-auto[</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="#cb233-1"></a>df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>),  <span class="co">#&lt;&lt;</span></span>
+<span id="cb233-2"><a href="#cb233-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),  <span class="co">#&lt;&lt;</span></span>
+<span id="cb233-3"><a href="#cb233-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-smalldf-auto[]</p>
+<p>count: false</p>
+</div>
+<div id="a-small-data.frame-1" class="section level1">
+<h1>A small data.frame</h1>
+<p>.panel1-smalldf-auto[</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="#cb234-1"></a>df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>),</span>
+<span id="cb234-2"><a href="#cb234-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),</span>
+<span id="cb234-3"><a href="#cb234-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F))</span>
+<span id="cb234-4"><a href="#cb234-4"></a></span>
+<span id="cb234-5"><a href="#cb234-5"></a><span class="kw">typeof</span>(df1)</span>
+<span id="cb234-6"><a href="#cb234-6"></a><span class="kw">attributes</span>(df1)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-smalldf-auto[</p>
+<pre><code>[1] &quot;list&quot;</code></pre>
+<pre><code>$names
+[1] &quot;name&quot;    &quot;age&quot;     &quot;retired&quot;
+
+$class
+[1] &quot;data.frame&quot;
+
+$row.names
+[1] 1 2 3</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-df-auto[</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="#cb237-1"></a>(num &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-df-auto[</p>
+<pre><code>[1] 1 2 3 4</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-df-auto[</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="#cb239-1"></a>(num &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</span>
+<span id="cb239-2"><a href="#cb239-2"></a></span>
+<span id="cb239-3"><a href="#cb239-3"></a>(color &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb239-4"><a href="#cb239-4"></a>           <span class="st">&quot;green&quot;</span>, <span class="ot">NA</span>))</span>
+<span id="cb239-5"><a href="#cb239-5"></a></span>
+<span id="cb239-6"><a href="#cb239-6"></a>(boolean &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">TRUE</span>,  <span class="co">#&lt;&lt;</span></span>
+<span id="cb239-7"><a href="#cb239-7"></a>             <span class="ot">TRUE</span>,<span class="ot">FALSE</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-df-auto[</p>
+<pre><code>[1] 1 2 3 4</code></pre>
+<pre><code>[1] &quot;red&quot;   &quot;white&quot; &quot;green&quot; NA     </code></pre>
+<pre><code>[1]  TRUE  TRUE  TRUE FALSE</code></pre>
+<p>]</p>
+<div id="tibble" class="section level3">
+<h3>tibble</h3>
+<p>A tibble (tbl_df), is a data.frame that enforces best practices: - Never changes the input type. - Can have columns that are lists. - Can have non-standard variable names. - Names can start with a number or contain spaces. - It only recycles vectors of length 1. - It never creates row names.</p>
+<hr />
+<p>count: false</p>
+<p>.panel1-tibble-auto[</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="#cb243-1"></a><span class="co"># data.frames can be converted to tibbles</span></span>
+<span id="cb243-2"><a href="#cb243-2"></a>(<span class="dt">tib =</span> <span class="kw">as_tibble</span>(df))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+.panel2-tibble-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["num"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["color"],"name":[2],"type":["chr"],"align":["left"]},{"label":["boolean"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"1","2":"red","3":"TRUE"},{"1":"2","2":"white","3":"TRUE"},{"1":"3","2":"green","3":"TRUE"},{"1":"4","2":"NA","3":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-tibble-auto[</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1"></a><span class="co"># data.frames can be converted to tibbles</span></span>
+<span id="cb244-2"><a href="#cb244-2"></a>(<span class="dt">tib =</span> <span class="kw">as_tibble</span>(df))</span>
+<span id="cb244-3"><a href="#cb244-3"></a></span>
+<span id="cb244-4"><a href="#cb244-4"></a><span class="kw">class</span>(tib)</span>
+<span id="cb244-5"><a href="#cb244-5"></a><span class="kw">typeof</span>(tib)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+.panel2-tibble-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["num"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["color"],"name":[2],"type":["chr"],"align":["left"]},{"label":["boolean"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"1","2":"red","3":"TRUE"},{"1":"2","2":"white","3":"TRUE"},{"1":"3","2":"green","3":"TRUE"},{"1":"4","2":"NA","3":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<pre><code>[1] &quot;list&quot;</code></pre>
+<p>]</p>
+</div>
+</div>
+<div id="subsetting" class="section level1">
+<h1>Subsetting</h1>
+<ul>
+<li>R’s subsetting operators are <strong>fast</strong> and powerful.</li>
+<li>Subsetting in R is easy to learn but hard to master.</li>
+<li>There are 3 subsetting operators, <code>[[</code>, <code>[</code>, and <code>$</code>.</li>
+<li>Subsetting operators interact differently with different vector types (e.g., atomic vectors, lists, factors, matrices, and data frames).</li>
+<li>Subsetting can be combined with assignment.</li>
+</ul>
+<p>count: false</p>
+<p>#Atomics .panel1-subvec-auto[</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="#cb247-1"></a>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">3.4</span>, <span class="dv">7</span>, <span class="dv">18</span>, <span class="fl">9.6</span>))</span>
+<span id="cb247-2"><a href="#cb247-2"></a></span>
+<span id="cb247-3"><a href="#cb247-3"></a>x[<span class="dv">3</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-subvec-auto[</p>
+<pre><code>[1]  3.4  7.0 18.0  9.6</code></pre>
+<pre><code>[1] 18</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Atomics .panel1-subvec-auto[</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="#cb250-1"></a>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">3.4</span>, <span class="dv">7</span>, <span class="dv">18</span>, <span class="fl">9.6</span>))</span>
+<span id="cb250-2"><a href="#cb250-2"></a></span>
+<span id="cb250-3"><a href="#cb250-3"></a>x[<span class="dv">3</span>]</span>
+<span id="cb250-4"><a href="#cb250-4"></a></span>
+<span id="cb250-5"><a href="#cb250-5"></a>x[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</span>
+<span id="cb250-6"><a href="#cb250-6"></a></span>
+<span id="cb250-7"><a href="#cb250-7"></a>x[<span class="op">-</span><span class="dv">3</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-subvec-auto[</p>
+<pre><code>[1]  3.4  7.0 18.0  9.6</code></pre>
+<pre><code>[1] 18</code></pre>
+<pre><code>[1] 18.0  9.6</code></pre>
+<pre><code>[1] 3.4 7.0 9.6</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Atomics .panel1-subvec-auto[</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="#cb255-1"></a>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">3.4</span>, <span class="dv">7</span>, <span class="dv">18</span>, <span class="fl">9.6</span>))</span>
+<span id="cb255-2"><a href="#cb255-2"></a></span>
+<span id="cb255-3"><a href="#cb255-3"></a>x[<span class="dv">3</span>]</span>
+<span id="cb255-4"><a href="#cb255-4"></a></span>
+<span id="cb255-5"><a href="#cb255-5"></a>x[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</span>
+<span id="cb255-6"><a href="#cb255-6"></a></span>
+<span id="cb255-7"><a href="#cb255-7"></a>x[<span class="op">-</span><span class="dv">3</span>]</span>
+<span id="cb255-8"><a href="#cb255-8"></a></span>
+<span id="cb255-9"><a href="#cb255-9"></a>x[<span class="kw">c</span>(T,T,F,F)]</span>
+<span id="cb255-10"><a href="#cb255-10"></a></span>
+<span id="cb255-11"><a href="#cb255-11"></a>x =<span class="st"> </span><span class="kw">setNames</span>(x, <span class="kw">c</span>(<span class="st">&#39;A&#39;</span>, <span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-subvec-auto[</p>
+<pre><code>[1]  3.4  7.0 18.0  9.6</code></pre>
+<pre><code>[1] 18</code></pre>
+<pre><code>[1] 18.0  9.6</code></pre>
+<pre><code>[1] 3.4 7.0 9.6</code></pre>
+<pre><code>[1] 3.4 7.0</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Atomics .panel1-subvec-auto[</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="#cb261-1"></a>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">3.4</span>, <span class="dv">7</span>, <span class="dv">18</span>, <span class="fl">9.6</span>))</span>
+<span id="cb261-2"><a href="#cb261-2"></a></span>
+<span id="cb261-3"><a href="#cb261-3"></a>x[<span class="dv">3</span>]</span>
+<span id="cb261-4"><a href="#cb261-4"></a></span>
+<span id="cb261-5"><a href="#cb261-5"></a>x[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</span>
+<span id="cb261-6"><a href="#cb261-6"></a></span>
+<span id="cb261-7"><a href="#cb261-7"></a>x[<span class="op">-</span><span class="dv">3</span>]</span>
+<span id="cb261-8"><a href="#cb261-8"></a></span>
+<span id="cb261-9"><a href="#cb261-9"></a>x[<span class="kw">c</span>(T,T,F,F)]</span>
+<span id="cb261-10"><a href="#cb261-10"></a></span>
+<span id="cb261-11"><a href="#cb261-11"></a>x =<span class="st"> </span><span class="kw">setNames</span>(x, <span class="kw">c</span>(<span class="st">&#39;A&#39;</span>, <span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))</span>
+<span id="cb261-12"><a href="#cb261-12"></a></span>
+<span id="cb261-13"><a href="#cb261-13"></a>x[<span class="st">&quot;A&quot;</span>]</span>
+<span id="cb261-14"><a href="#cb261-14"></a>x[<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>)]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-subvec-auto[</p>
+<pre><code>[1]  3.4  7.0 18.0  9.6</code></pre>
+<pre><code>[1] 18</code></pre>
+<pre><code>[1] 18.0  9.6</code></pre>
+<pre><code>[1] 3.4 7.0 9.6</code></pre>
+<pre><code>[1] 3.4 7.0</code></pre>
+<pre><code>  A 
+3.4 </code></pre>
+<pre><code>   A    C 
+ 3.4 18.0 </code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Atomics .panel1-subvec-auto[</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="#cb269-1"></a>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">3.4</span>, <span class="dv">7</span>, <span class="dv">18</span>, <span class="fl">9.6</span>))</span>
+<span id="cb269-2"><a href="#cb269-2"></a></span>
+<span id="cb269-3"><a href="#cb269-3"></a>x[<span class="dv">3</span>]</span>
+<span id="cb269-4"><a href="#cb269-4"></a></span>
+<span id="cb269-5"><a href="#cb269-5"></a>x[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</span>
+<span id="cb269-6"><a href="#cb269-6"></a></span>
+<span id="cb269-7"><a href="#cb269-7"></a>x[<span class="op">-</span><span class="dv">3</span>]</span>
+<span id="cb269-8"><a href="#cb269-8"></a></span>
+<span id="cb269-9"><a href="#cb269-9"></a>x[<span class="kw">c</span>(T,T,F,F)]</span>
+<span id="cb269-10"><a href="#cb269-10"></a></span>
+<span id="cb269-11"><a href="#cb269-11"></a>x =<span class="st"> </span><span class="kw">setNames</span>(x, <span class="kw">c</span>(<span class="st">&#39;A&#39;</span>, <span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))</span>
+<span id="cb269-12"><a href="#cb269-12"></a></span>
+<span id="cb269-13"><a href="#cb269-13"></a>x[<span class="st">&quot;A&quot;</span>]</span>
+<span id="cb269-14"><a href="#cb269-14"></a>x[<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>)]</span>
+<span id="cb269-15"><a href="#cb269-15"></a>x[<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>)]</span></code></pre></div>
+<p>]</p>
+<p>.panel2-subvec-auto[</p>
+<pre><code>[1]  3.4  7.0 18.0  9.6</code></pre>
+<pre><code>[1] 18</code></pre>
+<pre><code>[1] 18.0  9.6</code></pre>
+<pre><code>[1] 3.4 7.0 9.6</code></pre>
+<pre><code>[1] 3.4 7.0</code></pre>
+<pre><code>  A 
+3.4 </code></pre>
+<pre><code>   A    C 
+ 3.4 18.0 </code></pre>
+<pre><code>  A   A 
+3.4 3.4 </code></pre>
+<p>]</p>
+<style>
+.panel1-subvec-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-subvec-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-subvec-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<p>count: false</p>
+<p>#Matrices .panel1-submat-auto[</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="#cb278-1"></a>(<span class="dt">x =</span> <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>))</span>
+<span id="cb278-2"><a href="#cb278-2"></a></span>
+<span id="cb278-3"><a href="#cb278-3"></a>x[<span class="dv">3</span>,]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-submat-auto[</p>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+<pre><code>[1] 3 6 9</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Matrices .panel1-submat-auto[</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="#cb281-1"></a>(<span class="dt">x =</span> <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>))</span>
+<span id="cb281-2"><a href="#cb281-2"></a></span>
+<span id="cb281-3"><a href="#cb281-3"></a>x[<span class="dv">3</span>,]</span>
+<span id="cb281-4"><a href="#cb281-4"></a>x[,<span class="dv">3</span>]</span>
+<span id="cb281-5"><a href="#cb281-5"></a>x[<span class="dv">3</span>,<span class="dv">3</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-submat-auto[</p>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+<pre><code>[1] 3 6 9</code></pre>
+<pre><code>[1] 7 8 9</code></pre>
+<pre><code>[1] 9</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Matrices .panel1-submat-auto[</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="#cb286-1"></a>(<span class="dt">x =</span> <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>))</span>
+<span id="cb286-2"><a href="#cb286-2"></a></span>
+<span id="cb286-3"><a href="#cb286-3"></a>x[<span class="dv">3</span>,]</span>
+<span id="cb286-4"><a href="#cb286-4"></a>x[,<span class="dv">3</span>]</span>
+<span id="cb286-5"><a href="#cb286-5"></a>x[<span class="dv">3</span>,<span class="dv">3</span>]</span>
+<span id="cb286-6"><a href="#cb286-6"></a>x[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span>
+<span id="cb286-7"><a href="#cb286-7"></a>x[<span class="op">-</span><span class="dv">1</span>,]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-submat-auto[</p>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+<pre><code>[1] 3 6 9</code></pre>
+<pre><code>[1] 7 8 9</code></pre>
+<pre><code>[1] 9</code></pre>
+<pre><code>     [,1] [,2]
+[1,]    1    4
+[2,]    2    5</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    2    5    8
+[2,]    3    6    9</code></pre>
+<p>]</p>
+<style>
+.panel1-submat-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-submat-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-submat-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<p>count: false</p>
+<p>#Arrays .panel1-subarr-auto[</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="#cb293-1"></a>(<span class="dt">x =</span> <span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>)))</span>
+<span id="cb293-2"><a href="#cb293-2"></a></span>
+<span id="cb293-3"><a href="#cb293-3"></a>x[<span class="dv">1</span>,,]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-subarr-auto[</p>
+<pre><code>, , 1
+
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+
+, , 2
+
+     [,1] [,2]
+[1,]    5    7
+[2,]    6    8
+
+, , 3
+
+     [,1] [,2]
+[1,]    9   11
+[2,]   10   12</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    3    7   11</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Arrays .panel1-subarr-auto[</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="#cb296-1"></a>(<span class="dt">x =</span> <span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>)))</span>
+<span id="cb296-2"><a href="#cb296-2"></a></span>
+<span id="cb296-3"><a href="#cb296-3"></a>x[<span class="dv">1</span>,,]</span>
+<span id="cb296-4"><a href="#cb296-4"></a>x[,<span class="dv">1</span>,]</span>
+<span id="cb296-5"><a href="#cb296-5"></a>x[,,<span class="dv">1</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-subarr-auto[</p>
+<pre><code>, , 1
+
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+
+, , 2
+
+     [,1] [,2]
+[1,]    5    7
+[2,]    6    8
+
+, , 3
+
+     [,1] [,2]
+[1,]    9   11
+[2,]   10   12</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    3    7   11</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10</code></pre>
+<pre><code>     [,1] [,2]
+[1,]    1    3
+[2,]    2    4</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Lists .panel1-sublist-auto[</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="#cb301-1"></a>(ll &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>),  <span class="co">#&lt;&lt;</span></span>
+<span id="cb301-2"><a href="#cb301-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),  <span class="co">#&lt;&lt;</span></span>
+<span id="cb301-3"><a href="#cb301-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F)))  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-sublist-auto[</p>
+<pre><code>$name
+[1] &quot;George&quot; &quot;Stan&quot;   &quot;Carly&quot; 
+
+$age
+[1] 75 15 31
+
+$retired
+[1]  TRUE FALSE FALSE</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Lists .panel1-sublist-auto[</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="#cb303-1"></a>(ll &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>),</span>
+<span id="cb303-2"><a href="#cb303-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),</span>
+<span id="cb303-3"><a href="#cb303-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F)))</span>
+<span id="cb303-4"><a href="#cb303-4"></a>ll<span class="op">$</span>name</span>
+<span id="cb303-5"><a href="#cb303-5"></a>ll<span class="op">$</span>name[<span class="dv">1</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-sublist-auto[</p>
+<pre><code>$name
+[1] &quot;George&quot; &quot;Stan&quot;   &quot;Carly&quot; 
+
+$age
+[1] 75 15 31
+
+$retired
+[1]  TRUE FALSE FALSE</code></pre>
+<pre><code>[1] &quot;George&quot; &quot;Stan&quot;   &quot;Carly&quot; </code></pre>
+<pre><code>[1] &quot;George&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#Lists .panel1-sublist-auto[</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="#cb307-1"></a>(ll &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>),</span>
+<span id="cb307-2"><a href="#cb307-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),</span>
+<span id="cb307-3"><a href="#cb307-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F)))</span>
+<span id="cb307-4"><a href="#cb307-4"></a>ll<span class="op">$</span>name</span>
+<span id="cb307-5"><a href="#cb307-5"></a>ll<span class="op">$</span>name[<span class="dv">1</span>]</span>
+<span id="cb307-6"><a href="#cb307-6"></a></span>
+<span id="cb307-7"><a href="#cb307-7"></a>ll[[<span class="dv">1</span>]]</span>
+<span id="cb307-8"><a href="#cb307-8"></a>ll[[<span class="dv">1</span>]][<span class="dv">1</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-sublist-auto[</p>
+<pre><code>$name
+[1] &quot;George&quot; &quot;Stan&quot;   &quot;Carly&quot; 
+
+$age
+[1] 75 15 31
+
+$retired
+[1]  TRUE FALSE FALSE</code></pre>
+<pre><code>[1] &quot;George&quot; &quot;Stan&quot;   &quot;Carly&quot; </code></pre>
+<pre><code>[1] &quot;George&quot;</code></pre>
+<pre><code>[1] &quot;George&quot; &quot;Stan&quot;   &quot;Carly&quot; </code></pre>
+<pre><code>[1] &quot;George&quot;</code></pre>
+<p>]</p>
+</div>
+<div id="lists-are-not-matrices" class="section level1">
+<h1>Lists are not Matrices</h1>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="#cb313-1"></a><span class="co"># The name &quot;Stan&quot;</span></span>
+<span id="cb313-2"><a href="#cb313-2"></a>ll[<span class="dv">1</span>,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>Error in ll[1, 2]: incorrect number of dimensions</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="#cb315-1"></a><span class="co"># Stans Information</span></span>
+<span id="cb315-2"><a href="#cb315-2"></a>ll[<span class="dv">2</span>,]</span></code></pre></div>
+<pre><code>Error in ll[2, ]: incorrect number of dimensions</code></pre>
+<p>count: false</p>
+<p>#data.frames .panel1-subdf-auto[</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="#cb317-1"></a>(df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>),</span>
+<span id="cb317-2"><a href="#cb317-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),</span>
+<span id="cb317-3"><a href="#cb317-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F)))</span>
+<span id="cb317-4"><a href="#cb317-4"></a></span>
+<span id="cb317-5"><a href="#cb317-5"></a><span class="co"># Like a Matrix!</span></span>
+<span id="cb317-6"><a href="#cb317-6"></a>df[<span class="dv">1</span>,<span class="dv">2</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+.panel2-subdf-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["retired"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"George","2":"75","3":"TRUE"},{"1":"Stan","2":"15","3":"FALSE"},{"1":"Carly","2":"31","3":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] 75</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#data.frames .panel1-subdf-auto[</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="#cb319-1"></a>(df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>),</span>
+<span id="cb319-2"><a href="#cb319-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),</span>
+<span id="cb319-3"><a href="#cb319-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F)))</span>
+<span id="cb319-4"><a href="#cb319-4"></a></span>
+<span id="cb319-5"><a href="#cb319-5"></a><span class="co"># Like a Matrix!</span></span>
+<span id="cb319-6"><a href="#cb319-6"></a>df[<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb319-7"><a href="#cb319-7"></a>df[<span class="dv">2</span>,]</span>
+<span id="cb319-8"><a href="#cb319-8"></a></span>
+<span id="cb319-9"><a href="#cb319-9"></a><span class="co"># Like a list!</span></span>
+<span id="cb319-10"><a href="#cb319-10"></a>df[[<span class="dv">1</span>]][<span class="dv">1</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+.panel2-subdf-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["retired"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"George","2":"75","3":"TRUE"},{"1":"Stan","2":"15","3":"FALSE"},{"1":"Carly","2":"31","3":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] 75</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["retired"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"Stan","2":"15","3":"FALSE","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] &quot;George&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>#data.frames .panel1-subdf-auto[</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="#cb322-1"></a>(df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>),</span>
+<span id="cb322-2"><a href="#cb322-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),</span>
+<span id="cb322-3"><a href="#cb322-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F)))</span>
+<span id="cb322-4"><a href="#cb322-4"></a></span>
+<span id="cb322-5"><a href="#cb322-5"></a><span class="co"># Like a Matrix!</span></span>
+<span id="cb322-6"><a href="#cb322-6"></a>df[<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb322-7"><a href="#cb322-7"></a>df[<span class="dv">2</span>,]</span>
+<span id="cb322-8"><a href="#cb322-8"></a></span>
+<span id="cb322-9"><a href="#cb322-9"></a><span class="co"># Like a list!</span></span>
+<span id="cb322-10"><a href="#cb322-10"></a>df[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb322-11"><a href="#cb322-11"></a>df<span class="op">$</span>name[<span class="dv">1</span>]</span></code></pre></div>
+<p>]</p>
+.panel2-subdf-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["retired"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"George","2":"75","3":"TRUE"},{"1":"Stan","2":"15","3":"FALSE"},{"1":"Carly","2":"31","3":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] 75</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["retired"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"Stan","2":"15","3":"FALSE","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] &quot;George&quot;</code></pre>
+<pre><code>[1] &quot;George&quot;</code></pre>
+<p>]</p>
+<style>
+.panel1-subdf-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-subdf-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-subdf-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="#cb326-1"></a>(df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;George&quot;</span>, <span class="st">&quot;Stan&quot;</span>, <span class="st">&quot;Carly&quot;</span>), </span>
+<span id="cb326-2"><a href="#cb326-2"></a>                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">75</span>,<span class="dv">15</span>,<span class="dv">31</span>),</span>
+<span id="cb326-3"><a href="#cb326-3"></a>                  <span class="dt">retired =</span> <span class="kw">c</span>(T,F,F)))</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["retired"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"George","2":"75","3":"TRUE"},{"1":"Stan","2":"15","3":"FALSE"},{"1":"Carly","2":"31","3":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="#cb327-1"></a><span class="co"># Like a Matrix!</span></span>
+<span id="cb327-2"><a href="#cb327-2"></a>df[<span class="dv">1</span>,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>[1] 75</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="#cb329-1"></a>df[<span class="dv">2</span>,]</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["retired"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"Stan","2":"15","3":"FALSE","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="#cb330-1"></a><span class="co"># Like a list!</span></span>
+<span id="cb330-2"><a href="#cb330-2"></a>df[[<span class="dv">1</span>]][<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>[1] &quot;George&quot;</code></pre>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="#cb332-1"></a>df<span class="op">$</span>name[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>[1] &quot;George&quot;</code></pre>
+<div id="storm-dataset" class="section level3">
+<h3>Storm Dataset</h3>
+<ul>
+<li>Many packages come with loaded datasets.</li>
+<li><code>dplyr</code> (part of the tidyverse) has a <code>storms</code> dataset</li>
+</ul>
+<p><img src="data-structure_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
+<hr />
+<p>count: false</p>
+<p>.panel1-storms-auto[</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="#cb334-1"></a><span class="co">#preview dataset</span></span>
+<span id="cb334-2"><a href="#cb334-2"></a><span class="kw">head</span>(storms,<span class="dv">3</span>)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+.panel2-storms-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["month"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["day"],"name":[4],"type":["int"],"align":["right"]},{"label":["hour"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["lat"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["long"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["status"],"name":[8],"type":["chr"],"align":["left"]},{"label":["category"],"name":[9],"type":["ord"],"align":["right"]},{"label":["wind"],"name":[10],"type":["int"],"align":["right"]},{"label":["pressure"],"name":[11],"type":["int"],"align":["right"]},{"label":["ts_diameter"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["hu_diameter"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"Amy","2":"1975","3":"6","4":"27","5":"0","6":"27.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"6","6":"28.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"12","6":"29.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-storms-auto[</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="#cb335-1"></a><span class="co">#preview dataset</span></span>
+<span id="cb335-2"><a href="#cb335-2"></a><span class="kw">head</span>(storms,<span class="dv">3</span>)</span>
+<span id="cb335-3"><a href="#cb335-3"></a><span class="co"># Get data diminsions</span></span>
+<span id="cb335-4"><a href="#cb335-4"></a><span class="kw">dim</span>(storms)</span>
+<span id="cb335-5"><a href="#cb335-5"></a><span class="kw">str</span>(storms)  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+.panel2-storms-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["month"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["day"],"name":[4],"type":["int"],"align":["right"]},{"label":["hour"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["lat"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["long"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["status"],"name":[8],"type":["chr"],"align":["left"]},{"label":["category"],"name":[9],"type":["ord"],"align":["right"]},{"label":["wind"],"name":[10],"type":["int"],"align":["right"]},{"label":["pressure"],"name":[11],"type":["int"],"align":["right"]},{"label":["ts_diameter"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["hu_diameter"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"Amy","2":"1975","3":"6","4":"27","5":"0","6":"27.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"6","6":"28.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"12","6":"29.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] 10010    13</code></pre>
+<pre><code>tibble [10,010 x 13] (S3: tbl_df/tbl/data.frame)
+ $ name       : chr [1:10010] &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; ...
+ $ year       : num [1:10010] 1975 1975 1975 1975 1975 ...
+ $ month      : num [1:10010] 6 6 6 6 6 6 6 6 6 6 ...
+ $ day        : int [1:10010] 27 27 27 27 28 28 28 28 29 29 ...
+ $ hour       : num [1:10010] 0 6 12 18 0 6 12 18 0 6 ...
+ $ lat        : num [1:10010] 27.5 28.5 29.5 30.5 31.5 32.4 33.3 34 34.4 34 ...
+ $ long       : num [1:10010] -79 -79 -79 -79 -78.8 -78.7 -78 -77 -75.8 -74.8 ...
+ $ status     : chr [1:10010] &quot;tropical depression&quot; &quot;tropical depression&quot; &quot;tropical depression&quot; &quot;tropical depression&quot; ...
+ $ category   : Ord.factor w/ 7 levels &quot;-1&quot;&lt;&quot;0&quot;&lt;&quot;1&quot;&lt;&quot;2&quot;&lt;..: 1 1 1 1 1 1 1 1 2 2 ...
+ $ wind       : int [1:10010] 25 25 25 25 25 25 25 30 35 40 ...
+ $ pressure   : int [1:10010] 1013 1013 1013 1013 1012 1012 1011 1006 1004 1002 ...
+ $ ts_diameter: num [1:10010] NA NA NA NA NA NA NA NA NA NA ...
+ $ hu_diameter: num [1:10010] NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-storms-auto[</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="#cb338-1"></a><span class="co">#preview dataset</span></span>
+<span id="cb338-2"><a href="#cb338-2"></a><span class="kw">head</span>(storms,<span class="dv">3</span>)</span>
+<span id="cb338-3"><a href="#cb338-3"></a><span class="co"># Get data diminsions</span></span>
+<span id="cb338-4"><a href="#cb338-4"></a><span class="kw">dim</span>(storms)</span>
+<span id="cb338-5"><a href="#cb338-5"></a><span class="kw">str</span>(storms)</span>
+<span id="cb338-6"><a href="#cb338-6"></a></span>
+<span id="cb338-7"><a href="#cb338-7"></a>storms<span class="op">$</span>name[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span>
+<span id="cb338-8"><a href="#cb338-8"></a>storms[[<span class="dv">1</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+.panel2-storms-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["month"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["day"],"name":[4],"type":["int"],"align":["right"]},{"label":["hour"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["lat"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["long"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["status"],"name":[8],"type":["chr"],"align":["left"]},{"label":["category"],"name":[9],"type":["ord"],"align":["right"]},{"label":["wind"],"name":[10],"type":["int"],"align":["right"]},{"label":["pressure"],"name":[11],"type":["int"],"align":["right"]},{"label":["ts_diameter"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["hu_diameter"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"Amy","2":"1975","3":"6","4":"27","5":"0","6":"27.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"6","6":"28.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"12","6":"29.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] 10010    13</code></pre>
+<pre><code>tibble [10,010 x 13] (S3: tbl_df/tbl/data.frame)
+ $ name       : chr [1:10010] &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; ...
+ $ year       : num [1:10010] 1975 1975 1975 1975 1975 ...
+ $ month      : num [1:10010] 6 6 6 6 6 6 6 6 6 6 ...
+ $ day        : int [1:10010] 27 27 27 27 28 28 28 28 29 29 ...
+ $ hour       : num [1:10010] 0 6 12 18 0 6 12 18 0 6 ...
+ $ lat        : num [1:10010] 27.5 28.5 29.5 30.5 31.5 32.4 33.3 34 34.4 34 ...
+ $ long       : num [1:10010] -79 -79 -79 -79 -78.8 -78.7 -78 -77 -75.8 -74.8 ...
+ $ status     : chr [1:10010] &quot;tropical depression&quot; &quot;tropical depression&quot; &quot;tropical depression&quot; &quot;tropical depression&quot; ...
+ $ category   : Ord.factor w/ 7 levels &quot;-1&quot;&lt;&quot;0&quot;&lt;&quot;1&quot;&lt;&quot;2&quot;&lt;..: 1 1 1 1 1 1 1 1 2 2 ...
+ $ wind       : int [1:10010] 25 25 25 25 25 25 25 30 35 40 ...
+ $ pressure   : int [1:10010] 1013 1013 1013 1013 1012 1012 1011 1006 1004 1002 ...
+ $ ts_diameter: num [1:10010] NA NA NA NA NA NA NA NA NA NA ...
+ $ hu_diameter: num [1:10010] NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+<pre><code>[1] &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot;</code></pre>
+<pre><code>[1] &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot;</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-storms-auto[</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="#cb343-1"></a><span class="co">#preview dataset</span></span>
+<span id="cb343-2"><a href="#cb343-2"></a><span class="kw">head</span>(storms,<span class="dv">3</span>)</span>
+<span id="cb343-3"><a href="#cb343-3"></a><span class="co"># Get data diminsions</span></span>
+<span id="cb343-4"><a href="#cb343-4"></a><span class="kw">dim</span>(storms)</span>
+<span id="cb343-5"><a href="#cb343-5"></a><span class="kw">str</span>(storms)</span>
+<span id="cb343-6"><a href="#cb343-6"></a></span>
+<span id="cb343-7"><a href="#cb343-7"></a>storms<span class="op">$</span>name[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span>
+<span id="cb343-8"><a href="#cb343-8"></a>storms[[<span class="dv">1</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span>
+<span id="cb343-9"><a href="#cb343-9"></a>storms[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span></code></pre></div>
+<p>]</p>
+.panel2-storms-auto[
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["month"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["day"],"name":[4],"type":["int"],"align":["right"]},{"label":["hour"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["lat"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["long"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["status"],"name":[8],"type":["chr"],"align":["left"]},{"label":["category"],"name":[9],"type":["ord"],"align":["right"]},{"label":["wind"],"name":[10],"type":["int"],"align":["right"]},{"label":["pressure"],"name":[11],"type":["int"],"align":["right"]},{"label":["ts_diameter"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["hu_diameter"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"Amy","2":"1975","3":"6","4":"27","5":"0","6":"27.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"6","6":"28.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"12","6":"29.5","7":"-79","8":"tropical depression","9":"-1","10":"25","11":"1013","12":"NA","13":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre><code>[1] 10010    13</code></pre>
+<pre><code>tibble [10,010 x 13] (S3: tbl_df/tbl/data.frame)
+ $ name       : chr [1:10010] &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; ...
+ $ year       : num [1:10010] 1975 1975 1975 1975 1975 ...
+ $ month      : num [1:10010] 6 6 6 6 6 6 6 6 6 6 ...
+ $ day        : int [1:10010] 27 27 27 27 28 28 28 28 29 29 ...
+ $ hour       : num [1:10010] 0 6 12 18 0 6 12 18 0 6 ...
+ $ lat        : num [1:10010] 27.5 28.5 29.5 30.5 31.5 32.4 33.3 34 34.4 34 ...
+ $ long       : num [1:10010] -79 -79 -79 -79 -78.8 -78.7 -78 -77 -75.8 -74.8 ...
+ $ status     : chr [1:10010] &quot;tropical depression&quot; &quot;tropical depression&quot; &quot;tropical depression&quot; &quot;tropical depression&quot; ...
+ $ category   : Ord.factor w/ 7 levels &quot;-1&quot;&lt;&quot;0&quot;&lt;&quot;1&quot;&lt;&quot;2&quot;&lt;..: 1 1 1 1 1 1 1 1 2 2 ...
+ $ wind       : int [1:10010] 25 25 25 25 25 25 25 30 35 40 ...
+ $ pressure   : int [1:10010] 1013 1013 1013 1013 1012 1012 1011 1006 1004 1002 ...
+ $ ts_diameter: num [1:10010] NA NA NA NA NA NA NA NA NA NA ...
+ $ hu_diameter: num [1:10010] NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+<pre><code>[1] &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot;</code></pre>
+<pre><code>[1] &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot; &quot;Amy&quot;</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["month"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["day"],"name":[4],"type":["int"],"align":["right"]},{"label":["hour"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Amy","2":"1975","3":"6","4":"27","5":"0"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"6"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"12"},{"1":"Amy","2":"1975","3":"6","4":"27","5":"18"},{"1":"Amy","2":"1975","3":"6","4":"28","5":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>]</p>
+<style>
+.panel1-storms-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-storms-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-storms-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<p>count: false</p>
+<p>.panel1-raster-auto[</p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="#cb348-1"></a><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">nrow =</span> <span class="dv">10</span>)   <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-raster-auto[</p>
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    1   11   21   31   41   51   61   71   81    91
+ [2,]    2   12   22   32   42   52   62   72   82    92
+ [3,]    3   13   23   33   43   53   63   73   83    93
+ [4,]    4   14   24   34   44   54   64   74   84    94
+ [5,]    5   15   25   35   45   55   65   75   85    95
+ [6,]    6   16   26   36   46   56   66   76   86    96
+ [7,]    7   17   27   37   47   57   67   77   87    97
+ [8,]    8   18   28   38   48   58   68   78   88    98
+ [9,]    9   19   29   39   49   59   69   79   89    99
+[10,]   10   20   30   40   50   60   70   80   90   100</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-raster-auto[</p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="#cb350-1"></a><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">nrow =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></span>
+<span id="cb350-2"><a href="#cb350-2"></a><span class="st">  </span><span class="kw">raster</span>() <span class="op">%&gt;%</span></span>
+<span id="cb350-3"><a href="#cb350-3"></a><span class="st">  </span>rasterVis<span class="op">::</span><span class="kw">levelplot</span>()  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-raster-auto[ <img src="data-structure_files/figure-html/raster_auto_03_output-1.png" width="576" />]</p>
+<style>
+.panel1-raster-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-raster-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-raster-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<hr />
+<p>count: false</p>
+<p>.panel1-raster3-auto[</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="#cb351-1"></a><span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">300</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">3</span>))   <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-raster3-auto[</p>
+<pre><code>, , 1
+
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    1   11   21   31   41   51   61   71   81    91
+ [2,]    2   12   22   32   42   52   62   72   82    92
+ [3,]    3   13   23   33   43   53   63   73   83    93
+ [4,]    4   14   24   34   44   54   64   74   84    94
+ [5,]    5   15   25   35   45   55   65   75   85    95
+ [6,]    6   16   26   36   46   56   66   76   86    96
+ [7,]    7   17   27   37   47   57   67   77   87    97
+ [8,]    8   18   28   38   48   58   68   78   88    98
+ [9,]    9   19   29   39   49   59   69   79   89    99
+[10,]   10   20   30   40   50   60   70   80   90   100
+
+, , 2
+
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]  101  111  121  131  141  151  161  171  181   191
+ [2,]  102  112  122  132  142  152  162  172  182   192
+ [3,]  103  113  123  133  143  153  163  173  183   193
+ [4,]  104  114  124  134  144  154  164  174  184   194
+ [5,]  105  115  125  135  145  155  165  175  185   195
+ [6,]  106  116  126  136  146  156  166  176  186   196
+ [7,]  107  117  127  137  147  157  167  177  187   197
+ [8,]  108  118  128  138  148  158  168  178  188   198
+ [9,]  109  119  129  139  149  159  169  179  189   199
+[10,]  110  120  130  140  150  160  170  180  190   200
+
+, , 3
+
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]  201  211  221  231  241  251  261  271  281   291
+ [2,]  202  212  222  232  242  252  262  272  282   292
+ [3,]  203  213  223  233  243  253  263  273  283   293
+ [4,]  204  214  224  234  244  254  264  274  284   294
+ [5,]  205  215  225  235  245  255  265  275  285   295
+ [6,]  206  216  226  236  246  256  266  276  286   296
+ [7,]  207  217  227  237  247  257  267  277  287   297
+ [8,]  208  218  228  238  248  258  268  278  288   298
+ [9,]  209  219  229  239  249  259  269  279  289   299
+[10,]  210  220  230  240  250  260  270  280  290   300</code></pre>
+<p>]</p>
+<p>count: false</p>
+<p>.panel1-raster3-auto[</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="#cb353-1"></a><span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">300</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">3</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb353-2"><a href="#cb353-2"></a><span class="st">  </span><span class="kw">brick</span>() <span class="op">%&gt;%</span></span>
+<span id="cb353-3"><a href="#cb353-3"></a><span class="st">  </span>rasterVis<span class="op">::</span><span class="kw">levelplot</span>()  <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>]</p>
+<p>.panel2-raster3-auto[ <img src="data-structure_files/figure-html/raster3_auto_03_output-1.png" width="576" />]</p>
+<style>
+.panel1-raster3-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-raster3-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-raster3-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+</style>
+<style type="text/css">
+.remark-code{font-size: 100%}
+</style>
+</div>
+</div>
+
+
+
+&nbsp;
+<hr />
+
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+
+
+
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+
+</body>
+</html>

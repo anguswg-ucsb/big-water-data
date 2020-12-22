@@ -1,0 +1,813 @@
+---
+title: "Geography 176A"
+subtitle: "Lecture 04: Data Type & Structure"
+author: "Angus Watters"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ucsb.css
+    nature:
+      ratio: 16:10
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(flipbookr)
+library(gapminder)
+library(lobstr)
+library(raster)
+library(sf)
+# install.packages(“devtools”)
+
+oldoption <- options(scipen = 9999)
+options(scipen = 9999)
+
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = FALSE, fig.retina = 3)
+```
+
+
+## Reminder 
+<center>
+<img src="lec-img/01-learning-curve.png" width="75%">
+</center>
+
+---
+
+"I feel like I'm learning a new language right now"
+
+--
+
+"there is a difference between practical knowledge and understanding the concepts"
+
+--
+
+"I am still confused on the meaning of things, like why exactly do we need to use GitHub, what the difference is between the terminal and console, and the differences between file types. I know these are all very simple things, but I feel like I'm learning a new language right now."
+
+--
+
+<img src="lec-img/week-01-gforms.png" width ="35%">
+
+---
+
+# Changes:
+
+- Daily Assignments will be due at **5pm** the following class
+- I will start **recording** lectures on Monday 
+- Today, after lab, I will hang on from **5 - 6** to walk through parts of the lab in some detail
+
+--
+
+### If you are having trouble setting up R, RStudio, ect email me ASAP!
+
+---
+
+# Computers convert bytes <-> hex <-> value
+
+<img src="lec-img/04-ascii-hex-binary.png">
+
+---
+
+# What's the difference between 3 (the number) and '3' (the character)? 
+
+`To us`: meaning
+`To software`: hows its handled
+`To a computer`: nothing
+
+--
+
+```{r, error = TRUE}
+3+ 3
+'3' + 3
+```
+
+---
+
+class: inverse, center, middle
+
+# `r icon::fa_layer_group(color = "#003660", size = 10)`
+# Data Types
+
+---
+# Data Types
+
+**Values** in R can be one of 6 different **types** :
+    1. numeric (e.g. `2`, `2.15`)
+    2. integer (e.g. `2L`)
+    3. character (e.g. `"x"`, `"Welcome!"`)
+    4. logical (e.g. `TRUE`, `FALSE`)
+    5. raw (e.g. holds `bytes`)
+    6. complex (e.g. `1+4i`) - _we are going to ignore_
+    
+- The `class` function tells us what kind of object is it (high-level)
+- The `typeof` function can tell us the object’s data type (low-level)
+
+---
+
+## 1. Numeric
+
+- Values with decimals 
+
+--
+
+- Of type "double" in computer science terms
+
+--
+
+- Default computational data type in R.
+
+--
+
+- Doubles can be specified in decimal (0.1234), scientific (1.23e4), or hexadecimal (0xcafe) form. 
+
+--
+
+- There are three special values unique to doubles: `Inf`, `-Inf`, and `NaN` (not a number). 
+
+---
+
+`r flipbookr::chunk_reveal("numerics")`
+
+```{r numerics, include = F}
+(x = 4.75)
+class(x)
+typeof(x)
+
+x * 2
+x + 2
+x - 5
+x / 4
+
+
+x == 4
+```
+
+
+---
+
+### 2. Integer
+
+- Values without decimals 
+
+--
+
+- To create an integer in R you must follow the a number with an uppercase L.
+
+--
+
+- Take less memory then doubles but this is rarely an issue
+
+--
+
+ - One byte is **8** bits, 
+ - Each **bit** can represent two values (0,1), 
+ - One **byte** can hold  2^8^=256  values. 
+ - used for  (0  to  255) --or--  (−128  to  127). 
+
+---
+`r flipbookr::chunk_reveal("integers")`
+
+```{r integers, include = F}
+(x = 2) # defaults to numeric
+typeof(x)
+(y = 2L) # specifies integer
+typeof(y)
+class(y)
+
+(t = 1L / 5L)
+typeof(t)
+
+## Casting
+
+as.integer(c(4.1, 5.2, 6.3, 6.4))
+```
+
+
+---
+### 3. Character
+
+- character values stores text ranging in size from a single letter to a novel.
+
+--
+
+- surrounded by `"` ("here") or `'` ('there'). 
+
+--
+
+- Special characters are escaped with `\`; see `?Quotes` for full details.
+
+---
+
+`r flipbookr::chunk_reveal("character")`
+
+```{r character, include = F}
+(x = "a")
+(y = "bc")
+(z = "GIS is Great!!!")
+```
+
+---
+
+### 4. Logical 
+
+- Logical values store boolean values (`TRUE` and `FALSE`). 
+
+--
+
+- Usefull for checking conditions and controlling the flow of a program.
+
+--
+
+- Or, for checking binary conditions (like on,off;  open/closed; >100)
+
+--
+
+- The idea of the T/F boolean will be one of the most important in this class
+
+--
+
+- Logicals can be written in full (TRUE or FALSE), or abbreviated (T or F).
+
+
+---
+
+`r flipbookr::chunk_reveal("logical", widths = c(50,50,0))`
+
+```{r logical, include = F}
+u = TRUE 
+v = FALSE 
+typeof(u)
+
+# if u AND v are TRUE
+u & v
+# if u OR v are TRUE
+u | v   
+# The opposite
+!u
+
+# Equality / conditions
+2 == 6
+2 != 6
+
+"test" == "test"
+
+6 > 2
+```
+
+
+---
+### 5. Raw
+
+- The raw type is intended to hold raw bytes.
+- Useful to introduce, but will only be used at a conceptual level.
+
+---
+
+`r flipbookr::chunk_reveal("raw")`
+
+```{r raw, include = F}
+(x <- charToRaw("GIS is great!"))
+typeof(x)
+
+rawToChar(x[1])
+rawToChar(x)
+rawToBits(x)
+```
+
+
+---
+### Bonus: Time
+
+Representing time is a somewhat complex problem. There are different calendars, hours, days, months, and leap years to consider. As a basic introduction, here is simple way to create date values.
+
+---
+`r flipbookr::chunk_reveal("time")`
+
+```{r time, include = F}
+(start <- as.Date('2020-08-03'))
+(end   <- as.Date('2020-09-11'))
+typeof(start)
+
+end - start
+
+format(start, "%m")
+format(start, "%y")
+format(start, "%Y")
+```
+
+---
+
+And there are more advanced classes as well that capture date and time. We will get into these latter in class.
+
+```{r}
+as.POSIXlt(start)
+as.POSIXct(start)
+```
+
+---
+
+class: inverse, center, middle
+
+# `r icon::fa_database(color = "#003660", size = 10)`
+# Data Structures
+
+### Storing more then one value requires structure.
+
+---
+
+- Vectors come in two types: **atomic** and **lists** 
+
+--
+
+- For atomic vectors, all elements must have the same **type**;
+
+--
+
+- For lists, elements can have different types. 
+
+--
+
+- NULL serves as a generic zero length vector. 
+
+--
+
+- This diagram - taken from [here](https://adv-r.hadley.nz/vectors-chap.html) illustrates the basic relationships:
+
+
+<img src="lec-img/04-vec-list-01.png">
+
+
+---
+
+### Atomic Vectors
+
+A vector containing on type of data is called an "atom"
+  - Can created using the `c()` (combine) function.
+  - The length can be checked with `length()`
+  
+- There are four primary types of atomic vectors: logical, integer, double, and character (which contains strings). 
+
+- Collectively integer and double vectors are known as numeric vectors. 
+
+- Complex and raw atomic vectors are rare. 
+
+<img src="lec-img/04-data-types.png" width="40%">
+
+---
+
+<img src="lec-img/04-vec-list-02.png">
+
+---
+
+`r flipbookr::chunk_reveal("atom")`
+
+```{r atom, include = F}
+# Numeric
+(dbl_vec = c(1.9,2,3.5))
+typeof(dbl_vec)
+length(dbl_vec)
+
+(int_vec = c(1L, 17L, 3L))
+typeof(int_vec)
+length(int_vec)
+
+(lg_vec = c(TRUE, FALSE, F, T))
+typeof(lg_vec)
+length(lg_vec)
+
+(char_vec = c("GIS", "is", "Great!", "GIS is Great!"))
+typeof(char_vec)
+length(char_vec)
+```
+---
+
+# Missing Values!
+
+- Missing values still need a place holder
+- Missing values are denoted with `NA` (short for not applicable). 
+- Missing values are 'infectious': most computations involving a missing value will return another missing value.
+
+---
+`r flipbookr::chunk_reveal("na")`
+
+```{r, na, inclde = FALSE}
+(vec = c(5,6,7,8,NA))
+mean(vec)
+mean(vec, na.rm = TRUE)
+
+x <- c(NA, 50, NA, 9)
+x == NA
+
+is.na(x)
+```
+---
+# Atoms must be of the same type!
+## Cohersion
+
+- type is a property of the entire vector
+
+- When you try and combine different types they will be coerced in a fixed order: 
+
+- character → double → integer → logical
+
+- Coercion often happens automatically.
+
+- You can deliberately coerce by using an as.*() function, like as.logical(), as.integer(), as.double(), or as.character().
+
+- Failed coercion of strings generates a warning and a missing value
+
+---
+`r flipbookr::chunk_reveal("atoms")`
+
+```{r atoms, include = FALSE}
+c("a", 1)
+
+c("a", TRUE)
+
+c(4.5, 1L)
+
+c(4.5, 1L)
+
+c("1", 18, "GIS")
+
+as.numeric(c("1", 18, "GIS"))
+
+as.logical(c("1", 18, "GIS"))
+```
+
+---
+
+# Names
+
+- In addition to naming the object, you can name the elements
+- names should be unique, and non-missing
+
+```{r}
+(x <- c(a = 1, b = 2, c = 3))
+
+# Using the attribute names()
+names(x) <- c("d", "e", "f")
+names(x)
+x
+
+# With the function setNames():
+x <- setNames(1:3, c("g", "h", "i"))
+
+```
+
+---
+
+# Diminsions
+
+- You probably noticed that the set of atomic vectors do not include a number of important  structures like matrices (2D) or arrays (3D), factors, or date-times. 
+
+- These types are built on top of atomic vectors by adding attributes.
+
+- Adding a `dim` attribute to a vector allows it to behave like a 2D matrix or a XD array.
+
+---
+### Matrix
+
+A matrix is also an 2D atom (row, column)
+ - Same data types
+ - Same column length
+
+---
+`r flipbookr::chunk_reveal("matrix")`
+
+```{r matrix, include = F}
+# Use matrix
+(mat = matrix(1:9, nrow = 3))
+
+# Use matrix
+(mat2 = matrix(1:9, nrow = 3, byrow = TRUE))
+
+## dim returns dimensions of an object
+dim(mat2)
+
+# set names using colnames
+colnames(mat2) = c("A", "B", "C")
+mat2
+
+mat2[1,1]
+```
+
+---
+
+### Arrays
+
+An array is a 3D atom [row, column, slice]
+---
+
+`r flipbookr::chunk_reveal("arrays")`
+
+```{r arrays, include = F}
+array(c(1:12), dim = c(3,2,2))
+
+(arr = array(c(1:12), dim = c(2,3,2)))
+
+arr[1,1,1]
+```
+
+---
+
+- A vector without a `dim` attribute set is often thought of as 1-dimensional, but actually has NULL dimensions. 
+
+- Why?
+
+- Matrices with a single row or single column, or arrays with a single dimension are 1D. They may print similarly, but will behave differently. The differences aren’t too important, but it’s useful to know they exist in case you get strange output from a function (tapply() is a frequent offender). As always, use str() to reveal the differences.
+
+
+```{r}
+str(c(1:3))                   # 1d vector
+
+str(matrix(1:3, ncol = 1))   # column vector
+
+str(matrix(1:3, nrow = 1))   # row vector
+
+str(array(1:3, 3))           # "array" vector
+
+```
+
+---
+
+# Lists
+
+Lists `extend` atomic vectors and allow each element can be any type.
+
+```{r}
+(my_list <- list(
+  1:5, 
+  "GIS is great!", 
+  c(TRUE, FALSE, TRUE), 
+  c(2.3, 5.9)
+))
+
+typeof(my_list)
+```
+
+---
+# Lists can be recursive
+
+```{r}
+(list_list = list(list("hi")))
+
+str(list_list)
+```
+---
+
+### Data Frames
+
+A `data.frame` is a data structure built on top of lists
+
+--
+
+- a named _list of vectors_.
+
+--
+
+- data.frames are one of the biggest and most important ideas in R, and one of the things that make R different from other programming languages
+
+--
+
+- Unlike a regular list, in a `data.frame`,  the length of each vector **must** be the same. 
+
+--
+
+- This gives data frames their rectangular structure and explains why they share the properties of both matrices and lists
+
+---
+
+`r flipbookr::chunk_reveal("smalldf", title = "# A small data.frame")`
+
+```{r smalldf, include = F}
+df1 <- data.frame(name = c("George", "Stan", "Carly"), 
+                  age  = c(75,15,31),
+                  retired = c(T,F,F))
+                  
+typeof(df1)
+attributes(df1)
+str(df1)
+```
+
+---
+`r flipbookr::chunk_reveal("df")`
+
+```{r df, include = F}
+(num <- c(1,2,3,4))
+
+(color <- c("red", "white", 
+           "green", NA))
+
+(boolean <- c(TRUE,TRUE,
+             TRUE,FALSE))
+
+(df = data.frame(num, color, boolean))
+```
+
+---
+### tibble
+
+A tibble (tbl_df), is a data.frame that enforces best practices:
+- Never changes the input type.
+- Can have columns that are lists.
+- Can have non-standard variable names.
+- Names can start with a number or contain spaces.
+- It only recycles vectors of length 1.
+- It never creates row names.
+
+---
+
+`r flipbookr::chunk_reveal("tibble")`
+
+```{r tibble, include = F}
+# data.frames can be converted to tibbles
+(tib = as_tibble(df))
+
+class(tib)
+typeof(tib)
+
+# can be converted back
+data.frame(tib)
+```
+
+---
+
+# Subsetting
+
+ - R’s subsetting operators are **fast** and powerful. 
+ - Subsetting in R is easy to learn but hard to master.
+ - There are 3 subsetting operators, `[[`, `[`, and `$`.
+ - Subsetting operators interact differently with different vector types (e.g., atomic vectors, lists, factors, matrices, and data frames).
+ - Subsetting can be combined with assignment.
+
+
+---
+`r flipbookr::chunk_reveal("subvec", title = "#Atomics")`
+
+```{r subvec, include = FALSE}
+
+(x = c(3.4, 7, 18, 9.6))
+
+x[3]
+
+x[c(3,4)]
+
+x[-3]
+
+x[c(T,T,F,F)]
+
+x = setNames(x, c('A', 'B','C','D'))
+
+x["A"]
+x[c("A", "C")]
+x[c("A", "A")]
+
+```
+
+---
+`r flipbookr::chunk_reveal("submat", title = "#Matrices")`
+
+```{r, submat, include = FALSE}
+
+(x = matrix(1:9, nrow = 3))
+
+x[3,]
+x[,3]
+x[3,3]
+x[1:2,1:2]
+x[-1,]
+```
+
+---
+`r flipbookr::chunk_reveal("subarr", title = "#Arrays")`
+
+```{r, subarr, include = FALSE}
+(x = array(1:12, dim = c(2,2,3))) 
+
+x[1,,]
+x[,1,]
+x[,,1]
+
+```
+
+---
+`r flipbookr::chunk_reveal("sublist", title = "#Lists")`
+
+```{r, sublist, include = FALSE, error = TRUE}
+
+(ll <- list(name = c("George", "Stan", "Carly"), 
+                  age  = c(75,15,31),
+                  retired = c(T,F,F)))
+ll$name
+ll$name[1]
+
+ll[[1]]
+ll[[1]][1]
+
+ll[['name']][1]
+```
+---
+# Lists are not Matrices
+
+```{r, error = TRUE}
+# The name "Stan"
+ll[1,2]
+
+# Stans Information
+ll[2,]
+```
+
+---
+# Enter data.frames
+
+`r flipbookr::chunk_reveal("subdf", title = "#data.frames")`
+
+```{r, subdf}
+(df <- data.frame(name = c("George", "Stan", "Carly"), 
+                  age  = c(75,15,31),
+                  retired = c(T,F,F)))
+
+# Like a Matrix!
+df[1,2]
+df[2,]
+
+# Like a list!
+df[[1]][1]
+df$name[1]
+
+```
+
+---
+class: center, middle, inverse
+# Type and Structure in Practice
+### Real data examples
+---
+### Storm Dataset
+
+- Many packages come with loaded datasets.
+- `dplyr` (part of the tidyverse) has a `storms` dataset
+
+```{r, echo = FALSE}
+library(sf)
+storms.sf <- storms %>% 
+    st_as_sf(coords = c("long", "lat"), crs = 4326)  %>% 
+    mutate(time = as.POSIXct(paste(paste(year,month,day, sep = "-"), 
+                                   paste(hour, ":00", sep = "")))) %>% 
+    dplyr::select(-month, -day, -hour)
+
+cls <- storms.sf %>% pull(status)
+cls <- factor(cls, levels = unique(cls))
+col = sf.colors(length(levels(cls)))
+plot(st_geometry(storms.sf), cex = .2, axes = TRUE, graticule = TRUE, 
+     col = col[cls])
+legend("topleft", legend = levels(cls), col = col, pch = 1)
+```
+
+
+---
+
+`r flipbookr::chunk_reveal("storms")`
+
+```{r storms, include = F}
+#preview dataset
+head(storms,3)
+# Get data diminsions
+dim(storms)
+str(storms)
+
+storms$name[1:5]
+storms[[1]][1:5]
+storms[1:5,1:5]
+
+```
+
+
+`r flipbookr::chunk_reveal("raster")`
+
+```{r raster, include = F}
+matrix(1:100, nrow = 10) %>% 
+  raster() %>% 
+  rasterVis::levelplot()
+```
+---
+
+`r flipbookr::chunk_reveal("raster3")`
+
+```{r raster3, include = F}
+array(1:300, dim = c(10,10,3)) %>% 
+  brick() %>% 
+  rasterVis::levelplot()
+```
+---
+class: center, middle
+### [Assignment](https://github.com/mikejohnson51/exercise-04)
+
+---
+ 
+```{css, eval = TRUE, echo = F}
+.remark-code{font-size: 100%}
+```
