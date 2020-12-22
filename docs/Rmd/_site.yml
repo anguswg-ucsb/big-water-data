@@ -6,8 +6,6 @@ navbar:
   left:
     - text: "Week 1"
       href: github.html
-    - text: 'Home'
-      href: index.html
 output:
   mikedown::ucsb:
     toc: TRUE
