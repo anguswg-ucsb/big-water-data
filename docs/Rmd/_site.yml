@@ -1,3 +1,4 @@
+
 name: "Angus Watters"
 output_dir: '.'
 navbar:
@@ -7,3 +8,8 @@ navbar:
       href: github.html
     - text: 'Home'
       href: index.html
+output:
+  mikedown::ucsb:
+    toc: TRUE
+    number_sections: FALSE
+    code_folding: "hide"

@@ -10,3 +10,8 @@ subtitle: 'Big data in water - Debra Perrone'
 ---
 
 # Index page!
+
+```{r}
+library(rmarkdown)
+library(mikedown)
+```
