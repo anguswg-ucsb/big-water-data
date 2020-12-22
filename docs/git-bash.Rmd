@@ -224,7 +224,10 @@ git --version
 
 GitHub allows for us to find, borrow, and share open source. In the top left hand corner, enter`anguswg-ucsb/big-water-data`. into the search bar to find your first repository
 
-<img src="act-img/02-class-repo.png">
+
+
+
+![](img/github-page-ex.png)
 
 In the upper right hand corner you see three options:
 
@@ -289,11 +292,7 @@ https://github.com/anguswg-ucsb
 ```
  
  
-Going to your link, should show something like this (image, info, and star count > 1)
 
-<img src="act-img/assignment-02.png">
 
-These should be submitted on the Guachospace dropbox.
-
-## END
+## **END**
 

@@ -14,13 +14,13 @@ output:
 subtitle: 'Intro to the Terminal, git, and Github'
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
 library(rmarkdown)
 library(mikedown)
 #![](img/ucsb-bren-school.png)
 ```
 
-# Welcome to ES - Data & Water
+# **Welcome to ES - Data & Water**
 
 ***
 
