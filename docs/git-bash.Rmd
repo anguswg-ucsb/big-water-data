@@ -222,7 +222,7 @@ git --version
 
 ## <i class="fa fa-search" aria-hidden="true"></i> Finding Open Source code
 
-GitHub allows for us to find, borrow, and share open source. In the top left hand corner, enter`anguswg-ucsb/big-water-data`. into the search bar to find your first repository
+GitHub allows for us to find, borrow, and share open source. In the top left hand corner, enter`anguswg-ucsb/big-water-data` into the search bar to find your first repository
 
 
 
@@ -274,10 +274,115 @@ cd ~
 mkdir github
 ```
 
+<br>
+<br>
+
+# Forking + Cloning
+
+<br>
+
+## Step 1 - Locate & Fork a repo 
+
+> On GitHub, on the top left hand side type `anguswg-ucsb/big-water-data` into the search bar to find the repository for this course. 
+
+> Now once we are at the repo, in the top-right corner of this page, click Fork.
+
+> If you go to your GitHub page (`YOUR-USERNAME/big-water-data`), there will be your own version of this repo within your repositories
+
+![](img/fork-button.jpg)
+<br>
+<br>
+
+## Step 2 - Copy git URL
+
+> From your GitHub (`YOUR-USERNAME/big-water-data`), go into your repositories and find the forked version of this repo.
+
+> In the top right hand corner, click on the **green code** button and copy the git URL 
+
+![](img/copy-git-url.png)
+
+<br>
+<br>
+<br>
+<br>
+
+## Step 3 - Clone into RStudio to create a new project
+
+<br>
+
+`File --> New Project --> Version Control --> Git`
+
+<br>
+<br>
+
+> Open a New Project
+
+![](img/new-project.png)
+
+***
+
+<br>
+<br>
+<br>
+<br>
+
+> Select Version control 
+
+![](img/version-control.png)
+
+***
+
+<br>
+<br>
+<br>
+<br>
+
+> Select git
+
+![](img/select-git.png)
+
+<br>
+<br>
+<br>
+<br>
+
+>Paste the URL<br>Keep the name<br>Make as a subdirectory of `~/github`
+
+![](img/clone-repo.png)
+
+<br>
+<br>
+<br>
+
+## <i class="fa fa-fork" aria-hidden="true"></i> So what did we just do?
+
+ - forked a repo 
+ - cloned our forked version onto our machine via RStudio
+ - created a version control, git-enabled project! 
+ - Now, you can make changes to this repo on your computer, and push the changes to GitHub 
+
+
+
+  
+
+
+> **Congratulations!!**<br>We just went through a lot of steps, and it can be overwhelming the first few times dealing with the RStudio terminal, git, GitHub and this forking and cloning business. If you continue using RStudio and GitHub, before  before you know it, forking and cloning repositories will be something you can do without thinking
+
+
+Go ahead and inspect the folders/files in the project. What did you find? 
+
+All projects will typically contain 3 folders:  `docs, data, img` 
+
+
+<br>
+<br>
+<br>
+<br>
+
 
 # Assignment
 
-For this assignment two things must be submitted:
+<br>
 
 1. Screenshot of your git config global variables (e.g.)
 
@@ -285,13 +390,33 @@ For this assignment two things must be submitted:
 git config --list --global
 ```
 
-2. a URL to your github account (e.g.) .
+<br> 
+
+2. a URL to your github account (e.g.) 
 
 ```{r, eval = FALSE}
 https://github.com/anguswg-ucsb
 ```
  
- 
+<br> 
+
+3. All projects will typically contain 3 folders: docs, data, img
+
+<br>
+
+- Go ahead and inspect the files in each folder. 
+
+- What did you find?
+
+- What type of files are in each folder? 
+
+- What happens when you try to open the differnt file types?
+
+***
+
+<br>
+<br>
+<br>
 
 
 ## **END**

@@ -611,7 +611,7 @@ span.code {
 </div>
 <div id="finding-open-source-code" class="section level2">
 <h2><i class="fa fa-search" aria-hidden="true"></i> Finding Open Source code</h2>
-<p>GitHub allows for us to find, borrow, and share open source. In the top left hand corner, enter<code>anguswg-ucsb/big-water-data</code>. into the search bar to find your first repository</p>
+<p>GitHub allows for us to find, borrow, and share open source. In the top left hand corner, enter<code>anguswg-ucsb/big-water-data</code> into the search bar to find your first repository</p>
 <p><img src="img/github-page-ex.png" /></p>
 <p>In the upper right hand corner you see three options:</p>
 <ol style="list-style-type: decimal">
@@ -641,19 +641,105 @@ span.code {
 <p>To do this, create a folder called <code>github</code> in the <strong>home</strong> directory of your computer. We can quickly do this by changing to our home directory (<code>cd</code>) and making a new folder (<code>mkdir</code>) called github:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="bu">cd</span> ~</span>
 <span id="cb28-2"><a href="#cb28-2"></a><span class="fu">mkdir</span> github</span></code></pre></div>
+<p><br> <br></p>
+</div>
+</div>
+<div id="forking-cloning" class="section level1">
+<h1>Forking + Cloning</h1>
+<p><br></p>
+<div id="step-1---locate-fork-a-repo" class="section level2">
+<h2>Step 1 - Locate &amp; Fork a repo</h2>
+<blockquote>
+<p>On GitHub, on the top left hand side type <code>anguswg-ucsb/big-water-data</code> into the search bar to find the repository for this course.</p>
+</blockquote>
+<blockquote>
+<p>Now once we are at the repo, in the top-right corner of this page, click Fork.</p>
+</blockquote>
+<blockquote>
+<p>If you go to your GitHub page (<code>YOUR-USERNAME/big-water-data</code>), there will be your own version of this repo within your repositories</p>
+</blockquote>
+<p><img src="img/fork-button.jpg" /> <br> <br></p>
+</div>
+<div id="step-2---copy-git-url" class="section level2">
+<h2>Step 2 - Copy git URL</h2>
+<blockquote>
+<p>From your GitHub (<code>YOUR-USERNAME/big-water-data</code>), go into your repositories and find the forked version of this repo.</p>
+</blockquote>
+<blockquote>
+<p>In the top right hand corner, click on the <strong>green code</strong> button and copy the git URL</p>
+</blockquote>
+<p><img src="img/copy-git-url.png" /></p>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="step-3---clone-into-rstudio-to-create-a-new-project" class="section level2">
+<h2>Step 3 - Clone into RStudio to create a new project</h2>
+<p><br></p>
+<p><code>File --&gt; New Project --&gt; Version Control --&gt; Git</code></p>
+<p><br> <br></p>
+<blockquote>
+<p>Open a New Project</p>
+</blockquote>
+<p><img src="img/new-project.png" /></p>
+<hr />
+<p><br> <br> <br> <br></p>
+<blockquote>
+<p>Select Version control</p>
+</blockquote>
+<p><img src="img/version-control.png" /></p>
+<hr />
+<p><br> <br> <br> <br></p>
+<blockquote>
+<p>Select git</p>
+</blockquote>
+<p><img src="img/select-git.png" /></p>
+<p><br> <br> <br> <br></p>
+<blockquote>
+<p>Paste the URL<br>Keep the name<br>Make as a subdirectory of <code>~/github</code></p>
+</blockquote>
+<p><img src="img/clone-repo.png" /></p>
+<p><br> <br> <br></p>
+</div>
+<div id="so-what-did-we-just-do" class="section level2">
+<h2><i class="fa fa-fork" aria-hidden="true"></i> So what did we just do?</h2>
+<ul>
+<li>forked a repo</li>
+<li>cloned our forked version onto our machine via RStudio</li>
+<li>created a version control, git-enabled project!</li>
+<li>Now, you can make changes to this repo on your computer, and push the changes to GitHub</li>
+</ul>
+<blockquote>
+<p><strong>Congratulations!!</strong><br>We just went through a lot of steps, and it can be overwhelming the first few times dealing with the RStudio terminal, git, GitHub and this forking and cloning business. If you continue using RStudio and GitHub, before before you know it, forking and cloning repositories will be something you can do without thinking</p>
+</blockquote>
+<p>Go ahead and inspect the folders/files in the project. What did you find?</p>
+<p>All projects will typically contain 3 folders: <code>docs, data, img</code></p>
+<p><br> <br> <br> <br></p>
 </div>
 </div>
 <div id="assignment" class="section level1">
 <h1>Assignment</h1>
-<p>For this assignment two things must be submitted:</p>
+<p><br></p>
 <ol style="list-style-type: decimal">
 <li>Screenshot of your git config global variables (e.g.)</li>
 </ol>
 <div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">git</span> config --list --global</span></code></pre></div>
+<p><br></p>
 <ol start="2" style="list-style-type: decimal">
-<li>a URL to your github account (e.g.) .</li>
+<li>a URL to your github account (e.g.)</li>
 </ol>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>anguswg<span class="op">-</span>ucsb</span></code></pre></div>
+<p><br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>All projects will typically contain 3 folders: docs, data, img</li>
+</ol>
+<p><br></p>
+<ul>
+<li><p>Go ahead and inspect the files in each folder.</p></li>
+<li><p>What did you find?</p></li>
+<li><p>What type of files are in each folder?</p></li>
+<li><p>What happens when you try to open the differnt file types?</p></li>
+</ul>
+<hr />
+<p><br> <br> <br></p>
 <div id="end" class="section level2">
 <h2><strong>END</strong></h2>
 </div>
