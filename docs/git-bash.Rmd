@@ -384,7 +384,7 @@ All projects will typically contain 3 folders:  `docs, data, img`
 
 <br>
 
-1. Screenshot of your git config global variables (e.g.)
+**1. Screenshot of your git config global variables (e.g.)**
 
 ```{bash, eval = FALSE}
 git config --list --global
@@ -392,7 +392,7 @@ git config --list --global
 
 <br> 
 
-2. a URL to your github account (e.g.) 
+**2. a URL to your github account (e.g.) **
 
 ```{r, eval = FALSE}
 https://github.com/anguswg-ucsb
@@ -400,7 +400,7 @@ https://github.com/anguswg-ucsb
  
 <br> 
 
-3. All projects will typically contain 3 folders: docs, data, img
+**3. All projects will typically contain 3 folders: docs, data, img**
 
 <br>
 
@@ -412,7 +412,6 @@ https://github.com/anguswg-ucsb
 
 - What happens when you try to open the differnt file types?
 
-***
 
 <br>
 <br>
