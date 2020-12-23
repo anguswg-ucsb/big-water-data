@@ -346,7 +346,7 @@ mkdir github
 <br>
 <br>
 
->Paste the URL<br>Keep the name<br>Make as a subdirectory of `~/github`
+>Paste the URL<br>Keep the name<br>Make as a subdirectory of `~/github`<br>Click open in new session
 
 ![](img/clone-repo.png)
 
