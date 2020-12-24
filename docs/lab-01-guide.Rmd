@@ -1,0 +1,225 @@
+---
+title: "[Water & big data](index.html)"
+author: "Lab 1"
+date: "[Angus Watters](https://github.com/anguswg-ucsb)"
+mail: "adwattersgrubstein@ucsb.edu"
+github: "anguswg-ucsb"
+class_name: 'Water & big data'
+class_github: 'big-water-data'
+home: ""
+output:
+  rmdformats::downcute
+subtitle: "Create a new project in RStudio, set up project's file structure, and intro to R"
+---
+
+<style type="text/css">
+span.code {
+      background:rgba(240,128,128, 0.2);
+      border-radius: 5px 5px 5px 5px;
+      padding-left:5px;
+      padding-top:2px;
+      padding-right:5px;
+      padding-bottom:2px;
+      color:red;
+     } 
+</style>
+***
+
+> The RStudio terminal provides access to the **operating system (OS)** shell from within the RStudio IDE. Beneath the surface of any OS is an entire world that can only be accessed only from the **command line**. <br><br>The terminal is a gateway to that command line. <br><br>With it, instead of pointing and clicking, you can type commands and have your computer respond.
+
+
+***
+
+# **Goals**
+
+- Make a folder for this class that will be the home for all your projects
+- Learn how to make a new project in RStudio and build a reproducible & organized file structure within a project
+- Learn to execute simple tasks within the RStudio terminal to create files and navigate our system directory
+- Overcome the initial (and understandable!) anxiety associated with the terminal
+- Install packages and load them into your environment
+- Explore the basics of RStudio
+- Understand the different data types & data structures in R
+- Get comfortable working with the different data types & data structures
+
+***
+
+# **Create a folder for this class**
+
+### **MacOS <i class="fa fa-apple" aria-hidden="true"></i>**
+
+First, we will create a new folder on our desktop that we'll use to organize our RStudio projects for this class. 
+Navigate to your desktop, and right click and click `New folder`. A new folder should appear on your desktop, to rename the folder, double click on the folder's name and give it the name `Rprojects`
+
+### **Windows <i class="fa fa-windows" aria-hidden="true"></i>**
+
+On windows, do the same thing but when you right click on the desktop hover over `New` and the click `Folder` 
+
+![](img/new-desktop-folder.png)
+
+
+***
+
+# **Create a new project in RStudio**
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+![](img/open-new-rproj.png)
+
+
+![](img/select-new-dir.png)
+
+
+![](img/select-proj-type.png)
+
+![](img/create-new-proj.png)
+
+***
+
+# **Build a project file structure**
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+
+
+
+***
+
+# **Create a R Script**
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+***
+
+# **Load in your libraries**
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+***
+
+# **Data types**
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+***
+
+# **Data structures**
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+***
+
+# **Useful Terminal Commands**
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your Terminal application (do yourself a favor and download iTerm), and on Windows, through PowerShell. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The Terminal tab can be found next to the Console tab. If it is not visible, show it via Shift+Alt+T (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+Entering commands into the terminal is useful for expediting basic tasks like file/folder creation. The terminal is also useful for exploring your file structure, and for retrieving information about your computer system. 
+
+> Here are 6 common commands that are useful for navigating a file system and creating files.
+
+<br>
+
+## <span class= "code" >pwd</span> - print working directory
+
+pwd displays directory or folder you are currently in
+
+```{bash,  engine="sh"}
+pwd
+```
+
+<br>
+
+## <span class= "code" >ls</span> - list files
+
+ls shows the files in the current working directory. This is equivalent to looking at the files in your Finder/Explorer/File Manager. Use ls -a to also list hidden files, such as `.Rhistory` and `.git`. Here we look at all the files in current working directory:
+
+```{bash}
+ls
+```
+
+<br>
+
+## <span class= "code">mkdir</span> - make a directory
+
+mkdir creates a new folder (directory) inside your current working directory
+
+to make a new folder called 'my_folder'
+
+```{bash}
+mkdir my_folder
+ls
+```
+
+Notably we see our my-folder directory!
+
+<br>
+
+## <span class= "code" >cd</span> - change directory
+
+cd allows you to navigate through directories by changing working directory. There are many ways to navigate:
+
+### go to subdirectory of current working directory:
+
+```{bash}
+pwd # start here
+cd my-folder
+pwd # end here
+```
+
+### go to parent (one folder up) of current working directory: cd ..
+
+```{bash}
+pwd
+cd ..
+pwd
+```
+### go to your “home” directory: cd ~ or simply cd
+
+```{bash}
+pwd
+cd ~
+pwd
+```
+
+### Using absolute path, works regardless of your current working directory:. 
+
+```{bash}
+pwd
+cd /Users/anguswg-ucsb/github/spds
+pwd
+```
+
+Windows uses a slightly different syntax with the slashes between the folder names reversed, \, e.g. cd C:\Users\MY_USERNAME\Desktop.
+
+**Pro tip 1:** Dragging and dropping a file or folder into the terminal window will paste the absolute path into the window.
+
+**Pro tip 2:** Use the tab key to autocomplete unambiguous directory and file names. Hit tab twice to see all ambiguous options.
+
+<br>
+
+## <span class= "code">touch</span> - create a file
+
+On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</span>  can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file named `new_r_file.R` in our working directory as follows:
+
+```{bash, eval = TRUE}
+touch new_r_file.R
+ls
+```
+
+On a Windows machine (anything running Powershell) <span class = "code">$null ></span>  can be used to create a new file with a defined name and extension in the working directory. Essentially, this is piping no data (null) into a new file. For example, we can create a new R file in our working directory as follows:
+
+```{bash, eval = FALSE}
+$null > new-r-file.R
+```
+
+<br>
+
+## <span class= "code">clear</span> - clear your terminal window
+
+```{r, eval = FALSE}
+clear
+```
+
+```{bash, echo = FALSE}
+rm -R my_folder
+rm new_r_file.R
+```

@@ -6,8 +6,8 @@ navbar:
   left:
     - text: "Week 1"
       href: git-bash.html
+    - text: "Lab 1"
+      href: lab-01-guide.html
 output:
-  mikedown::ucsb:
-    toc: TRUE
-    number_sections: FALSE
-    code_folding: "hide"
+  rmdformats::downcute
+

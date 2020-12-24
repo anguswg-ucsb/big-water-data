@@ -8,10 +8,7 @@ class_name: 'Water & big data'
 class_github: 'big-water-data'
 home: ""
 output:
-  mikedown::ucsb:
-    toc: TRUE
-    number_sections: FALSE
-    code_folding: "show"
+  rmdformats::downcute
 subtitle: 'Intro to the Terminal, git, and Github'
 ---
 
@@ -34,7 +31,7 @@ span.code {
 
 ***
 
-# Goals
+# **Goals**
 
 - Brief crash course in terminal commands
 - Overcome the initial (and understandable!) anxiety associated with the terminal
@@ -44,7 +41,7 @@ span.code {
 
 ***
 
-# Locate the Terminal
+# **Locate the Terminal**
 
 The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
 
@@ -53,11 +50,17 @@ The terminal is a computer application. On a Mac, it is most frequently accessed
 
 ***
 
-# Useful Terminal Commands
+# **Useful Terminal Commands**
 
-Using the terminal expedites basic tasks such as creating new files and folders, exploring folder structures, and seeing what it can tell us about our computer system. Here are 6 common commands that are useful for navigating a file system and creating files.
+The terminal is a computer application. On a Mac, it is most frequently accessed via your Terminal application (do yourself a favor and download iTerm), and on Windows, through PowerShell. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The Terminal tab can be found next to the Console tab. If it is not visible, show it via Shift+Alt+T (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
 
-### <span class= "code" >pwd</span> - print working directory
+Entering commands into the terminal is useful for expediting basic tasks like file/folder creation. The terminal is also useful for exploring your file structure, and for retrieving information about your computer system. 
+
+> Here are 6 common commands that are useful for navigating a file system and creating files.
+
+<br>
+
+## <span class= "code" >pwd</span> - print working directory
 
 pwd displays directory or folder you are currently in
 
@@ -65,7 +68,9 @@ pwd displays directory or folder you are currently in
 pwd
 ```
 
-### <span class= "code" >ls</span> - list files
+<br>
+
+## <span class= "code" >ls</span> - list files
 
 ls shows the files in the current working directory. This is equivalent to looking at the files in your Finder/Explorer/File Manager. Use ls -a to also list hidden files, such as `.Rhistory` and `.git`. Here we look at all the files in current working directory:
 
@@ -73,7 +78,9 @@ ls shows the files in the current working directory. This is equivalent to looki
 ls
 ```
 
-### <span class= "code">mkdir</span> - make a directory
+<br>
+
+## <span class= "code">mkdir</span> - make a directory
 
 mkdir creates a new folder (directory) inside your current working directory
 
@@ -86,11 +93,13 @@ ls
 
 Notably we see our my-folder directory!
 
-### <span class= "code" >cd</span> - change directory
+<br>
+
+## <span class= "code" >cd</span> - change directory
 
 cd allows you to navigate through directories by changing working directory. There are many ways to navigate:
 
-#### go to subdirectory of current working directory:
+### go to subdirectory of current working directory:
 
 ```{bash}
 pwd # start here
@@ -98,14 +107,14 @@ cd my-folder
 pwd # end here
 ```
 
-#### go to parent (one folder up) of current working directory: cd ..
+### go to parent (one folder up) of current working directory: cd ..
 
 ```{bash}
 pwd
 cd ..
 pwd
 ```
-#### go to your “home” directory: cd ~ or simply cd
+### go to your “home” directory: cd ~ or simply cd
 
 ```{bash}
 pwd
@@ -113,7 +122,7 @@ cd ~
 pwd
 ```
 
-#### Using absolute path, works regardless of your current working directory:. 
+### Using absolute path, works regardless of your current working directory:. 
 
 ```{bash}
 pwd
@@ -127,7 +136,9 @@ Windows uses a slightly different syntax with the slashes between the folder nam
 
 **Pro tip 2:** Use the tab key to autocomplete unambiguous directory and file names. Hit tab twice to see all ambiguous options.
 
-### Create a file
+<br>
+
+## <span class= "code">touch</span> - create a file
 
 On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</span>  can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file named `new_r_file.R` in our working directory as follows:
 
@@ -142,7 +153,9 @@ On a Windows machine (anything running Powershell) <span class = "code">$null ><
 $null > new-r-file.R
 ```
 
-### <span class= "code">clear</span> - clear your terminal window
+<br>
+
+## <span class= "code">clear</span> - clear your terminal window
 
 ```{r, eval = FALSE}
 clear
@@ -154,7 +167,7 @@ rm new_r_file.R
 ```
 
 
-# Installing git
+# **Installing git**
 
 Now we are going to use our terminal to find/install git. But what is git?
 
@@ -182,7 +195,7 @@ If you have git installed, or it automatically installed, consider yourself fort
 
 <span class= "code">You should only have to do this if git was **NOT** found in Step 1 !!!</span>
 
-### MacOS <i class="fa fa-apple" aria-hidden="true"></i>
+### **MacOS <i class="fa fa-apple" aria-hidden="true"></i>**
 
 Install the Xcode command line tools (not all of Xcode), which includes Git, by typing the following in your terminal:
 
@@ -190,7 +203,7 @@ Install the Xcode command line tools (not all of Xcode), which includes Git, by 
 xcode-select --install
 ```
 
-### Windows <i class="fa fa-windows" aria-hidden="true"></i>
+### **Windows <i class="fa fa-windows" aria-hidden="true"></i>**
 
 Install [Git for Windows](https://gitforwindows.org/), also known as “Git Bash”, to get Git and some other useful tools, such as the Bash shell. 
 
@@ -209,7 +222,7 @@ Once you have git installed, enter `git --version` into your terminal to see the
 git --version
 ```
 
-# Github
+# **Github**
 
 > GitHub provides a platform for hosting software developed using Git. It offers the version control functionality of Git, plus its own features. While Git is a **command line tool**, GitHub provides a Web-based graphical interface. 
 
@@ -277,7 +290,7 @@ mkdir github
 <br>
 <br>
 
-# Forking + Cloning
+# **Forking + Cloning**
 
 <br>
 
@@ -380,7 +393,7 @@ All projects will typically contain 3 folders:  `docs, data, img`
 <br>
 
 
-# Assignment
+# **Assignment**
 
 <br>
 

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="Lab 1" />
+    
+    
+    <title>Water &amp; big data</title>
+
+        <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+    <script src="site_libs/navigation-1.1/tabsets.js"></script>
+    <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+    <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+    <link href="site_libs/downcute-0.1/downcute.css" rel="stylesheet" />
+    <link href="site_libs/downcute-0.1/downcute_fonts_embed.css" rel="stylesheet" />
+    <script src="site_libs/downcute-0.1/downcute.js"></script>
+    <script src="site_libs/prism-1.22/prism.js"></script>
+    
+    
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+                  <!-- downcute start -->   
+   <div id="docute" class="Root">
+     <div class="Page layout-narrow">
+      <div class="Wrap">
+        <div class="Sidebar">
+          <div class="SidebarItems" id="toc">
+            <ul>
+            <li><a href="#goals"><strong>Goals</strong></a></li>
+            <li><a href="#create-a-folder-for-this-class"><strong>Create a folder for this class</strong></a></li>
+            <li><a href="#create-a-new-project-in-rstudio"><strong>Create a new project in RStudio</strong></a></li>
+            <li><a href="#build-a-project-file-structure"><strong>Build a project file structure</strong></a></li>
+            <li><a href="#create-a-r-script"><strong>Create a R Script</strong></a></li>
+            <li><a href="#load-in-your-libraries"><strong>Load in your libraries</strong></a></li>
+            <li><a href="#data-types"><strong>Data types</strong></a></li>
+            <li><a href="#data-structures"><strong>Data structures</strong></a></li>
+            <li><a href="#useful-terminal-commands"><strong>Useful Terminal Commands</strong></a><ul>
+            <li><a href="#pwd---print-working-directory"><span class="code">pwd</span> - print working directory</a></li>
+            <li><a href="#ls---list-files"><span class="code">ls</span> - list files</a></li>
+            <li><a href="#mkdir---make-a-directory"><span class="code">mkdir</span> - make a directory</a></li>
+            <li><a href="#cd---change-directory"><span class="code">cd</span> - change directory</a></li>
+            <li><a href="#touch---create-a-file"><span class="code">touch</span> - create a file</a></li>
+            <li><a href="#clear---clear-your-terminal-window"><span class="code">clear</span> - clear your terminal window</a></li>
+            </ul></li>
+            </ul>
+          </div>
+          <div data-position="sidebar:post-end" class="InjectedComponents"><div class="dark-theme-toggler"><div class="toggle"><div class="toggle-track"><div class="toggle-track-check"><img  src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div> <div class="toggle-track-x"><img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div></div> <div class="toggle-thumb"></div></div> <input type="checkbox" aria-label="Switch between Dark and Default theme" class="toggler-screen-reader-only"></div></div>
+        </div>
+        <div class="Main">
+          <div class="Content" id="content"> 
+   
+   
+      
+   <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="index.html">Water & big data</a>
+       </div>
+       <div id="navbar" class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+           <li>
+     <a href="git-bash.html">Week 1</a>
+   </li>
+   <li>
+     <a href="lab-01-guide.html">Lab 1</a>
+   </li>
+         </ul>
+         <ul class="nav navbar-nav navbar-right">
+           
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div><!--/.container -->
+   </div><!--/.navbar -->
+        
+      <h1 class="title"><a href="index.html">Water &amp; big data</a></h1>
+         <h1 class="subtitle">Create a new project in RStudio, set up project’s file structure, and intro to R</h1>
+   
+      <p class="authors">
+           <span class="glyphicon glyphicon-user"></span> Lab 1
+      </p>
+         <p class="date"><span class="glyphicon glyphicon-calendar"></span> <a href="https://github.com/anguswg-ucsb">Angus Watters</a></p>
+         
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div class="page-content has-page-title">
+<style type="text/css">
+span.code {
+      background:rgba(240,128,128, 0.2);
+      border-radius: 5px 5px 5px 5px;
+      padding-left:5px;
+      padding-top:2px;
+      padding-right:5px;
+      padding-bottom:2px;
+      color:red;
+     } 
+</style>
+<hr />
+<blockquote>
+<p>The RStudio terminal provides access to the <strong>operating system (OS)</strong> shell from within the RStudio IDE. Beneath the surface of any OS is an entire world that can only be accessed only from the <strong>command line</strong>. <br><br>The terminal is a gateway to that command line. <br><br>With it, instead of pointing and clicking, you can type commands and have your computer respond.</p>
+</blockquote>
+<hr />
+<div id="goals" class="section level1">
+<h1><strong>Goals</strong></h1>
+<ul>
+<li>Make a folder for this class that will be the home for all your projects</li>
+<li>Learn how to make a new project in RStudio and build a reproducible &amp; organized file structure within a project</li>
+<li>Learn to execute simple tasks within the RStudio terminal to create files and navigate our system directory</li>
+<li>Overcome the initial (and understandable!) anxiety associated with the terminal</li>
+<li>Install packages and load them into your environment</li>
+<li>Explore the basics of RStudio</li>
+<li>Understand the different data types &amp; data structures in R</li>
+<li>Get comfortable working with the different data types &amp; data structures</li>
+</ul>
+<hr />
+</div>
+<div id="create-a-folder-for-this-class" class="section level1">
+<h1><strong>Create a folder for this class</strong></h1>
+<div id="macos" class="section level3">
+<h3><strong>MacOS <i class="fa fa-apple" aria-hidden="true"></i></strong></h3>
+<p>First, we will create a new folder on our desktop that we’ll use to organize our RStudio projects for this class. Navigate to your desktop, and right click and click <code>New folder</code>. A new folder should appear on your desktop, to rename the folder, double click on the folder’s name and give it the name <code>Rprojects</code></p>
+</div>
+<div id="windows" class="section level3">
+<h3><strong>Windows <i class="fa fa-windows" aria-hidden="true"></i></strong></h3>
+<p>On windows, do the same thing but when you right click on the desktop hover over <code>New</code> and the click <code>Folder</code></p>
+<p><img src="img/new-desktop-folder.png" /></p>
+<hr />
+</div>
+</div>
+<div id="create-a-new-project-in-rstudio" class="section level1">
+<h1><strong>Create a new project in RStudio</strong></h1>
+<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<p><img src="img/open-new-rproj.png" /></p>
+<p><img src="img/select-new-dir.png" /></p>
+<p><img src="img/select-proj-type.png" /></p>
+<p><img src="img/create-new-proj.png" /></p>
+<hr />
+</div>
+<div id="build-a-project-file-structure" class="section level1">
+<h1><strong>Build a project file structure</strong></h1>
+<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<hr />
+</div>
+<div id="create-a-r-script" class="section level1">
+<h1><strong>Create a R Script</strong></h1>
+<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<hr />
+</div>
+<div id="load-in-your-libraries" class="section level1">
+<h1><strong>Load in your libraries</strong></h1>
+<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<hr />
+</div>
+<div id="data-types" class="section level1">
+<h1><strong>Data types</strong></h1>
+<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<hr />
+</div>
+<div id="data-structures" class="section level1">
+<h1><strong>Data structures</strong></h1>
+<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<hr />
+</div>
+<div id="useful-terminal-commands" class="section level1">
+<h1><strong>Useful Terminal Commands</strong></h1>
+<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your Terminal application (do yourself a favor and download iTerm), and on Windows, through PowerShell. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The Terminal tab can be found next to the Console tab. If it is not visible, show it via Shift+Alt+T (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<p>Entering commands into the terminal is useful for expediting basic tasks like file/folder creation. The terminal is also useful for exploring your file structure, and for retrieving information about your computer system.</p>
+<blockquote>
+<p>Here are 6 common commands that are useful for navigating a file system and creating files.</p>
+</blockquote>
+<p><br></p>
+<div id="pwd---print-working-directory" class="section level2">
+<h2><span class="code">pwd</span> - print working directory</h2>
+<p>pwd displays directory or folder you are currently in</p>
+<pre class="bash"><code>pwd</code></pre>
+<pre><code>## /cygdrive/c/Users/angus/OneDrive/Desktop/github/big-water-data/docs</code></pre>
+<p><br></p>
+</div>
+<div id="ls---list-files" class="section level2">
+<h2><span class="code">ls</span> - list files</h2>
+<p>ls shows the files in the current working directory. This is equivalent to looking at the files in your Finder/Explorer/File Manager. Use ls -a to also list hidden files, such as <code>.Rhistory</code> and <code>.git</code>. Here we look at all the files in current working directory:</p>
+<pre class="bash"><code>ls</code></pre>
+<pre><code>## R
+## Rmd
+## _site
+## _site.yml
+## data-structure.Rmd
+## data-structure.html
+## data-structure_files
+## git-bash.Rmd
+## git-bash.html
+## git-bash_files
+## img
+## index.html
+## index.rmd
+## index_files
+## lab-01-guide.Rmd
+## lab-01-guide.html
+## lab-01-guide_files
+## lab-01.Rmd
+## lesson-01.html
+## lesson-01_files
+## site_libs</code></pre>
+<p><br></p>
+</div>
+<div id="mkdir---make-a-directory" class="section level2">
+<h2><span class="code">mkdir</span> - make a directory</h2>
+<p>mkdir creates a new folder (directory) inside your current working directory</p>
+<p>to make a new folder called ‘my_folder’</p>
+<pre class="bash"><code>mkdir my_folder
+ls</code></pre>
+<pre><code>## R
+## Rmd
+## _site
+## _site.yml
+## data-structure.Rmd
+## data-structure.html
+## data-structure_files
+## git-bash.Rmd
+## git-bash.html
+## git-bash_files
+## img
+## index.html
+## index.rmd
+## index_files
+## lab-01-guide.Rmd
+## lab-01-guide.html
+## lab-01-guide_files
+## lab-01.Rmd
+## lesson-01.html
+## lesson-01_files
+## my_folder
+## site_libs</code></pre>
+<p>Notably we see our my-folder directory!</p>
+<p><br></p>
+</div>
+<div id="cd---change-directory" class="section level2">
+<h2><span class="code">cd</span> - change directory</h2>
+<p>cd allows you to navigate through directories by changing working directory. There are many ways to navigate:</p>
+<div id="go-to-subdirectory-of-current-working-directory" class="section level3">
+<h3>go to subdirectory of current working directory:</h3>
+<pre class="bash"><code>pwd # start here
+cd my-folder
+pwd # end here</code></pre>
+<pre><code>## /cygdrive/c/Users/angus/OneDrive/Desktop/github/big-water-data/docs
+## /usr/bin/bash: line 1: cd: my-folder: No such file or directory
+## /cygdrive/c/Users/angus/OneDrive/Desktop/github/big-water-data/docs</code></pre>
+</div>
+<div id="go-to-parent-one-folder-up-of-current-working-directory-cd-.." class="section level3">
+<h3>go to parent (one folder up) of current working directory: cd ..</h3>
+<pre class="bash"><code>pwd
+cd ..
+pwd</code></pre>
+<pre><code>## /cygdrive/c/Users/angus/OneDrive/Desktop/github/big-water-data/docs
+## /cygdrive/c/Users/angus/OneDrive/Desktop/github/big-water-data</code></pre>
+</div>
+<div id="go-to-your-home-directory-cd-or-simply-cd" class="section level3">
+<h3>go to your “home” directory: cd ~ or simply cd</h3>
+<pre class="bash"><code>pwd
+cd ~
+pwd</code></pre>
+<pre><code>## /cygdrive/c/Users/angus/OneDrive/Desktop/github/big-water-data/docs
+## /cygdrive/c/Users/angus/OneDrive/Documents</code></pre>
+</div>
+<div id="using-absolute-path-works-regardless-of-your-current-working-directory." class="section level3">
+<h3>Using absolute path, works regardless of your current working directory:.</h3>
+<pre class="bash"><code>pwd
+cd /Users/anguswg-ucsb/github/spds
+pwd</code></pre>
+<pre><code>## /cygdrive/c/Users/angus/OneDrive/Desktop/github/big-water-data/docs
+## /usr/bin/bash: line 1: cd: /Users/anguswg-ucsb/github/spds: No such file or directory
+## /cygdrive/c/Users/angus/OneDrive/Desktop/github/big-water-data/docs</code></pre>
+<p>Windows uses a slightly different syntax with the slashes between the folder names reversed, , e.g. cd C:_USERNAME.</p>
+<p><strong>Pro tip 1:</strong> Dragging and dropping a file or folder into the terminal window will paste the absolute path into the window.</p>
+<p><strong>Pro tip 2:</strong> Use the tab key to autocomplete unambiguous directory and file names. Hit tab twice to see all ambiguous options.</p>
+<p><br></p>
+</div>
+</div>
+<div id="touch---create-a-file" class="section level2">
+<h2><span class="code">touch</span> - create a file</h2>
+<p>On a MacOS or Linux machine (anything running Bash) <span class="code">touch</span> can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file named <code>new_r_file.R</code> in our working directory as follows:</p>
+<pre class="bash"><code>touch new_r_file.R
+ls</code></pre>
+<pre><code>## R
+## Rmd
+## _site
+## _site.yml
+## data-structure.Rmd
+## data-structure.html
+## data-structure_files
+## git-bash.Rmd
+## git-bash.html
+## git-bash_files
+## img
+## index.html
+## index.rmd
+## index_files
+## lab-01-guide.Rmd
+## lab-01-guide.html
+## lab-01-guide_files
+## lab-01.Rmd
+## lesson-01.html
+## lesson-01_files
+## my_folder
+## new_r_file.R
+## site_libs</code></pre>
+<p>On a Windows machine (anything running Powershell) <span class="code">$null &gt;</span> can be used to create a new file with a defined name and extension in the working directory. Essentially, this is piping no data (null) into a new file. For example, we can create a new R file in our working directory as follows:</p>
+<pre class="bash"><code>$null &gt; new-r-file.R</code></pre>
+<p><br></p>
+</div>
+<div id="clear---clear-your-terminal-window" class="section level2">
+<h2><span class="code">clear</span> - clear your terminal window</h2>
+<pre class="r"><code>clear</code></pre>
+</div>
+</div>
+</div>
+
+   
+   
+              </div>
+  </div>
+  </div>
+  </div>
+   
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 		
+	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>
