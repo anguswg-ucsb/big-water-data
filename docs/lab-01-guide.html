@@ -121,8 +121,17 @@
             <li><a href="#build-a-project-file-structure"><strong>Build a project file structure</strong></a></li>
             <li><a href="#create-a-r-script"><strong>Create a R Script</strong></a></li>
             <li><a href="#load-in-your-libraries"><strong>Load in your libraries</strong></a></li>
-            <li><a href="#data-types"><strong>Data types</strong></a></li>
-            <li><a href="#data-structures"><strong>Data structures</strong></a></li>
+            <li><a href="#data-types"><strong>Data types</strong></a><ul>
+            <li><a href="#numeric">Numeric</a></li>
+            <li><a href="#integer">Integer</a></li>
+            <li><a href="#character">Character</a></li>
+            <li><a href="#missing-values-na">Missing Values (NA)</a></li>
+            </ul></li>
+            <li><a href="#data-structures"><strong>Data structures</strong></a><ul>
+            <li><a href="#vectors">Vectors</a></li>
+            <li><a href="#lists">Lists</a></li>
+            <li><a href="#dataframes">Dataframes</a></li>
+            </ul></li>
             <li><a href="#useful-terminal-commands"><strong>Useful Terminal Commands</strong></a><ul>
             <li><a href="#pwd---print-working-directory"><span class="code">pwd</span> - print working directory</a></li>
             <li><a href="#ls---list-files"><span class="code">ls</span> - list files</a></li>
@@ -229,32 +238,246 @@ span.code {
 <p><img src="img/select-new-dir.png" /></p>
 <p><img src="img/select-proj-type.png" /></p>
 <p><img src="img/create-new-proj.png" /></p>
-<hr />
+<p><img src="img/createh-new-proj.png" /></p>
+<p><img src="img/crehate-new-proj.png" /> ***</p>
 </div>
 <div id="build-a-project-file-structure" class="section level1">
 <h1><strong>Build a project file structure</strong></h1>
 <p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<p><br></p>
+<p><img src="img/terminal-empty.png" /></p>
+<p><br></p>
+<p><img src="img/pwd-1.png" /></p>
+<p><br></p>
+<p><img src="img/pwd-2.png" /></p>
+<p><br></p>
+<p><img src="img/mkdir-docs.png" /></p>
+<p><br></p>
+<p><img src="img/mkdir-data.png" /></p>
+<p><br></p>
+<p><img src="img/mkdir-img.png" /></p>
+<p><br></p>
+<p><img src="img/cd-docs.png" /></p>
+<p><br> <br></p>
 <hr />
 </div>
 <div id="create-a-r-script" class="section level1">
 <h1><strong>Create a R Script</strong></h1>
-<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<p><img src="img/touch-rscript-docs.png" /></p>
+<p><br></p>
+<p><img src="img/open-rscript-console.png" /></p>
 <hr />
+<p><br> <br></p>
 </div>
 <div id="load-in-your-libraries" class="section level1">
 <h1><strong>Load in your libraries</strong></h1>
-<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<p><br></p>
+<p><img src="img/load-lib-save.png" /></p>
 <hr />
+<p><br> <br></p>
 </div>
 <div id="data-types" class="section level1">
 <h1><strong>Data types</strong></h1>
-<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<p>Values in R can be one of 6 different types :</p>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>numeric (e.g. <code>2</code>, <code>2.15</code>) - values w/ decimals<br>2. integer (e.g. <code>2L</code>) - values w/o decimals (create w/ uppercase ‘L’)<br>3. character (e.g. <code>"x"</code>, <code>"Welcome!"</code>)<br>4. logical (e.g. <code>TRUE</code>, <code>FALSE</code>)<br>5. raw (e.g. holds <code>bytes</code>)<br>6. complex (e.g. <code>1+4i</code>) - <em>we are going to ignore</em></li>
+</ol>
+</blockquote>
+<p>The <code>class</code> function tells us what kind of object is it (high-level) The <code>typeof</code> function can tell us the object’s data type (low-level)</p>
+<p>What’s the difference between 3 (the number) and ‘3’ (the character)?</p>
+<div id="numeric" class="section level2">
+<h2>Numeric</h2>
+<pre class="r"><code>x = 3  
+y = 3*400 
+z = 1 + 3
+
+class(3) # numeric</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(3*400) # integer</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(1 +3) # character</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(x) # character</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(y) # logical </code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(z) </code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="integer" class="section level2">
+<h2>Integer</h2>
+<pre class="r"><code>x = 3  
+y = 3*400 
+z = 1 + 3
+
+class(3) # numeric</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(3*400) # integer</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(1 +3) # character</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(x) # character</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(y) # logical </code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(z) </code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="character" class="section level2">
+<h2>Character</h2>
+<pre class="r"><code>x = &quot;a&quot;  
+y = &quot;bc&quot;  
+z = &quot;GIS is Great!!!&quot;
+class(3) # numeric</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(3L) # integer</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>class(&#39;3&#39;) # character</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>class(x) # character</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>class(TRUE) # logical </code></pre>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+</div>
+<div id="missing-values-na" class="section level2">
+<h2>Missing Values (NA)</h2>
+<blockquote>
+<p>Missing values still need a place holder<br>Missing values are denoted with NA (short for not applicable).<br>Missing values are ‘infectious’: most computations involving a missing value will return another missing value.</p>
+</blockquote>
+<pre class="r"><code>vec = c(5,6,7,8,NA)  
+mean(vec)  </code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>mean(vec, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 6.5</code></pre>
+<pre class="r"><code>x = c(NA, 50, NA, 9)  
+x == NA  </code></pre>
+<pre><code>## [1] NA NA NA NA</code></pre>
+<pre class="r"><code>is.na(x)</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
 <hr />
+</div>
 </div>
 <div id="data-structures" class="section level1">
 <h1><strong>Data structures</strong></h1>
-<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your <em>Terminal</em> application (do yourself a favor and download <a href="https://www.iterm2.com/">iTerm</a>), and on Windows, through <em>PowerShell</em>. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The <strong>Terminal</strong> tab can be found next to the <strong>Console tab</strong>. If it is not visible, show it via <code>Shift+Alt+T</code> (or Tools &gt; Terminal &gt; New Terminal). Once visible, it should look something like this:</p>
+<div id="vectors" class="section level2">
+<h2>Vectors</h2>
+<blockquote>
+<p>Can created using the c() (combine) function<br>The length can be checked with length()</p>
+</blockquote>
+<pre class="r"><code>a &lt;- c(1,2,5.3,6,-2,4) # numeric vector
+b &lt;- c(&quot;one&quot;,&quot;two&quot;,&quot;three&quot;) # character vector
+c &lt;- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector</code></pre>
+</div>
+<div id="lists" class="section level2">
+<h2>Lists</h2>
+<p>An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name. Extends vectors and allows elements to be any type</p>
+<pre class="r"><code>list = list(
+  1:5, 
+  &quot;water_level&quot;, 
+  c(TRUE, FALSE, TRUE), 
+  c(2.3, 5.9)
+)
+
+list[[1]]</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre class="r"><code>list[[2]]</code></pre>
+<pre><code>## [1] &quot;water_level&quot;</code></pre>
+<pre class="r"><code>list[[3]]</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
+<pre class="r"><code>list[[4]]</code></pre>
+<pre><code>## [1] 2.3 5.9</code></pre>
+<pre class="r"><code>typeof(list)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+</div>
+<div id="dataframes" class="section level2">
+<h2>Dataframes</h2>
+<ul>
+<li><p>a named list of vectors.</p></li>
+<li><p>data.frames are one of the biggest and most important ideas in R, and one of the things that make R different from other programming languages</p></li>
+<li><p>Unlike a regular list, in a <code>data.frame</code>, the length of each vector must be the same.</p></li>
+</ul>
+<pre class="r"><code>df &lt;- data.frame(state = c(&quot;California&quot;, &quot;Arizona&quot;, &quot;Texas&quot;),  
+                  size_rank  = c(1,3,2),  
+                  pop = c(T,F,F))  
+typeof(df)  </code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="r"><code>attributes(df)  </code></pre>
+<pre><code>## $names
+## [1] &quot;state&quot;     &quot;size_rank&quot; &quot;pop&quot;      
+## 
+## $class
+## [1] &quot;data.frame&quot;
+## 
+## $row.names
+## [1] 1 2 3</code></pre>
+<pre class="r"><code>str(df)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
+##  $ state    : chr  &quot;California&quot; &quot;Arizona&quot; &quot;Texas&quot;
+##  $ size_rank: num  1 3 2
+##  $ pop      : logi  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code>dim(df) #3 objects by 3 variables</code></pre>
+<pre><code>## [1] 3 3</code></pre>
+<blockquote>
+<p>Subsetting a dataframe</p>
+</blockquote>
+<pre class="r"><code>df[1,2]  </code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>df[2,]  </code></pre>
+<pre><code>##     state size_rank   pop
+## 2 Arizona         3 FALSE</code></pre>
+<pre class="r"><code>df[[1]][1] </code></pre>
+<pre><code>## [1] &quot;California&quot;</code></pre>
+<pre class="r"><code>df$state[1] # first row in column state</code></pre>
+<pre><code>## [1] &quot;California&quot;</code></pre>
+<pre class="r"><code>df$pop[2] # second row in column pop</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>df[1:2] # columns 1, 2 of dataframe</code></pre>
+<pre><code>##        state size_rank
+## 1 California         1
+## 2    Arizona         3
+## 3      Texas         2</code></pre>
+<div id="car-examples" class="section level3">
+<h3>Car examples</h3>
+<blockquote>
+<p>R comes with several preloaded data sets<br>mtcars is a list of Motor trend cars<br>running <code>data()</code> will show the list of avaliable datasets</p>
+</blockquote>
+<pre class="r"><code>#preview dataset
+head(mtcars,3)  </code></pre>
+<pre><code>##                mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</code></pre>
+<pre class="r"><code># Get data diminsions
+dim(mtcars)  </code></pre>
+<pre><code>## [1] 32 11</code></pre>
+<pre class="r"><code>str(mtcars)  </code></pre>
+<pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+<pre class="r"><code>mtcars$name[1:5]  </code></pre>
+<pre><code>## NULL</code></pre>
+<pre class="r"><code>mtcars[[1]][1:5]  </code></pre>
+<pre><code>## [1] 21.0 21.0 22.8 21.4 18.7</code></pre>
+<pre class="r"><code>mtcars[1:5,1:5]</code></pre>
+<pre><code>##                    mpg cyl disp  hp drat
+## Mazda RX4         21.0   6  160 110 3.90
+## Mazda RX4 Wag     21.0   6  160 110 3.90
+## Datsun 710        22.8   4  108  93 3.85
+## Hornet 4 Drive    21.4   6  258 110 3.08
+## Hornet Sportabout 18.7   8  360 175 3.15</code></pre>
 <hr />
+</div>
+</div>
 </div>
 <div id="useful-terminal-commands" class="section level1">
 <h1><strong>Useful Terminal Commands</strong></h1>

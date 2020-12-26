@@ -73,39 +73,232 @@ The terminal is a computer application. On a Mac, it is most frequently accessed
 
 ![](img/create-new-proj.png)
 
+![](img/createh-new-proj.png)
+
+![](img/crehate-new-proj.png)
 ***
+
+
 
 # **Build a project file structure**
 
 The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
 
+<br>
 
+![](img/terminal-empty.png)
 
+<br>
+
+![](img/pwd-1.png)
+
+<br>
+
+![](img/pwd-2.png)
+
+<br>
+
+![](img/mkdir-docs.png)
+
+<br>
+
+![](img/mkdir-data.png)
+
+<br>
+
+![](img/mkdir-img.png)
+
+<br>
+
+![](img/cd-docs.png)
+
+<br>
+<br>
 
 ***
 
 # **Create a R Script**
 
-The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+![](img/touch-rscript-docs.png)
+
+<br>
+
+![](img/open-rscript-console.png)
+
 
 ***
+
+<br>
+<br>
 
 # **Load in your libraries**
 
-The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+<br>
+
+![](img/load-lib-save.png)
 
 ***
 
+<br>
+<br>
+
 # **Data types**
 
-The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+Values in R can be one of 6 different types :
+
+>1. numeric (e.g. `2`, `2.15`) - values w/ decimals<br>2. integer (e.g. `2L`) - values w/o decimals (create w/ uppercase 'L')<br>3. character (e.g. `"x"`, `"Welcome!"`)<br>4. logical (e.g. `TRUE`, `FALSE`)<br>5. raw (e.g. holds `bytes`)<br>6. complex (e.g. `1+4i`) - _we are going to ignore_
+
+The `class` function tells us what kind of object is it (high-level)
+The `typeof` function can tell us the object’s data type (low-level)
+
+What's the difference between 3 (the number) and '3' (the character)?
+
+## Numeric
+```{r,eval= TRUE}
+x = 3  
+y = 3*400 
+z = 1 + 3
+
+class(3) # numeric
+class(3*400) # integer
+class(1 +3) # character
+class(x) # character
+class(y) # logical 
+class(z) 
+```
+
+## Integer
+```{r,eval= TRUE}
+x = 3  
+y = 3*400 
+z = 1 + 3
+
+class(3) # numeric
+class(3*400) # integer
+class(1 +3) # character
+class(x) # character
+class(y) # logical 
+class(z) 
+```
+
+## Character
+```{r,eval= TRUE}
+x = "a"  
+y = "bc"  
+z = "GIS is Great!!!"
+class(3) # numeric
+class(3L) # integer
+class('3') # character
+class(x) # character
+class(TRUE) # logical 
+
+```
+
+## Missing Values (NA)
+
+>Missing values still need a place holder<br>Missing values are denoted with NA (short for not applicable).<br>Missing values are 'infectious': most computations involving a missing value will return another missing value.
+
+```{r,eval= TRUE}
+vec = c(5,6,7,8,NA)  
+mean(vec)  
+mean(vec, na.rm = TRUE)
+
+x = c(NA, 50, NA, 9)  
+x == NA  
+is.na(x)
+
+```
 
 ***
 
 # **Data structures**
 
-The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
 
+## Vectors
+
+>Can created using the c() (combine) function<br>The length can be checked with length()
+
+```{r}
+a <- c(1,2,5.3,6,-2,4) # numeric vector
+b <- c("one","two","three") # character vector
+c <- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector
+```
+
+## Lists
+
+An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name. Extends vectors and allows elements to be any type
+
+```{r}
+list = list(
+  1:5, 
+  "water_level", 
+  c(TRUE, FALSE, TRUE), 
+  c(2.3, 5.9)
+)
+
+list[[1]]
+list[[2]]
+list[[3]]
+list[[4]]
+
+
+typeof(list)
+```
+
+
+## Dataframes
+
+- a named list of vectors.
+
+- data.frames are one of the biggest and most important ideas in R, and one of the things that make R different from other programming languages
+
+- Unlike a regular list, in a `data.frame`, the length of each vector must be the same.
+
+```{r}
+
+df <- data.frame(state = c("California", "Arizona", "Texas"),  
+                  size_rank  = c(1,3,2),  
+                  pop = c(T,F,F))  
+typeof(df)  
+attributes(df)  
+str(df)
+
+dim(df) #3 objects by 3 variables
+
+```
+
+
+> Subsetting a dataframe 
+
+```{r}
+
+df[1,2]  
+df[2,]  
+
+df[[1]][1] 
+
+df$state[1] # first row in column state
+df$pop[2] # second row in column pop
+
+df[1:2] # columns 1, 2 of dataframe
+```
+
+### Car examples
+
+> R comes with several preloaded data sets<br>mtcars is a list of Motor trend cars<br>running `data()` will show the list of avaliable datasets
+
+```{r}
+#preview dataset
+head(mtcars,3)  
+
+# Get data diminsions
+dim(mtcars)  
+str(mtcars)  
+mtcars$name[1:5]  
+mtcars[[1]][1:5]  
+mtcars[1:5,1:5]
+
+```
 ***
 
 # **Useful Terminal Commands**
