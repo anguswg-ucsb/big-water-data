@@ -1,5 +1,5 @@
 ---
-title: "[Water & big data](index.html)"
+title: "[ENVS 193](index.html)"
 author: "Week 1 exercise"
 date: "[Angus Watters](https://github.com/anguswg-ucsb)"
 mail: "adwattersgrubstein@ucsb.edu"

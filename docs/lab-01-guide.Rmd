@@ -1,5 +1,5 @@
 ---
-title: "[Water & big data](index.html)"
+title: "[ENVS 193](index.html)"
 author: "Lab 1"
 date: "[Angus Watters](https://github.com/anguswg-ucsb)"
 mail: "adwattersgrubstein@ucsb.edu"
@@ -23,11 +23,6 @@ span.code {
       color:red;
      } 
 </style>
-***
-
-> The RStudio terminal provides access to the **operating system (OS)** shell from within the RStudio IDE. Beneath the surface of any OS is an entire world that can only be accessed only from the **command line**. <br><br>The terminal is a gateway to that command line. <br><br>With it, instead of pointing and clicking, you can type commands and have your computer respond.
-
-
 ***
 
 # **Goals**
@@ -61,54 +56,98 @@ On windows, do the same thing but when you right click on the desktop hover over
 
 # **Create a new project in RStudio**
 
-The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+> Open RStudio and click on `File` in the top left hand corner of the page, and then select `New Project`
 
 ![](img/open-new-rproj.png)
 
+<br>
+<br>
+
+> Select `New Directory`
 
 ![](img/select-new-dir.png)
 
+<br>
+
+> Select `New Project`
 
 ![](img/select-proj-type.png)
 
+<br>
+
+>Under `directory name` enter **Lab-01**<br>Under `create project as subdirectory of` select browse and find and select the ***Rprojects*** folder you created on your desktop<br>Check the `Open in new session` box in the bottom left hand corner<br>After entering the above information, select `Create Project`<br> RStudio will automatically open the new project,  you can also access your `lab-01.Rproj` from your Rprojects folder on your desktop.
+
 ![](img/create-new-proj.png)
 
-![](img/createh-new-proj.png)
 
-![](img/crehate-new-proj.png)
 ***
 
 
 
 # **Build a project file structure**
 
-The terminal is a computer application. On a Mac, it is most frequently accessed via your _Terminal_ application (do yourself a favor and download [iTerm](https://www.iterm2.com/)), and on Windows, through _PowerShell_. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The **Terminal** tab can be found next to the **Console tab**. If it is not visible, show it via `Shift+Alt+T` (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
+
+> Now we are going to create a simple file structure to help keep our project organized. We will populate our project with `docs`, `data`, and `img` folders. We will do this via the terminal
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your Terminal application (do yourself a favor and download iTerm), and on Windows, through PowerShell. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. **The Terminal tab can be found next to the Console tab. If it is not visible, show it via Shift+Alt+T (or Tools > Terminal > New Terminal).** Once visible, it should look something like this
+
+***The terminal is a gateway to that command line. With it, instead of pointing and clicking, you can type commands and have your computer respond. Entering commands into the terminal is useful for expediting basic tasks like file/folder creation. The terminal is also useful for exploring your file structure, and for retrieving information about your computer system.***
 
 <br>
+
+## **Terminal layout**
+
+>The <span class = "code">terminal</span> and the <span class = "code">files tab</span> are highlighted red and the project's `current working directory`is in yellow. 
 
 ![](img/terminal-empty.png)
 
 <br>
 
-![](img/pwd-1.png)
+## <span class= "code" >pwd</span> - print working directory
 
-<br>
+pwd displays the directory or folder you are currently in
+
+My working directory is `/c/Users/angus/OneDrive/Desktop/Rprojects/lab-01`, yours will be slightly different but essentially the same
 
 ![](img/pwd-2.png)
 
 <br>
 
+## <span class= "code">mkdir</span> - make a directory
+
+mkdir creates a new folder (directory) inside your current working directory<br>Entering <span class = "code">mkdir docs</span> into the terminal, will create a docs folder within our current working directory.<br>Go ahead an make docs, data, and img folders in your project.<br> In the bottom right hand pane, select File from the top row of tabs, you should now see your docs, data, and img folders. 
+
+These 3 folders will hold all the components of your project.<br>The docs folder is for your Rscript (.R) and Rmarkdown (.Rmd) files, the data folder is for your .CSV, .xls, .txt files, and the img folder is for images you may use or create from within the project.
+
+
+<br>
+
+>**mkdir docs**
+
 ![](img/mkdir-docs.png)
 
 <br>
+
+>**mkdir data**
 
 ![](img/mkdir-data.png)
 
 <br>
 
+>**mkdir img**
+
 ![](img/mkdir-img.png)
 
 <br>
+
+## <span class= "code" >cd</span> - change directory
+
+cd allows you to navigate through directories by changing working directory. 
+
+There are many ways to navigate using <span class = "code">cd</span> but today we will only need `cd "the folder (directory) you want to move to"` and `cd ..`<br>The first command takes us from our current working directory and by entering `cd docs` we move into our docs folder<br><span class = "code">cd ..</span> will reverse this and step back a directory<br>We are doing this because the next thing we will do is create a file in our docs folder!
+
+
+
 
 ![](img/cd-docs.png)
 
@@ -119,9 +158,15 @@ The terminal is a computer application. On a Mac, it is most frequently accessed
 
 # **Create a R Script**
 
+## <span class= "code">touch</span> - create a file
+
+On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</span>  can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file named `lab-01-script.R` in our working directory as follows.<br> You should now see an Rscript (.R) file in your docs folder
+
 ![](img/touch-rscript-docs.png)
 
 <br>
+
+>Open your lab-01-script.R file and then in the bottom left hand quadrant where our terminal is, select `Console` from the tab row above.
 
 ![](img/open-rscript-console.png)
 

@@ -8,7 +8,7 @@ class_name: 'ES - Big data & Water'
 class_github: 'big-water-data'
 output:
   rmdformats::downcute
-subtitle: 'Intro to the Terminal, git, and Github'
+subtitle: 'Water and data'
 ---
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
