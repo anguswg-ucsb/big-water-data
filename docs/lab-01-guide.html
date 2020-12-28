@@ -128,6 +128,7 @@
             <li><a href="#touch---create-a-file"><span class="code">touch</span> - create a file</a></li>
             </ul></li>
             <li><a href="#load-in-your-libraries"><strong>Load in your libraries</strong></a></li>
+            <li><a href="#variables"><strong>Variables</strong></a></li>
             <li><a href="#data-types"><strong>Data types</strong></a><ul>
             <li><a href="#numeric">Numeric</a></li>
             <li><a href="#integer">Integer</a></li>
@@ -231,7 +232,10 @@ span.code {
 <h3><strong>Windows <i class="fa fa-windows" aria-hidden="true"></i></strong></h3>
 <p>On windows, do the same thing but when you right click on the desktop hover over <code>New</code> and the click <code>Folder</code></p>
 <p><img src="img/new-desktop-folder.png" /></p>
-<hr />
+<p><br> <br></p>
+<p>Next open RStudio, if you do not see RStudio on your desktop you can open it by searching <strong>RStudio</strong></p>
+<p><strong>On a Mac</strong>, in the the top right hand corner of your screen select the magnifiying glass icon and enter RStudio</p>
+<p><strong>On windows</strong>, in the bottom left hand corner of your screen enter RStudio into the search box with the magnifying glass</p>
 </div>
 </div>
 <div id="create-a-new-project-in-rstudio" class="section level1">
@@ -327,10 +331,68 @@ span.code {
 </div>
 <div id="load-in-your-libraries" class="section level1">
 <h1><strong>Load in your libraries</strong></h1>
-<p><br></p>
-<p><img src="img/load-lib-save.png" /></p>
-<hr />
+<blockquote>
+<p>Now we will load a package into our workspace. We will do this by typing <code>library(tidyverse)</code> into our RScript and then pressing the <code>Run</code> button on the top right hand corner of your RScript. Code can also be run by the keyboard command <code>Cmd+Return</code> on Mac, and <code>Ctrl+Enter</code> on Windows This is how you run lines of code from an RScript. Additionally if you highlight any portion of a code and run it, just the highlighted portion of code will be executed.<br>After you have loaded in the tidyverse package a bunch of seemingly random outputs should have appeared in your console. This is what you want and it is just details of the package being loaded.<br>When you run code, the output of that code will appear in the console, also any errors or warnings will display in the console.<br></p>
+</blockquote>
+<p><img src="img/load-lib-save.png" /> <br></p>
+<blockquote>
+<p>Code can also be run from the console, but it does not allow you to go back and work on code, it will just take one line of code and return the output.</p>
+</blockquote>
+<ul>
+<li>Enter <code>3 + 5</code> into your RScript and run it. What happened?</li>
+<li>Enter <code>x = 3 + 5</code> into your RScript and run it. A value for <code>x</code> should have been added to your environment pane (top right quadrent, select Environment tab if needed)</li>
+<li>What happens if you type <code>x</code> into your RScript and run it?</li>
+<li>Now see what happens when you type <code>x</code> into your console and press Enter</li>
+</ul>
 <p><br> <br></p>
+</div>
+<div id="variables" class="section level1">
+<h1><strong>Variables</strong></h1>
+<p>Variable values are “bound” to a name using the = or &lt;- assignment operators (they work identically, I prefer the “=”)</p>
+<pre class="r"><code>a = 3
+a &lt;- 3</code></pre>
+<blockquote>
+<p><strong><em>An objects will retain the value from the last line of code run</em></strong>.<br>For example, we see that the object <strong><em>x</em></strong> is first assigned a value of 5 <code>(x = 5)</code>,<br>and then x is assigned a new value of 5 + 2 <code>(x = 5 + 2)</code>.<br>If x is called in the next line, we see the value of x is 7.</p>
+</blockquote>
+<pre class="r"><code>x = 5 
+x = 5 +2
+x</code></pre>
+<pre><code>## [1] 7</code></pre>
+<p><br></p>
+<blockquote>
+<p><strong><em>But if we assign x to 5 after assigning x = 5 + 2, we see that x now equals 5</em></strong></p>
+</blockquote>
+<pre class="r"><code>x = 5 
+x = 5 +2
+x = 5 
+x</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p><br></p>
+<blockquote>
+<p>Copy and paste the following code into your RScript, but before you run it all, take a guess at what you think what value <code>y</code> will have at the end. and <code>x</code>?</p>
+</blockquote>
+<pre class="r"><code>x = 5
+y = 2
+y = x
+y</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p><br></p>
+<p>Lets say we stored information about UCSB in some objects:</p>
+<pre class="r"><code>school = &quot;UCSB&quot;
+lat = 34.4140
+lng = -119.8489</code></pre>
+<p><br></p>
+<p>If we wanted to we could add <code>lat</code> and <code>lng</code></p>
+<pre class="r"><code>lat +lng</code></pre>
+<pre><code>## [1] -85.4349</code></pre>
+<p><br></p>
+<p>But what if we try and add <code>lat</code> and <code>school</code>?</p>
+<pre class="r"><code>lat + school</code></pre>
+<pre><code>## Error in lat + school: non-numeric argument to binary operator</code></pre>
+<p>This <code>non-numeric argument error</code> is saying that one of these objects is not a <strong><em>numeric value</em></strong>, this leads into the idea that values have different classes/types</p>
+<hr />
+<p><strong><em>Don’t worry if you feel overwhelmed its completely normal at this stage, there is a lot of information to take in. It will takes some time to feel comfortable with the Console/RScript/Environment interactions but before long, with practice, it will become intuitive!</em></strong></p>
+<p><br></p>
 </div>
 <div id="data-types" class="section level1">
 <h1><strong>Data types</strong></h1>

@@ -51,8 +51,14 @@ On windows, do the same thing but when you right click on the desktop hover over
 
 ![](img/new-desktop-folder.png)
 
+<br>
+<br>
 
-***
+Next open RStudio, if you do not see RStudio on your desktop you can open it by searching **RStudio**
+
+**On a Mac**, in the the top right hand corner of your screen select the magnifiying glass icon and enter RStudio
+
+**On windows**, in the bottom left hand corner of your screen enter RStudio into the search box with the magnifying glass
 
 # **Create a new project in RStudio**
 
@@ -178,13 +184,92 @@ On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</
 
 # **Load in your libraries**
 
-<br>
+>Now we will load a package into our workspace. We will do this by typing `library(tidyverse)` into our RScript and then pressing the `Run` button on the top right hand corner of your RScript. Code can also be run by the keyboard command `Cmd+Return` on Mac, and `Ctrl+Enter`	on Windows This is how you run lines of code from an RScript. Additionally if you highlight any portion of a code and run it, just the highlighted portion of code will be executed.<br>After you have loaded in the tidyverse package a bunch of seemingly random outputs should have appeared in your console. This is what you want and it is just details of the package being loaded.<br>When you run code, the output of that code will appear in the console, also any errors or warnings will display in the console.<br>
 
 ![](img/load-lib-save.png)
+<br>
+
+>Code can also be run from the console, but it does not allow you to go back and work on code, it will just take one line of code and return the output.
+
+- Enter `3 + 5` into your RScript and run it. What happened?
+- Enter `x = 3 + 5` into your RScript and run it. A value for `x` should have been added to your environment pane (top right quadrent, select Environment tab if needed)
+- What happens if you type `x` into your RScript and run it?
+- Now see what happens when you type `x` into your console and press Enter
+
+
+<br>
+<br>
+
+# **Variables**
+Variable values are "bound" to a name using the = or <- assignment operators (they work identically, I prefer the "=")
+
+```{r}
+a = 3
+a <- 3
+```
+
+>***An objects will retain the value from the last line of code run***.<br>For example, we see that the object ***x*** is first assigned a value of 5 `(x = 5)`,<br>and then x is assigned a new value of 5 + 2 `(x = 5 + 2)`.<br>If x is called in the next line, we see the value of x is 7. 
+
+```{r}
+x = 5 
+x = 5 +2
+x
+```
+
+<br>
+
+>***But if we assign x to 5 after assigning x = 5 + 2, we see that x now equals 5***
+
+```{r}
+x = 5 
+x = 5 +2
+x = 5 
+x
+```
+
+<br>
+
+>Copy and paste the following code into your RScript, but before you run it all, take a guess at what you think what value `y` will have at the end. and `x`?
+
+```{r}
+x = 5
+y = 2
+y = x
+y
+```
+
+<br>
+
+Lets say we stored information about UCSB in some objects:
+
+```{r}
+school = "UCSB"
+lat = 34.4140
+lng = -119.8489
+```
+
+<br>
+
+If we wanted to we could add `lat` and `lng`
+
+```{r}
+lat +lng
+```
+
+<br>
+
+But what if we try and add `lat` and `school`?
+
+```{r, error = TRUE}
+lat + school
+```
+
+This `non-numeric argument error` is saying that one of these objects is not a ***numeric value***, this leads into the idea that values have different classes/types
 
 ***
 
-<br>
+***Don't worry if you feel overwhelmed its completely normal at this stage, there is a lot of information to take in. It will takes some time to feel comfortable with the Console/RScript/Environment interactions but before long, with practice, it will become intuitive!***
+
 <br>
 
 # **Data types**
