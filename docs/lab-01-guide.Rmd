@@ -81,7 +81,7 @@ Next open RStudio, if you do not see RStudio on your desktop you can open it by 
 
 <br>
 
->Under `directory name` enter **Lab-01**<br>Under `create project as subdirectory of` select browse and find and select the ***Rprojects*** folder you created on your desktop<br>Check the `Open in new session` box in the bottom left hand corner<br>After entering the above information, select `Create Project`<br> RStudio will automatically open the new project,  you can also access your `lab-01.Rproj` from your Rprojects folder on your desktop.
+>For `directory name` enter **Lab-01**<br>Under `create project as subdirectory of` select browse and find and select the ***Rprojects*** folder you created on your desktop<br>Check the `Open in new session` box in the bottom left hand corner<br><br>After entering the above information, select `Create Project`,<br>***RStudio will automatically open the new project,  you can also access your `lab-01.Rproj` from your Rprojects folder on your desktop.***
 
 ![](img/create-new-proj.png)
 
@@ -191,6 +191,9 @@ On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</
 
 >Code can also be run from the console, but it does not allow you to go back and work on code, it will just take one line of code and return the output.
 
+<br>
+**Running code from an RScript vs. Console:**
+
 - Enter `3 + 5` into your RScript and run it. What happened?
 - Enter `x = 3 + 5` into your RScript and run it. A value for `x` should have been added to your environment pane (top right quadrent, select Environment tab if needed)
 - What happens if you type `x` into your RScript and run it?
@@ -198,7 +201,8 @@ On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</
 
 
 <br>
-<br>
+
+***
 
 # **Variables**
 Variable values are "bound" to a name using the = or <- assignment operators (they work identically, I prefer the "=")
@@ -208,7 +212,9 @@ a = 3
 a <- 3
 ```
 
->***An objects will retain the value from the last line of code run***.<br>For example, we see that the object ***x*** is first assigned a value of 5 `(x = 5)`,<br>and then x is assigned a new value of 5 + 2 `(x = 5 + 2)`.<br>If x is called in the next line, we see the value of x is 7. 
+<br>
+
+***An objects will retain the value from the last line of code run***.<br>For example, we see that the object ***x*** is first assigned a value of 5 `(x = 5)`,<br>and then x is assigned a new value of 5 + 2 `(x = 5 + 2)`.<br>If x is called in the next line, we see the value of x is 7. 
 
 ```{r}
 x = 5 
@@ -218,7 +224,7 @@ x
 
 <br>
 
->***But if we assign x to 5 after assigning x = 5 + 2, we see that x now equals 5***
+***But if we assign x to 5 after assigning x = 5 + 2, we see that x now equals 5***
 
 ```{r}
 x = 5 
@@ -229,7 +235,7 @@ x
 
 <br>
 
->Copy and paste the following code into your RScript, but before you run it all, take a guess at what you think what value `y` will have at the end. and `x`?
+***Copy and paste the following code into your RScript, but before you run it all, take a guess at what you think what value `y` will have at the end. and `x`?***
 
 ```{r}
 x = 5
@@ -268,7 +274,7 @@ This `non-numeric argument error` is saying that one of these objects is not a *
 
 ***
 
-***Don't worry if you feel overwhelmed its completely normal at this stage, there is a lot of information to take in. It will takes some time to feel comfortable with the Console/RScript/Environment interactions but before long, with practice, it will become intuitive!***
+>***Don't worry if you feel overwhelmed its completely normal at this stage, there is a lot of information to take in. It will takes some time to feel comfortable with the Console/RScript/Environment interactions but before long, with practice, it will become intuitive!***
 
 <br>
 
@@ -276,85 +282,170 @@ This `non-numeric argument error` is saying that one of these objects is not a *
 
 Values in R can be one of 6 different types :
 
->1. numeric (e.g. `2`, `2.15`) - values w/ decimals<br>2. integer (e.g. `2L`) - values w/o decimals (create w/ uppercase 'L')<br>3. character (e.g. `"x"`, `"Welcome!"`)<br>4. logical (e.g. `TRUE`, `FALSE`)<br>5. raw (e.g. holds `bytes`)<br>6. complex (e.g. `1+4i`) - _we are going to ignore_
+  1. **numeric** (e.g. 2, 2.15) - values w/ decimals<br>2. **integer** (e.g. 2L) - values w/o decimals (create w/ uppercase 'L')<br>3. **character** (e.g. "x", "Welcome!")<br>4. **logical** (e.g. TRUE, FALSE)<br>5. **raw** (e.g. holds bytes)<br>6. **complex** (e.g. 1+4i) - _we are going to ignore_
 
-The `class` function tells us what kind of object is it (high-level)
-The `typeof` function can tell us the object’s data type (low-level)
+The `class()` function tells us what kind of object is it (high-level)<br>The `typeof()` function can tell us the object’s data type (low-level)
+<br>
+>***What's the difference between 3 (the number) and '3' (the character)?***
 
-What's the difference between 3 (the number) and '3' (the character)?
+```{r,eval= TRUE}
+class(3) # numeric
+```
+<br>
+
+```{r,eval= TRUE}
+class('3') # character
+```
+>When you surround a something in quotes (double or single), that element is coerced to the class of character, as shown above as the numeric 3 becomes a character once wrapped in quotes
+
+<br>
 
 ## Numeric
+
+>***Copy the following examples of different data types and use the `class()` function to examine the different data types***
+
 ```{r,eval= TRUE}
 x = 3  
-y = 3*400 
-z = 1 + 3
-
-class(3) # numeric
-class(3*400) # integer
-class(1 +3) # character
-class(x) # character
-class(y) # logical 
-class(z) 
+y = 3 * 400
+z = 5 + 6
 ```
 
 ## Integer
 ```{r,eval= TRUE}
-x = 3  
-y = 3*400 
-z = 1 + 3
-
-class(3) # numeric
-class(3*400) # integer
-class(1 +3) # character
-class(x) # character
-class(y) # logical 
-class(z) 
+x = 2 # numeric
+y = 2L # specifies as integer 
+z = as.integer(c(4.1, 5.2, 6.3, 6.4)) # coerces values to integer type
 ```
 
 ## Character
+
+You can use either Single quotes '' or double quotes "", R treats them identically
+
 ```{r,eval= TRUE}
 x = "a"  
 y = "bc"  
-z = "GIS is Great!!!"
-class(3) # numeric
-class(3L) # integer
-class('3') # character
-class(x) # character
-class(TRUE) # logical 
-
+z = "I like turtles!!!"
 ```
 
-## Missing Values (NA)
+<br>
 
->Missing values still need a place holder<br>Missing values are denoted with NA (short for not applicable).<br>Missing values are 'infectious': most computations involving a missing value will return another missing value.
+## **Missing Values (NA)**
+- Missing values still need a place holder
+- Missing values are denoted with NA (short for not applicable).
+- Missing values are 'infectious': most computations involving a missing value will return another missing value.
+
+<br>
+
+### **Useful NA function**
+
+- `na.omit()` - removes all cases where an NA appears
+- `is.na()` - indicates which elements are missing (NA), if element is NA it returns TRUE
+
+<br>
 
 ```{r,eval= TRUE}
 vec = c(5,6,7,8,NA)  
-mean(vec)  
-mean(vec, na.rm = TRUE)
+mean(vec) # the NA value in the vector results in a mean of NA
+```
+<br>
+```{r}
+mean(vec, na.rm = TRUE) # use na.rm = TRUE removes the NAs 
+```
 
-x = c(NA, 50, NA, 9)  
-x == NA  
-is.na(x)
+<br>
 
+```{r}
+x = c(NA, 50, NA, 9)
+is.na(x) 
 ```
 
 ***
 
+<br>
+<br>
+
+
 # **Data structures**
 
 
-## Vectors
+## **Vectors**
 
->Can created using the c() (combine) function<br>The length can be checked with length()
+- Vectors can be created using the `c()` (combine) function
+- The length can be checked with `length()`
+
+***From the examples below, create your own vector made up of all character strings:<br>2. name of the state you were born in<br>1. name of your hometown***
+  
 
 ```{r}
-a <- c(1,2,5.3,6,-2,4) # numeric vector
-b <- c("one","two","three") # character vector
-c <- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector
+a = c(1,2,5.3,6,-2,4) # numeric vector
+a
+```
+<br>
+```{r}
+b = c("one","two","three") # character vector
+b
+```
+<br>
+```{r}
+c = c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector
+c
 ```
 
-## Lists
+<br>
+
+```{r}
+d = 1:10 # number sequence vector
+d
+```
+
+
+<br>
+
+### **Adding elements to a vector**
+
+Here the character string "four" is added to the vector **b** from the above example
+```{r}
+b = c(b, 'four')
+b
+```
+
+***Now try adding your favorite food (chr) to the vector you created vector***
+
+<br>
+
+### **Subsetting a vector**
+
+Here are several different methods of subsetting a vector
+
+```{r}
+vector <- c(1, 2, 5.3 ,6 ,-2, 4) # numeric vector
+vector[3] # subsets to only the 3rd element
+```
+<br>
+```{r}
+vector[-3] # removes 3rd element
+```
+<br>
+```{r}
+vector[1:3] # subsets elements 1 through 3
+```
+<br>
+
+`setNames()` allows you to name each element in a vector
+```{r}
+vector = setNames(vector, c('A', 'B','C','D', 'E', 'F')) # names elements and reassigns named vector to original vector variable using =
+
+vector[1:6] # display elements 1 through 6
+```
+
+***Using `setNames()`, give each element of your vector an appropriate name and then subset your vector to just your name and favorite food***
+
+***
+
+<br>
+<br>
+
+## **Lists**
 
 An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name. Extends vectors and allows elements to be any type
 
@@ -365,18 +456,42 @@ list = list(
   c(TRUE, FALSE, TRUE), 
   c(2.3, 5.9)
 )
-
-list[[1]]
-list[[2]]
-list[[3]]
-list[[4]]
-
-
 typeof(list)
 ```
 
+<br>
 
-## Dataframes
+### **Subsetting a list**
+The content of elements of a list can be retrieved by using double square brackets.
+
+<br>
+
+```{r}
+class(list)
+```
+<br>
+```{r}
+list[[1]]
+```
+<br>
+```{r}
+list[[1]][1]
+```
+<br>
+```{r}
+list[[2]]
+```
+<br>
+```{r}
+list[[3]][2]
+```
+
+***
+
+<br>
+<br>
+
+## **Dataframes**
 
 - a named list of vectors.
 
@@ -384,52 +499,150 @@ typeof(list)
 
 - Unlike a regular list, in a `data.frame`, the length of each vector must be the same.
 
+- typically dataframes are read into R via `read_csv`, `read_table`, or `read_xls`, depending on the file type 
+
+- dataframes can also be built using the `data.frame()`function
+
+<br>
+
+> ***Below is an example of a dataframe with 3 columns, `num`, `color`, and `boolean`<br> The rows of the dataframe contain the values from the vectors***
+
 ```{r}
 
-df <- data.frame(state = c("California", "Arizona", "Texas"),  
-                  size_rank  = c(1,3,2),  
-                  pop = c(T,F,F))  
-typeof(df)  
-attributes(df)  
-str(df)
+num = c(1,2,3,4)
+color =  c("red", "white",  
+           "green", NA)  
+boolean = c(TRUE,TRUE,  
+             TRUE,FALSE) 
+df = data.frame(num, color, boolean)
 
-dim(df) #3 objects by 3 variables
-
+df
 ```
 
 
-> Subsetting a dataframe 
+
+<br>
+
+### **Structure of a dataframe**
+The data frame is 4 objects (rows) by 3 variables (columns)<br>Notice the `num`, `chr`, `logi` classisifcation of the 3 different columns
 
 ```{r}
-
-df[1,2]  
-df[2,]  
-
-df[[1]][1] 
-
-df$state[1] # first row in column state
-df$pop[2] # second row in column pop
-
-df[1:2] # columns 1, 2 of dataframe
+str(df) 
 ```
 
-### Car examples
+<br>
 
-> R comes with several preloaded data sets<br>mtcars is a list of Motor trend cars<br>running `data()` will show the list of avaliable datasets
+### **Subsetting a dataframe**
 
 ```{r}
-#preview dataset
-head(mtcars,3)  
+df[1,2]  # row 1, column 2
+```
+<br>
+```{r}
+df[2,]  # row 2, all columns
+```
+<br>
+```{r}
+df$color[1] #  row 1 in column color
+```
+<br>
+```{r}
+df$num[2] # row 2 in column num
+```
+<br>
+```{r}
+df[1:2] # columns 1 through 2 of dataframe
+```
 
-# Get data diminsions
+<br>
+
+### **Create a dataframe by hand**
+
+```{r}
+df2 = data.frame(id = letters[1:8], x = 1:8, y = 9:16)
+df2
+```
+
+
+### **Useful dataframe function**
+
+- `head()` - shows first 6 rows
+- `tail()` - shows last 6 rows
+- `dim()` - returns the dimensions of data frame (i.e. number of rows and number of columns)
+- `nrow()` - number of rows
+- `ncol()` - number of columns
+- `str()` - structure of data frame - name, type and preview of data in each column
+- `names()` or `colnames()` - both show the names attribute for a data frame
+- `sapply(dataframe, class)` - shows the class of each column in the data frame
+
+>`head()`
+
+```{r}
+head(df2)
+```
+
+<br>
+
+>`tail()`
+
+```{r}
+tail(df2)
+```
+
+<br>
+
+>`nrow()`
+
+```{r}
+nrow(df2)
+```
+
+### **Preloaded R Datasets**
+
+R comes with several preloaded data sets<br>running `data()` in an RScript will return all of the avaliable toy datasets
+
+>mtcars<br>
+For example, mtcars is a list of Motor trend cars containing each cars attributes in the columns. It is commonly used as an example dataframe
+
+```{r}
+m =mtcars
+class(m)
+```
+
+<br>
+**Dimensions & structure of mtcars**
+```{r}
+# Dimensions & structure of mtcars
 dim(mtcars)  
 str(mtcars)  
-mtcars$name[1:5]  
-mtcars[[1]][1:5]  
-mtcars[1:5,1:5]
-
 ```
+
+<br>
+**Subsetting mtcars**
+```{r}
+mtcars[1:5,] # rows 1-5, all columns
+```
+<br>
+```{r}
+mtcars[1, 1:6] # row 1, columns 1-6
+```
+<br>
+```{r}
+mtcars[1:4,1:4] # rows 1 -4, cols 1-4
+```
+
+
+
 ***
+
+# **Assignment**
+
+## 1. Create 5 vectors using atleast 3 different data types
+
+## 2. Populate a dataframe with vectors
+
+## 3. inspect dimensions and qualities of dataframe
+
 
 # **Useful Terminal Commands**
 

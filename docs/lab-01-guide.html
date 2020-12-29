@@ -133,12 +133,17 @@
             <li><a href="#numeric">Numeric</a></li>
             <li><a href="#integer">Integer</a></li>
             <li><a href="#character">Character</a></li>
-            <li><a href="#missing-values-na">Missing Values (NA)</a></li>
+            <li><a href="#missing-values-na"><strong>Missing Values (NA)</strong></a></li>
             </ul></li>
             <li><a href="#data-structures"><strong>Data structures</strong></a><ul>
-            <li><a href="#vectors">Vectors</a></li>
-            <li><a href="#lists">Lists</a></li>
-            <li><a href="#dataframes">Dataframes</a></li>
+            <li><a href="#vectors"><strong>Vectors</strong></a></li>
+            <li><a href="#lists"><strong>Lists</strong></a></li>
+            <li><a href="#dataframes"><strong>Dataframes</strong></a></li>
+            </ul></li>
+            <li><a href="#assignment"><strong>Assignment</strong></a><ul>
+            <li><a href="#create-5-vectors-using-atleast-3-different-data-types">1. Create 5 vectors using atleast 3 different data types</a></li>
+            <li><a href="#populate-a-dataframe-with-vectors">2. Populate a dataframe with vectors</a></li>
+            <li><a href="#inspect-dimensions-and-qualities-of-dataframe">3. inspect dimensions and qualities of dataframe</a></li>
             </ul></li>
             <li><a href="#useful-terminal-commands"><strong>Useful Terminal Commands</strong></a><ul>
             <li><a href="#pwd---print-working-directory-1"><span class="code">pwd</span> - print working directory</a></li>
@@ -256,7 +261,7 @@ span.code {
 <p><img src="img/select-proj-type.png" /></p>
 <p><br></p>
 <blockquote>
-<p>Under <code>directory name</code> enter <strong>Lab-01</strong><br>Under <code>create project as subdirectory of</code> select browse and find and select the <strong><em>Rprojects</em></strong> folder you created on your desktop<br>Check the <code>Open in new session</code> box in the bottom left hand corner<br>After entering the above information, select <code>Create Project</code><br> RStudio will automatically open the new project, you can also access your <code>lab-01.Rproj</code> from your Rprojects folder on your desktop.</p>
+<p>For <code>directory name</code> enter <strong>Lab-01</strong><br>Under <code>create project as subdirectory of</code> select browse and find and select the <strong><em>Rprojects</em></strong> folder you created on your desktop<br>Check the <code>Open in new session</code> box in the bottom left hand corner<br><br>After entering the above information, select <code>Create Project</code>,<br><strong><em>RStudio will automatically open the new project, you can also access your <code>lab-01.Rproj</code> from your Rprojects folder on your desktop.</em></strong></p>
 </blockquote>
 <p><img src="img/create-new-proj.png" /></p>
 <hr />
@@ -338,39 +343,36 @@ span.code {
 <blockquote>
 <p>Code can also be run from the console, but it does not allow you to go back and work on code, it will just take one line of code and return the output.</p>
 </blockquote>
+<p><br> <strong>Running code from an RScript vs. Console:</strong></p>
 <ul>
 <li>Enter <code>3 + 5</code> into your RScript and run it. What happened?</li>
 <li>Enter <code>x = 3 + 5</code> into your RScript and run it. A value for <code>x</code> should have been added to your environment pane (top right quadrent, select Environment tab if needed)</li>
 <li>What happens if you type <code>x</code> into your RScript and run it?</li>
 <li>Now see what happens when you type <code>x</code> into your console and press Enter</li>
 </ul>
-<p><br> <br></p>
+<p><br></p>
+<hr />
 </div>
 <div id="variables" class="section level1">
 <h1><strong>Variables</strong></h1>
 <p>Variable values are “bound” to a name using the = or &lt;- assignment operators (they work identically, I prefer the “=”)</p>
 <pre class="r"><code>a = 3
 a &lt;- 3</code></pre>
-<blockquote>
+<p><br></p>
 <p><strong><em>An objects will retain the value from the last line of code run</em></strong>.<br>For example, we see that the object <strong><em>x</em></strong> is first assigned a value of 5 <code>(x = 5)</code>,<br>and then x is assigned a new value of 5 + 2 <code>(x = 5 + 2)</code>.<br>If x is called in the next line, we see the value of x is 7.</p>
-</blockquote>
 <pre class="r"><code>x = 5 
 x = 5 +2
 x</code></pre>
 <pre><code>## [1] 7</code></pre>
 <p><br></p>
-<blockquote>
 <p><strong><em>But if we assign x to 5 after assigning x = 5 + 2, we see that x now equals 5</em></strong></p>
-</blockquote>
 <pre class="r"><code>x = 5 
 x = 5 +2
 x = 5 
 x</code></pre>
 <pre><code>## [1] 5</code></pre>
 <p><br></p>
-<blockquote>
-<p>Copy and paste the following code into your RScript, but before you run it all, take a guess at what you think what value <code>y</code> will have at the end. and <code>x</code>?</p>
-</blockquote>
+<p><strong><em>Copy and paste the following code into your RScript, but before you run it all, take a guess at what you think what value <code>y</code> will have at the end. and <code>x</code>?</em></strong></p>
 <pre class="r"><code>x = 5
 y = 2
 y = x
@@ -391,104 +393,140 @@ lng = -119.8489</code></pre>
 <pre><code>## Error in lat + school: non-numeric argument to binary operator</code></pre>
 <p>This <code>non-numeric argument error</code> is saying that one of these objects is not a <strong><em>numeric value</em></strong>, this leads into the idea that values have different classes/types</p>
 <hr />
+<blockquote>
 <p><strong><em>Don’t worry if you feel overwhelmed its completely normal at this stage, there is a lot of information to take in. It will takes some time to feel comfortable with the Console/RScript/Environment interactions but before long, with practice, it will become intuitive!</em></strong></p>
+</blockquote>
 <p><br></p>
 </div>
 <div id="data-types" class="section level1">
 <h1><strong>Data types</strong></h1>
 <p>Values in R can be one of 6 different types :</p>
-<blockquote>
 <ol style="list-style-type: decimal">
-<li>numeric (e.g. <code>2</code>, <code>2.15</code>) - values w/ decimals<br>2. integer (e.g. <code>2L</code>) - values w/o decimals (create w/ uppercase ‘L’)<br>3. character (e.g. <code>"x"</code>, <code>"Welcome!"</code>)<br>4. logical (e.g. <code>TRUE</code>, <code>FALSE</code>)<br>5. raw (e.g. holds <code>bytes</code>)<br>6. complex (e.g. <code>1+4i</code>) - <em>we are going to ignore</em></li>
+<li><strong>numeric</strong> (e.g. 2, 2.15) - values w/ decimals<br>2. <strong>integer</strong> (e.g. 2L) - values w/o decimals (create w/ uppercase ‘L’)<br>3. <strong>character</strong> (e.g. “x”, “Welcome!”)<br>4. <strong>logical</strong> (e.g. TRUE, FALSE)<br>5. <strong>raw</strong> (e.g. holds bytes)<br>6. <strong>complex</strong> (e.g. 1+4i) - <em>we are going to ignore</em></li>
 </ol>
+<p>The <code>class()</code> function tells us what kind of object is it (high-level)<br>The <code>typeof()</code> function can tell us the object’s data type (low-level) <br> &gt;<strong><em>What’s the difference between 3 (the number) and ‘3’ (the character)?</em></strong></p>
+<pre class="r"><code>class(3) # numeric</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p><br></p>
+<pre class="r"><code>class(&#39;3&#39;) # character</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<blockquote>
+<p>When you surround a something in quotes (double or single), that element is coerced to the class of character, as shown above as the numeric 3 becomes a character once wrapped in quotes</p>
 </blockquote>
-<p>The <code>class</code> function tells us what kind of object is it (high-level) The <code>typeof</code> function can tell us the object’s data type (low-level)</p>
-<p>What’s the difference between 3 (the number) and ‘3’ (the character)?</p>
+<p><br></p>
 <div id="numeric" class="section level2">
 <h2>Numeric</h2>
+<blockquote>
+<p><strong><em>Copy the following examples of different data types and use the <code>class()</code> function to examine the different data types</em></strong></p>
+</blockquote>
 <pre class="r"><code>x = 3  
-y = 3*400 
-z = 1 + 3
-
-class(3) # numeric</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(3*400) # integer</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(1 +3) # character</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(x) # character</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(y) # logical </code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(z) </code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
+y = 3 * 400
+z = 5 + 6</code></pre>
 </div>
 <div id="integer" class="section level2">
 <h2>Integer</h2>
-<pre class="r"><code>x = 3  
-y = 3*400 
-z = 1 + 3
-
-class(3) # numeric</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(3*400) # integer</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(1 +3) # character</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(x) # character</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(y) # logical </code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(z) </code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>x = 2 # numeric
+y = 2L # specifies as integer 
+z = as.integer(c(4.1, 5.2, 6.3, 6.4)) # coerces values to integer type</code></pre>
 </div>
 <div id="character" class="section level2">
 <h2>Character</h2>
+<p>You can use either Single quotes ’’ or double quotes "", R treats them identically</p>
 <pre class="r"><code>x = &quot;a&quot;  
 y = &quot;bc&quot;  
-z = &quot;GIS is Great!!!&quot;
-class(3) # numeric</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(3L) # integer</code></pre>
-<pre><code>## [1] &quot;integer&quot;</code></pre>
-<pre class="r"><code>class(&#39;3&#39;) # character</code></pre>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<pre class="r"><code>class(x) # character</code></pre>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<pre class="r"><code>class(TRUE) # logical </code></pre>
-<pre><code>## [1] &quot;logical&quot;</code></pre>
+z = &quot;I like turtles!!!&quot;</code></pre>
+<p><br></p>
 </div>
 <div id="missing-values-na" class="section level2">
-<h2>Missing Values (NA)</h2>
-<blockquote>
-<p>Missing values still need a place holder<br>Missing values are denoted with NA (short for not applicable).<br>Missing values are ‘infectious’: most computations involving a missing value will return another missing value.</p>
-</blockquote>
+<h2><strong>Missing Values (NA)</strong></h2>
+<ul>
+<li>Missing values still need a place holder</li>
+<li>Missing values are denoted with NA (short for not applicable).</li>
+<li>Missing values are ‘infectious’: most computations involving a missing value will return another missing value.</li>
+</ul>
+<p><br></p>
+<div id="useful-na-function" class="section level3">
+<h3><strong>Useful NA function</strong></h3>
+<ul>
+<li><code>na.omit()</code> - removes all cases where an NA appears</li>
+<li><code>is.na()</code> - indicates which elements are missing (NA), if element is NA it returns TRUE</li>
+</ul>
+<p><br></p>
 <pre class="r"><code>vec = c(5,6,7,8,NA)  
-mean(vec)  </code></pre>
+mean(vec) # the NA value in the vector results in a mean of NA</code></pre>
 <pre><code>## [1] NA</code></pre>
-<pre class="r"><code>mean(vec, na.rm = TRUE)</code></pre>
+<p><br></p>
+<pre class="r"><code>mean(vec, na.rm = TRUE) # use na.rm = TRUE removes the NAs </code></pre>
 <pre><code>## [1] 6.5</code></pre>
-<pre class="r"><code>x = c(NA, 50, NA, 9)  
-x == NA  </code></pre>
-<pre><code>## [1] NA NA NA NA</code></pre>
-<pre class="r"><code>is.na(x)</code></pre>
+<p><br></p>
+<pre class="r"><code>x = c(NA, 50, NA, 9)
+is.na(x) </code></pre>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
 <hr />
+<p><br> <br></p>
+</div>
 </div>
 </div>
 <div id="data-structures" class="section level1">
 <h1><strong>Data structures</strong></h1>
 <div id="vectors" class="section level2">
-<h2>Vectors</h2>
-<blockquote>
-<p>Can created using the c() (combine) function<br>The length can be checked with length()</p>
-</blockquote>
-<pre class="r"><code>a &lt;- c(1,2,5.3,6,-2,4) # numeric vector
-b &lt;- c(&quot;one&quot;,&quot;two&quot;,&quot;three&quot;) # character vector
-c &lt;- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector</code></pre>
+<h2><strong>Vectors</strong></h2>
+<ul>
+<li>Vectors can be created using the <code>c()</code> (combine) function</li>
+<li>The length can be checked with <code>length()</code></li>
+</ul>
+<p><strong><em>From the examples below, create your own vector made up of all character strings:<br>2. name of the state you were born in<br>1. name of your hometown</em></strong></p>
+<pre class="r"><code>a = c(1,2,5.3,6,-2,4) # numeric vector
+a</code></pre>
+<pre><code>## [1]  1.0  2.0  5.3  6.0 -2.0  4.0</code></pre>
+<p><br></p>
+<pre class="r"><code>b = c(&quot;one&quot;,&quot;two&quot;,&quot;three&quot;) # character vector
+b</code></pre>
+<pre><code>## [1] &quot;one&quot;   &quot;two&quot;   &quot;three&quot;</code></pre>
+<p><br></p>
+<pre class="r"><code>c = c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector
+c</code></pre>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE</code></pre>
+<p><br></p>
+<pre class="r"><code>d = 1:10 # number sequence vector
+d</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<p><br></p>
+<div id="adding-elements-to-a-vector" class="section level3">
+<h3><strong>Adding elements to a vector</strong></h3>
+<p>Here the character string “four” is added to the vector <strong>b</strong> from the above example</p>
+<pre class="r"><code>b = c(b, &#39;four&#39;)
+b</code></pre>
+<pre><code>## [1] &quot;one&quot;   &quot;two&quot;   &quot;three&quot; &quot;four&quot;</code></pre>
+<p><strong><em>Now try adding your favorite food (chr) to the vector you created vector</em></strong></p>
+<p><br></p>
+</div>
+<div id="subsetting-a-vector" class="section level3">
+<h3><strong>Subsetting a vector</strong></h3>
+<p>Here are several different methods of subsetting a vector</p>
+<pre class="r"><code>vector &lt;- c(1, 2, 5.3 ,6 ,-2, 4) # numeric vector
+vector[3] # subsets to only the 3rd element</code></pre>
+<pre><code>## [1] 5.3</code></pre>
+<p><br></p>
+<pre class="r"><code>vector[-3] # removes 3rd element</code></pre>
+<pre><code>## [1]  1  2  6 -2  4</code></pre>
+<p><br></p>
+<pre class="r"><code>vector[1:3] # subsets elements 1 through 3</code></pre>
+<pre><code>## [1] 1.0 2.0 5.3</code></pre>
+<p><br></p>
+<p><code>setNames()</code> allows you to name each element in a vector</p>
+<pre class="r"><code>vector = setNames(vector, c(&#39;A&#39;, &#39;B&#39;,&#39;C&#39;,&#39;D&#39;, &#39;E&#39;, &#39;F&#39;)) # names elements and reassigns named vector to original vector variable using =
+
+vector[1:6] # display elements 1 through 6</code></pre>
+<pre><code>##    A    B    C    D    E    F 
+##  1.0  2.0  5.3  6.0 -2.0  4.0</code></pre>
+<p><strong><em>Using <code>setNames()</code>, give each element of your vector an appropriate name and then subset your vector to just your name and favorite food</em></strong></p>
+<hr />
+<p><br> <br></p>
+</div>
 </div>
 <div id="lists" class="section level2">
-<h2>Lists</h2>
+<h2><strong>Lists</strong></h2>
 <p>An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name. Extends vectors and allows elements to be any type</p>
 <pre class="r"><code>list = list(
   1:5, 
@@ -496,77 +534,158 @@ c &lt;- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector</code></pre>
   c(TRUE, FALSE, TRUE), 
   c(2.3, 5.9)
 )
-
-list[[1]]</code></pre>
+typeof(list)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<p><br></p>
+<div id="subsetting-a-list" class="section level3">
+<h3><strong>Subsetting a list</strong></h3>
+<p>The content of elements of a list can be retrieved by using double square brackets.</p>
+<p><br></p>
+<pre class="r"><code>class(list)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<p><br></p>
+<pre class="r"><code>list[[1]]</code></pre>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
+<p><br></p>
+<pre class="r"><code>list[[1]][1]</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p><br></p>
 <pre class="r"><code>list[[2]]</code></pre>
 <pre><code>## [1] &quot;water_level&quot;</code></pre>
-<pre class="r"><code>list[[3]]</code></pre>
-<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
-<pre class="r"><code>list[[4]]</code></pre>
-<pre><code>## [1] 2.3 5.9</code></pre>
-<pre class="r"><code>typeof(list)</code></pre>
-<pre><code>## [1] &quot;list&quot;</code></pre>
+<p><br></p>
+<pre class="r"><code>list[[3]][2]</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<hr />
+<p><br> <br></p>
+</div>
 </div>
 <div id="dataframes" class="section level2">
-<h2>Dataframes</h2>
+<h2><strong>Dataframes</strong></h2>
 <ul>
 <li><p>a named list of vectors.</p></li>
 <li><p>data.frames are one of the biggest and most important ideas in R, and one of the things that make R different from other programming languages</p></li>
 <li><p>Unlike a regular list, in a <code>data.frame</code>, the length of each vector must be the same.</p></li>
+<li><p>typically dataframes are read into R via <code>read_csv</code>, <code>read_table</code>, or <code>read_xls</code>, depending on the file type</p></li>
+<li><p>dataframes can also be built using the <code>data.frame()</code>function</p></li>
 </ul>
-<pre class="r"><code>df &lt;- data.frame(state = c(&quot;California&quot;, &quot;Arizona&quot;, &quot;Texas&quot;),  
-                  size_rank  = c(1,3,2),  
-                  pop = c(T,F,F))  
-typeof(df)  </code></pre>
-<pre><code>## [1] &quot;list&quot;</code></pre>
-<pre class="r"><code>attributes(df)  </code></pre>
-<pre><code>## $names
-## [1] &quot;state&quot;     &quot;size_rank&quot; &quot;pop&quot;      
-## 
-## $class
-## [1] &quot;data.frame&quot;
-## 
-## $row.names
-## [1] 1 2 3</code></pre>
-<pre class="r"><code>str(df)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
-##  $ state    : chr  &quot;California&quot; &quot;Arizona&quot; &quot;Texas&quot;
-##  $ size_rank: num  1 3 2
-##  $ pop      : logi  TRUE FALSE FALSE</code></pre>
-<pre class="r"><code>dim(df) #3 objects by 3 variables</code></pre>
-<pre><code>## [1] 3 3</code></pre>
+<p><br></p>
 <blockquote>
-<p>Subsetting a dataframe</p>
+<p><strong><em>Below is an example of a dataframe with 3 columns, <code>num</code>, <code>color</code>, and <code>boolean</code><br> The rows of the dataframe contain the values from the vectors</em></strong></p>
 </blockquote>
-<pre class="r"><code>df[1,2]  </code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre class="r"><code>df[2,]  </code></pre>
-<pre><code>##     state size_rank   pop
-## 2 Arizona         3 FALSE</code></pre>
-<pre class="r"><code>df[[1]][1] </code></pre>
-<pre><code>## [1] &quot;California&quot;</code></pre>
-<pre class="r"><code>df$state[1] # first row in column state</code></pre>
-<pre><code>## [1] &quot;California&quot;</code></pre>
-<pre class="r"><code>df$pop[2] # second row in column pop</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>df[1:2] # columns 1, 2 of dataframe</code></pre>
-<pre><code>##        state size_rank
-## 1 California         1
-## 2    Arizona         3
-## 3      Texas         2</code></pre>
-<div id="car-examples" class="section level3">
-<h3>Car examples</h3>
+<pre class="r"><code>num = c(1,2,3,4)
+color =  c(&quot;red&quot;, &quot;white&quot;,  
+           &quot;green&quot;, NA)  
+boolean = c(TRUE,TRUE,  
+             TRUE,FALSE) 
+df = data.frame(num, color, boolean)
+
+df</code></pre>
+<pre><code>##   num color boolean
+## 1   1   red    TRUE
+## 2   2 white    TRUE
+## 3   3 green    TRUE
+## 4   4  &lt;NA&gt;   FALSE</code></pre>
+<p><br></p>
+<div id="structure-of-a-dataframe" class="section level3">
+<h3><strong>Structure of a dataframe</strong></h3>
+<p>The data frame is 4 objects (rows) by 3 variables (columns)<br>Notice the <code>num</code>, <code>chr</code>, <code>logi</code> classisifcation of the 3 different columns</p>
+<pre class="r"><code>str(df) </code></pre>
+<pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
+##  $ num    : num  1 2 3 4
+##  $ color  : chr  &quot;red&quot; &quot;white&quot; &quot;green&quot; NA
+##  $ boolean: logi  TRUE TRUE TRUE FALSE</code></pre>
+<p><br></p>
+</div>
+<div id="subsetting-a-dataframe" class="section level3">
+<h3><strong>Subsetting a dataframe</strong></h3>
+<pre class="r"><code>df[1,2]  # row 1, column 2</code></pre>
+<pre><code>## [1] &quot;red&quot;</code></pre>
+<p><br></p>
+<pre class="r"><code>df[2,]  # row 2, all columns</code></pre>
+<pre><code>##   num color boolean
+## 2   2 white    TRUE</code></pre>
+<p><br></p>
+<pre class="r"><code>df$color[1] #  row 1 in column color</code></pre>
+<pre><code>## [1] &quot;red&quot;</code></pre>
+<p><br></p>
+<pre class="r"><code>df$num[2] # row 2 in column num</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p><br></p>
+<pre class="r"><code>df[1:2] # columns 1 through 2 of dataframe</code></pre>
+<pre><code>##   num color
+## 1   1   red
+## 2   2 white
+## 3   3 green
+## 4   4  &lt;NA&gt;</code></pre>
+<p><br></p>
+</div>
+<div id="create-a-dataframe-by-hand" class="section level3">
+<h3><strong>Create a dataframe by hand</strong></h3>
+<pre class="r"><code>df2 = data.frame(id = letters[1:8], x = 1:8, y = 9:16)
+df2</code></pre>
+<pre><code>##   id x  y
+## 1  a 1  9
+## 2  b 2 10
+## 3  c 3 11
+## 4  d 4 12
+## 5  e 5 13
+## 6  f 6 14
+## 7  g 7 15
+## 8  h 8 16</code></pre>
+</div>
+<div id="useful-dataframe-function" class="section level3">
+<h3><strong>Useful dataframe function</strong></h3>
+<ul>
+<li><code>head()</code> - shows first 6 rows</li>
+<li><code>tail()</code> - shows last 6 rows</li>
+<li><code>dim()</code> - returns the dimensions of data frame (i.e. number of rows and number of columns)</li>
+<li><code>nrow()</code> - number of rows</li>
+<li><code>ncol()</code> - number of columns</li>
+<li><code>str()</code> - structure of data frame - name, type and preview of data in each column</li>
+<li><code>names()</code> or <code>colnames()</code> - both show the names attribute for a data frame</li>
+<li><code>sapply(dataframe, class)</code> - shows the class of each column in the data frame</li>
+</ul>
 <blockquote>
-<p>R comes with several preloaded data sets<br>mtcars is a list of Motor trend cars<br>running <code>data()</code> will show the list of avaliable datasets</p>
+<p><code>head()</code></p>
 </blockquote>
-<pre class="r"><code>#preview dataset
-head(mtcars,3)  </code></pre>
-<pre><code>##                mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</code></pre>
-<pre class="r"><code># Get data diminsions
+<pre class="r"><code>head(df2)</code></pre>
+<pre><code>##   id x  y
+## 1  a 1  9
+## 2  b 2 10
+## 3  c 3 11
+## 4  d 4 12
+## 5  e 5 13
+## 6  f 6 14</code></pre>
+<p><br></p>
+<blockquote>
+<p><code>tail()</code></p>
+</blockquote>
+<pre class="r"><code>tail(df2)</code></pre>
+<pre><code>##   id x  y
+## 3  c 3 11
+## 4  d 4 12
+## 5  e 5 13
+## 6  f 6 14
+## 7  g 7 15
+## 8  h 8 16</code></pre>
+<p><br></p>
+<blockquote>
+<p><code>nrow()</code></p>
+</blockquote>
+<pre class="r"><code>nrow(df2)</code></pre>
+<pre><code>## [1] 8</code></pre>
+</div>
+<div id="preloaded-r-datasets" class="section level3">
+<h3><strong>Preloaded R Datasets</strong></h3>
+<p>R comes with several preloaded data sets<br>running <code>data()</code> in an RScript will return all of the avaliable toy datasets</p>
+<blockquote>
+<p>mtcars<br> For example, mtcars is a list of Motor trend cars containing each cars attributes in the columns. It is commonly used as an example dataframe</p>
+</blockquote>
+<pre class="r"><code>m =mtcars
+class(m)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p><br> <strong>Dimensions &amp; structure of mtcars</strong></p>
+<pre class="r"><code># Dimensions &amp; structure of mtcars
 dim(mtcars)  </code></pre>
 <pre><code>## [1] 32 11</code></pre>
 <pre class="r"><code>str(mtcars)  </code></pre>
@@ -582,19 +701,39 @@ dim(mtcars)  </code></pre>
 ##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
 ##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
 ##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
-<pre class="r"><code>mtcars$name[1:5]  </code></pre>
-<pre><code>## NULL</code></pre>
-<pre class="r"><code>mtcars[[1]][1:5]  </code></pre>
-<pre><code>## [1] 21.0 21.0 22.8 21.4 18.7</code></pre>
-<pre class="r"><code>mtcars[1:5,1:5]</code></pre>
-<pre><code>##                    mpg cyl disp  hp drat
-## Mazda RX4         21.0   6  160 110 3.90
-## Mazda RX4 Wag     21.0   6  160 110 3.90
-## Datsun 710        22.8   4  108  93 3.85
-## Hornet 4 Drive    21.4   6  258 110 3.08
-## Hornet Sportabout 18.7   8  360 175 3.15</code></pre>
+<p><br> <strong>Subsetting mtcars</strong></p>
+<pre class="r"><code>mtcars[1:5,] # rows 1-5, all columns</code></pre>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</code></pre>
+<p><br></p>
+<pre class="r"><code>mtcars[1, 1:6] # row 1, columns 1-6</code></pre>
+<pre><code>##           mpg cyl disp  hp drat   wt
+## Mazda RX4  21   6  160 110  3.9 2.62</code></pre>
+<p><br></p>
+<pre class="r"><code>mtcars[1:4,1:4] # rows 1 -4, cols 1-4</code></pre>
+<pre><code>##                 mpg cyl disp  hp
+## Mazda RX4      21.0   6  160 110
+## Mazda RX4 Wag  21.0   6  160 110
+## Datsun 710     22.8   4  108  93
+## Hornet 4 Drive 21.4   6  258 110</code></pre>
 <hr />
 </div>
+</div>
+</div>
+<div id="assignment" class="section level1">
+<h1><strong>Assignment</strong></h1>
+<div id="create-5-vectors-using-atleast-3-different-data-types" class="section level2">
+<h2>1. Create 5 vectors using atleast 3 different data types</h2>
+</div>
+<div id="populate-a-dataframe-with-vectors" class="section level2">
+<h2>2. Populate a dataframe with vectors</h2>
+</div>
+<div id="inspect-dimensions-and-qualities-of-dataframe" class="section level2">
+<h2>3. inspect dimensions and qualities of dataframe</h2>
 </div>
 </div>
 <div id="useful-terminal-commands" class="section level1">
