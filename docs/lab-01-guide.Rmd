@@ -631,18 +631,57 @@ mtcars[1, 1:6] # row 1, columns 1-6
 mtcars[1:4,1:4] # rows 1 -4, cols 1-4
 ```
 
-
-
 ***
 
 # **Assignment**
 
-## 1. Create 5 vectors using atleast 3 different data types
 
-## 2. Populate a dataframe with vectors
+## **1. Create vectors containing information about 8 family/friends/pets in your life**
+**Vectors ** `name`, `age`, `species`, `relation` (relative to you), `hair_color`, `eye_color`, and `retired`
 
-## 3. inspect dimensions and qualities of dataframe
+- **name:** character
+- **age:** numeric
+- **species:** character
+- **relation:** character
+- **hair_color:** character
+- **eye_color:** character
+- **retired:** logical (TRUE or FALSE)
 
+<br>
+<br>
+
+## **2. Make a dataframe using these 8 vectors as your column headers**
+  - **hint:** `df = data.frame(col = )`
+<br>
+<br>
+
+## **3. Explore the structure of your dataframe and its appearance in the environment pane**
+  -  **Navigate to your environment (Upper right hand pane), locate your dataframe, and double click to open it in a new pane**
+  - `str(df)` - structure of your dataframe 
+  - `dim(df)` - dimensions of your dataframe
+  - `class(df)` - class of the dataframe
+  - `class(df$column)` - class of a column in the dataframe
+
+<br>
+<br>
+
+## **4. Subset your dataframe using 3 different methods shown in this lab**
+  - Subset yourself and one other person and assign the output to a new dataframe variable
+  - Remove just yourself and assign this to a new dataframe
+  - Lastly, create a new dataframe variable that contains only names, hair color, eye color, and species and assign this to a new variable.
+  - ***Once completed, you should have 4 dataframes in your environment (the original and 3 subsetted dataframes)***
+
+<br>
+<br>
+
+  **hints:**
+  - `df$column` 
+  - `df[row, column]`
+  - `df[col1:col2]`
+
+<br>
+<br>
+<br>
 
 # **Useful Terminal Commands**
 

@@ -141,9 +141,10 @@
             <li><a href="#dataframes"><strong>Dataframes</strong></a></li>
             </ul></li>
             <li><a href="#assignment"><strong>Assignment</strong></a><ul>
-            <li><a href="#create-5-vectors-using-atleast-3-different-data-types">1. Create 5 vectors using atleast 3 different data types</a></li>
-            <li><a href="#populate-a-dataframe-with-vectors">2. Populate a dataframe with vectors</a></li>
-            <li><a href="#inspect-dimensions-and-qualities-of-dataframe">3. inspect dimensions and qualities of dataframe</a></li>
+            <li><a href="#create-vectors-containing-information-about-8-familyfriendspets-in-your-life"><strong>1. Create vectors containing information about 8 family/friends/pets in your life</strong></a></li>
+            <li><a href="#make-a-dataframe-using-these-8-vectors-as-your-column-headers"><strong>2. Make a dataframe using these 8 vectors as your column headers</strong></a></li>
+            <li><a href="#explore-the-structure-of-your-dataframe-and-its-appearance-in-the-environment-pane"><strong>3. Explore the structure of your dataframe and its appearance in the environment pane</strong></a></li>
+            <li><a href="#subset-your-dataframe-using-3-different-methods-shown-in-this-lab"><strong>4. Subset your dataframe using 3 different methods shown in this lab</strong></a></li>
             </ul></li>
             <li><a href="#useful-terminal-commands"><strong>Useful Terminal Commands</strong></a><ul>
             <li><a href="#pwd---print-working-directory-1"><span class="code">pwd</span> - print working directory</a></li>
@@ -726,14 +727,48 @@ dim(mtcars)  </code></pre>
 </div>
 <div id="assignment" class="section level1">
 <h1><strong>Assignment</strong></h1>
-<div id="create-5-vectors-using-atleast-3-different-data-types" class="section level2">
-<h2>1. Create 5 vectors using atleast 3 different data types</h2>
+<div id="create-vectors-containing-information-about-8-familyfriendspets-in-your-life" class="section level2">
+<h2><strong>1. Create vectors containing information about 8 family/friends/pets in your life</strong></h2>
+<p><strong>Vectors </strong> <code>name</code>, <code>age</code>, <code>species</code>, <code>relation</code> (relative to you), <code>hair_color</code>, <code>eye_color</code>, and <code>retired</code></p>
+<ul>
+<li><strong>name:</strong> character</li>
+<li><strong>age:</strong> numeric</li>
+<li><strong>species:</strong> character</li>
+<li><strong>relation:</strong> character</li>
+<li><strong>hair_color:</strong> character</li>
+<li><strong>eye_color:</strong> character</li>
+<li><strong>retired:</strong> logical (TRUE or FALSE)</li>
+</ul>
+<p><br> <br></p>
 </div>
-<div id="populate-a-dataframe-with-vectors" class="section level2">
-<h2>2. Populate a dataframe with vectors</h2>
+<div id="make-a-dataframe-using-these-8-vectors-as-your-column-headers" class="section level2">
+<h2><strong>2. Make a dataframe using these 8 vectors as your column headers</strong></h2>
+<ul>
+<li><strong>hint:</strong> <code>df = data.frame(col = )</code> <br> <br></li>
+</ul>
 </div>
-<div id="inspect-dimensions-and-qualities-of-dataframe" class="section level2">
-<h2>3. inspect dimensions and qualities of dataframe</h2>
+<div id="explore-the-structure-of-your-dataframe-and-its-appearance-in-the-environment-pane" class="section level2">
+<h2><strong>3. Explore the structure of your dataframe and its appearance in the environment pane</strong></h2>
+<ul>
+<li><strong>Navigate to your environment (Upper right hand pane), locate your dataframe, and double click to open it in a new pane</strong></li>
+<li><code>str(df)</code> - structure of your dataframe</li>
+<li><code>dim(df)</code> - dimensions of your dataframe</li>
+<li><code>class(df)</code> - class of the dataframe</li>
+<li><code>class(df$column)</code> - class of a column in the dataframe</li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="subset-your-dataframe-using-3-different-methods-shown-in-this-lab" class="section level2">
+<h2><strong>4. Subset your dataframe using 3 different methods shown in this lab</strong></h2>
+<ul>
+<li>Subset yourself and one other person and assign the output to a new dataframe variable</li>
+<li>Remove just yourself and assign this to a new dataframe</li>
+<li>Lastly, create a new dataframe variable that contains only names, hair color, eye color, and species and assign this to a new variable.</li>
+<li><strong><em>Once completed, you should have 4 dataframes in your environment (the original and 3 subsetted dataframes)</em></strong></li>
+</ul>
+<p><br> <br></p>
+<p><strong>hints:</strong> - <code>df$column</code> - <code>df[row, column]</code> - <code>df[col1:col2]</code></p>
+<p><br> <br> <br></p>
 </div>
 </div>
 <div id="useful-terminal-commands" class="section level1">
