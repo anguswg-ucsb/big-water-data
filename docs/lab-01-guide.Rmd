@@ -669,132 +669,22 @@ mtcars[1:4,1:4] # rows 1 -4, cols 1-4
   - Subset yourself and one other person and assign the output to a new dataframe variable
   - Remove just yourself and assign this to a new dataframe
   - Lastly, create a new dataframe variable that contains only names, hair color, eye color, and species and assign this to a new variable.
-  - ***Once completed, you should have 4 dataframes in your environment (the original and 3 subsetted dataframes)***
 
-<br>
-<br>
-
-  **hints:**
   - `df$column` 
   - `df[row, column]`
   - `df[col1:col2]`
 
-<br>
-<br>
-<br>
-
-# **Useful Terminal Commands**
-
-The terminal is a computer application. On a Mac, it is most frequently accessed via your Terminal application (do yourself a favor and download iTerm), and on Windows, through PowerShell. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. The Terminal tab can be found next to the Console tab. If it is not visible, show it via Shift+Alt+T (or Tools > Terminal > New Terminal). Once visible, it should look something like this:
-
-Entering commands into the terminal is useful for expediting basic tasks like file/folder creation. The terminal is also useful for exploring your file structure, and for retrieving information about your computer system. 
-
-> Here are 6 common commands that are useful for navigating a file system and creating files.
+  - ***Once completed, you should have 4 dataframes in your environment (the original and 3 subsetted dataframes)***
 
 <br>
 
-## <span class= "code" >pwd</span> - print working directory
+---
 
-pwd displays directory or folder you are currently in
-
-```{bash,  engine="sh"}
-pwd
-```
+# **END**
 
 <br>
-
-## <span class= "code" >ls</span> - list files
-
-ls shows the files in the current working directory. This is equivalent to looking at the files in your Finder/Explorer/File Manager. Use ls -a to also list hidden files, such as `.Rhistory` and `.git`. Here we look at all the files in current working directory:
-
-```{bash}
-ls
-```
-
 <br>
 
-## <span class= "code">mkdir</span> - make a directory
 
-mkdir creates a new folder (directory) inside your current working directory
 
-to make a new folder called 'my_folder'
 
-```{bash}
-mkdir my_folder
-ls
-```
-
-Notably we see our my-folder directory!
-
-<br>
-
-## <span class= "code" >cd</span> - change directory
-
-cd allows you to navigate through directories by changing working directory. There are many ways to navigate:
-
-### go to subdirectory of current working directory:
-
-```{bash}
-pwd # start here
-cd my-folder
-pwd # end here
-```
-
-### go to parent (one folder up) of current working directory: cd ..
-
-```{bash}
-pwd
-cd ..
-pwd
-```
-### go to your “home” directory: cd ~ or simply cd
-
-```{bash}
-pwd
-cd ~
-pwd
-```
-
-### Using absolute path, works regardless of your current working directory:. 
-
-```{bash}
-pwd
-cd /Users/anguswg-ucsb/github/spds
-pwd
-```
-
-Windows uses a slightly different syntax with the slashes between the folder names reversed, \, e.g. cd C:\Users\MY_USERNAME\Desktop.
-
-**Pro tip 1:** Dragging and dropping a file or folder into the terminal window will paste the absolute path into the window.
-
-**Pro tip 2:** Use the tab key to autocomplete unambiguous directory and file names. Hit tab twice to see all ambiguous options.
-
-<br>
-
-## <span class= "code">touch</span> - create a file
-
-On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</span>  can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file named `new_r_file.R` in our working directory as follows:
-
-```{bash, eval = TRUE}
-touch new_r_file.R
-ls
-```
-
-On a Windows machine (anything running Powershell) <span class = "code">$null ></span>  can be used to create a new file with a defined name and extension in the working directory. Essentially, this is piping no data (null) into a new file. For example, we can create a new R file in our working directory as follows:
-
-```{bash, eval = FALSE}
-$null > new-r-file.R
-```
-
-<br>
-
-## <span class= "code">clear</span> - clear your terminal window
-
-```{r, eval = FALSE}
-clear
-```
-
-```{bash, echo = FALSE}
-rm -R my_folder
-rm new_r_file.R
-```
