@@ -4,11 +4,11 @@ author: "Home"
 date: "[Angus Watters](https://github.com/anguswg-ucsb)"
 mail: "adwattersgrubstein@ucsb.edu"
 github: "anguswg-ucsb"
-class_name: 'ES - Big data & Water'
+class_name: 'ENVS 193'
 class_github: 'big-water-data'
 output:
   rmdformats::downcute
-subtitle: 'Water and data'
+subtitle: 'Water data science'
 ---
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}

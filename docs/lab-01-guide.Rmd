@@ -4,12 +4,12 @@ author: "Lab 1"
 date: "[Angus Watters](https://github.com/anguswg-ucsb)"
 mail: "adwattersgrubstein@ucsb.edu"
 github: "anguswg-ucsb"
-class_name: 'Water & big data'
+class_name: 'ENVS 193'
 class_github: 'big-water-data'
 home: ""
 output:
   rmdformats::downcute
-subtitle: "Create a new project in RStudio, set up project's file structure, and intro to R"
+subtitle: "Create a new project in RStudio, set up project's file structure, and an introduction to R"
 ---
 
 <style type="text/css">

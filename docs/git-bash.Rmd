@@ -1,10 +1,10 @@
 ---
 title: "[ENVS 193](index.html)"
-author: "Week 1 exercise"
+author: "GitHub - RStudio"
 date: "[Angus Watters](https://github.com/anguswg-ucsb)"
 mail: "adwattersgrubstein@ucsb.edu"
 github: "anguswg-ucsb"
-class_name: 'Water & big data'
+class_name: 'ENVS 193'
 class_github: 'big-water-data'
 home: ""
 output:

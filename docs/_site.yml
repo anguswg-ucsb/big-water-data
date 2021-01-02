@@ -2,9 +2,9 @@
 name: "Angus Watters"
 output_dir: '.'
 navbar:
-  title: "Water & big data"
+  title: "ENVS 193"
   left:
-    - text: "Week 1"
+    - text: "GitHub-RStudio"
       href: git-bash.html
     - text: "Lab 1"
       href: lab-01-guide.html
