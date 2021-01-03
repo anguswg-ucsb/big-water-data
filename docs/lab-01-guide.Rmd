@@ -66,20 +66,20 @@ On windows, do the same thing but when you right click on the desktop hover over
 
 # **Create a new project in RStudio**
 
-> Open RStudio and click on `File` in the top left hand corner of the page, and then select `New Project`
+> **Open RStudio and click on `File` in the top left hand corner of the page, and then select `New Project`**
 
 ![](img/open-new-rproj.png)
 
 <br>
 <br>
 
-> Select `New Directory`
+> **Select `New Directory`**
 
 ![](img/select-new-dir.png)
 
 <br>
 
-> Select `New Project`
+> **Select `New Project`**
 
 ![](img/select-proj-type.png)
 
@@ -125,7 +125,7 @@ My working directory is `/c/Users/angus/OneDrive/Desktop/Rprojects/lab-01`, your
 
 ## <span class= "code">mkdir</span> - make a directory
 
-mkdir creates a new folder (directory) inside your current working directory<br>Entering <span class = "code">mkdir docs</span> into the terminal, will create a docs folder within our current working directory.<br>Go ahead an make docs, data, and img folders in your project.<br> In the bottom right hand pane, select File from the top row of tabs, you should now see your docs, data, and img folders. 
+mkdir creates a new folder (directory) inside your current working directory<br>Entering <span class = "code">mkdir docs</span> into the terminal, will create a docs folder within our current working directory.<br>Go ahead an make docs, data, and img folders in your project.<br> **In the bottom right hand pane, select File from the top row of tabs, you should now see your docs, data, and img folders**
 
 These 3 folders will hold all the components of your project.<br>The docs folder is for your Rscript (.R) and Rmarkdown (.Rmd) files, the data folder is for your .CSV, .xls, .txt files, and the img folder is for images you may use or create from within the project.
 
