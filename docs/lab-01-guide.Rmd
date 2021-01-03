@@ -58,7 +58,7 @@ On windows, do the same thing but when you right click on the desktop hover over
 <br>
 <br>
 
-Next open RStudio, if you do not see RStudio on your desktop you can open it by searching **RStudio**
+**Next open RStudio, if you do not see RStudio on your desktop you can open it by searching RStudio**
 
 **On a Mac**, in the the top right hand corner of your screen select the magnifiying glass icon and enter RStudio
 
