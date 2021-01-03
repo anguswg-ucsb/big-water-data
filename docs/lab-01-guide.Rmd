@@ -1,6 +1,6 @@
 ---
-title: "[ENVS 193](index.html)"
-author: "Lab 1"
+title: "Lab 1"
+author: "[ENVS 193](index.html)"
 date: "[Angus Watters](https://github.com/anguswg-ucsb)"
 mail: "adwattersgrubstein@ucsb.edu"
 github: "anguswg-ucsb"
