@@ -45,6 +45,10 @@ span.code {
 First, we will create a new folder on our desktop that we'll use to organize our RStudio projects for this class. 
 Navigate to your desktop, and right click and click `New folder`. A new folder should appear on your desktop, to rename the folder, double click on the folder's name and give it the name `Rprojects`
 
+![](img/mac-file-create.png)
+<br> 
+<br> 
+
 ### **Windows <i class="fa fa-windows" aria-hidden="true"></i>**
 
 On windows, do the same thing but when you right click on the desktop hover over `New` and the click `Folder` 
