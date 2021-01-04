@@ -87,24 +87,32 @@ here() will give us an easy way of finding this path
 ```{r}
 here("data/export.csv")
 ```
-
-```{r}
+<br>
+```{r, message=FALSE, warning = FALSE}
 read_csv(here("data/export.csv"))
-here()
 ```
 
 Run this code and you'll notice the dataframe outputs to our console. 
-How do we save this dataframe to a variable so we can convenianetly access again.
+How do we save this dataframe to a variable so we can conveniently access again.
+
+<br>
 
 # **Variables** 
 
->Lets create a variable named `water_df` and assign it to our .csv file!
+Lets create a variable named `water_df` and assign it to our .csv file!
 
-```{r} 
+```{r, message=FALSE, warning = FALSE}
 water_df = read_csv(here("data/export.csv"))
 ```
 
-If you look at your environemnt (top right pane) you should see a variable called `water_df` which has 1 observation of 14 different variables!
+<br>
+<br>
+
+If you look at your environment (top right pane) you should see a variable called `water_df` which has 1 observation of 14 different variables!
+
+<br>
+
+Now run `water_df` in your Rscript or your console you should see this:
 
 ```{r}
 water_df
@@ -122,26 +130,60 @@ Before getting into the data within our data frame lets just quickly look at dif
 - The length can be checked with `length()`
 
 
+### **Character vector**
+
+Let's use `c()` to make a **character vector** of different water demand sectors
 ```{r}
-a = c(1,2,5.3,6,-2,4) # numeric vector
-a
-```
-
-### **Subsetting a dataframe**
-
-Here are several different methods of subsetting a vector
-
-```{r}
-vector <- c(1, 2, 5.3 ,6 ,-2, 4) # numeric vector
-vector[3] # subsets to only the 3rd element
+water_demands = c("Public Supply", "Domestic", "Industrial")
+water_demands
 ```
 <br>
+
+### **Numeric vector**
+Now let's use `c()` to make a **numeric vector** detailing the volume of water use for each of these sectors
 ```{r}
-vector[-3] # removes 3rd element
+water_use = c(49.94, 0.52, 6.36)
+water_use
 ```
 <br>
+
+### **Adding elements to a vector**
+
+If we wanted to add **Irrigation** to our `water_demands` vector, we would need to surround **Irrigation** in quotes to create a character string, as to match the data type of the other elements in the `water_demands` vector. 
 ```{r}
-vector[1:3] # subsets elements 1 through 3
+water_demands = c(water_demands, "Irrigation")
+water_demands
+```
+<br>
+
+To add the volume of water use by **Irrigation** we can do the same thing but because this is a numeric vector we do not need to use quotation marks
+
+```{r}
+water_use = c(water_use, 55.95)
+water_use
+```
+
+### **Subsetting a vector**
+
+To subset a vector we use `[]`, this is known as indexing. Each element in a vector has an index based on its order in the vector.
+
+<br>
+If we want to retrieve only the 3rd element we would put a 3 in the brackets to "index the 3rd element"
+```{r}
+water_demands[3]
+
+```
+<br>
+
+If you want to **remove an element from a list,** while keeping all the other elements, you can use the a **negative**. The following removes just the 3rd element from the list and returns a vector of the remaining elements 
+```{r}
+water_demands[-3] 
+```
+<br>
+
+If you want to get a range of elements from a vector use the `:`. The structure of this method is `vector[startingElement:endingElement]`
+```{r}
+water_demands[1:3] 
 ```
 
 <br>

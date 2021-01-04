@@ -247,25 +247,8 @@ library(here)</code></pre>
 <p>So to access the <code>export.csv</code> file in our data folder we need to get to<br> <strong>“C:/Users/angus/OneDrive/Desktop/github/big-water-data/data/export.csv”</strong><br> here() will give us an easy way of finding this path</p>
 <pre class="r"><code>here(&quot;data/export.csv&quot;)</code></pre>
 <pre><code>## [1] &quot;C:/Users/angus/OneDrive/Desktop/github/big-water-data/data/export.csv&quot;</code></pre>
+<p><br></p>
 <pre class="r"><code>read_csv(here(&quot;data/export.csv&quot;))</code></pre>
-<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   X1 = col_double(),
-##   `Public Supply` = col_double(),
-##   Domestic = col_double(),
-##   Industrial = col_double(),
-##   Irrigation = col_double(),
-##   `Irrigation-Crops` = col_double(),
-##   `Irrigation-Golf` = col_double(),
-##   Livestock = col_double(),
-##   Aquaculture = col_double(),
-##   Mining = col_double(),
-##   Thermo = col_double(),
-##   `Thermo: Once Through` = col_double(),
-##   `Thermo: Recirc` = col_double(),
-##   Total = col_double()
-## )</code></pre>
 <pre><code>## # A tibble: 1 x 14
 ##      X1 `Public Supply` Domestic Industrial Irrigation `Irrigation-Cro~
 ##   &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
@@ -273,35 +256,17 @@ library(here)</code></pre>
 ## # ... with 8 more variables: `Irrigation-Golf` &lt;dbl&gt;, Livestock &lt;dbl&gt;,
 ## #   Aquaculture &lt;dbl&gt;, Mining &lt;dbl&gt;, Thermo &lt;dbl&gt;, `Thermo: Once
 ## #   Through` &lt;dbl&gt;, `Thermo: Recirc` &lt;dbl&gt;, Total &lt;dbl&gt;</code></pre>
-<pre class="r"><code>here()</code></pre>
-<pre><code>## [1] &quot;C:/Users/angus/OneDrive/Desktop/github/big-water-data&quot;</code></pre>
-<p>Run this code and you’ll notice the dataframe outputs to our console. How do we save this dataframe to a variable so we can convenianetly access again.</p>
+<p>Run this code and you’ll notice the dataframe outputs to our console. How do we save this dataframe to a variable so we can conveniently access again.</p>
+<p><br></p>
 </div>
 <div id="variables" class="section level1">
 <h1><strong>Variables</strong></h1>
-<blockquote>
 <p>Lets create a variable named <code>water_df</code> and assign it to our .csv file!</p>
-</blockquote>
 <pre class="r"><code>water_df = read_csv(here(&quot;data/export.csv&quot;))</code></pre>
-<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   X1 = col_double(),
-##   `Public Supply` = col_double(),
-##   Domestic = col_double(),
-##   Industrial = col_double(),
-##   Irrigation = col_double(),
-##   `Irrigation-Crops` = col_double(),
-##   `Irrigation-Golf` = col_double(),
-##   Livestock = col_double(),
-##   Aquaculture = col_double(),
-##   Mining = col_double(),
-##   Thermo = col_double(),
-##   `Thermo: Once Through` = col_double(),
-##   `Thermo: Recirc` = col_double(),
-##   Total = col_double()
-## )</code></pre>
-<p>If you look at your environemnt (top right pane) you should see a variable called <code>water_df</code> which has 1 observation of 14 different variables!</p>
+<p><br> <br></p>
+<p>If you look at your environment (top right pane) you should see a variable called <code>water_df</code> which has 1 observation of 14 different variables!</p>
+<p><br></p>
+<p>Now run <code>water_df</code> in your Rscript or your console you should see this:</p>
 <pre class="r"><code>water_df</code></pre>
 <pre><code>## # A tibble: 1 x 14
 ##      X1 `Public Supply` Domestic Industrial Irrigation `Irrigation-Cro~
@@ -320,21 +285,48 @@ library(here)</code></pre>
 <li>Vectors can be created using the <code>c()</code> (combine) function</li>
 <li>The length can be checked with <code>length()</code></li>
 </ul>
-<pre class="r"><code>a = c(1,2,5.3,6,-2,4) # numeric vector
-a</code></pre>
-<pre><code>## [1]  1.0  2.0  5.3  6.0 -2.0  4.0</code></pre>
-<div id="subsetting-a-dataframe" class="section level3">
-<h3><strong>Subsetting a dataframe</strong></h3>
-<p>Here are several different methods of subsetting a vector</p>
-<pre class="r"><code>vector &lt;- c(1, 2, 5.3 ,6 ,-2, 4) # numeric vector
-vector[3] # subsets to only the 3rd element</code></pre>
-<pre><code>## [1] 5.3</code></pre>
+<div id="character-vector" class="section level3">
+<h3><strong>Character vector</strong></h3>
+<p>Let’s use <code>c()</code> to make a <strong>character vector</strong> of different water demand sectors</p>
+<pre class="r"><code>water_demands = c(&quot;Public Supply&quot;, &quot;Domestic&quot;, &quot;Industrial&quot;)
+water_demands</code></pre>
+<pre><code>## [1] &quot;Public Supply&quot; &quot;Domestic&quot;      &quot;Industrial&quot;</code></pre>
 <p><br></p>
-<pre class="r"><code>vector[-3] # removes 3rd element</code></pre>
-<pre><code>## [1]  1  2  6 -2  4</code></pre>
+</div>
+<div id="numeric-vector" class="section level3">
+<h3><strong>Numeric vector</strong></h3>
+<p>Now let’s use <code>c()</code> to make a <strong>numeric vector</strong> detailing the volume of water use for each of these sectors</p>
+<pre class="r"><code>water_use = c(49.94, 0.52, 6.36)
+water_use</code></pre>
+<pre><code>## [1] 49.94  0.52  6.36</code></pre>
 <p><br></p>
-<pre class="r"><code>vector[1:3] # subsets elements 1 through 3</code></pre>
-<pre><code>## [1] 1.0 2.0 5.3</code></pre>
+</div>
+<div id="adding-elements-to-a-vector" class="section level3">
+<h3><strong>Adding elements to a vector</strong></h3>
+<p>If we wanted to add <strong>Irrigation</strong> to our <code>water_demands</code> vector, we would need to surround <strong>Irrigation</strong> in quotes to create a character string, as to match the data type of the other elements in the <code>water_demands</code> vector.</p>
+<pre class="r"><code>water_demands = c(water_demands, &quot;Irrigation&quot;)
+water_demands</code></pre>
+<pre><code>## [1] &quot;Public Supply&quot; &quot;Domestic&quot;      &quot;Industrial&quot;    &quot;Irrigation&quot;</code></pre>
+<p><br></p>
+<p>To add the volume of water use by <strong>Irrigation</strong> we can do the same thing but because this is a numeric vector we do not need to use quotation marks</p>
+<pre class="r"><code>water_use = c(water_use, 55.95)
+water_use</code></pre>
+<pre><code>## [1] 49.94  0.52  6.36 55.95</code></pre>
+</div>
+<div id="subsetting-a-vector" class="section level3">
+<h3><strong>Subsetting a vector</strong></h3>
+<p>To subset a vector we use <code>[]</code>, this is known as indexing. Each element in a vector has an index based on its order in the vector.</p>
+<p><br> If we want to retrieve only the 3rd element we would put a 3 in the brackets to “index the 3rd element”</p>
+<pre class="r"><code>water_demands[3]</code></pre>
+<pre><code>## [1] &quot;Industrial&quot;</code></pre>
+<p><br></p>
+<p>If you want to <strong>remove an element from a list,</strong> while keeping all the other elements, you can use the a <strong>negative</strong>. The following removes just the 3rd element from the list and returns a vector of the remaining elements</p>
+<pre class="r"><code>water_demands[-3] </code></pre>
+<pre><code>## [1] &quot;Public Supply&quot; &quot;Domestic&quot;      &quot;Irrigation&quot;</code></pre>
+<p><br></p>
+<p>If you want to get a range of elements from a vector use the <code>:</code>. The structure of this method is <code>vector[startingElement:endingElement]</code></p>
+<pre class="r"><code>water_demands[1:3] </code></pre>
+<pre><code>## [1] &quot;Public Supply&quot; &quot;Domestic&quot;      &quot;Industrial&quot;</code></pre>
 <p><br></p>
 </div>
 </div>
@@ -403,7 +395,7 @@ vector[3] # subsets to only the 3rd element</code></pre>
 ##   .. )</code></pre>
 <p><br></p>
 </div>
-<div id="subsetting-a-dataframe-1" class="section level3">
+<div id="subsetting-a-dataframe" class="section level3">
 <h3><strong>Subsetting a dataframe</strong></h3>
 <ul>
 <li>We can subset our dataframe and look at specific rows or columns by using <code>[]</code> or <code>$</code></li>
