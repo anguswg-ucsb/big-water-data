@@ -6,8 +6,9 @@ navbar:
   left:
     - text: "GitHub-RStudio"
       href: git-bash.html
-    - text: "Lab 1"
-      href: lab-01-guide.html
+    - text: "Lab 2 - Prelab"
+      href: lab-02-prelab.html
+    - text: "Lab 2"
+      href: lab-02-guide.html
 output:
   rmdformats::downcute
-

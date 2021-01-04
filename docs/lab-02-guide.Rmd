@@ -1,0 +1,343 @@
+---
+title: "Lab 2"
+author: "[ENVS 193](index.html)"
+date: "[Angus Watters](https://github.com/anguswg-ucsb)"
+mail: "adwattersgrubstein@ucsb.edu"
+github: "anguswg-ucsb"
+class_name: 'ENVS 193'
+class_github: 'big-water-data'
+home: ""
+output:
+  rmdformats::downcute
+subtitle: "Create a new project in RStudio, set up project's file structure, and an introduction to R"
+---
+
+
+<style type="text/css">
+span.code {
+      background:rgba(240,128,128, 0.2);
+      border-radius: 5px 5px 5px 5px;
+      padding-left:5px;
+      padding-top:2px;
+      padding-right:5px;
+      padding-bottom:2px;
+      color:red;
+     } 
+</style>
+***
+
+
+# **Goals**
+
+- Make a folder for this class that will be the home for all your projects
+- Learn how to make a new project in RStudio and build a reproducible & organized file structure within a project
+- Learn to execute simple tasks within the RStudio terminal to create files and navigate our system directory
+
+***
+
+# **Before we start:**
+
+- Open up your lab-02 Rproject from your Rprojects folder
+- Then open your `lab-02-script.R` file from your `docs` folder
+- At the top of your Rscript, type the `#` and then type your name, the course name, lab 2, and the date afterwords
+
+
+
+
+> The hash symbol `#` is used to "comment out" text in your RScript so R does not run it as code. It is good practice to get used to using the `#` to label your code and describe your process. It helps you remember what certain code is doing and it also helps someone viewing your code to understand your process 
+
+```{r}
+# Angus Watters
+# ENVS 193 - Professor Perrone
+# Lab 2
+# 1/4/2021
+```
+
+# **Load in libraries**
+- In this lab, we will be using the `tidyverse` and `here` packages 
+- Load these libraries in by using the `library()` function 
+
+```{r, message=FALSE, warning = FALSE, eval=TRUE}
+library(tidyverse)
+library(here)
+```
+
+## **here() package**
+
+## **help() function**
+
+
+# **Read in a .csv file**
+
+- Click here to download a .csv file of water data ADD LINK TO CSV DATA
+- Once the file downloads, save it into the `data folder` in your project directory. 
+- Now lets read that .csv file into our Rscript using the `read_csv()` function and the `here()` function
+- here() allows you to locate files relative to your project root. It finds files based on the current working directory at the time when the package is loaded. This means that if someone else would like to run your code, the file path will adjust to that persons current working directory, giving them a file path to the data. Using here() is good practice as it allows for a  reproducible file path for whoever is using the code. ***Reproducible code and work flows allows you to cut down on extra coding in the future and saves time in the long run for you and anyone else who might want to use your code. ***
+
+My curent working directory when I loaded the `here` package
+```{r}
+here()
+```
+
+<br>
+
+So to access the `export.csv` file in our data folder we need to get to<br> **"C:/Users/angus/OneDrive/Desktop/github/big-water-data/data/export.csv"**<br>
+here() will give us an easy way of finding this path
+
+```{r}
+here("data/export.csv")
+```
+
+```{r}
+read_csv(here("data/export.csv"))
+here()
+```
+
+Run this code and you'll notice the dataframe outputs to our console. 
+How do we save this dataframe to a variable so we can convenianetly access again.
+
+# **Variables** 
+
+>Lets create a variable named `water_df` and assign it to our .csv file!
+
+```{r} 
+water_df = read_csv(here("data/export.csv"))
+```
+
+If you look at your environemnt (top right pane) you should see a variable called `water_df` which has 1 observation of 14 different variables!
+
+```{r}
+water_df
+```
+
+Before getting into the data within our data frame lets just quickly look at different data structures within R
+
+
+# **Data Structures** 
+
+
+## **Vectors**
+
+- Vectors can be created using the `c()` (combine) function
+- The length can be checked with `length()`
+
+
+```{r}
+a = c(1,2,5.3,6,-2,4) # numeric vector
+a
+```
+
+### **Subsetting a dataframe**
+
+Here are several different methods of subsetting a vector
+
+```{r}
+vector <- c(1, 2, 5.3 ,6 ,-2, 4) # numeric vector
+vector[3] # subsets to only the 3rd element
+```
+<br>
+```{r}
+vector[-3] # removes 3rd element
+```
+<br>
+```{r}
+vector[1:3] # subsets elements 1 through 3
+```
+
+<br>
+
+## **Dataframes**
+
+- a named list of vectors.
+
+- data.frames are one of the biggest and most important ideas in R, and one of the things that make R different from other programming languages
+
+- Unlike a regular list, in a `data.frame`, the length of each vector must be the same.
+
+- typically dataframes are read into R via `read_csv`, `read_table`, or `read_xls`, depending on the file type 
+
+- dataframes can also be built using the `data.frame()`function
+
+### **Useful dataframe function**
+
+- `head()` - shows first 6 rows
+- `tail()` - shows last 6 rows
+- `dim()` - returns the dimensions of data frame (i.e. number of rows and number of columns)
+- `nrow()` - number of rows
+- `ncol()` - number of columns
+- `str()` - structure of data frame - name, type and preview of data in each column
+- `names()` or `colnames()` - both show the names attribute for a data frame
+
+***Lets now inspect different qualities of this dataframe***
+
+<br>
+
+### **Structure of a dataframe**
+
+
+If we use the `class()` function on our dataframe we see that it is a `tbl_df`, a **tibble** is very similar to a dataframe, but it also displays the type of data underneath each column heading name 
+
+```{r}
+class(water_df)
+```
+
+<br>
+
+And here is our dataframe. 
+The data frame is 1 observation (rows) by 14 variables (columns)<br>Notice the `num` classification next to all of the columns, this is indicating the type of data in each column
+```{r}
+str(water_df) 
+```
+
+<br>
+
+### **Subsetting a dataframe**
+- We can subset our dataframe and look at specific rows or columns by using `[]` or `$`
+- To subset with brackets the structure is `dataframe[row, column]`
+- To subset using the $ the structure is `dataframe$column`
+
+
+
+So if we call `water_df[1,2]` we will get the first row and second column of our dataframe
+```{r}
+water_df[1,2]  # row 1, column 2
+```
+<br>
+
+If we call just `water_df[1,]` we will get the entire first row with all the columns of our dataframe
+```{r}
+water_df[1,]  # row 1, column 2
+```
+
+<br>
+
+You can use `:` to subset a range of columns, the structure to do this is `dataframe[column1:column(n)]`
+```{r}
+water_df[1:4]
+```
+
+<br>
+
+
+
+Let's subset the first row and the second column using the `$`
+```{r}
+water_df$"Public Supply"[1]
+```
+
+And then the fourth column and all the rows (we only have 1 row in our dataframe so we will only get the first row)
+
+```{r}
+water_df$Industrial
+```
+You'll notice when we wanted to subset the first row and second column, `water_df$"Public Supply"[1]` we had to use quotations around the column name, but we didnt need to do this in the following example, `water_df$Industrial`. This is because the "Public Supply" has column has a space between the two words. 
+
+**Try running the same code without the quotations and see what happens. **
+
+**Did you receive an error?**
+
+>The reason for this is because the **"Public Supply"**  column has a space between the two words, this space needs to be acknowledged by R, this can be accomplished by adding the quotations, indicating everything in the quotes is the column name. We didn't need to do this with the `water_df$Industrial` call as the column **"Industrial"** is all one word. This is one reason why it is important to be careful when naming data frame. Typically it is best to avoid spaces and instead it utlize the `_` character in place of a space. 
+
+
+
+# **Data types**
+
+Values in R can be one of 6 different types :
+
+  1. **numeric** (e.g. 2, 2.15) - values w/ decimals<br>2. **integer** (e.g. 2L) - values w/o decimals (create w/ uppercase 'L')<br>3. **character** (e.g. "x", "Welcome!")<br>4. **logical** (e.g. TRUE, FALSE)<br>5. **raw** (e.g. holds bytes)<br>6. **complex** (e.g. 1+4i) - _we are going to ignore_
+  
+>For this class we will be focused on **numeric** and **character** data types
+
+The `class()` function tells us what kind of object is it (high-level)<br>The `typeof()` function can tell us the object’s data type (low-level)
+
+
+<br>
+
+<br>
+
+## **Numerics**
+
+>***Let's look at what data types are in our `water_df` dataframe we created***
+
+THe data type for the values in the `Public Supply` column
+```{r}
+class(water_df$"Public Supply")
+```
+
+<br>
+
+And for the `Industrial` column
+
+```{r}
+class(water_df$Industrial)
+```
+
+All of our columns contain `numeric` data types but you will encounter situations where you may have a column with character data types that you wish to be numeric, and vice versa. 
+
+<br>
+
+**The following example shows why this is important to know**
+
+Lets say we had country information on domestic and agricultural water use in some objects:
+
+```{r}
+country = "Mexico"
+domestic_water_use = 146
+agricultural_water_use = 74
+```
+
+<br>
+
+If we wanted to we could add `domestic_water_use` and `agricultural_water_use` and get an answer
+
+```{r}
+domestic_water_use + agricultural_water_use
+```
+
+<br>
+
+But what if we try and add `domestic_water_use` and `country`?
+
+```{r, error = TRUE}
+domestic_water_use + country
+```
+
+This `non-numeric argument error` is saying that one of these objects is not a **numeric value** (country is a character value)
+
+For whatever reasons, you will encounter data that has discrepencies like this and thus why it is good to look at the structure of whatever dataframe you're working with.
+
+***
+
+**What's the difference between `2012` (the number) and `'2012'` (the character)?**
+
+```{r,eval= TRUE}
+class(2012) # numeric
+```
+<br>
+
+```{r,eval= TRUE}
+class('2012') # character
+```
+When you surround a something in quotes (double or single), that element is coerced to the class of character, as shown above as the numeric 3 becomes a character once wrapped in quotes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

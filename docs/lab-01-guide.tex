@@ -1,0 +1,1307 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Lab 1},
+  pdfauthor={ENVS 193},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Lab 1}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Create a new project in RStudio, set up project's file structure, and an
+introduction to R}
+\author{\href{index.html}{ENVS 193}}
+\date{\href{https://github.com/anguswg-ucsb}{Angus Watters}}
+
+\begin{document}
+\maketitle
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{goals}{%
+\section{\texorpdfstring{\textbf{Goals}}{Goals}}\label{goals}}
+
+\begin{itemize}
+\tightlist
+\item
+  Make a folder for this class that will be the home for all your
+  projects
+\item
+  Learn how to make a new project in RStudio and build a reproducible \&
+  organized file structure within a project
+\item
+  Learn to execute simple tasks within the RStudio terminal to create
+  files and navigate our system directory
+\item
+  Overcome the initial (and understandable!) anxiety associated with the
+  terminal
+\item
+  Install packages and load them into your environment
+\item
+  Explore the basics of RStudio
+\item
+  Understand the different data types \& data structures in R
+\item
+  Get comfortable working with the different data types \& data
+  structures
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{create-a-folder-for-this-class}{%
+\section{\texorpdfstring{\textbf{Create a folder for this
+class}}{Create a folder for this class}}\label{create-a-folder-for-this-class}}
+
+\hypertarget{macos}{%
+\subsubsection{\texorpdfstring{\textbf{MacOS }}{MacOS }}\label{macos}}
+
+First, we will create a new folder on our desktop that we'll use to
+organize our RStudio projects for this class. Navigate to your desktop,
+and right click and click \texttt{New\ folder}. A new folder should
+appear on your desktop, to rename the folder, double click on the
+folder's name and give it the name \texttt{Rprojects}
+
+\includegraphics{img/mac-file-create.png}
+
+\hypertarget{windows}{%
+\subsubsection{\texorpdfstring{\textbf{Windows
+}}{Windows }}\label{windows}}
+
+On windows, do the same thing but when you right click on the desktop
+hover over \texttt{New} and the click \texttt{Folder}
+
+\includegraphics{img/new-desktop-folder.png}
+
+\textbf{Next open RStudio, if you do not see RStudio on your desktop you
+can open it by searching RStudio}
+
+\textbf{On a Mac}, in the the top right hand corner of your screen
+select the magnifiying glass icon and enter RStudio
+
+\textbf{On windows}, in the bottom left hand corner of your screen enter
+RStudio into the search box with the magnifying glass
+
+\hypertarget{create-a-new-project-in-rstudio}{%
+\section{\texorpdfstring{\textbf{Create a new project in
+RStudio}}{Create a new project in RStudio}}\label{create-a-new-project-in-rstudio}}
+
+\begin{quote}
+\textbf{Open RStudio and click on \texttt{File} in the top left hand
+corner of the page, and then select \texttt{New\ Project}}
+\end{quote}
+
+\includegraphics{img/open-new-rproj.png}
+
+\begin{quote}
+\textbf{Select \texttt{New\ Directory}}
+\end{quote}
+
+\includegraphics{img/select-new-dir.png}
+
+\begin{quote}
+\textbf{Select \texttt{New\ Project}}
+\end{quote}
+
+\includegraphics{img/select-proj-type.png}
+
+\begin{quote}
+For \texttt{directory\ name} enter \textbf{Lab-01}Under
+\texttt{create\ project\ as\ subdirectory\ of} select browse and find
+and select the \textbf{\emph{Rprojects}} folder you created on your
+desktopCheck the \texttt{Open\ in\ new\ session} box in the bottom left
+hand cornerAfter entering the above information, select
+\texttt{Create\ Project},\textbf{\emph{RStudio will automatically open
+the new project, you can also access your \texttt{lab-01.Rproj} from
+your Rprojects folder on your desktop.}}
+\end{quote}
+
+\includegraphics{img/create-new-proj.png}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{build-a-project-file-structure}{%
+\section{\texorpdfstring{\textbf{Build a project file
+structure}}{Build a project file structure}}\label{build-a-project-file-structure}}
+
+\begin{quote}
+Now we are going to create a simple file structure to help keep our
+project organized. We will populate our project with \texttt{docs},
+\texttt{data}, and \texttt{img} folders. We will do this via the
+terminal
+\end{quote}
+
+The terminal is a computer application. On a Mac, it is most frequently
+accessed via your Terminal application (do yourself a favor and download
+iTerm), and on Windows, through PowerShell. Fortunately, RStudio
+provides a built in terminal that imitates these applications within the
+RStudio IDE. \textbf{The Terminal tab can be found next to the Console
+tab. If it is not visible, show it via Shift+Alt+T (or Tools
+\textgreater{} Terminal \textgreater{} New Terminal).} Once visible, it
+should look something like this
+
+\textbf{\emph{The terminal is a gateway to that command line. With it,
+instead of pointing and clicking, you can type commands and have your
+computer respond. Entering commands into the terminal is useful for
+expediting basic tasks like file/folder creation. The terminal is also
+useful for exploring your file structure, and for retrieving information
+about your computer system.}}
+
+\hypertarget{terminal-layout}{%
+\subsection{\texorpdfstring{\textbf{Terminal
+layout}}{Terminal layout}}\label{terminal-layout}}
+
+\begin{quote}
+The {terminal} and the {files tab} are highlighted red and the project's
+\texttt{current\ working\ directory}is in yellow.
+\end{quote}
+
+\includegraphics{img/terminal-empty.png}
+
+\hypertarget{pwd---print-working-directory}{%
+\subsection{\texorpdfstring{{pwd} - print working
+directory}{pwd - print working directory}}\label{pwd---print-working-directory}}
+
+pwd displays the directory or folder you are currently in
+
+My working directory is
+\texttt{/c/Users/angus/OneDrive/Desktop/Rprojects/lab-01}, yours will be
+slightly different but essentially the same
+
+\includegraphics{img/pwd-2.png}
+
+\hypertarget{mkdir---make-a-directory}{%
+\subsection{\texorpdfstring{{mkdir} - make a
+directory}{mkdir - make a directory}}\label{mkdir---make-a-directory}}
+
+mkdir creates a new folder (directory) inside your current working
+directoryEntering {mkdir docs} into the terminal, will create a docs
+folder within our current working directory.Go ahead an make docs, data,
+and img folders in your project. \textbf{In the bottom right hand pane,
+select File from the top row of tabs, you should now see your docs,
+data, and img folders}
+
+These 3 folders will hold all the components of your project.The docs
+folder is for your Rscript (.R) and Rmarkdown (.Rmd) files, the data
+folder is for your .CSV, .xls, .txt files, and the img folder is for
+images you may use or create from within the project.
+
+\begin{quote}
+\textbf{mkdir docs}
+\end{quote}
+
+\includegraphics{img/mkdir-docs.png}
+
+\begin{quote}
+\textbf{mkdir data}
+\end{quote}
+
+\includegraphics{img/mkdir-data.png}
+
+\begin{quote}
+\textbf{mkdir img}
+\end{quote}
+
+\includegraphics{img/mkdir-img.png}
+
+\hypertarget{cd---change-directory}{%
+\subsection{\texorpdfstring{{cd} - change
+directory}{cd - change directory}}\label{cd---change-directory}}
+
+cd allows you to navigate through directories by changing working
+directory.
+
+There are many ways to navigate using {cd} but today we will only need
+\texttt{cd\ "the\ folder\ (directory)\ you\ want\ to\ move\ to"} and
+\texttt{cd\ ..}The first command takes us from our current working
+directory and by entering \texttt{cd\ docs} we move into our docs
+folder{cd ..} will reverse this and step back a directoryWe are doing
+this because the next thing we will do is create a file in our docs
+folder!
+
+\includegraphics{img/cd-docs.png}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{create-a-r-script}{%
+\section{\texorpdfstring{\textbf{Create a R
+Script}}{Create a R Script}}\label{create-a-r-script}}
+
+\hypertarget{touch---create-a-file}{%
+\subsection{\texorpdfstring{{touch} - create a
+file}{touch - create a file}}\label{touch---create-a-file}}
+
+On a MacOS or Linux machine (anything running Bash) {touch} can be used
+to create a new file with a defined name and extension in the working
+directory. For example, we can create a new R file named
+\texttt{lab-01-script.R} in our working directory as follows. You should
+now see an Rscript (.R) file in your docs folder
+
+\includegraphics{img/touch-rscript-docs.png}
+
+\begin{quote}
+Open your lab-01-script.R file and then in the bottom left hand quadrant
+where our terminal is, select \texttt{Console} from the tab row above.
+\end{quote}
+
+\includegraphics{img/open-rscript-console.png}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{load-in-your-libraries}{%
+\section{\texorpdfstring{\textbf{Load in your
+libraries}}{Load in your libraries}}\label{load-in-your-libraries}}
+
+\begin{quote}
+Now we will load a package into our workspace. We will do this by typing
+\texttt{library(tidyverse)} into our RScript and then pressing the
+\texttt{Run} button on the top right hand corner of your RScript. Code
+can also be run by the keyboard command \texttt{Cmd+Return} on Mac, and
+\texttt{Ctrl+Enter} on Windows This is how you run lines of code from an
+RScript. Additionally if you highlight any portion of a code and run it,
+just the highlighted portion of code will be executed.After you have
+loaded in the tidyverse package a bunch of seemingly random outputs
+should have appeared in your console. This is what you want and it is
+just details of the package being loaded.When you run code, the output
+of that code will appear in the console, also any errors or warnings
+will display in the console.
+\end{quote}
+
+\includegraphics{img/load-lib-save.png}
+
+\begin{quote}
+Code can also be run from the console, but it does not allow you to go
+back and work on code, it will just take one line of code and return the
+output.
+\end{quote}
+
+\textbf{Running code from an RScript vs.~Console:}
+
+\begin{itemize}
+\tightlist
+\item
+  Enter \texttt{3\ +\ 5} into your RScript and run it. What happened?
+\item
+  Enter \texttt{x\ =\ 3\ +\ 5} into your RScript and run it. A value for
+  \texttt{x} should have been added to your environment pane (top right
+  quadrent, select Environment tab if needed)
+\item
+  What happens if you type \texttt{x} into your RScript and run it?
+\item
+  Now see what happens when you type \texttt{x} into your console and
+  press Enter
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{variables}{%
+\section{\texorpdfstring{\textbf{Variables}}{Variables}}\label{variables}}
+
+Variable values are ``bound'' to a name using the = or \textless-
+assignment operators (they work identically, I prefer the ``='')
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a =}\StringTok{ }\DecValTok{3}
+\NormalTok{a <-}\StringTok{ }\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{\emph{An objects will retain the value from the last line of
+code run}}.For example, we see that the object \textbf{\emph{x}} is
+first assigned a value of 5 \texttt{(x\ =\ 5)},and then x is assigned a
+new value of 5 + 2 \texttt{(x\ =\ 5\ +\ 2)}.If x is called in the next
+line, we see the value of x is 7.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\DecValTok{5} 
+\NormalTok{x =}\StringTok{ }\DecValTok{5} \OperatorTok{+}\DecValTok{2}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7
+\end{verbatim}
+
+\textbf{\emph{But if we assign x to 5 after assigning x = 5 + 2, we see
+that x now equals 5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\DecValTok{5} 
+\NormalTok{x =}\StringTok{ }\DecValTok{5} \OperatorTok{+}\DecValTok{2}
+\NormalTok{x =}\StringTok{ }\DecValTok{5} 
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\textbf{\emph{Copy and paste the following code into your RScript, but
+before you run it all, take a guess at what you think what value
+\texttt{y} will have at the end. and \texttt{x}?}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\DecValTok{5}
+\NormalTok{y =}\StringTok{ }\DecValTok{2}
+\NormalTok{y =}\StringTok{ }\NormalTok{x}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+Lets say we stored information about UCSB in some objects:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{school =}\StringTok{ "UCSB"}
+\NormalTok{lat =}\StringTok{ }\FloatTok{34.4140}
+\NormalTok{lng =}\StringTok{ }\FloatTok{-119.8489}
+\end{Highlighting}
+\end{Shaded}
+
+If we wanted to we could add \texttt{lat} and \texttt{lng}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lat }\OperatorTok{+}\NormalTok{lng}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -85.4349
+\end{verbatim}
+
+But what if we try and add \texttt{lat} and \texttt{school}?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lat }\OperatorTok{+}\StringTok{ }\NormalTok{school}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in lat + school: non-numeric argument to binary operator
+\end{verbatim}
+
+This \texttt{non-numeric\ argument\ error} is saying that one of these
+objects is not a \textbf{\emph{numeric value}}, this leads into the idea
+that values have different classes/types
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{\emph{Don't worry if you feel overwhelmed its completely normal
+at this stage, there is a lot of information to take in. It will takes
+some time to feel comfortable with the Console/RScript/Environment
+interactions but before long, with practice, it will become intuitive!}}
+\end{quote}
+
+\hypertarget{data-types}{%
+\section{\texorpdfstring{\textbf{Data
+types}}{Data types}}\label{data-types}}
+
+Values in R can be one of 6 different types :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{numeric} (e.g.~2, 2.15) - values w/ decimals2.
+  \textbf{integer} (e.g.~2L) - values w/o decimals (create w/ uppercase
+  `L')3. \textbf{character} (e.g.~``x'', ``Welcome!'')4.
+  \textbf{logical} (e.g.~TRUE, FALSE)5. \textbf{raw} (e.g.~holds
+  bytes)6. \textbf{complex} (e.g.~1+4i) - \emph{we are going to ignore}
+\end{enumerate}
+
+The \texttt{class()} function tells us what kind of object is it
+(high-level)The \texttt{typeof()} function can tell us the object's data
+type (low-level) \textgreater{}\textbf{\emph{What's the difference
+between 3 (the number) and `3' (the character)?}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(}\DecValTok{3}\NormalTok{) }\CommentTok{# numeric}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(}\StringTok{'3'}\NormalTok{) }\CommentTok{# character}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{quote}
+When you surround a something in quotes (double or single), that element
+is coerced to the class of character, as shown above as the numeric 3
+becomes a character once wrapped in quotes
+\end{quote}
+
+\hypertarget{numeric}{%
+\subsection{Numeric}\label{numeric}}
+
+\begin{quote}
+\textbf{\emph{Copy the following examples of different data types and
+use the \texttt{class()} function to examine the different data types}}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\DecValTok{3}  
+\NormalTok{y =}\StringTok{ }\DecValTok{3} \OperatorTok{*}\StringTok{ }\DecValTok{400}
+\NormalTok{z =}\StringTok{ }\DecValTok{5} \OperatorTok{+}\StringTok{ }\DecValTok{6}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{integer}{%
+\subsection{Integer}\label{integer}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\DecValTok{2} \CommentTok{# numeric}
+\NormalTok{y =}\StringTok{ }\NormalTok{2L }\CommentTok{# specifies as integer }
+\NormalTok{z =}\StringTok{ }\KeywordTok{as.integer}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{4.1}\NormalTok{, }\FloatTok{5.2}\NormalTok{, }\FloatTok{6.3}\NormalTok{, }\FloatTok{6.4}\NormalTok{)) }\CommentTok{# coerces values to integer type}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{character}{%
+\subsection{Character}\label{character}}
+
+You can use either Single quotes '' or double quotes "", R treats them
+identically
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ "a"}  
+\NormalTok{y =}\StringTok{ "bc"}  
+\NormalTok{z =}\StringTok{ "I like turtles!!!"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{missing-values-na}{%
+\subsection{\texorpdfstring{\textbf{Missing Values
+(NA)}}{Missing Values (NA)}}\label{missing-values-na}}
+
+\begin{itemize}
+\tightlist
+\item
+  Missing values still need a place holder
+\item
+  Missing values are denoted with NA (short for not applicable).
+\item
+  Missing values are `infectious': most computations involving a missing
+  value will return another missing value.
+\end{itemize}
+
+\hypertarget{useful-na-function}{%
+\subsubsection{\texorpdfstring{\textbf{Useful NA
+function}}{Useful NA function}}\label{useful-na-function}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{na.omit()} - removes all cases where an NA appears
+\item
+  \texttt{is.na()} - indicates which elements are missing (NA), if
+  element is NA it returns TRUE
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vec =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\OtherTok{NA}\NormalTok{)  }
+\KeywordTok{mean}\NormalTok{(vec) }\CommentTok{# the NA value in the vector results in a mean of NA}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(vec, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{) }\CommentTok{# use na.rm = TRUE removes the NAs }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\DecValTok{50}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+\KeywordTok{is.na}\NormalTok{(x) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE FALSE
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{data-structures}{%
+\section{\texorpdfstring{\textbf{Data
+structures}}{Data structures}}\label{data-structures}}
+
+\hypertarget{vectors}{%
+\subsection{\texorpdfstring{\textbf{Vectors}}{Vectors}}\label{vectors}}
+
+\begin{itemize}
+\tightlist
+\item
+  Vectors can be created using the \texttt{c()} (combine) function
+\item
+  The length can be checked with \texttt{length()}
+\end{itemize}
+
+\textbf{\emph{From the examples below, create your own vector made up of
+all character strings:2. name of the state you were born in1. name of
+your hometown}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\FloatTok{5.3}\NormalTok{,}\DecValTok{6}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{) }\CommentTok{# numeric vector}
+\NormalTok{a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1.0  2.0  5.3  6.0 -2.0  4.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"one"}\NormalTok{,}\StringTok{"two"}\NormalTok{,}\StringTok{"three"}\NormalTok{) }\CommentTok{# character vector}
+\NormalTok{b}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "one"   "two"   "three"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{c =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{,}\OtherTok{TRUE}\NormalTok{,}\OtherTok{TRUE}\NormalTok{,}\OtherTok{FALSE}\NormalTok{,}\OtherTok{TRUE}\NormalTok{,}\OtherTok{FALSE}\NormalTok{) }\CommentTok{#logical vector}
+\NormalTok{c}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{10} \CommentTok{# number sequence vector}
+\NormalTok{d}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\hypertarget{adding-elements-to-a-vector}{%
+\subsubsection{\texorpdfstring{\textbf{Adding elements to a
+vector}}{Adding elements to a vector}}\label{adding-elements-to-a-vector}}
+
+Here the character string ``four'' is added to the vector \textbf{b}
+from the above example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b =}\StringTok{ }\KeywordTok{c}\NormalTok{(b, }\StringTok{'four'}\NormalTok{)}
+\NormalTok{b}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "one"   "two"   "three" "four"
+\end{verbatim}
+
+\textbf{\emph{Now try adding your favorite food (chr) to the vector you
+created vector}}
+
+\hypertarget{subsetting-a-vector}{%
+\subsubsection{\texorpdfstring{\textbf{Subsetting a
+vector}}{Subsetting a vector}}\label{subsetting-a-vector}}
+
+Here are several different methods of subsetting a vector
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vector <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\FloatTok{5.3}\NormalTok{ ,}\DecValTok{6}\NormalTok{ ,}\OperatorTok{-}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{) }\CommentTok{# numeric vector}
+\NormalTok{vector[}\DecValTok{3}\NormalTok{] }\CommentTok{# subsets to only the 3rd element}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vector[}\OperatorTok{-}\DecValTok{3}\NormalTok{] }\CommentTok{# removes 3rd element}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1  2  6 -2  4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vector[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{] }\CommentTok{# subsets elements 1 through 3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.0 2.0 5.3
+\end{verbatim}
+
+\texttt{setNames()} allows you to name each element in a vector
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vector =}\StringTok{ }\KeywordTok{setNames}\NormalTok{(vector, }\KeywordTok{c}\NormalTok{(}\StringTok{'A'}\NormalTok{, }\StringTok{'B'}\NormalTok{,}\StringTok{'C'}\NormalTok{,}\StringTok{'D'}\NormalTok{, }\StringTok{'E'}\NormalTok{, }\StringTok{'F'}\NormalTok{)) }\CommentTok{# names elements and reassigns named vector to original vector variable using =}
+
+\NormalTok{vector[}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{] }\CommentTok{# display elements 1 through 6}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    A    B    C    D    E    F 
+##  1.0  2.0  5.3  6.0 -2.0  4.0
+\end{verbatim}
+
+\textbf{\emph{Using \texttt{setNames()}, give each element of your
+vector an appropriate name and then subset your vector to just your name
+and favorite food}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{lists}{%
+\subsection{\texorpdfstring{\textbf{Lists}}{Lists}}\label{lists}}
+
+An ordered collection of objects (components). A list allows you to
+gather a variety of (possibly unrelated) objects under one name. Extends
+vectors and allows elements to be any type
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{list =}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }
+  \StringTok{"water_level"}\NormalTok{, }
+  \KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{), }
+  \KeywordTok{c}\NormalTok{(}\FloatTok{2.3}\NormalTok{, }\FloatTok{5.9}\NormalTok{)}
+\NormalTok{)}
+\KeywordTok{typeof}\NormalTok{(list)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "list"
+\end{verbatim}
+
+\hypertarget{subsetting-a-list}{%
+\subsubsection{\texorpdfstring{\textbf{Subsetting a
+list}}{Subsetting a list}}\label{subsetting-a-list}}
+
+The content of elements of a list can be retrieved by using double
+square brackets.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(list)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "list"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{list[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{list[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{list[[}\DecValTok{2}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "water_level"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{list[[}\DecValTok{3}\NormalTok{]][}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{dataframes}{%
+\subsection{\texorpdfstring{\textbf{Dataframes}}{Dataframes}}\label{dataframes}}
+
+\begin{itemize}
+\item
+  a named list of vectors.
+\item
+  data.frames are one of the biggest and most important ideas in R, and
+  one of the things that make R different from other programming
+  languages
+\item
+  Unlike a regular list, in a \texttt{data.frame}, the length of each
+  vector must be the same.
+\item
+  typically dataframes are read into R via \texttt{read\_csv},
+  \texttt{read\_table}, or \texttt{read\_xls}, depending on the file
+  type
+\item
+  dataframes can also be built using the \texttt{data.frame()}function
+\end{itemize}
+
+\begin{quote}
+\textbf{\emph{Below is an example of a dataframe with 3 columns,
+\texttt{num}, \texttt{color}, and \texttt{boolean} The rows of the
+dataframe contain the values from the vectors}}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{color =}\StringTok{  }\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"white"}\NormalTok{,  }
+           \StringTok{"green"}\NormalTok{, }\OtherTok{NA}\NormalTok{)  }
+\NormalTok{boolean =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{,}\OtherTok{TRUE}\NormalTok{,  }
+             \OtherTok{TRUE}\NormalTok{,}\OtherTok{FALSE}\NormalTok{) }
+\NormalTok{df =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(num, color, boolean)}
+
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   num color boolean
+## 1   1   red    TRUE
+## 2   2 white    TRUE
+## 3   3 green    TRUE
+## 4   4  <NA>   FALSE
+\end{verbatim}
+
+\hypertarget{structure-of-a-dataframe}{%
+\subsubsection{\texorpdfstring{\textbf{Structure of a
+dataframe}}{Structure of a dataframe}}\label{structure-of-a-dataframe}}
+
+The data frame is 4 objects (rows) by 3 variables (columns)Notice the
+\texttt{num}, \texttt{chr}, \texttt{logi} classisifcation of the 3
+different columns
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(df) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    4 obs. of  3 variables:
+##  $ num    : num  1 2 3 4
+##  $ color  : chr  "red" "white" "green" NA
+##  $ boolean: logi  TRUE TRUE TRUE FALSE
+\end{verbatim}
+
+\hypertarget{subsetting-a-dataframe}{%
+\subsubsection{\texorpdfstring{\textbf{Subsetting a
+dataframe}}{Subsetting a dataframe}}\label{subsetting-a-dataframe}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]  }\CommentTok{# row 1, column 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "red"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\DecValTok{2}\NormalTok{,]  }\CommentTok{# row 2, all columns}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   num color boolean
+## 2   2 white    TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\OperatorTok{$}\NormalTok{color[}\DecValTok{1}\NormalTok{] }\CommentTok{#  row 1 in column color}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "red"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\OperatorTok{$}\NormalTok{num[}\DecValTok{2}\NormalTok{] }\CommentTok{# row 2 in column num}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{] }\CommentTok{# columns 1 through 2 of dataframe}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   num color
+## 1   1   red
+## 2   2 white
+## 3   3 green
+## 4   4  <NA>
+\end{verbatim}
+
+\hypertarget{create-a-dataframe-by-hand}{%
+\subsubsection{\texorpdfstring{\textbf{Create a dataframe by
+hand}}{Create a dataframe by hand}}\label{create-a-dataframe-by-hand}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df2 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{id =}\NormalTok{ letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{8}\NormalTok{], }\DataTypeTok{x =} \DecValTok{1}\OperatorTok{:}\DecValTok{8}\NormalTok{, }\DataTypeTok{y =} \DecValTok{9}\OperatorTok{:}\DecValTok{16}\NormalTok{)}
+\NormalTok{df2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   id x  y
+## 1  a 1  9
+## 2  b 2 10
+## 3  c 3 11
+## 4  d 4 12
+## 5  e 5 13
+## 6  f 6 14
+## 7  g 7 15
+## 8  h 8 16
+\end{verbatim}
+
+\hypertarget{useful-dataframe-function}{%
+\subsubsection{\texorpdfstring{\textbf{Useful dataframe
+function}}{Useful dataframe function}}\label{useful-dataframe-function}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{head()} - shows first 6 rows
+\item
+  \texttt{tail()} - shows last 6 rows
+\item
+  \texttt{dim()} - returns the dimensions of data frame (i.e.~number of
+  rows and number of columns)
+\item
+  \texttt{nrow()} - number of rows
+\item
+  \texttt{ncol()} - number of columns
+\item
+  \texttt{str()} - structure of data frame - name, type and preview of
+  data in each column
+\item
+  \texttt{names()} or \texttt{colnames()} - both show the names
+  attribute for a data frame
+\item
+  \texttt{sapply(dataframe,\ class)} - shows the class of each column in
+  the data frame
+\end{itemize}
+
+\begin{quote}
+\texttt{head()}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   id x  y
+## 1  a 1  9
+## 2  b 2 10
+## 3  c 3 11
+## 4  d 4 12
+## 5  e 5 13
+## 6  f 6 14
+\end{verbatim}
+
+\begin{quote}
+\texttt{tail()}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tail}\NormalTok{(df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   id x  y
+## 3  c 3 11
+## 4  d 4 12
+## 5  e 5 13
+## 6  f 6 14
+## 7  g 7 15
+## 8  h 8 16
+\end{verbatim}
+
+\begin{quote}
+\texttt{nrow()}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nrow}\NormalTok{(df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+\hypertarget{preloaded-r-datasets}{%
+\subsubsection{\texorpdfstring{\textbf{Preloaded R
+Datasets}}{Preloaded R Datasets}}\label{preloaded-r-datasets}}
+
+R comes with several preloaded data setsrunning \texttt{data()} in an
+RScript will return all of the avaliable toy datasets
+
+\begin{quote}
+mtcars For example, mtcars is a list of Motor trend cars containing each
+cars attributes in the columns. It is commonly used as an example
+dataframe
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m =mtcars}
+\KeywordTok{class}\NormalTok{(m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data.frame"
+\end{verbatim}
+
+\textbf{Dimensions \& structure of mtcars}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Dimensions & structure of mtcars}
+\KeywordTok{dim}\NormalTok{(mtcars)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32 11
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(mtcars)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+\end{verbatim}
+
+\textbf{Subsetting mtcars}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,] }\CommentTok{# rows 1-5, all columns}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{] }\CommentTok{# row 1, columns 1-6}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           mpg cyl disp  hp drat   wt
+## Mazda RX4  21   6  160 110  3.9 2.62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{] }\CommentTok{# rows 1 -4, cols 1-4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 mpg cyl disp  hp
+## Mazda RX4      21.0   6  160 110
+## Mazda RX4 Wag  21.0   6  160 110
+## Datsun 710     22.8   4  108  93
+## Hornet 4 Drive 21.4   6  258 110
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{assignment}{%
+\section{\texorpdfstring{\textbf{Assignment}}{Assignment}}\label{assignment}}
+
+\hypertarget{create-vectors-containing-information-about-8-familyfriendspets-in-your-life}{%
+\subsection{\texorpdfstring{\textbf{1. Create vectors containing
+information about 8 family/friends/pets in your
+life}}{1. Create vectors containing information about 8 family/friends/pets in your life}}\label{create-vectors-containing-information-about-8-familyfriendspets-in-your-life}}
+
+\textbf{Vectors } \texttt{name}, \texttt{age}, \texttt{species},
+\texttt{relation} (relative to you), \texttt{hair\_color},
+\texttt{eye\_color}, and \texttt{retired}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{name:} character
+\item
+  \textbf{age:} numeric
+\item
+  \textbf{species:} character
+\item
+  \textbf{relation:} character
+\item
+  \textbf{hair\_color:} character
+\item
+  \textbf{eye\_color:} character
+\item
+  \textbf{retired:} logical (TRUE or FALSE)
+\end{itemize}
+
+\hypertarget{make-a-dataframe-using-these-8-vectors-as-your-column-headers}{%
+\subsection{\texorpdfstring{\textbf{2. Make a dataframe using these 8
+vectors as your column
+headers}}{2. Make a dataframe using these 8 vectors as your column headers}}\label{make-a-dataframe-using-these-8-vectors-as-your-column-headers}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{hint:} \texttt{df\ =\ data.frame(col\ =\ )} 
+\end{itemize}
+
+\hypertarget{explore-the-structure-of-your-dataframe-and-its-appearance-in-the-environment-pane}{%
+\subsection{\texorpdfstring{\textbf{3. Explore the structure of your
+dataframe and its appearance in the environment
+pane}}{3. Explore the structure of your dataframe and its appearance in the environment pane}}\label{explore-the-structure-of-your-dataframe-and-its-appearance-in-the-environment-pane}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Navigate to your environment (Upper right hand pane), locate
+  your dataframe, and double click to open it in a new pane}
+\item
+  \texttt{str(df)} - structure of your dataframe
+\item
+  \texttt{dim(df)} - dimensions of your dataframe
+\item
+  \texttt{class(df)} - class of the dataframe
+\item
+  \texttt{class(df\$column)} - class of a column in the dataframe
+\end{itemize}
+
+\hypertarget{subset-your-dataframe-using-3-different-methods-shown-in-this-lab}{%
+\subsection{\texorpdfstring{\textbf{4. Subset your dataframe using 3
+different methods shown in this
+lab}}{4. Subset your dataframe using 3 different methods shown in this lab}}\label{subset-your-dataframe-using-3-different-methods-shown-in-this-lab}}
+
+\begin{itemize}
+\item
+  Subset yourself and one other person and assign the output to a new
+  dataframe variable
+\item
+  Remove just yourself and assign this to a new dataframe
+\item
+  Lastly, create a new dataframe variable that contains only names, hair
+  color, eye color, and species and assign this to a new variable.
+\item
+  \texttt{df\$column}
+\item
+  \texttt{df{[}row,\ column{]}}
+\item
+  \texttt{df{[}col1:col2{]}}
+\item
+  \textbf{\emph{Once completed, you should have 4 dataframes in your
+  environment (the original and 3 subsetted dataframes)}}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{end}{%
+\section{\texorpdfstring{\textbf{END}}{END}}\label{end}}
+
+\end{document}
