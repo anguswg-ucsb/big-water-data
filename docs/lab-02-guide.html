@@ -118,13 +118,13 @@
             <li><a href="#goals"><strong>Goals</strong></a></li>
             <li><a href="#before-we-start"><strong>Before we start:</strong></a></li>
             <li><a href="#load-in-libraries"><strong>Load in libraries</strong></a><ul>
-            <li><a href="#here-package"><strong>here() package</strong></a></li>
             <li><a href="#help-function"><strong>help() function</strong></a></li>
             </ul></li>
-            <li><a href="#read-in-a-.csv-file"><strong>Read in a .csv file</strong></a></li>
+            <li><a href="#read-in-a-.csv-file-using-here"><strong>Read in a .csv file using here()</strong></a></li>
             <li><a href="#variables"><strong>Variables</strong></a></li>
             <li><a href="#data-structures"><strong>Data Structures</strong></a><ul>
             <li><a href="#vectors"><strong>Vectors</strong></a></li>
+            <li><a href="#lists"><strong>Lists</strong></a></li>
             <li><a href="#dataframes"><strong>Dataframes</strong></a></li>
             </ul></li>
             <li><a href="#data-types"><strong>Data types</strong></a><ul>
@@ -154,11 +154,20 @@
            <li>
      <a href="git-bash.html">GitHub-RStudio</a>
    </li>
-   <li>
-     <a href="lab-02-prelab.html">Lab 2 - Prelab</a>
-   </li>
-   <li>
-     <a href="lab-02-guide.html">Lab 2</a>
+   <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+       Lab 2
+        
+       <span class="caret"></span>
+     </a>
+     <ul class="dropdown-menu" role="menu">
+       <li>
+         <a href="lab-02-prelab.html">Prelab</a>
+       </li>
+       <li>
+         <a href="lab-02-guide.html">Lab 2</a>
+       </li>
+     </ul>
    </li>
          </ul>
          <ul class="nav navbar-nav navbar-right">
@@ -169,7 +178,7 @@
    </div><!--/.navbar -->
         
       <h1 class="title">Lab 2</h1>
-         <h1 class="subtitle">Create a new project in RStudio, set up project’s file structure, and an introduction to R</h1>
+         <h1 class="subtitle">RScripts, data types, data structures and subsetting</h1>
    
       <p class="authors">
            <span class="glyphicon glyphicon-user"></span> <a href="index.html">ENVS 193</a>
@@ -196,9 +205,10 @@ span.code {
 <div id="goals" class="section level1">
 <h1><strong>Goals</strong></h1>
 <ul>
-<li>Make a folder for this class that will be the home for all your projects</li>
-<li>Learn how to make a new project in RStudio and build a reproducible &amp; organized file structure within a project</li>
-<li>Learn to execute simple tasks within the RStudio terminal to create files and navigate our system directory</li>
+<li>Work within an RScript file (.R)</li>
+<li>Load libraries into an RScript (tidyverse &amp; here)</li>
+<li>Read a .csv data file into an RScript</li>
+<li>Explore different data types and structures in R</li>
 </ul>
 <hr />
 </div>
@@ -206,12 +216,11 @@ span.code {
 <h1><strong>Before we start:</strong></h1>
 <ul>
 <li>Open up your lab-02 Rproject from your Rprojects folder</li>
+<li>Download the <code>export.csv</code> file from GauchoSpace and save it to the <code>data</code> folder in your <code>lab-02 Rproject</code></li>
 <li>Then open your <code>lab-02-script.R</code> file from your <code>docs</code> folder</li>
 <li>At the top of your Rscript, type the <code>#</code> and then type your name, the course name, lab 2, and the date afterwords</li>
 </ul>
-<blockquote>
-<p>The hash symbol <code>#</code> is used to “comment out” text in your RScript so R does not run it as code. It is good practice to get used to using the <code>#</code> to label your code and describe your process. It helps you remember what certain code is doing and it also helps someone viewing your code to understand your process</p>
-</blockquote>
+<p>The <strong>hash symbol <code>#</code></strong> is used to <strong>“comment out”</strong> text in your RScript so R does not run it as code. It is good practice to get used to using the <code>#</code> to label your code and describe your process. It helps you remember what certain code is doing and it also helps someone viewing your code to understand your process</p>
 <pre class="r"><code># Angus Watters
 # ENVS 193 - Professor Perrone
 # Lab 2
@@ -225,22 +234,28 @@ span.code {
 </ul>
 <pre class="r"><code>library(tidyverse)
 library(here)</code></pre>
-<div id="here-package" class="section level2">
-<h2><strong>here() package</strong></h2>
-</div>
 <div id="help-function" class="section level2">
 <h2><strong>help() function</strong></h2>
+<ul>
+<li>the help() function is a very useful tool for understanding what a function does and what inputs it takes.</li>
+<li>When you call the help function, the help page for the function you called will appear in the bottom right pane</li>
+<li>At the bottom of the help page you will find code examples for that function, you can run these yourself to get an idea of how to use a function!</li>
+<li>As you go through this lab, use the <code>help()</code> function to get more information on the functions we will be using</li>
+<li>You can access the help documentation for any function by entering the function into the <code>help()</code> function like so:</li>
+</ul>
+<pre class="r"><code>help(library) # calling help for the library() function</code></pre>
+<p><img src="img/help-function.png" /></p>
 </div>
 </div>
-<div id="read-in-a-.csv-file" class="section level1">
-<h1><strong>Read in a .csv file</strong></h1>
+<div id="read-in-a-.csv-file-using-here" class="section level1">
+<h1><strong>Read in a .csv file using here()</strong></h1>
 <ul>
 <li>Click here to download a .csv file of water data ADD LINK TO CSV DATA</li>
 <li>Once the file downloads, save it into the <code>data folder</code> in your project directory.</li>
 <li>Now lets read that .csv file into our Rscript using the <code>read_csv()</code> function and the <code>here()</code> function</li>
-<li>here() allows you to locate files relative to your project root. It finds files based on the current working directory at the time when the package is loaded. This means that if someone else would like to run your code, the file path will adjust to that persons current working directory, giving them a file path to the data. Using here() is good practice as it allows for a reproducible file path for whoever is using the code. <strong><em>Reproducible code and work flows allows you to cut down on extra coding in the future and saves time in the long run for you and anyone else who might want to use your code. </em></strong></li>
 </ul>
-<p>My curent working directory when I loaded the <code>here</code> package</p>
+<p><br> - <code>here()</code> allows you to locate files relative to your project root. It finds files based on the current working directory at the time when the package is loaded. This means that if someone else would like to run your code, the file path will adjust to that persons current working directory, giving them a file path to the data. Using here() is good practice as it allows for a reproducible file path for whoever is using the code. <strong><em>Reproducible code and work flows allows you to cut down on extra coding in the future and saves time in the long run for you and anyone else who might want to use your code. </em></strong></p>
+<p>My current working directory when I loaded the <code>here</code> package</p>
 <pre class="r"><code>here()</code></pre>
 <pre><code>## [1] &quot;C:/Users/angus/OneDrive/Desktop/github/big-water-data&quot;</code></pre>
 <p><br></p>
@@ -328,6 +343,56 @@ water_use</code></pre>
 <pre class="r"><code>water_demands[1:3] </code></pre>
 <pre><code>## [1] &quot;Public Supply&quot; &quot;Domestic&quot;      &quot;Industrial&quot;</code></pre>
 <p><br></p>
+</div>
+</div>
+<div id="lists" class="section level2">
+<h2><strong>Lists</strong></h2>
+<p>An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name. Extends vectors and allows elements to be any type - the <code>list()</code> function lets you create a list - Let’s input the values we used to create our <code>water_demands</code> and <code>water_use</code> vectors into a list</p>
+<pre class="r"><code>list = list(
+  c(&quot;Public Supply&quot;, &quot;Domestic&quot;, &quot;Industrial&quot;), 
+  c(49.94, 0.52, 6.36))</code></pre>
+<p><br></p>
+<p>But because we have already created vectors containing these values, a more efficient way of making this same list would be to call our vectors directly into <code>list()</code></p>
+<pre class="r"><code>list2 = list(
+  water_demands, 
+  water_use)</code></pre>
+<p><br> Use the <code>class()</code> function on our <code>list2</code> variable, to check what type of data structure <code>list2</code> is</p>
+<pre class="r"><code>class(list)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<p><br></p>
+<div id="subsetting-a-list" class="section level3">
+<h3><strong>Subsetting a list</strong></h3>
+<p>The content of elements of a list can be retrieved by using double square brackets <code>[]</code></p>
+<p><br></p>
+<p>Here if we call <code>list2[[1]]</code> we will be returning the first list element, <code>water_demands</code></p>
+<pre class="r"><code>list2[[1]]</code></pre>
+<pre><code>## [1] &quot;Public Supply&quot; &quot;Domestic&quot;      &quot;Industrial&quot;    &quot;Irrigation&quot;</code></pre>
+<p><br> Then if we want to get a certain element from within our first list element <code>water_demands</code> we can use the same indexing we used with vectors<br>So within our first list element we want the object in index <code>[1]</code></p>
+<pre class="r"><code>list2[[1]][1]</code></pre>
+<pre><code>## [1] &quot;Public Supply&quot;</code></pre>
+<p><br> We can do the same thing with the second list element, <code>water_use</code></p>
+<pre class="r"><code>list2[[2]]</code></pre>
+<pre><code>## [1] 49.94  0.52  6.36 55.95</code></pre>
+<p><br></p>
+<pre class="r"><code>list2[[2]][2]</code></pre>
+<pre><code>## [1] 0.52</code></pre>
+<p><br></p>
+<p>If we wanted to <strong>name the two elements of our list we can use the <code>names()</code> function.</strong><br> To use the <code>names()</code> function you have to supply a vector with your desired names and this vector must have the same number of elements as the length of your list.<br>To check our lists length we can use the <code>length()</code> function</p>
+<pre class="r"><code>length(list2)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>So we see our list has a length of 2, therefore if we want to assign names to our list we need to supply a vector with 2 names. <br></p>
+<pre class="r"><code>names(list2) = c(&#39;sector&#39;, &#39;water_volume&#39;)
+list2</code></pre>
+<pre><code>## $sector
+## [1] &quot;Public Supply&quot; &quot;Domestic&quot;      &quot;Industrial&quot;    &quot;Irrigation&quot;   
+## 
+## $water_volume
+## [1] 49.94  0.52  6.36 55.95</code></pre>
+<p>Now we have a list with 2 elements named <code>sector</code> and <code>water_volume</code> respectively. <br> <strong>What if we wanted to match the element by index?</strong> That is we want the element in index 1 of the first vector to match with the element in index 1 of the second vector.<br> The function <code>bind_rows()</code> allows us to take the 2 vector sequences in <code>list2</code> and bind the rows together, so index 1 in <code>water_demands</code> becomes row 1, column1 and index 1 in <code>water_use</code> becomes row 2, column1, thus matching.</p>
+<pre class="r"><code>binded_row_list = bind_rows(list2)</code></pre>
+<p>If you assign <code>bind_rows(list2)</code> to a new variable <code>binded_row_list</code> and hit run. You will notice we have a new object in our environment! <br> Use the <code>class()</code> function on your <code>binded_row_list</code> object and what do you get?</p>
+<hr />
+<p><br> <br></p>
 </div>
 </div>
 <div id="dataframes" class="section level2">

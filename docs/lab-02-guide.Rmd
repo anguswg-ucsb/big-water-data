@@ -9,7 +9,7 @@ class_github: 'big-water-data'
 home: ""
 output:
   rmdformats::downcute
-subtitle: "Create a new project in RStudio, set up project's file structure, and an introduction to R"
+subtitle: "RScripts, data types, data structures and subsetting"
 ---
 
 
@@ -29,22 +29,25 @@ span.code {
 
 # **Goals**
 
-- Make a folder for this class that will be the home for all your projects
-- Learn how to make a new project in RStudio and build a reproducible & organized file structure within a project
-- Learn to execute simple tasks within the RStudio terminal to create files and navigate our system directory
+- Work within an RScript file (.R)
+- Load libraries into an RScript (tidyverse & here)
+- Read a .csv data file into an RScript
+- Explore different data types and structures in R
+
 
 ***
 
 # **Before we start:**
 
 - Open up your lab-02 Rproject from your Rprojects folder
+- Download the  `export.csv` file from GauchoSpace and save it to the `data` folder in your `lab-02 Rproject`
 - Then open your `lab-02-script.R` file from your `docs` folder
 - At the top of your Rscript, type the `#` and then type your name, the course name, lab 2, and the date afterwords
 
 
 
 
-> The hash symbol `#` is used to "comment out" text in your RScript so R does not run it as code. It is good practice to get used to using the `#` to label your code and describe your process. It helps you remember what certain code is doing and it also helps someone viewing your code to understand your process 
+The **hash symbol `#`** is used to **"comment out"** text in your RScript so R does not run it as code. It is good practice to get used to using the `#` to label your code and describe your process. It helps you remember what certain code is doing and it also helps someone viewing your code to understand your process 
 
 ```{r}
 # Angus Watters
@@ -62,19 +65,31 @@ library(tidyverse)
 library(here)
 ```
 
-## **here() package**
 
 ## **help() function**
+- the help() function is a very useful tool for understanding what a function does and what inputs it takes. 
+- When you call the help function, the help page for the function you called will appear in the bottom right pane
+- At the bottom of the help page you will find code examples for that function, you can run these yourself to get an idea of how to use a function!
+- As you go through this lab, use the `help()` function to get more information on the functions we will be using
+- You can access the help documentation for any function by entering the function into the `help()` function like so:
+
+```{r,message=FALSE, warning = FALSE, eval=FALSE}
+help(library) # calling help for the library() function
+```
+
+![](img/help-function.png)
 
 
-# **Read in a .csv file**
+# **Read in a .csv file using here()**
 
 - Click here to download a .csv file of water data ADD LINK TO CSV DATA
 - Once the file downloads, save it into the `data folder` in your project directory. 
 - Now lets read that .csv file into our Rscript using the `read_csv()` function and the `here()` function
-- here() allows you to locate files relative to your project root. It finds files based on the current working directory at the time when the package is loaded. This means that if someone else would like to run your code, the file path will adjust to that persons current working directory, giving them a file path to the data. Using here() is good practice as it allows for a  reproducible file path for whoever is using the code. ***Reproducible code and work flows allows you to cut down on extra coding in the future and saves time in the long run for you and anyone else who might want to use your code. ***
 
-My curent working directory when I loaded the `here` package
+<br>
+- `here()` allows you to locate files relative to your project root. It finds files based on the current working directory at the time when the package is loaded. This means that if someone else would like to run your code, the file path will adjust to that persons current working directory, giving them a file path to the data. Using here() is good practice as it allows for a  reproducible file path for whoever is using the code. ***Reproducible code and work flows allows you to cut down on extra coding in the future and saves time in the long run for you and anyone else who might want to use your code. ***
+
+My current working directory when I loaded the `here` package
 ```{r}
 here()
 ```
@@ -186,6 +201,89 @@ If you want to get a range of elements from a vector use the `:`. The structure 
 water_demands[1:3] 
 ```
 
+<br>
+
+## **Lists**
+
+An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name. Extends vectors and allows elements to be any type
+- the `list()` function lets you create a list 
+- Let's input the values we used to create our `water_demands` and `water_use` vectors into a list
+
+
+```{r}
+list = list(
+  c("Public Supply", "Domestic", "Industrial"), 
+  c(49.94, 0.52, 6.36))
+```
+<br>
+
+But because we have already created vectors containing these values, a more efficient way of making this same list would be to call our vectors directly into `list()`
+```{r}
+list2 = list(
+  water_demands, 
+  water_use)
+```
+
+<br>
+Use the `class()` function on our `list2` variable, to check what type of data structure `list2` is
+```{r}
+class(list)
+```
+
+<br>
+
+### **Subsetting a list**
+The content of elements of a list can be retrieved by using double square brackets `[]`
+
+<br>
+
+Here if we call `list2[[1]]` we will be returning the first list element, `water_demands`
+```{r}
+list2[[1]]
+```
+<br>
+Then if we want to get a certain element from within our first list element `water_demands` we can use the same indexing we used with vectors<br>So within our first list element we want the object in index `[1]`
+```{r}
+list2[[1]][1]
+```
+<br>
+We can do the same thing with the second list element, `water_use`
+```{r}
+list2[[2]]
+```
+<br>
+```{r}
+list2[[2]][2]
+```
+<br>
+
+If we wanted to **name the two elements of our list we can use the `names()` function.**<br> To use the `names()` function you have to supply a vector with your desired names and this vector must have the same number of elements as the length of your list.<br>To check our lists length we can use the `length()` function
+
+```{r}
+length(list2)
+```
+So we see our list has a length of 2, therefore if we want to assign names to our list we need to supply a vector with 2 names.
+<br>
+```{r}
+names(list2) = c('sector', 'water_volume')
+list2
+```
+Now we have a list with 2 elements named `sector` and `water_volume` respectively.
+<br>
+**What if we wanted to match the element by index?** That is we want the element in index 1 of the first vector to match with the element in index 1 of the second vector.<br> The function `bind_rows()` allows us to take the 2 vector sequences in `list2` and bind the rows together, so index 1 in `water_demands` becomes row 1, column1 and index 1 in  `water_use` becomes row 2, column1, thus matching. 
+
+```{r}
+binded_row_list = bind_rows(list2)
+
+```
+
+If you assign `bind_rows(list2)` to a new variable `binded_row_list` and hit run. You will notice we have a new object in our environment!
+<br>
+Use the `class()` function on your `binded_row_list` object and what do you get?
+
+***
+
+<br>
 <br>
 
 ## **Dataframes**
