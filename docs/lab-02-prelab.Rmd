@@ -25,7 +25,7 @@ span.code {
 </style>
 ***
 
-# **Goals**{.tabset}
+# **Goals**
 
 - Make a folder for this class that will be the home for all your projects
 - Learn how to make a new project in RStudio and build a reproducible & organized file structure within a project
