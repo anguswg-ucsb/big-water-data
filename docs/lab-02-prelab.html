@@ -119,33 +119,10 @@
             <li><a href="#create-a-folder-for-this-class"><strong>Create a folder for this class</strong></a></li>
             <li><a href="#create-a-new-project-in-rstudio"><strong>Create a new project in RStudio</strong></a></li>
             <li><a href="#build-a-project-file-structure"><strong>Build a project file structure</strong></a><ul>
-            <li><a href="#terminal-layout"><strong>Terminal layout</strong></a></li>
-            <li><a href="#pwd---print-working-directory"><span class="code">pwd</span> - print working directory</a></li>
-            <li><a href="#mkdir---make-a-directory"><span class="code">mkdir</span> - make a directory</a></li>
-            <li><a href="#cd---change-directory"><span class="code">cd</span> - change directory</a></li>
-            </ul></li>
-            <li><a href="#create-a-r-script"><strong>Create a R Script</strong></a><ul>
-            <li><a href="#touch---create-a-file"><span class="code">touch</span> - create a file</a></li>
+            <li><a href="#new-folders---docs-data"><span class="code">New Folders</span> - docs &amp; data</a></li>
+            <li><a href="#open-a-rscript"><span class="code">Open a RScript</span></a></li>
             </ul></li>
             <li><a href="#load-in-your-libraries"><strong>Load in your libraries</strong></a></li>
-            <li><a href="#variables"><strong>Variables</strong></a></li>
-            <li><a href="#data-types"><strong>Data types</strong></a><ul>
-            <li><a href="#numeric">Numeric</a></li>
-            <li><a href="#integer">Integer</a></li>
-            <li><a href="#character">Character</a></li>
-            <li><a href="#missing-values-na"><strong>Missing Values (NA)</strong></a></li>
-            </ul></li>
-            <li><a href="#data-structures"><strong>Data structures</strong></a><ul>
-            <li><a href="#vectors"><strong>Vectors</strong></a></li>
-            <li><a href="#lists"><strong>Lists</strong></a></li>
-            <li><a href="#dataframes"><strong>Dataframes</strong></a></li>
-            </ul></li>
-            <li><a href="#assignment"><strong>Assignment</strong></a><ul>
-            <li><a href="#create-vectors-containing-information-about-8-familyfriendspets-in-your-life"><strong>1. Create vectors containing information about 8 family/friends/pets in your life</strong></a></li>
-            <li><a href="#make-a-dataframe-using-these-8-vectors-as-your-column-headers"><strong>2. Make a dataframe using these 8 vectors as your column headers</strong></a></li>
-            <li><a href="#explore-the-structure-of-your-dataframe-and-its-appearance-in-the-environment-pane"><strong>3. Explore the structure of your dataframe and its appearance in the environment pane</strong></a></li>
-            <li><a href="#subset-your-dataframe-using-3-different-methods-shown-in-this-lab"><strong>4. Subset your dataframe using 3 different methods shown in this lab</strong></a></li>
-            </ul></li>
             <li><a href="#end"><strong>END</strong></a></li>
             </ul>
           </div>
@@ -224,8 +201,6 @@ span.code {
 <ul>
 <li>Make a folder for this class that will be the home for all your projects</li>
 <li>Learn how to make a new project in RStudio and build a reproducible &amp; organized file structure within a project</li>
-<li>Learn to execute simple tasks within the RStudio terminal to create files and navigate our system directory</li>
-<li>Overcome the initial (and understandable!) anxiety associated with the terminal</li>
 <li>Install packages and load them into your environment</li>
 <li>Explore the basics of RStudio</li>
 <li>Understand the different data types &amp; data structures in R</li>
@@ -252,532 +227,66 @@ span.code {
 </div>
 <div id="create-a-new-project-in-rstudio" class="section level1">
 <h1><strong>Create a new project in RStudio</strong></h1>
-<blockquote>
 <p><strong>Open RStudio and click on <code>File</code> in the top left hand corner of the page, and then select <code>New Project</code></strong></p>
-</blockquote>
 <p><img src="img/open-new-rproj.png" /></p>
 <p><br> <br></p>
-<blockquote>
 <p><strong>Select <code>New Directory</code></strong></p>
-</blockquote>
 <p><img src="img/select-new-dir.png" /></p>
 <p><br></p>
-<blockquote>
 <p><strong>Select <code>New Project</code></strong></p>
-</blockquote>
 <p><img src="img/select-proj-type.png" /></p>
 <p><br></p>
-<blockquote>
 <p>For <code>directory name</code> enter <strong>Lab-01</strong><br>Under <code>create project as subdirectory of</code> select browse and find and select the <strong><em>Rprojects</em></strong> folder you created on your desktop<br>Check the <code>Open in new session</code> box in the bottom left hand corner<br><br>After entering the above information, select <code>Create Project</code>,<br><strong><em>RStudio will automatically open the new project, you can also access your <code>lab-01.Rproj</code> from your Rprojects folder on your desktop.</em></strong></p>
-</blockquote>
 <p><img src="img/create-new-proj.png" /></p>
 <hr />
 </div>
 <div id="build-a-project-file-structure" class="section level1">
 <h1><strong>Build a project file structure</strong></h1>
-<blockquote>
-<p>Now we are going to create a simple file structure to help keep our project organized. We will populate our project with <code>docs</code>, <code>data</code>, and <code>img</code> folders. We will do this via the terminal</p>
-</blockquote>
-<p>The terminal is a computer application. On a Mac, it is most frequently accessed via your Terminal application (do yourself a favor and download iTerm), and on Windows, through PowerShell. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. <strong>The Terminal tab can be found next to the Console tab. If it is not visible, show it via Shift+Alt+T (or Tools &gt; Terminal &gt; New Terminal).</strong> Once visible, it should look something like this</p>
-<p><strong><em>The terminal is a gateway to that command line. With it, instead of pointing and clicking, you can type commands and have your computer respond. Entering commands into the terminal is useful for expediting basic tasks like file/folder creation. The terminal is also useful for exploring your file structure, and for retrieving information about your computer system.</em></strong></p>
+<p>Now we are going to create a simple file structure to help keep our project organized. We will populate our project with <code>docs</code>, <code>data</code>, and <code>img</code> folders</p>
 <p><br></p>
-<div id="terminal-layout" class="section level2">
-<h2><strong>Terminal layout</strong></h2>
-<blockquote>
-<p>The <span class="code">terminal</span> and the <span class="code">files tab</span> are highlighted red and the project’s <code>current working directory</code>is in yellow.</p>
-</blockquote>
-<p><img src="img/terminal-empty.png" /></p>
+<div id="new-folders---docs-data" class="section level2">
+<h2><span class="code">New Folders</span> - docs &amp; data</h2>
+<p>We will now creates a new folder (directory) inside our current working directory<br><strong>In the bottom right hand pane, within the Files tab, click Click <span class="code">New Folder</span>, name your new folder, <code>docs</code>.</strong> This will create a new folder (directory) within your current working directory.<br> <strong>In the bottom right hand pane, select File from the top row of tabs, you should now see your docs, data, and img folders</strong></p>
+<p>Go ahead and do this again to make a <code>data</code> folder in your project. These folders will hold all the components of your project.<br>The <code>docs</code> folder is for your Rscript (.R) and Rmarkdown (.Rmd) files and the <code>data</code> folder will house your .CSV, .xls, .txt files.</p>
 <p><br></p>
-</div>
-<div id="pwd---print-working-directory" class="section level2">
-<h2><span class="code">pwd</span> - print working directory</h2>
-<p>pwd displays the directory or folder you are currently in</p>
-<p>My working directory is <code>/c/Users/angus/OneDrive/Desktop/Rprojects/lab-01</code>, yours will be slightly different but essentially the same</p>
-<p><img src="img/pwd-2.png" /></p>
+<p><strong>Make a new folder <code>docs</code></strong></p>
+<p><img src="img/new-docs-file.png" /></p>
+<p><br></p>
+<p><strong>Check that the docs folder was created and take note of where this folder is</strong><br>Your docs folder is now in your lab-01 project, within your Rprojects directory, which is on your desktop <img src="img/docs-file.png" /></p>
+<p><br></p>
+<p><strong>Go ahead and do this again to make a <code>data</code> folder in your project.</strong></p>
+<p><img src="img/docs-data-folders.png" /></p>
+<p>These folders will hold all the components of your project. The <code>docs</code> folder is for your Rscript (.R) and Rmarkdown (.Rmd) files and the <code>data</code> folder will house your .CSV, .xls, .txt files. **</p>
 <p><br></p>
 </div>
-<div id="mkdir---make-a-directory" class="section level2">
-<h2><span class="code">mkdir</span> - make a directory</h2>
-<p>mkdir creates a new folder (directory) inside your current working directory<br>Entering <span class="code">mkdir docs</span> into the terminal, will create a docs folder within our current working directory.<br>Go ahead an make docs, data, and img folders in your project.<br> <strong>In the bottom right hand pane, select File from the top row of tabs, you should now see your docs, data, and img folders</strong></p>
-<p>These 3 folders will hold all the components of your project.<br>The docs folder is for your Rscript (.R) and Rmarkdown (.Rmd) files, the data folder is for your .CSV, .xls, .txt files, and the img folder is for images you may use or create from within the project.</p>
+<div id="open-a-rscript" class="section level2">
+<h2><span class="code">Open a RScript</span></h2>
+<p><strong>In the top left corner, click <code>File</code>, hover over <code>New file</code> and then click <span class="code">RScript</span></strong></p>
+<p><img src="img/new-rscript-file.png" /></p>
+<p><strong>A new pane should open up, this is your <span class="code">RScript</span> file.</strong> Notice that an RScript files end with <code>.R</code>.</p>
 <p><br></p>
-<blockquote>
-<p><strong>mkdir docs</strong></p>
-</blockquote>
-<p><img src="img/mkdir-docs.png" /></p>
+<p>Your Rscript is currently <strong>“Untitled,”</strong> so lets now click the save button at the top of the pane and give it a name and a location to be saved to.</p>
 <p><br></p>
-<blockquote>
-<p><strong>mkdir data</strong></p>
-</blockquote>
-<p><img src="img/mkdir-data.png" /></p>
+<p><strong>Name the file <code>lab-01-script</code> and then navigate to your Rprojects folder on the desktop, and into your <code>lab-01</code> project, and finally into your docs folder, and then press save.</strong> <img src="img/save-rscript.png" /></p>
 <p><br></p>
-<blockquote>
-<p><strong>mkdir img</strong></p>
-</blockquote>
-<p><img src="img/mkdir-img.png" /></p>
-<p><br></p>
-</div>
-<div id="cd---change-directory" class="section level2">
-<h2><span class="code">cd</span> - change directory</h2>
-<p>cd allows you to navigate through directories by changing working directory.</p>
-<p>There are many ways to navigate using <span class="code">cd</span> but today we will only need <code>cd "the folder (directory) you want to move to"</code> and <code>cd ..</code><br>The first command takes us from our current working directory and by entering <code>cd docs</code> we move into our docs folder<br><span class="code">cd ..</span> will reverse this and step back a directory<br>We are doing this because the next thing we will do is create a file in our docs folder!</p>
-<p><img src="img/cd-docs.png" /></p>
+<p>Now in the bottom right hand pane, under the <code>file</code> tab, open your <code>docs</code> folder and check to see if your <code>lab-01-rscript.R</code>saved. <img src="img/open-rscript-console.png" /></p>
+<p>We now have created a file structure and an RScript file in RStudio. This is a cookie-cutter file structure that should work for most projects you will ever do in RStudio. Having files organized in the same manner from one project to the next will make your life much easier and more efficient going forward!</p>
+<p><br> Before we moving forward to the next section, make sure that in the bottom left hand quadrant where the terminal, select the <code>Console</code> from the tab row above.</p>
 <p><br> <br></p>
 <hr />
-</div>
-</div>
-<div id="create-a-r-script" class="section level1">
-<h1><strong>Create a R Script</strong></h1>
-<div id="touch---create-a-file" class="section level2">
-<h2><span class="code">touch</span> - create a file</h2>
-<p>On a MacOS or Linux machine (anything running Bash) <span class="code">touch</span> can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file named <code>lab-01-script.R</code> in our working directory as follows.<br> You should now see an Rscript (.R) file in your docs folder</p>
-<p><img src="img/touch-rscript-docs.png" /></p>
 <p><br></p>
-<blockquote>
-<p>Open your lab-01-script.R file and then in the bottom left hand quadrant where our terminal is, select <code>Console</code> from the tab row above.</p>
-</blockquote>
-<p><img src="img/open-rscript-console.png" /></p>
-<hr />
-<p><br> <br></p>
 </div>
 </div>
 <div id="load-in-your-libraries" class="section level1">
 <h1><strong>Load in your libraries</strong></h1>
-<blockquote>
 <p>Now we will load a package into our workspace. We will do this by typing <code>library(tidyverse)</code> into our RScript and then pressing the <code>Run</code> button on the top right hand corner of your RScript. Code can also be run by the keyboard command <code>Cmd+Return</code> on Mac, and <code>Ctrl+Enter</code> on Windows This is how you run lines of code from an RScript. Additionally if you highlight any portion of a code and run it, just the highlighted portion of code will be executed.<br>After you have loaded in the tidyverse package a bunch of seemingly random outputs should have appeared in your console. This is what you want and it is just details of the package being loaded.<br>When you run code, the output of that code will appear in the console, also any errors or warnings will display in the console.<br></p>
-</blockquote>
-<p><img src="img/load-lib-save.png" /> <br></p>
-<blockquote>
-<p>Code can also be run from the console, but it does not allow you to go back and work on code, it will just take one line of code and return the output.</p>
-</blockquote>
-<p><br> <strong>Running code from an RScript vs. Console:</strong></p>
-<ul>
-<li>Enter <code>3 + 5</code> into your RScript and run it. What happened?</li>
-<li>Enter <code>x = 3 + 5</code> into your RScript and run it. A value for <code>x</code> should have been added to your environment pane (top right quadrent, select Environment tab if needed)</li>
-<li>What happens if you type <code>x</code> into your RScript and run it?</li>
-<li>Now see what happens when you type <code>x</code> into your console and press Enter</li>
-</ul>
+<p><img src="img/load-lib-save.png" /> <br> <br></p>
+<p><strong>Lastly, we will install the <code>here</code> package,</strong> we will learn more about this package in during Lab 2.</p>
 <p><br></p>
+<p>Type <code>install.packages('here')</code> into your console and press enter. A bunch of text should appear in your console, don’t worry, this is what we want. This means the package is downloading and being “unpacked.”</p>
+<pre class="r"><code>install.packages(&#39;here&#39;)</code></pre>
+<p><strong>Save your file project before closing your RStudio sessions, we will pick up from here in Lab 2</strong></p>
 <hr />
-</div>
-<div id="variables" class="section level1">
-<h1><strong>Variables</strong></h1>
-<p>Variable values are “bound” to a name using the = or &lt;- assignment operators (they work identically, I prefer the “=”)</p>
-<pre class="r"><code>a = 3
-a &lt;- 3</code></pre>
-<p><br></p>
-<p><strong><em>An objects will retain the value from the last line of code run</em></strong>.<br>For example, we see that the object <strong><em>x</em></strong> is first assigned a value of 5 <code>(x = 5)</code>,<br>and then x is assigned a new value of 5 + 2 <code>(x = 5 + 2)</code>.<br>If x is called in the next line, we see the value of x is 7.</p>
-<pre class="r"><code>x = 5 
-x = 5 +2
-x</code></pre>
-<pre><code>## [1] 7</code></pre>
-<p><br></p>
-<p><strong><em>But if we assign x to 5 after assigning x = 5 + 2, we see that x now equals 5</em></strong></p>
-<pre class="r"><code>x = 5 
-x = 5 +2
-x = 5 
-x</code></pre>
-<pre><code>## [1] 5</code></pre>
-<p><br></p>
-<p><strong><em>Copy and paste the following code into your RScript, but before you run it all, take a guess at what you think what value <code>y</code> will have at the end. and <code>x</code>?</em></strong></p>
-<pre class="r"><code>x = 5
-y = 2
-y = x
-y</code></pre>
-<pre><code>## [1] 5</code></pre>
-<p><br></p>
-<p>Lets say we stored information about UCSB in some objects:</p>
-<pre class="r"><code>school = &quot;UCSB&quot;
-lat = 34.4140
-lng = -119.8489</code></pre>
-<p><br></p>
-<p>If we wanted to we could add <code>lat</code> and <code>lng</code></p>
-<pre class="r"><code>lat +lng</code></pre>
-<pre><code>## [1] -85.4349</code></pre>
-<p><br></p>
-<p>But what if we try and add <code>lat</code> and <code>school</code>?</p>
-<pre class="r"><code>lat + school</code></pre>
-<pre><code>## Error in lat + school: non-numeric argument to binary operator</code></pre>
-<p>This <code>non-numeric argument error</code> is saying that one of these objects is not a <strong><em>numeric value</em></strong>, this leads into the idea that values have different classes/types</p>
-<hr />
-<blockquote>
-<p><strong><em>Don’t worry if you feel overwhelmed its completely normal at this stage, there is a lot of information to take in. It will takes some time to feel comfortable with the Console/RScript/Environment interactions but before long, with practice, it will become intuitive!</em></strong></p>
-</blockquote>
-<p><br></p>
-</div>
-<div id="data-types" class="section level1">
-<h1><strong>Data types</strong></h1>
-<p>Values in R can be one of 6 different types :</p>
-<ol style="list-style-type: decimal">
-<li><strong>numeric</strong> (e.g. 2, 2.15) - values w/ decimals<br>2. <strong>integer</strong> (e.g. 2L) - values w/o decimals (create w/ uppercase ‘L’)<br>3. <strong>character</strong> (e.g. “x”, “Welcome!”)<br>4. <strong>logical</strong> (e.g. TRUE, FALSE)<br>5. <strong>raw</strong> (e.g. holds bytes)<br>6. <strong>complex</strong> (e.g. 1+4i) - <em>we are going to ignore</em></li>
-</ol>
-<p>The <code>class()</code> function tells us what kind of object is it (high-level)<br>The <code>typeof()</code> function can tell us the object’s data type (low-level) <br> &gt;<strong><em>What’s the difference between 3 (the number) and ‘3’ (the character)?</em></strong></p>
-<pre class="r"><code>class(3) # numeric</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<p><br></p>
-<pre class="r"><code>class(&#39;3&#39;) # character</code></pre>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<blockquote>
-<p>When you surround a something in quotes (double or single), that element is coerced to the class of character, as shown above as the numeric 3 becomes a character once wrapped in quotes</p>
-</blockquote>
-<p><br></p>
-<div id="numeric" class="section level2">
-<h2>Numeric</h2>
-<blockquote>
-<p><strong><em>Copy the following examples of different data types and use the <code>class()</code> function to examine the different data types</em></strong></p>
-</blockquote>
-<pre class="r"><code>x = 3  
-y = 3 * 400
-z = 5 + 6</code></pre>
-</div>
-<div id="integer" class="section level2">
-<h2>Integer</h2>
-<pre class="r"><code>x = 2 # numeric
-y = 2L # specifies as integer 
-z = as.integer(c(4.1, 5.2, 6.3, 6.4)) # coerces values to integer type</code></pre>
-</div>
-<div id="character" class="section level2">
-<h2>Character</h2>
-<p>You can use either Single quotes ’’ or double quotes "", R treats them identically</p>
-<pre class="r"><code>x = &quot;a&quot;  
-y = &quot;bc&quot;  
-z = &quot;I like turtles!!!&quot;</code></pre>
-<p><br></p>
-</div>
-<div id="missing-values-na" class="section level2">
-<h2><strong>Missing Values (NA)</strong></h2>
-<ul>
-<li>Missing values still need a place holder</li>
-<li>Missing values are denoted with NA (short for not applicable).</li>
-<li>Missing values are ‘infectious’: most computations involving a missing value will return another missing value.</li>
-</ul>
-<p><br></p>
-<div id="useful-na-function" class="section level3">
-<h3><strong>Useful NA function</strong></h3>
-<ul>
-<li><code>na.omit()</code> - removes all cases where an NA appears</li>
-<li><code>is.na()</code> - indicates which elements are missing (NA), if element is NA it returns TRUE</li>
-</ul>
-<p><br></p>
-<pre class="r"><code>vec = c(5,6,7,8,NA)  
-mean(vec) # the NA value in the vector results in a mean of NA</code></pre>
-<pre><code>## [1] NA</code></pre>
-<p><br></p>
-<pre class="r"><code>mean(vec, na.rm = TRUE) # use na.rm = TRUE removes the NAs </code></pre>
-<pre><code>## [1] 6.5</code></pre>
-<p><br></p>
-<pre class="r"><code>x = c(NA, 50, NA, 9)
-is.na(x) </code></pre>
-<pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
-<hr />
-<p><br> <br></p>
-</div>
-</div>
-</div>
-<div id="data-structures" class="section level1">
-<h1><strong>Data structures</strong></h1>
-<div id="vectors" class="section level2">
-<h2><strong>Vectors</strong></h2>
-<ul>
-<li>Vectors can be created using the <code>c()</code> (combine) function</li>
-<li>The length can be checked with <code>length()</code></li>
-</ul>
-<p><strong><em>From the examples below, create your own vector made up of all character strings:<br>2. name of the state you were born in<br>1. name of your hometown</em></strong></p>
-<pre class="r"><code>a = c(1,2,5.3,6,-2,4) # numeric vector
-a</code></pre>
-<pre><code>## [1]  1.0  2.0  5.3  6.0 -2.0  4.0</code></pre>
-<p><br></p>
-<pre class="r"><code>b = c(&quot;one&quot;,&quot;two&quot;,&quot;three&quot;) # character vector
-b</code></pre>
-<pre><code>## [1] &quot;one&quot;   &quot;two&quot;   &quot;three&quot;</code></pre>
-<p><br></p>
-<pre class="r"><code>c = c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector
-c</code></pre>
-<pre><code>## [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE</code></pre>
-<p><br></p>
-<pre class="r"><code>d = 1:10 # number sequence vector
-d</code></pre>
-<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<p><br></p>
-<div id="adding-elements-to-a-vector" class="section level3">
-<h3><strong>Adding elements to a vector</strong></h3>
-<p>Here the character string “four” is added to the vector <strong>b</strong> from the above example</p>
-<pre class="r"><code>b = c(b, &#39;four&#39;)
-b</code></pre>
-<pre><code>## [1] &quot;one&quot;   &quot;two&quot;   &quot;three&quot; &quot;four&quot;</code></pre>
-<p><strong><em>Now try adding your favorite food (chr) to the vector you created vector</em></strong></p>
-<p><br></p>
-</div>
-<div id="subsetting-a-vector" class="section level3">
-<h3><strong>Subsetting a vector</strong></h3>
-<p>Here are several different methods of subsetting a vector</p>
-<pre class="r"><code>vector &lt;- c(1, 2, 5.3 ,6 ,-2, 4) # numeric vector
-vector[3] # subsets to only the 3rd element</code></pre>
-<pre><code>## [1] 5.3</code></pre>
-<p><br></p>
-<pre class="r"><code>vector[-3] # removes 3rd element</code></pre>
-<pre><code>## [1]  1  2  6 -2  4</code></pre>
-<p><br></p>
-<pre class="r"><code>vector[1:3] # subsets elements 1 through 3</code></pre>
-<pre><code>## [1] 1.0 2.0 5.3</code></pre>
-<p><br></p>
-<p><code>setNames()</code> allows you to name each element in a vector</p>
-<pre class="r"><code>vector = setNames(vector, c(&#39;A&#39;, &#39;B&#39;,&#39;C&#39;,&#39;D&#39;, &#39;E&#39;, &#39;F&#39;)) # names elements and reassigns named vector to original vector variable using =
-
-vector[1:6] # display elements 1 through 6</code></pre>
-<pre><code>##    A    B    C    D    E    F 
-##  1.0  2.0  5.3  6.0 -2.0  4.0</code></pre>
-<p><strong><em>Using <code>setNames()</code>, give each element of your vector an appropriate name and then subset your vector to just your name and favorite food</em></strong></p>
-<hr />
-<p><br> <br></p>
-</div>
-</div>
-<div id="lists" class="section level2">
-<h2><strong>Lists</strong></h2>
-<p>An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name. Extends vectors and allows elements to be any type</p>
-<pre class="r"><code>list = list(
-  1:5, 
-  &quot;water_level&quot;, 
-  c(TRUE, FALSE, TRUE), 
-  c(2.3, 5.9)
-)
-typeof(list)</code></pre>
-<pre><code>## [1] &quot;list&quot;</code></pre>
-<p><br></p>
-<div id="subsetting-a-list" class="section level3">
-<h3><strong>Subsetting a list</strong></h3>
-<p>The content of elements of a list can be retrieved by using double square brackets.</p>
-<p><br></p>
-<pre class="r"><code>class(list)</code></pre>
-<pre><code>## [1] &quot;list&quot;</code></pre>
-<p><br></p>
-<pre class="r"><code>list[[1]]</code></pre>
-<pre><code>## [1] 1 2 3 4 5</code></pre>
-<p><br></p>
-<pre class="r"><code>list[[1]][1]</code></pre>
-<pre><code>## [1] 1</code></pre>
-<p><br></p>
-<pre class="r"><code>list[[2]]</code></pre>
-<pre><code>## [1] &quot;water_level&quot;</code></pre>
-<p><br></p>
-<pre class="r"><code>list[[3]][2]</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<hr />
-<p><br> <br></p>
-</div>
-</div>
-<div id="dataframes" class="section level2">
-<h2><strong>Dataframes</strong></h2>
-<ul>
-<li><p>a named list of vectors.</p></li>
-<li><p>data.frames are one of the biggest and most important ideas in R, and one of the things that make R different from other programming languages</p></li>
-<li><p>Unlike a regular list, in a <code>data.frame</code>, the length of each vector must be the same.</p></li>
-<li><p>typically dataframes are read into R via <code>read_csv</code>, <code>read_table</code>, or <code>read_xls</code>, depending on the file type</p></li>
-<li><p>dataframes can also be built using the <code>data.frame()</code>function</p></li>
-</ul>
-<p><br></p>
-<blockquote>
-<p><strong><em>Below is an example of a dataframe with 3 columns, <code>num</code>, <code>color</code>, and <code>boolean</code><br> The rows of the dataframe contain the values from the vectors</em></strong></p>
-</blockquote>
-<pre class="r"><code>num = c(1,2,3,4)
-color =  c(&quot;red&quot;, &quot;white&quot;,  
-           &quot;green&quot;, NA)  
-boolean = c(TRUE,TRUE,  
-             TRUE,FALSE) 
-df = data.frame(num, color, boolean)
-
-df</code></pre>
-<pre><code>##   num color boolean
-## 1   1   red    TRUE
-## 2   2 white    TRUE
-## 3   3 green    TRUE
-## 4   4  &lt;NA&gt;   FALSE</code></pre>
-<p><br></p>
-<div id="structure-of-a-dataframe" class="section level3">
-<h3><strong>Structure of a dataframe</strong></h3>
-<p>The data frame is 4 objects (rows) by 3 variables (columns)<br>Notice the <code>num</code>, <code>chr</code>, <code>logi</code> classisifcation of the 3 different columns</p>
-<pre class="r"><code>str(df) </code></pre>
-<pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
-##  $ num    : num  1 2 3 4
-##  $ color  : chr  &quot;red&quot; &quot;white&quot; &quot;green&quot; NA
-##  $ boolean: logi  TRUE TRUE TRUE FALSE</code></pre>
-<p><br></p>
-</div>
-<div id="subsetting-a-dataframe" class="section level3">
-<h3><strong>Subsetting a dataframe</strong></h3>
-<pre class="r"><code>df[1,2]  # row 1, column 2</code></pre>
-<pre><code>## [1] &quot;red&quot;</code></pre>
-<p><br></p>
-<pre class="r"><code>df[2,]  # row 2, all columns</code></pre>
-<pre><code>##   num color boolean
-## 2   2 white    TRUE</code></pre>
-<p><br></p>
-<pre class="r"><code>df$color[1] #  row 1 in column color</code></pre>
-<pre><code>## [1] &quot;red&quot;</code></pre>
-<p><br></p>
-<pre class="r"><code>df$num[2] # row 2 in column num</code></pre>
-<pre><code>## [1] 2</code></pre>
-<p><br></p>
-<pre class="r"><code>df[1:2] # columns 1 through 2 of dataframe</code></pre>
-<pre><code>##   num color
-## 1   1   red
-## 2   2 white
-## 3   3 green
-## 4   4  &lt;NA&gt;</code></pre>
-<p><br></p>
-</div>
-<div id="create-a-dataframe-by-hand" class="section level3">
-<h3><strong>Create a dataframe by hand</strong></h3>
-<pre class="r"><code>df2 = data.frame(id = letters[1:8], x = 1:8, y = 9:16)
-df2</code></pre>
-<pre><code>##   id x  y
-## 1  a 1  9
-## 2  b 2 10
-## 3  c 3 11
-## 4  d 4 12
-## 5  e 5 13
-## 6  f 6 14
-## 7  g 7 15
-## 8  h 8 16</code></pre>
-</div>
-<div id="useful-dataframe-function" class="section level3">
-<h3><strong>Useful dataframe function</strong></h3>
-<ul>
-<li><code>head()</code> - shows first 6 rows</li>
-<li><code>tail()</code> - shows last 6 rows</li>
-<li><code>dim()</code> - returns the dimensions of data frame (i.e. number of rows and number of columns)</li>
-<li><code>nrow()</code> - number of rows</li>
-<li><code>ncol()</code> - number of columns</li>
-<li><code>str()</code> - structure of data frame - name, type and preview of data in each column</li>
-<li><code>names()</code> or <code>colnames()</code> - both show the names attribute for a data frame</li>
-<li><code>sapply(dataframe, class)</code> - shows the class of each column in the data frame</li>
-</ul>
-<blockquote>
-<p><code>head()</code></p>
-</blockquote>
-<pre class="r"><code>head(df2)</code></pre>
-<pre><code>##   id x  y
-## 1  a 1  9
-## 2  b 2 10
-## 3  c 3 11
-## 4  d 4 12
-## 5  e 5 13
-## 6  f 6 14</code></pre>
-<p><br></p>
-<blockquote>
-<p><code>tail()</code></p>
-</blockquote>
-<pre class="r"><code>tail(df2)</code></pre>
-<pre><code>##   id x  y
-## 3  c 3 11
-## 4  d 4 12
-## 5  e 5 13
-## 6  f 6 14
-## 7  g 7 15
-## 8  h 8 16</code></pre>
-<p><br></p>
-<blockquote>
-<p><code>nrow()</code></p>
-</blockquote>
-<pre class="r"><code>nrow(df2)</code></pre>
-<pre><code>## [1] 8</code></pre>
-</div>
-<div id="preloaded-r-datasets" class="section level3">
-<h3><strong>Preloaded R Datasets</strong></h3>
-<p>R comes with several preloaded data sets<br>running <code>data()</code> in an RScript will return all of the avaliable toy datasets</p>
-<blockquote>
-<p>mtcars<br> For example, mtcars is a list of Motor trend cars containing each cars attributes in the columns. It is commonly used as an example dataframe</p>
-</blockquote>
-<pre class="r"><code>m =mtcars
-class(m)</code></pre>
-<pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<p><br> <strong>Dimensions &amp; structure of mtcars</strong></p>
-<pre class="r"><code># Dimensions &amp; structure of mtcars
-dim(mtcars)  </code></pre>
-<pre><code>## [1] 32 11</code></pre>
-<pre class="r"><code>str(mtcars)  </code></pre>
-<pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
-##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
-##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
-##  $ disp: num  160 160 108 258 360 ...
-##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
-##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
-##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
-##  $ qsec: num  16.5 17 18.6 19.4 17 ...
-##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
-##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
-##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
-##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
-<p><br> <strong>Subsetting mtcars</strong></p>
-<pre class="r"><code>mtcars[1:5,] # rows 1-5, all columns</code></pre>
-<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</code></pre>
-<p><br></p>
-<pre class="r"><code>mtcars[1, 1:6] # row 1, columns 1-6</code></pre>
-<pre><code>##           mpg cyl disp  hp drat   wt
-## Mazda RX4  21   6  160 110  3.9 2.62</code></pre>
-<p><br></p>
-<pre class="r"><code>mtcars[1:4,1:4] # rows 1 -4, cols 1-4</code></pre>
-<pre><code>##                 mpg cyl disp  hp
-## Mazda RX4      21.0   6  160 110
-## Mazda RX4 Wag  21.0   6  160 110
-## Datsun 710     22.8   4  108  93
-## Hornet 4 Drive 21.4   6  258 110</code></pre>
-<hr />
-</div>
-</div>
-</div>
-<div id="assignment" class="section level1">
-<h1><strong>Assignment</strong></h1>
-<div id="create-vectors-containing-information-about-8-familyfriendspets-in-your-life" class="section level2">
-<h2><strong>1. Create vectors containing information about 8 family/friends/pets in your life</strong></h2>
-<p><strong>Vectors </strong> <code>name</code>, <code>age</code>, <code>species</code>, <code>relation</code> (relative to you), <code>hair_color</code>, <code>eye_color</code>, and <code>retired</code></p>
-<ul>
-<li><strong>name:</strong> character</li>
-<li><strong>age:</strong> numeric</li>
-<li><strong>species:</strong> character</li>
-<li><strong>relation:</strong> character</li>
-<li><strong>hair_color:</strong> character</li>
-<li><strong>eye_color:</strong> character</li>
-<li><strong>retired:</strong> logical (TRUE or FALSE)</li>
-</ul>
-<p><br> <br></p>
-</div>
-<div id="make-a-dataframe-using-these-8-vectors-as-your-column-headers" class="section level2">
-<h2><strong>2. Make a dataframe using these 8 vectors as your column headers</strong></h2>
-<ul>
-<li><strong>hint:</strong> <code>df = data.frame(col = )</code> <br> <br></li>
-</ul>
-</div>
-<div id="explore-the-structure-of-your-dataframe-and-its-appearance-in-the-environment-pane" class="section level2">
-<h2><strong>3. Explore the structure of your dataframe and its appearance in the environment pane</strong></h2>
-<ul>
-<li><strong>Navigate to your environment (Upper right hand pane), locate your dataframe, and double click to open it in a new pane</strong></li>
-<li><code>str(df)</code> - structure of your dataframe</li>
-<li><code>dim(df)</code> - dimensions of your dataframe</li>
-<li><code>class(df)</code> - class of the dataframe</li>
-<li><code>class(df$column)</code> - class of a column in the dataframe</li>
-</ul>
-<p><br> <br></p>
-</div>
-<div id="subset-your-dataframe-using-3-different-methods-shown-in-this-lab" class="section level2">
-<h2><strong>4. Subset your dataframe using 3 different methods shown in this lab</strong></h2>
-<ul>
-<li><p>Subset yourself and one other person and assign the output to a new dataframe variable</p></li>
-<li><p>Remove just yourself and assign this to a new dataframe</p></li>
-<li><p>Lastly, create a new dataframe variable that contains only names, hair color, eye color, and species and assign this to a new variable.</p></li>
-<li><p><code>df$column</code></p></li>
-<li><p><code>df[row, column]</code></p></li>
-<li><p><code>df[col1:col2]</code></p></li>
-<li><p><strong><em>Once completed, you should have 4 dataframes in your environment (the original and 3 subsetted dataframes)</em></strong></p></li>
-</ul>
-<p><br></p>
-<hr />
-</div>
 </div>
 <div id="end" class="section level1">
 <h1><strong>END</strong></h1>
