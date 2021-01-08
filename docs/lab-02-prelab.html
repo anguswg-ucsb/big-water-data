@@ -120,7 +120,7 @@
             <li><a href="#create-a-new-project-in-rstudio"><strong>Create a new project in RStudio</strong></a></li>
             <li><a href="#build-a-project-file-structure"><strong>Build a project file structure</strong></a><ul>
             <li><a href="#new-folders---docs-data"><span class="code">New Folders</span> - docs &amp; data</a></li>
-            <li><a href="#open-a-rscript"><span class="code">Open a RScript</span></a></li>
+            <li><a href="#open-a-rscript---.r"><span class="code">Open a RScript</span> - .R</a></li>
             </ul></li>
             <li><a href="#load-in-your-libraries"><strong>Load in your libraries</strong></a></li>
             <li><a href="#end"><strong>END</strong></a></li>
@@ -177,7 +177,7 @@
       <p class="authors">
            <span class="glyphicon glyphicon-user"></span> <a href="index.html">ENVS 193</a>
       </p>
-         <p class="date"><span class="glyphicon glyphicon-calendar"></span> <a href="https://github.com/anguswg-ucsb">Angus Watters</a></p>
+         <p class="date"><span class="glyphicon glyphicon-calendar"></span> <a href="https://github.com/anguswg-ucsb">Angus Watters - based off material from Mike Johnson and input from Debra Perrone</a></p>
          
    
       
@@ -199,20 +199,20 @@ span.code {
 <div id="goals" class="section level1">
 <h1><strong>Goals</strong></h1>
 <ul>
-<li>Make a folder for this class that will be the home for all your projects</li>
-<li>Learn how to make a new project in RStudio and build a reproducible &amp; organized file structure within a project</li>
+<li>Make a folder for this class that will be the home for your early course projects</li>
+<li>Learn how to make a new project in RStudio</li>
+<li>Build an organized file structure within your project</li>
 <li>Install packages and load them into your environment</li>
 <li>Explore the basics of RStudio</li>
-<li>Understand the different data types &amp; data structures in R</li>
-<li>Get comfortable working with the different data types &amp; data structures</li>
 </ul>
 <hr />
 </div>
 <div id="create-a-folder-for-this-class" class="section level1">
 <h1><strong>Create a folder for this class</strong></h1>
+<p>First, we will create a new folder called Rprojects on our desktop that we’ll use to organize our RStudio projects for this class.</p>
 <div id="macos" class="section level3">
 <h3><strong>MacOS <i class="fa fa-apple" aria-hidden="true"></i></strong></h3>
-<p>First, we will create a new folder on our desktop that we’ll use to organize our RStudio projects for this class. Navigate to your desktop, and right click and click <code>New folder</code>. A new folder should appear on your desktop, to rename the folder, double click on the folder’s name and give it the name <code>Rprojects</code></p>
+<p>Navigate to your desktop, and right click and click <code>New folder</code>. A new folder should appear on your desktop; to rename the folder. To rename the folder, double click on the folder’s name and give it the name <code>Rprojects</code></p>
 <p><img src="img/mac-file-create.png" /> <br> <br></p>
 </div>
 <div id="windows" class="section level3">
@@ -220,9 +220,8 @@ span.code {
 <p>On windows, do the same thing but when you right click on the desktop hover over <code>New</code> and the click <code>Folder</code></p>
 <p><img src="img/new-desktop-folder.png" /></p>
 <p><br> <br></p>
-<p><strong>Next open RStudio, if you do not see RStudio on your desktop you can open it by searching RStudio</strong></p>
-<p><strong>On a Mac</strong>, in the the top right hand corner of your screen select the magnifiying glass icon and enter RStudio</p>
-<p><strong>On windows</strong>, in the bottom left hand corner of your screen enter RStudio into the search box with the magnifying glass</p>
+<p><strong>Next open RStudio, if you do not see RStudio on your desktop you can open it by searching RStudio with the magnifying glass icon in the top right corner of your screen on a <span class="code">Mac</span>.</strong></p>
+<p><strong><span class="code">On Windows</span>, search RStudio in the search bar found in the bottom left corner of your screen</strong></p>
 </div>
 </div>
 <div id="create-a-new-project-in-rstudio" class="section level1">
@@ -259,17 +258,15 @@ span.code {
 <p>These folders will hold all the components of your project. The <code>docs</code> folder is for your Rscript (.R) and Rmarkdown (.Rmd) files and the <code>data</code> folder will house your .CSV, .xls, .txt files. **</p>
 <p><br></p>
 </div>
-<div id="open-a-rscript" class="section level2">
-<h2><span class="code">Open a RScript</span></h2>
+<div id="open-a-rscript---.r" class="section level2">
+<h2><span class="code">Open a RScript</span> - .R</h2>
 <p><strong>In the top left corner, click <code>File</code>, hover over <code>New file</code> and then click <span class="code">RScript</span></strong></p>
 <p><img src="img/new-rscript-file.png" /></p>
-<p><strong>A new pane should open up, this is your <span class="code">RScript</span> file.</strong> Notice that an RScript files end with <code>.R</code>.</p>
+<p><strong>A new pane should open up, this is your <span class="code">RScript</span> file.</strong> Notice that an RScript file end with the extension <strong>.R</strong> Your Rscript is currently <strong>“Untitled,”</strong> so lets now click the save button at the top of the pane and give it a name and a location to be saved to.</p>
+<p><br> <br></p>
+<p>Name the file <code>lab-01-script</code> and then navigate to your <strong>Rprojects folder on the desktop,</strong> and into your <code>lab-01</code> project, and finally into your <strong>docs folder, and then press save.</strong> <img src="img/save-rscript.png" /></p>
 <p><br></p>
-<p>Your Rscript is currently <strong>“Untitled,”</strong> so lets now click the save button at the top of the pane and give it a name and a location to be saved to.</p>
-<p><br></p>
-<p><strong>Name the file <code>lab-01-script</code> and then navigate to your Rprojects folder on the desktop, and into your <code>lab-01</code> project, and finally into your docs folder, and then press save.</strong> <img src="img/save-rscript.png" /></p>
-<p><br></p>
-<p>Now in the bottom right hand pane, under the <code>file</code> tab, open your <code>docs</code> folder and check to see if your <code>lab-01-rscript.R</code>saved. <img src="img/open-rscript-console.png" /></p>
+<p>Now in the bottom right hand pane, under the <strong><code>file</code></strong> tab, open your <strong><code>docs</code></strong> folder and check to see if your <strong><code>lab-01-rscript.R</code></strong> saved. <img src="img/open-rscript-console.png" /></p>
 <p>We now have created a file structure and an RScript file in RStudio. This is a cookie-cutter file structure that should work for most projects you will ever do in RStudio. Having files organized in the same manner from one project to the next will make your life much easier and more efficient going forward!</p>
 <p><br> Before we moving forward to the next section, make sure that in the bottom left hand quadrant where the terminal, select the <code>Console</code> from the tab row above.</p>
 <p><br> <br></p>
@@ -279,12 +276,13 @@ span.code {
 </div>
 <div id="load-in-your-libraries" class="section level1">
 <h1><strong>Load in your libraries</strong></h1>
-<p>Now we will load a package into our workspace. We will do this by typing <code>library(tidyverse)</code> into our RScript and then pressing the <code>Run</code> button on the top right hand corner of your RScript. Code can also be run by the keyboard command <code>Cmd+Return</code> on Mac, and <code>Ctrl+Enter</code> on Windows This is how you run lines of code from an RScript. Additionally if you highlight any portion of a code and run it, just the highlighted portion of code will be executed.<br>After you have loaded in the tidyverse package a bunch of seemingly random outputs should have appeared in your console. This is what you want and it is just details of the package being loaded.<br>When you run code, the output of that code will appear in the console, also any errors or warnings will display in the console.<br></p>
+<p>Now we will load a package into our workspace. We will do this by typing <strong><code>library(tidyverse)</code></strong> into our RScript and then pressing the <strong><code>Run</code></strong> button on the top right hand corner of your RScript. Code can also be run by the keyboard command <strong><code>Cmd+Return</code></strong> on Mac, and <strong><code>Ctrl+Enter</code></strong> on Windows This is how you run lines of code from an RScript. Additionally if you highlight any portion of a code and run it, just the highlighted portion of code will be executed.<br>After you have loaded in the tidyverse package a bunch of seemingly random outputs should have appeared in your console. This is what you want and it is just details of the package being loaded.<br>When you run code, the output of that code will appear in the console, also any errors or warnings will display in the console.<br></p>
 <p><img src="img/load-lib-save.png" /> <br> <br></p>
 <p><strong>Lastly, we will install the <code>here</code> package,</strong> we will learn more about this package in during Lab 2.</p>
+<p>Type <strong><code>install.packages('here')</code></strong> into your console and press enter. A bunch of text should appear in your console, don’t worry, this is what we want. This means the package is downloading and being “unpacked.”</p>
 <p><br></p>
-<p>Type <code>install.packages('here')</code> into your console and press enter. A bunch of text should appear in your console, don’t worry, this is what we want. This means the package is downloading and being “unpacked.”</p>
 <pre class="r"><code>install.packages(&#39;here&#39;)</code></pre>
+<p><br></p>
 <p><strong>Save your file project before closing your RStudio sessions, we will pick up from here in Lab 2</strong></p>
 <hr />
 </div>

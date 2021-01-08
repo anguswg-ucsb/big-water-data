@@ -1,7 +1,7 @@
 ---
 title: "Prelab - Lab 2"
 author: "[ENVS 193](index.html)"
-date: "[Angus Watters](https://github.com/anguswg-ucsb)"
+date: "[Angus Watters - based off material from Mike Johnson and input from Debra Perrone](https://github.com/anguswg-ucsb)"
 mail: "adwattersgrubstein@ucsb.edu"
 github: "anguswg-ucsb"
 class_name: 'ENVS 193'
@@ -27,21 +27,21 @@ span.code {
 
 # **Goals**
 
-- Make a folder for this class that will be the home for all your projects
-- Learn how to make a new project in RStudio and build a reproducible & organized file structure within a project
+- Make a folder for this class that will be the home for your early course projects
+- Learn how to make a new project in RStudio 
+- Build an organized file structure within your project
 - Install packages and load them into your environment
 - Explore the basics of RStudio
-- Understand the different data types & data structures in R
-- Get comfortable working with the different data types & data structures
 
 ***
 
 # **Create a folder for this class**
 
+First, we will create a new folder called Rprojects on our desktop that we’ll use to organize our RStudio projects for this class. 
+
 ### **MacOS <i class="fa fa-apple" aria-hidden="true"></i>**
 
-First, we will create a new folder on our desktop that we'll use to organize our RStudio projects for this class. 
-Navigate to your desktop, and right click and click `New folder`. A new folder should appear on your desktop, to rename the folder, double click on the folder's name and give it the name `Rprojects`
+Navigate to your desktop, and right click and click `New folder`. A new folder should appear on your desktop; to rename the folder. To rename the folder, double click on the folder's name and give it the name `Rprojects`
 
 ![](img/mac-file-create.png)
 <br> 
@@ -56,11 +56,10 @@ On windows, do the same thing but when you right click on the desktop hover over
 <br>
 <br>
 
-**Next open RStudio, if you do not see RStudio on your desktop you can open it by searching RStudio**
+**Next open RStudio, if you do not see RStudio on your desktop you can open it by searching RStudio with the magnifying glass icon in the top right corner of your screen on a <span class = "code">Mac</span>.**
 
-**On a Mac**, in the the top right hand corner of your screen select the magnifiying glass icon and enter RStudio
+**<span class = "code">On Windows</span>, search RStudio in the search bar found in the bottom left corner of your screen**
 
-**On windows**, in the bottom left hand corner of your screen enter RStudio into the search box with the magnifying glass
 
 # **Create a new project in RStudio**
 
@@ -134,27 +133,25 @@ These folders will hold all the components of your project. The `docs` folder is
 
 <br>
 
-## <span class= "code" >Open a RScript</span> 
+## <span class= "code" >Open a RScript</span> - .R 
 **In the top left corner, click `File`, hover over `New file` and then click <span class= "code" >RScript</span>**
 
 ![](img/new-rscript-file.png)
 
 
-**A new pane should open up, this is your <span class= "code" >RScript</span> file.** Notice that an RScript files end with `.R`. 
-
-<br>
-
+**A new pane should open up, this is your <span class= "code" >RScript</span> file.** Notice that an RScript file end with the extension **.R** 
 Your Rscript is currently **"Untitled,"** so lets now click the save button at the top of the pane and give it a name and a location to be saved to.
 
 <br>
+<br>
 
 
-**Name the file `lab-01-script` and then navigate to your Rprojects folder on the desktop, and into your `lab-01` project, and finally into your docs folder, and then press save.** 
+Name the file `lab-01-script` and then navigate to your **Rprojects folder on the desktop,** and into your `lab-01` project, and finally into your **docs folder, and then press save.**
 ![](img/save-rscript.png)
 
 <br>
 
-Now in the bottom right hand pane, under the `file` tab, open your `docs` folder and check to see if your `lab-01-rscript.R`saved.
+Now in the bottom right hand pane, under the **`file`** tab, open your **`docs`** folder and check to see if your **`lab-01-rscript.R`** saved.
 ![](img/open-rscript-console.png)
 
 We now have created a file structure and an RScript file in RStudio. This is a cookie-cutter file structure that should work for most projects you will ever do in RStudio. Having files organized in the same manner from one project to the next will make your life much easier and more efficient going forward!
@@ -173,7 +170,7 @@ Before we moving forward to the next section, make sure that in the bottom left 
 
 # **Load in your libraries**
 
-Now we will load a package into our workspace. We will do this by typing `library(tidyverse)` into our RScript and then pressing the `Run` button on the top right hand corner of your RScript. Code can also be run by the keyboard command `Cmd+Return` on Mac, and `Ctrl+Enter`	on Windows This is how you run lines of code from an RScript. Additionally if you highlight any portion of a code and run it, just the highlighted portion of code will be executed.<br>After you have loaded in the tidyverse package a bunch of seemingly random outputs should have appeared in your console. This is what you want and it is just details of the package being loaded.<br>When you run code, the output of that code will appear in the console, also any errors or warnings will display in the console.<br>
+Now we will load a package into our workspace. We will do this by typing **`library(tidyverse)`** into our RScript and then pressing the **`Run`** button on the top right hand corner of your RScript. Code can also be run by the keyboard command **`Cmd+Return`** on Mac, and **`Ctrl+Enter`**	on Windows This is how you run lines of code from an RScript. Additionally if you highlight any portion of a code and run it, just the highlighted portion of code will be executed.<br>After you have loaded in the tidyverse package a bunch of seemingly random outputs should have appeared in your console. This is what you want and it is just details of the package being loaded.<br>When you run code, the output of that code will appear in the console, also any errors or warnings will display in the console.<br>
 
 ![](img/load-lib-save.png)
 <br>
@@ -181,13 +178,16 @@ Now we will load a package into our workspace. We will do this by typing `librar
 
 **Lastly, we will install the `here` package,** we will learn more about this package in during Lab 2.  
 
-<br>
+Type **`install.packages('here')`** into your console and press enter. A  bunch of text should appear in your console, don't worry, this is what we want. This means the package is downloading and being "unpacked." 
 
-Type `install.packages('here')` into your console and press enter. A  bunch of text should appear in your console, don't worry, this is what we want. This means the package is downloading and being "unpacked." 
+<br>
 
 ```{r, eval=FALSE}
 install.packages('here')
 ```
+
+<br>
+
 **Save your file project before closing your RStudio sessions, we will pick up from here in Lab 2**
 
 ---
