@@ -1,0 +1,84 @@
+
+> Now we are going to create a simple file structure to help keep our project organized. We will populate our project with `docs`, `data`, and `img` folders. We will do this via the terminal
+
+The terminal is a computer application. On a Mac, it is most frequently accessed via your Terminal application (do yourself a favor and download iTerm), and on Windows, through PowerShell. Fortunately, RStudio provides a built in terminal that imitates these applications within the RStudio IDE. **The Terminal tab can be found next to the Console tab. If it is not visible, show it via Shift+Alt+T (or Tools > Terminal > New Terminal).** Once visible, it should look something like this
+
+***The terminal is a gateway to that command line. With it, instead of pointing and clicking, you can type commands and have your computer respond. Entering commands into the terminal is useful for expediting basic tasks like file/folder creation. The terminal is also useful for exploring your file structure, and for retrieving information about your computer system.***
+
+<br>
+
+## **Terminal layout**
+
+>The <span class = "code">terminal</span> and the <span class = "code">files tab</span> are highlighted red and the project's `current working directory`is in yellow. 
+
+![](img/terminal-empty.png)
+
+<br>
+
+## <span class= "code" >pwd</span> - print working directory
+
+pwd displays the directory or folder you are currently in
+
+My working directory is `/c/Users/angus/OneDrive/Desktop/Rprojects/lab-01`, yours will be slightly different but essentially the same
+
+![](img/pwd-2.png)
+
+<br>
+
+## <span class= "code">mkdir</span> - make a directory
+
+mkdir creates a new folder (directory) inside your current working directory<br>Entering <span class = "code">mkdir docs</span> into the terminal, will create a docs folder within our current working directory.<br>Go ahead an make docs, data, and img folders in your project.<br> **In the bottom right hand pane, select File from the top row of tabs, you should now see your docs, data, and img folders**
+
+These 3 folders will hold all the components of your project.<br>The docs folder is for your Rscript (.R) and Rmarkdown (.Rmd) files, the data folder is for your .CSV, .xls, .txt files, and the img folder is for images you may use or create from within the project.
+
+
+<br>
+
+>**mkdir docs**
+
+![](img/mkdir-docs.png)
+
+<br>
+
+>**mkdir data**
+
+![](img/mkdir-data.png)
+
+<br>
+
+>**mkdir img**
+
+![](img/mkdir-img.png)
+
+<br>
+
+## <span class= "code" >cd</span> - change directory
+
+cd allows you to navigate through directories by changing working directory. 
+
+There are many ways to navigate using <span class = "code">cd</span> but today we will only need `cd "the folder (directory) you want to move to"` and `cd ..`<br>The first command takes us from our current working directory and by entering `cd docs` we move into our docs folder<br><span class = "code">cd ..</span> will reverse this and step back a directory<br>We are doing this because the next thing we will do is create a file in our docs folder!
+
+
+
+
+![](img/cd-docs.png)
+
+<br>
+<br>
+
+***
+
+# **Create a R Script**
+
+## <span class= "code">touch</span> - create a file
+
+On a MacOS or Linux machine (anything running Bash) <span class = "code">touch</span>  can be used to create a new file with a defined name and extension in the working directory. For example, we can create a new R file named `lab-01-script.R` in our working directory as follows.<br> You should now see an Rscript (.R) file in your docs folder
+
+![](img/touch-rscript-docs.png)
+
+<br>
+
+>Open your lab-01-script.R file and then in the bottom left hand quadrant where our terminal is, select `Console` from the tab row above.
+
+![](img/open-rscript-console.png)
+
