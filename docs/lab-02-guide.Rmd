@@ -11,7 +11,7 @@ output:
   rmdformats::downcute
 subtitle: "RScripts, data types, data structures and subsetting"
 ---
-
+ 
 
 <style type="text/css">
 span.code {
@@ -37,17 +37,14 @@ span.code {
 
 ***
 
-# **Before we start:**
+# **Open Script from Pre-lab_02**
 
-- Open up your lab-02 Rproject from your Rprojects folder
-- Download the  `export.csv` file from GauchoSpace and save it to the `data` folder in your `lab-02 Rproject`
-- Then open your `lab-02-script.R` file from your `docs` folder
-- At the top of your Rscript, type the `#` and then type your name, the course name, lab 2, and the date afterwords
-
-
+- Open up your lab-02 Rproject from your Rprojects folder. At the top of your Rscript, you should have the #, followed by Lab-02, your name, and the date. 
+- Remind yourself what the hash symbol (i.e, #) does. The **hash symbol is used to “comment out”** text in your RScript. What does this mean? R does not run it as code. Note that if you kept your text, but removed the #, you would get an error message. 
+- It is good practice to use the # to comment on your code and describe your process. It helps you remember what code does, as well as helps you keep track of things like units. It also helps someone viewing your code to understand your processes. 
+- Note that under your intro comment, you should have two libraries ready to load with code that looks like the following
 
 
-The **hash symbol `#`** is used to **"comment out"** text in your RScript so R does not run it as code. It is good practice to get used to using the `#` to label your code and describe your process. It helps you remember what certain code is doing and it also helps someone viewing your code to understand your process 
 
 ```{r}
 # Angus Watters
@@ -62,16 +59,17 @@ The **hash symbol `#`** is used to **"comment out"** text in your RScript so R d
 
 ```{r, message=FALSE, warning = FALSE, eval=TRUE}
 library(tidyverse)
+library(readr)
 library(here)
 ```
 
 
 ## **help() function**
-- the help() function is a very useful tool for understanding what a function does and what inputs it takes. 
-- When you call the help function, the help page for the function you called will appear in the bottom right pane
-- At the bottom of the help page you will find code examples for that function, you can run these yourself to get an idea of how to use a function!
-- As you go through this lab, use the `help()` function to get more information on the functions we will be using
-- You can access the help documentation for any function by entering the function into the `help()` function like so:
+
+The `help() function` is a tool for understanding what a function does, what inputs it takes, and what outputs it gives. When you call the help function, the help page for the function you called will appear in the bottom right pane, a tab to the right of the Files tab. 
+
+The Help tab is great. At the bottom page you will find code examples for that function, you can run these yourself to get an idea of how to use a function! **As you go through this lab, use the help() function to get more information on the functions we will be using.** You can access the help for any function; for example, let’s use the help function to get information on the library function.
+
 
 ```{r,message=FALSE, warning = FALSE, eval=FALSE}
 help(library) # calling help for the library() function
@@ -100,11 +98,11 @@ So to access the `export.csv` file in our data folder we need to get to<br> **"C
 here() will give us an easy way of finding this path
 
 ```{r}
-here("data/export.csv")
+here("docs/data/export.csv")
 ```
 <br>
 ```{r, message=FALSE, warning = FALSE}
-read_csv(here("data/export.csv"))
+read_csv(here("docs/data/export.csv"), skip = 1)
 ```
 
 Run this code and you'll notice the dataframe outputs to our console. 
@@ -117,7 +115,7 @@ How do we save this dataframe to a variable so we can conveniently access again.
 Lets create a variable named `water_df` and assign it to our .csv file!
 
 ```{r, message=FALSE, warning = FALSE}
-water_df = read_csv(here("data/export.csv"))
+water_df = read_csv(here("docs/data/export.csv"), skip = 1)
 ```
 
 <br>

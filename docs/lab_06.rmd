@@ -1,0 +1,637 @@
+---
+title: "Lab 2"
+author: "[ENVS 193](index.html)"
+date: "Angus Watters - based off material from Mike Johnson and input from Debra Perrone"
+mail: "adwattersgrubstein@ucsb.edu"
+github: "anguswg-ucsb"
+class_name: 'ENVS 193'
+class_github: 'big-water-data'
+home: ""
+output:
+  rmdformats::downcute
+    code_folding: hide
+subtitle: "RScripts, data types, data structures and subsetting"
+---
+
+<style type="text/css">
+span.code {
+      background:rgba(240,128,128, 0.2);
+      border-radius: 5px 5px 5px 5px;
+      padding-left:5px;
+      padding-top:2px;
+      padding-right:5px;
+      padding-bottom:2px;
+      color:red;
+     } 
+</style>
+
+# Lab 05
+WRITTEN BY ANGUS WATTERS AND PROFESSOR PERRONE 
+
+Goals
+- Explore more ggplot features
+  
+-	Practice data cleaning, wrangling, and manipulation 
+
+-	Introduction to sf package and using R as a GIS
+
+-	Create spatial feature objects
+
+-	Assign lat/long coordinates to a coordinate reference system (CRS)
+
+-	Change the CRS of an object
+
+-	Create maps
+
+-	Explore the sf package
+
+Lab legend
+Steps	Shown in bolded dark blue text, numbered 
+Functions	Shown in bolded blue text
+Questions you must answer	Shown in burgundy bolded text
+Check points	Shown in bolded green text
+Code examples	Grey highlighted lines of text
+Code comment (i.e., #)	Green text, highlighted in grey
+YOUR ANSWERS	Black text, highlighted in yellow
+
+Note that all of your responses to the questions in this lab must be in
+black text, highlighted in yellow.
+	
+
+
+
+
+
+
+
+
+
+## Step 1: Load libraries 
+
+Load the following libraries into your Rscript:
+```{r, message=FALSE, warning=FALSE}
+# Data prep & cleaning
+library(janitor)
+library(here)
+library(kableExtra)
+
+# Data manipulation
+library(tidyverse)
+
+# Spatial packages
+library(USAboundaries)
+library(sf)
+```
+
+
+## Step 2: Read in your data and join water_use with centroids
+Now read in the USGS excel file and the centroids.rds file and assign them to water_use and centroids, respectively.
+
+<br>
+
+### Step 2.1:
+Use clean_names() and rename() to clean water_use in the same way you did in labs 3 and 4. Make sure the necessary columns are all numerics and no characters using mutate() and across().
+
+```{r}
+water_use <- water_use %>%
+  mutate(across(c(8:141), as.numeric))
+```
+
+<br>
+
+### Step 2.2:
+Create a data_dictionary object, clean the names, pivot_wider(), clean the names again, and pivot_longer() so you have a clean and easily readable dictionary. This is also the same procedure you did in lab 4. 
+
+<br>
+
+## Step 3: Select freshwater total columns and summarize
+
+Now use select() to select the state column and the columns with data on total freshwater withdrawals, and assign this to a new object named freshwater_select 
+
+### Step 3.1:
+From your freshwater_select object, create a new object named sectors and assign it to the freshwater_select dataframe. 
+Then use mutate to calculate and add 5 columns: domestic, industrial, agricultural, mining, and thermoelectric. Finally, select the state column and these new columns. 
+This should leave you with a dataframe with 3223 observations and 7 variables. 
+
+
+```{r}
+freshwater_select = select(water_use, state, contains('w_fr_to'))
+
+sectors <-  freshwater_select %>%
+  mutate(Domestic = ps_w_fr_to + do_w_fr_to,
+         Industrial = in_w_fr_to,
+         Agriculture = ir_w_fr_to + li_w_fr_to + aq_w_fr_to,
+         Mining = mi_w_fr_to,
+         Thermoelectric = pt_w_fr_to,
+         Total = Domestic + Industrial + Agriculture + Mining + Thermoelectric) %>% 
+  select(1, 15:20)
+```
+
+### Step 3.2:
+Now in a new pipeline, group the sectors data frame by state, use summarize to sum across the 5 columns. 
+Then pivot_longer so that you now have 3 columns: state, sector, and withdrawals. 
+After this, the sectors data frame should have 318 rows and 3 columns. 
+
+sectors <- sectors %>%
+  group_by(state) %>%
+  summarise(across(Domestic:Total, sum)) %>%
+  pivot_longer(cols = c(2:7), names_to = "sector", values_to = "withdrawal")
+
+
+
+
+## Step 4: Add latitude/longitude columns to sectors
+
+Now we are going to add latitude and longitude columns to our sectors data frame. To do this, inner join sectors with the centroids data frame. (HINT: Join them by state)
+The sectors data frame should now have 312 rows and 5 columns. 
+
+sectors <-  inner_join(sectors, centroids, by = 'state')	
+
+
+
+
+
+
+
+
+
+
+
+## Step 5: Stacked bar graph – withdrawals by sector
+
+We will use our sectors data frame to create a plot similar to the one you made in lab 4, but instead of having the each state’s sector bars side by side, we will have each state be a stacked bar. 
+	When we created the sectors data frame you may remember we add a “Total” column. For this particular plot, we don’t want to include this data, thus we will want to filter on the sector column. This would be a good place to make an “intermediary object,” that you will use just for your ggplot. An intermediary object means you create a new object and assign it to the data frame you performed a subsetting operation on. In this case, create a new object that contains the filtered sectors for our ggplot, rather than filtering sectors and reassigning it to sectors. This is good practice as it lets you easily go back to the original data frame that contains all the original data.
+
+### Step 5.1:
+Create an intermediary object filtering out the Total sector rows
+
+```{r}
+df1 = sectors %>% filter(sector != "Total")
+```
+
+
+### Step 5.2:
+Use your df1 data frame to build a ggplot with the following elements:
+•	The state on the X axis
+
+•	Withdrawals on the Y axis
+
+•	A geom_col() layer with the fill representing each sector 
+
+•	Add labels (title, caption, axis titles, legend title/no title)
+
+•	Manually assign fill colors
+
+•	Use theme() to adjust the layout of the plot (plot title, axis title, axis text, legend title, caption text/position)
+
+<br>
+
+```{r}
+ggplot(df1, aes(x = state,  y = withdrawal)) +
+  geom_col(aes(fill = sector)) +
+  labs(title = "Total sector water withdrawals by state",
+       caption = "Figure 1: Withdrawals by sector. Data from USGS (2015). Created by Angus Watters",
+       x = "State",
+       y = "Total withdrawals",
+       fill = "") +
+  scale_fill_manual(values = c('green4', 'dodgerblue3', 'red2', 'gray56', 'darkorange')) +
+  theme_bw() +
+  theme(plot.title =element_text(size = 16, vjust = 2),
+        axis.text = element_text(face = "bold", size =10),
+        axis.title = element_text(size = 12),
+        legend.title = element_text(size = 12),
+        legend.position = “top”,
+        plot.caption = element_text(hjust = 0, face = "bold", size = 12))
+```
+
+
+Run your ggplot.
+How are the states on the X axis ordered?
+
+
+### Step 5.3:
+We want to put our data in order of the magnitude of withdrawals. Reorder your X axis so the highest total withdrawal is on the left and it descends in magnitude to the right. 
+
+If they don’t put a negative in front of withdrawals there columns will appear from lowest to highest withdrawals and not highest to lowest 
+
+```{r}
+ggplot(df1, aes(x = reorder(state, -withdrawal),  y = withdrawal)) +
+  geom_col(aes(fill = sector)) +
+  labs(title = "Total sector water withdrawals by state",
+       caption = "Figure 1: Withdrawals by sector. Data from USGS (2015). Created by Angus Watters",
+       x = "State",
+       y = "Total withdrawals",
+       fill = "") +
+  scale_fill_manual(values = c('green4', 'dodgerblue3', 'red2', 'gray56', 'darkorange')) +
+  theme_bw() +
+  theme(plot.title =element_text(size = 16, vjust = 2),
+        axis.text = element_text(face = "bold", size =10),
+        axis.title = element_text(size = 12),
+        legend.title = element_text(size = 12),
+        legend.position = “top”,
+        plot.caption = element_text(hjust = 0, face = "bold", size = 12))
+```
+
+        
+## Step 6: Stacked bar graph – Total surface and groundwater withdrawals
+
+Our goal is to make a stacked bar graph that shows the total surface water and groundwater withdrawals by state, in order of highest to lowest withdrawal volume. 
+
+### Step 6.1:
+Locate total water withdrawal columns:
+The first thing we will do is subset our water_use data frame and create a new object named withdrawal_total. Select the columns that contain “to_,” the character string that contains the total withdrawal columns. 
+You’ll notice that we all selected the ps_to_pop column, we don’t want this column so select again, this time select all the columns except ps_to_pop. 
+
+```{r}
+withdrawal_total <- water_use %>% 
+  select(state, contains('to_')) %>%
+  select(!ps_to_pop)
+```
+ 
+
+### Step 6.2:
+Select groundwater & surface water columns:
+Next, we want to further subset our data, creating new object withdrawal_sw_gw from our withdrawal_total data frame, and select state, total groundwater withdrawals (fresh + saline), and total surface water withdrawals (fresh + saline).
+
+```{r}
+withdrawal_sw_gw <- withdrawal_total %>%
+  select(state,to_wgw_to, to_wsw_to)
+```
+  
+
+### Step 6.3:
+Group, summarize, rename, pivot_longer:
+Now we will get our withdrawal_sw_gw data frame prepped for plotting. We want to group the data frame by state and summarise across the two withdrawal rows. Like we have done before, this is going to apply a function to each of our groups (states). That is, all the rows that have the same state column are one group, and the values in that groups rows will be summed. Follow your summary but renaming the to_wgw_to and to_wsw_to columns to “Groundwater” and “Surface water” respectively. The reason for this is that these will eventually be labels on our plot, and it is easier to change them at this point then it is when the data is plotted in ggplot. Lastly, pivot the data frame to be longer (names_to = “source”, values_to = “withdrawal”). 
+
+```{r, echo = FALSE}
+withdrawal_sw_gw <- withdrawal_sw_gw %>%
+  group_by(state) %>%
+  summarise(across(to_wgw_to:to_wsw_to, sum)) %>%
+  rename(Groundwater = to_wgw_to, "Surface water" = to_wsw_to) %>%
+  pivot_longer(cols = c(2:3), names_to = "source", values_to = "withdrawal")
+```
+
+
+### Step 6.4:
+Use the withdrawal_sw_gw data frame to create a stacked bar graph:
+
+•	X axis ordered from most to least withdrawals
+
+•	Y axis total withdrawals
+
+•	Geom_col() layer 
+
+•	Stacked bars filled by source 
+
+•	Labels (title, caption, XY axis, legend title/no title)
+
+•	Appropriate colors
+
+•	Theme_ and adjust text size, face, position using theme()
+
+
+
+```{r}
+ggplot(withdrawal_sw_gw, aes(x = reorder(state, -withdrawal), y = withdrawal)) +
+  geom_col(aes(fill = source), alpha = 0.7)  +
+  labs(title = "Groundwater and surface water withdrawals",
+       caption = "Figure 1: Total groundwater and surface water withdrawals. Data from USGS (2015). Created by Angus Watters",
+       x = "State",
+       y = "Total withdrawals",
+       fill = "") +
+  scale_fill_manual(values = c('green4', 'dodgerblue3')) +
+  theme_bw() +
+  theme(plot.title =element_text(size = 16, vjust = 2),
+        axis.text = element_text(face = "bold", size =10),
+        axis.title = element_text(size = 12),
+        legend.title = element_text(size = 12),
+        plot.caption = element_text(hjust = 0, face = "bold", size = 12))
+```
+
+
+
+
+## Step 7: Sf and USA boundaries packages 
+Sf package
+The Sf package allows R to create Simple Features objects. Simple features are a standardized way of encoding spatial vector data.  A simple feature is a data frame in R that carries a geometry list column containing latitude and longitude information. 
+
+Most common simple feature objects you will interact with:
+
+
+```{r}
+geoms = data.frame(feature = c("POINT", "LINESTRING", "POLYGON", "MULTIPOINT",
+                               "MULTILINESTRING", "MULTIPOLYGON", "GEOMETRY COLLECTION"), description = c('zero-dimensional geometry containing a single point', 'sequence of points connected by straight, non-self intersecting line pieces; one-dimensional geometry', 'geometry with a positive area (two-dimensional); sequence of points form a closed, non-self intersecting ring; the first ring denotes the exterior ring, zero or more subsequent rings denote holes in this exterior ring', 'set of points; a MULTIPOINT is simple if no two Points in the MULTIPOINT are equal', 'set of linestrings', 'set of polygons',
+'set of geometries of any type except GEOMETRYCOLLECTION'))
+                
+  kableExtra::kbl(geoms, col.names = c('SIMPLE FEATURE', 'DESCRIPTION'), escape = F, align = "c") %>%  kable_material(c("striped", "hover")) %>%
+kableExtra::kable_styling(position = "center") 
+```
+
+
+
+USAboundaries package:
+The USAboundaries package (provided by the U.S. Census Buraeu) contains boundaries for the following  US geographical units:
+
+• State
+
+•	County
+
+•	Congressional districts
+
+•	Zipcodes
+
+
+### Step 7.1:
+Let’s begin by creating a new object named conus (stands for continental United States). We can do this by accessing the us_states() function from within the USAboundaries package:
+
+conus = us_states()	
+
+Run the class() function on your conus object. What class is the object?
+
+Now, run the conus object. You should notice several differences from your standard dataframe:
+
+•	**Simple feature collection with 52 features and 12 fields**
+o	Similar to a standard dataframe, this says that there are 52 rows with 12 columns
+o	However the rows are now called features, this is because each row has its own unique geometry attached to it.
+•	**Geometry type:** Multipolygon 
+o	The conus object is a multipolygon because it is made up of 52 features (individual polygons)
+•	**Bbox:** xmin: -179.1743 ymin: 17.91377 xmax: 179.7739 ymax: 71.35256
+o	Bbox is your bounding box, these are the minimum and maximum XY coordinates that surround your conus multipolygon
+•	**Geographic CRS:** WGS 84
+o	A coordinate system is a set of mathematical rules for specifying how coordinates are to be assigned to points, thus it defines your map projections
+o	WGS 84 is denoted by the CRS code 4326
+o	The CRS codes you will use most:
+	4326 – (unit = degree)
+	4269 – (unit = degree, often used by US government agencies)
+	5070 – (unit = meter, best for data analysis on contiguous lower 48 states) 
+
+We can use the `plot()` function to quickly inspect the geometry of a simple feature object. Run this code and see what happens.
+plot(conus$geometry)	
+
+If you notice, the scale of your geometry features is thrown off by Alaska, Hawaii, and Puerto Rico. You can manipulate a Sf data frame object in the same way do a standard dataframe. 
+
+Remove the Alaska, Hawaii, and Puerto Rico features from your conus object and then run the `plot()` function again. 
+
+What happened?
+
+### Step 7.2:
+`st_transform()`
+The st_transform() function lets you change the CRS of a sf object. Whenever you’re working with Sf data frames, the rule of thumb is to keep your CRS’s consistent amongst your different sf objects. This is really important because any geographic calculations done in one CRS is incompatible with another. That is, analysis done in one CRS is based on a different starting point from another CRS. The other reason this is important is for mapping purposes. If you attempt to plot two Sf objects with differing CRS, the objects will not be mapped together as you would imagine. This difference in how the objects will be projected can be very large or very small, either way they are not painting an accurate picture of reality. 
+
+Use st_transform to change the conus object from CRS 4326 to CRS 5070:
+
+```{r}
+conus  <- conus %>% st_transform(5070)	
+```
+
+Now use the plot function to inspect how this changed the geometry of conus. 
+
+### Step 7.3:
+`St_as_sf()`
+If we have a data frame that contains latitude and longitude columns, we can then create a Sf object using this information. 
+The st_as_sf() will create a Sf object from columns containing XY coordinates. St_as_sf() function requires you to input the column names of the XY coordinates and a CRS code. If you recall, our centroids data frame contains latitude and longitude columns for the geographic centroid of each state!
+
+Let use `st_as_sf()` to create an sf object named centroids_spatial from our centroid dataframe:
+  o	The “coords=” argument requires the “X” column first and then the “Y” column 
+  o	Enter 4326 into the “crs=” argument
+
+
+```{r}
+centroids_spatial = centroids %>%
+  st_as_sf(coords = c('lng', 'lat'), crs = 4326)
+```
+
+Now run the centroids_spatial object. 
+What is the geometry type? What do you notice about the columns in centroids_spatial vs. centroids? 
+Geometry type = POINT. The lat/lng columns in centroids_spatial are gone, replaced by the geometry column. Centroids still has lat/lng columns. 
+
+From your environment, open up the conus and centroids_spatial data frames. Look at the geometry columns in each data frame. 
+
+What differences do you notice? 
+Why do you think this is?
+	
+The centroids_spatial object will have just 2 coordinates, one lat, one long. The conus object will have many lat/long pairings. This is because the centroids_spatial object are points, while conus is polygons. 
+
+Use the `plot()` function on centroids_spatial.
+
+What do you see? 
+
+**Difference between an Sf object and a data frame with lat/lng columns: **
+Even though a data frame contains columns named lat/lng, this does not mean it is a spatial object. R treats the lat/lng columns in our centroids data frame just as it would any other numeric column. These XY points have to be prescribed a coordinate reference system (CRS) to make any sense. The CRS gives coordinates a point of reference by which they can be positioned and form a geometry in space.  
+Thus the once we used st_as_sf() on the centroids data frame, assigning the “lat” and “lng” coordinates to a CRS, a geometry column was created from the latitude/longitude coordinates from each row!
+Objects with geometry columns (sf objects) carry more information, and thus memory. Therefore, sf objects have longer computation times and put more burden on your machine. This means it is important to be aware of when to create an Sf object and when it is better to proceed with data analysis/computations and put off adding your geometries until they’re needed (Mapping, geographic calculations, distances, buffers, elevation) We can ease a lot of computational overhead by being mindful of when we retain our geometry data with our attribute data.
+ 
+
+## Step 8: Mapping - Estimated Use of water in the US 
+
+### Step 8.1:
+conus data frame:
+Start by making an object name conus from the us_states() function. Transform it to CRS 5070 and filter out Puerto Rico, Alaska, and Hawaii. Then select the state_name and state_abbr columns. 
+
+conus = us_states() %>%
+  st_transform(5070) %>%
+  filter(!name %in% c('Puerto Rico', 'Alaska', 'Hawaii')) %>%
+  select(state_name, state_abbr)
+
+Note: “sticky” geometries
+Open up your conus sf object. Notice that you have three columns (state_name, state_abbr, and geometry) even though you only selected the two columns state_name and state_abbr. This is because with sf objects, the geometries are “sticky,” which means that the geometries will follow their respective rows through all calculations you perform on the rest of the data frame. 
+
+### Step 8.2:
+sector_spatial data frame: 
+Make a second object named sector_spatial, and assign it to your sectors data frame. Use filter to obtain only the “Total” rows, and filter out "PR", "VI", "DC", "HI", and "AK". Then rename that state column to “state_abbr.”
+
+sector_spatial = sectors %>%
+  filter(sector == 'Total', !state %in% c("PR", "VI", "DC", "HI", "AK")) %>%
+  rename(state_abbr = state)
+
+### Step 8.3:
+Join sector_spatial and conus:
+Next thing we want to do is have each state_abbr from our sector_spatial data frame be matched with their respective state polygon geometries from the conus sf object. To do this we will perform an inner_join on sector_spatial and conus by the state_abbr. Then 
+
+sector_spatial <- inner_join(sector_spatial, conus, by = "state_abbr") %>% st_as_sf()
+
+
+
+
+### Step 8.4:
+We can use ggplot to map sf objects. In ggplot, we use the geom_sf() function to create layers with sf objects. 
+
+geom_sf()
+Create a ggplot with no inputs in the first ggplot() function, and add a geom_sf() layer, inputting your sector_spatial data frame as the data argument: 
+
+ggplot() +
+  geom_sf(data = sector_spatial)
+
+Run your ggplot and examine the output.
+
+Our first order of business is to get each state to reflect its total withdrawal data.
+Let’s now give our geom_sf layer a fill aesthetic. We want the color each state on our map represent the amount of total water withdrawals in that state. We can also outline our states with the color black, and with a thin line (size = 0.1).
+
+Give the geom_sf layer an aes to accomplish this.
+
+ggplot() +
+  geom_sf(data = sector_spatial, aes(fill = withdrawal), col = "black", size = .1))
+
+geom_sf_text()
+Now let’s use geom_sf_text() to add state labels. Each time we add a new geom, we need to give it a  data frame so it has data to work off of. Input the sector_spatial data frame to geom_sf_text.  Run this code.
+
+What happened?
+
+The error you received is because no aes label was given to the geom. The geom_sf_text() layer requires you give it an aes label argument. Use the appropriate column from the data frame to label each state.
+
+ggplot() +
+  geom_sf(data = sector_spatial, aes(fill = withdrawal), col = "black", size = .1) +
+  geom_sf_text(data = sector_spatial, aes(label = state_abbr))
+
+It is hard to see the black text font. We can change the color of our label text with the col argument. 
+
+ggplot() +
+  geom_sf(data = sector_spatial, aes(fill = withdrawal), col = "black", size = .1) +
+  geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = "black") 
+
+labs()
+Let’s change the labels on our map using labs(). Add a title and a caption, change the legend title, and get rid of the x and y axis labels to give the map a cleaner look. 
+
+ggplot() +
+  geom_sf(data = sector_spatial, aes(fill = withdrawal), col = "black", size = .1) +
+  geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = "black") +
+  labs(title = "Estimated Water use in the United States",
+       caption = "Figure 1: Total state water withdrawals. Data from USGS (2015). Created by Angus Watters",
+       x = "",
+       y = "",
+       fill = "Water withdrawals (Mgal/day)")
+
+scale_fill_gradient()
+We can use the scale_fill_gradient() function to change our legends color scale with the low= and high= parameters. There are many colors available in R. 
+
+I found these color hex codes on this website:
+ RGB Color Codes Chart 🎨 (rapidtables.com)
+
+ggplot() +
+  geom_sf(data = sector_spatial, aes(fill = withdrawal), col = "black", size = .1) +
+  geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = "black") +
+  labs(title = "Estimated Water use in the United States",
+       caption = "Figure 1: Total state water withdrawals. Data from USGS (2015). Created by Angus Watters",
+       x = "",
+       y = "",
+       fill = "Water withdrawals (Mgal/day)") +
+  scale_fill_gradient(low = '#CCE5FF, high = "#003366") 
+
+
+
+
+
+
+guides()
+The guides() function within ggplot gives you several options to “guide” your legend. In this case, we are going to use guide_legend() on the legend aesthetic(fill), this will break our legend up into categories, replacing the continuous scale we had before. The “reverse = TRUE” argument will reverse the order of our legends categories. 
+
+Change the reverse from TRUE to FALSE and see what the effect was.  Determine which order you think makes more sense to the viewer. 
+
+ggplot() +
+  geom_sf(data = sector_spatial, aes(fill = withdrawal), col = "black", size = .1) +
+  geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = "black") +
+  labs(title = "Estimated Water use in the United States",
+       caption = "Figure 1: Total state water withdrawals. Data from USGS (2015). Created by Angus Watters",
+       x = "",
+       y = "",
+       fill = "Water withdrawals (Mgal/day)") +
+  scale_fill_gradient(low = '#CCE5FF’, high = "#003366") +
+  guides(fill = guide_legend(reverse = TRUE)) 
+
+
+
+theme()
+Last thing to do is use theme() to alter the positioning and size of text on your map. Then pick a theme that you think best improves presentation. 
+
+ggplot() +
+  geom_sf(data = sector_spatial, aes(fill = withdrawal), col = "black", size = .1) +
+  geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = "black") +
+  labs(title = "Estimated Water use in the United States",
+       caption = "Figure 1: Total state water withdrawals. Data from USGS (2015). Created by Angus Watters",
+       x = "",
+       y = "",
+       fill = "Water withdrawals (Mgal/day)") +
+  scale_fill_gradient(low = '#CCE5FF’, high = "#003366") +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  theme_classic() +
+  theme(plot.title =element_text(size = 16, vjust = 2),
+        axis.text = element_text(face = "bold", size =10),
+        legend.title = element_text(size = 12),
+        legend.position = "top",
+        plot.caption = element_text(hjust = 0, face = "bold", size = 12))
+
+## Step 9: Mapping – Sector within each state with the greatest water withdrawals 
+
+The goal of this map is to find which sector  accounts for the most water withdrawals in each state.  
+
+### Step 9.1:
+First lets create a new object that will be end up being the data frame with each state’s top water withdrawing sector. In the last map we made an object called sector_spatial so we don’t want to use that name again so instead we can go with sector_spatial2.  
+
+Create a sector_spatial2 object and assign it your sectors data frame. 
+•	Rename the state column to “state_abbr,” 
+•	then group the data frame by state_abbr. 
+•	Then filter out the following states: ("PR", "VI", "DC", "HI", "AK") and filter out the rows which contain a “Total” sector, as we don’t want this displayed on our map (plus it would clearly be the top sector for every state). 
+•	Close that pipeline. From sector_spatial2, create a new pipeline and filter the rows in the withdrawal column for only the max() withdrawal values
+sector_spatial2 = sectors %>% 
+  rename(state_abbr = state)
+
+
+sector_spatial2 <- sector_spatial2 %>%
+  group_by(state_abbr) %>%
+  filter(sector != 'Total', !state_abbr %in% c("PR", "VI", "DC", "HI", "AK"))
+
+
+sector_spatial2 <- sector_spatial2 %>%
+  filter(withdrawal == max(withdrawal))
+
+
+
+### Step 9.2:
+Now use inner_join() to join our conus sf data frame with our sector_spatial2 data frame by the state_abbr (This is why earlier we renamed the state column to state_abbr!)
+
+
+sector_spatial2 <- inner_join(conus, sector_spatial2, by = "state_abbr")
+
+Check the class of sector_spatial2 and then run the object to examine its output into the console. 
+
+What is its class?
+
+Interpret what “Simple feature collection with 48 features and 6 fields” means.
+
+What is the geometry type? 
+
+Why do you think it is a multipolygon rather than just a polygon? (HINT: Simple feature collection)
+
+What is the CRS?
+
+
+### Step 9.3:
+Now use this sector_spatial2 sf object to build a map with ggplot(). Include:
+•	Geom_sf with each state fill represented by sector
+•	State labels
+•	Title, caption
+•	Appropriate colors
+•	Adjust theme elements (axis.text, plot.caption, etc.)
+ggplot() +
+  geom_sf(data = sector_spatial2, aes(fill = sector), col = "black", size = .1) +
+  geom_sf_text(data = sector_spatial2, aes(label = state_abbr), col = "black") +
+  labs(title = "Top water users in each state",
+       caption = "Figure 1: Top water withdrawaling sector in each state. Data from USGS (2015). Created by Angus Watters",
+       x = "",
+       y = "",
+       fill = "") +
+  scale_fill_manual(values = c('green4', 'dodgerblue3', 'red2', 'darkorange')) +
+  theme_classic() +
+  theme(plot.title =element_text(size = 16, vjust = 2),
+        axis.text = element_text(face = "bold", size =10),
+        axis.title = element_text(size = 12),
+        legend.title = element_text(size = 12),
+        legend.position = "top",
+        plot.caption = element_text(hjust = 0, face = "bold", size = 12))
+
+
+ 
+
+
+
+

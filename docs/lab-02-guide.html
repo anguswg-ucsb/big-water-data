@@ -116,7 +116,7 @@
           <div class="SidebarItems" id="toc">
             <ul>
             <li><a href="#goals"><strong>Goals</strong></a></li>
-            <li><a href="#before-we-start"><strong>Before we start:</strong></a></li>
+            <li><a href="#open-script-from-pre-lab_02"><strong>Open Script from Pre-lab_02</strong></a></li>
             <li><a href="#load-in-libraries"><strong>Load in libraries</strong></a><ul>
             <li><a href="#help-function"><strong>help() function</strong></a></li>
             </ul></li>
@@ -212,15 +212,14 @@ span.code {
 </ul>
 <hr />
 </div>
-<div id="before-we-start" class="section level1">
-<h1><strong>Before we start:</strong></h1>
+<div id="open-script-from-pre-lab_02" class="section level1">
+<h1><strong>Open Script from Pre-lab_02</strong></h1>
 <ul>
-<li>Open up your lab-02 Rproject from your Rprojects folder</li>
-<li>Download the <code>export.csv</code> file from GauchoSpace and save it to the <code>data</code> folder in your <code>lab-02 Rproject</code></li>
-<li>Then open your <code>lab-02-script.R</code> file from your <code>docs</code> folder</li>
-<li>At the top of your Rscript, type the <code>#</code> and then type your name, the course name, lab 2, and the date afterwords</li>
+<li>Open up your lab-02 Rproject from your Rprojects folder. At the top of your Rscript, you should have the #, followed by Lab-02, your name, and the date.</li>
+<li>Remind yourself what the hash symbol (i.e, #) does. The <strong>hash symbol is used to “comment out”</strong> text in your RScript. What does this mean? R does not run it as code. Note that if you kept your text, but removed the #, you would get an error message.</li>
+<li>It is good practice to use the # to comment on your code and describe your process. It helps you remember what code does, as well as helps you keep track of things like units. It also helps someone viewing your code to understand your processes.</li>
+<li>Note that under your intro comment, you should have two libraries ready to load with code that looks like the following</li>
 </ul>
-<p>The <strong>hash symbol <code>#</code></strong> is used to <strong>“comment out”</strong> text in your RScript so R does not run it as code. It is good practice to get used to using the <code>#</code> to label your code and describe your process. It helps you remember what certain code is doing and it also helps someone viewing your code to understand your process</p>
 <pre class="r"><code># Angus Watters
 # ENVS 193 - Professor Perrone
 # Lab 2
@@ -233,16 +232,12 @@ span.code {
 <li>Load these libraries in by using the <code>library()</code> function</li>
 </ul>
 <pre class="r"><code>library(tidyverse)
+library(readr)
 library(here)</code></pre>
 <div id="help-function" class="section level2">
 <h2><strong>help() function</strong></h2>
-<ul>
-<li>the help() function is a very useful tool for understanding what a function does and what inputs it takes.</li>
-<li>When you call the help function, the help page for the function you called will appear in the bottom right pane</li>
-<li>At the bottom of the help page you will find code examples for that function, you can run these yourself to get an idea of how to use a function!</li>
-<li>As you go through this lab, use the <code>help()</code> function to get more information on the functions we will be using</li>
-<li>You can access the help documentation for any function by entering the function into the <code>help()</code> function like so:</li>
-</ul>
+<p>The <code>help() function</code> is a tool for understanding what a function does, what inputs it takes, and what outputs it gives. When you call the help function, the help page for the function you called will appear in the bottom right pane, a tab to the right of the Files tab.</p>
+<p>The Help tab is great. At the bottom page you will find code examples for that function, you can run these yourself to get an idea of how to use a function! <strong>As you go through this lab, use the help() function to get more information on the functions we will be using.</strong> You can access the help for any function; for example, let’s use the help function to get information on the library function.</p>
 <pre class="r"><code>help(library) # calling help for the library() function</code></pre>
 <p><img src="img/help-function.png" /></p>
 </div>
@@ -260,36 +255,30 @@ library(here)</code></pre>
 <pre><code>## [1] &quot;C:/Users/angus/OneDrive/Desktop/github/big-water-data&quot;</code></pre>
 <p><br></p>
 <p>So to access the <code>export.csv</code> file in our data folder we need to get to<br> <strong>“C:/Users/angus/OneDrive/Desktop/github/big-water-data/data/export.csv”</strong><br> here() will give us an easy way of finding this path</p>
-<pre class="r"><code>here(&quot;data/export.csv&quot;)</code></pre>
-<pre><code>## [1] &quot;C:/Users/angus/OneDrive/Desktop/github/big-water-data/data/export.csv&quot;</code></pre>
+<pre class="r"><code>here(&quot;docs/data/export.csv&quot;)</code></pre>
+<pre><code>## [1] &quot;C:/Users/angus/OneDrive/Desktop/github/big-water-data/docs/data/export.csv&quot;</code></pre>
 <p><br></p>
-<pre class="r"><code>read_csv(here(&quot;data/export.csv&quot;))</code></pre>
-<pre><code>## # A tibble: 1 x 14
-##      X1 `Public Supply` Domestic Industrial Irrigation `Irrigation-Cro~
-##   &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
-## 1     1            49.9     0.52       6.36       56.0             53.0
-## # ... with 8 more variables: `Irrigation-Golf` &lt;dbl&gt;, Livestock &lt;dbl&gt;,
-## #   Aquaculture &lt;dbl&gt;, Mining &lt;dbl&gt;, Thermo &lt;dbl&gt;, `Thermo: Once
-## #   Through` &lt;dbl&gt;, `Thermo: Recirc` &lt;dbl&gt;, Total &lt;dbl&gt;</code></pre>
+<pre class="r"><code>read_csv(here(&quot;docs/data/export.csv&quot;), skip = 1)</code></pre>
+<pre><code>## # A tibble: 0 x 14
+## # ... with 14 variables: `1` &lt;chr&gt;, `49.94` &lt;chr&gt;, `0.52` &lt;chr&gt;, `6.36` &lt;chr&gt;,
+## #   `55.95` &lt;chr&gt;, `52.95` &lt;chr&gt;, `3` &lt;chr&gt;, `0.88` &lt;chr&gt;, `0` &lt;chr&gt;,
+## #   `0.04` &lt;chr&gt;, `0_1` &lt;chr&gt;, `0_2` &lt;chr&gt;, `0_3` &lt;chr&gt;, `113.69` &lt;chr&gt;</code></pre>
 <p>Run this code and you’ll notice the dataframe outputs to our console. How do we save this dataframe to a variable so we can conveniently access again.</p>
 <p><br></p>
 </div>
 <div id="variables" class="section level1">
 <h1><strong>Variables</strong></h1>
 <p>Lets create a variable named <code>water_df</code> and assign it to our .csv file!</p>
-<pre class="r"><code>water_df = read_csv(here(&quot;data/export.csv&quot;))</code></pre>
+<pre class="r"><code>water_df = read_csv(here(&quot;docs/data/export.csv&quot;), skip = 1)</code></pre>
 <p><br> <br></p>
 <p>If you look at your environment (top right pane) you should see a variable called <code>water_df</code> which has 1 observation of 14 different variables!</p>
 <p><br></p>
 <p>Now run <code>water_df</code> in your Rscript or your console you should see this:</p>
 <pre class="r"><code>water_df</code></pre>
-<pre><code>## # A tibble: 1 x 14
-##      X1 `Public Supply` Domestic Industrial Irrigation `Irrigation-Cro~
-##   &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
-## 1     1            49.9     0.52       6.36       56.0             53.0
-## # ... with 8 more variables: `Irrigation-Golf` &lt;dbl&gt;, Livestock &lt;dbl&gt;,
-## #   Aquaculture &lt;dbl&gt;, Mining &lt;dbl&gt;, Thermo &lt;dbl&gt;, `Thermo: Once
-## #   Through` &lt;dbl&gt;, `Thermo: Recirc` &lt;dbl&gt;, Total &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 0 x 14
+## # ... with 14 variables: `1` &lt;chr&gt;, `49.94` &lt;chr&gt;, `0.52` &lt;chr&gt;, `6.36` &lt;chr&gt;,
+## #   `55.95` &lt;chr&gt;, `52.95` &lt;chr&gt;, `3` &lt;chr&gt;, `0.88` &lt;chr&gt;, `0` &lt;chr&gt;,
+## #   `0.04` &lt;chr&gt;, `0_1` &lt;chr&gt;, `0_2` &lt;chr&gt;, `0_3` &lt;chr&gt;, `113.69` &lt;chr&gt;</code></pre>
 <p>Before getting into the data within our data frame lets just quickly look at different data structures within R</p>
 </div>
 <div id="data-structures" class="section level1">
@@ -426,37 +415,37 @@ list2</code></pre>
 <p><br></p>
 <p>And here is our dataframe. The data frame is 1 observation (rows) by 14 variables (columns)<br>Notice the <code>num</code> classification next to all of the columns, this is indicating the type of data in each column</p>
 <pre class="r"><code>str(water_df) </code></pre>
-<pre><code>## tibble [1 x 14] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ X1                  : num 1
-##  $ Public Supply       : num 49.9
-##  $ Domestic            : num 0.52
-##  $ Industrial          : num 6.36
-##  $ Irrigation          : num 56
-##  $ Irrigation-Crops    : num 53
-##  $ Irrigation-Golf     : num 3
-##  $ Livestock           : num 0.88
-##  $ Aquaculture         : num 0
-##  $ Mining              : num 0.04
-##  $ Thermo              : num 0
-##  $ Thermo: Once Through: num 0
-##  $ Thermo: Recirc      : num 0
-##  $ Total               : num 114
+<pre><code>## tibble [0 x 14] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ 1     : chr(0) 
+##  $ 49.94 : chr(0) 
+##  $ 0.52  : chr(0) 
+##  $ 6.36  : chr(0) 
+##  $ 55.95 : chr(0) 
+##  $ 52.95 : chr(0) 
+##  $ 3     : chr(0) 
+##  $ 0.88  : chr(0) 
+##  $ 0     : chr(0) 
+##  $ 0.04  : chr(0) 
+##  $ 0_1   : chr(0) 
+##  $ 0_2   : chr(0) 
+##  $ 0_3   : chr(0) 
+##  $ 113.69: chr(0) 
 ##  - attr(*, &quot;spec&quot;)=
 ##   .. cols(
-##   ..   X1 = col_double(),
-##   ..   `Public Supply` = col_double(),
-##   ..   Domestic = col_double(),
-##   ..   Industrial = col_double(),
-##   ..   Irrigation = col_double(),
-##   ..   `Irrigation-Crops` = col_double(),
-##   ..   `Irrigation-Golf` = col_double(),
-##   ..   Livestock = col_double(),
-##   ..   Aquaculture = col_double(),
-##   ..   Mining = col_double(),
-##   ..   Thermo = col_double(),
-##   ..   `Thermo: Once Through` = col_double(),
-##   ..   `Thermo: Recirc` = col_double(),
-##   ..   Total = col_double()
+##   ..   `1` = col_character(),
+##   ..   `49.94` = col_character(),
+##   ..   `0.52` = col_character(),
+##   ..   `6.36` = col_character(),
+##   ..   `55.95` = col_character(),
+##   ..   `52.95` = col_character(),
+##   ..   `3` = col_character(),
+##   ..   `0.88` = col_character(),
+##   ..   `0` = col_character(),
+##   ..   `0.04` = col_character(),
+##   ..   `0_1` = col_character(),
+##   ..   `0_2` = col_character(),
+##   ..   `0_3` = col_character(),
+##   ..   `113.69` = col_character()
 ##   .. )</code></pre>
 <p><br></p>
 </div>
@@ -469,34 +458,36 @@ list2</code></pre>
 </ul>
 <p>So if we call <code>water_df[1,2]</code> we will get the first row and second column of our dataframe</p>
 <pre class="r"><code>water_df[1,2]  # row 1, column 2</code></pre>
+<pre><code>## Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
+## Use `NA_integer_` as row index to obtain a row full of `NA` values.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## # A tibble: 1 x 1
-##   `Public Supply`
-##             &lt;dbl&gt;
-## 1            49.9</code></pre>
+##   `49.94`
+##   &lt;chr&gt;  
+## 1 &lt;NA&gt;</code></pre>
 <p><br></p>
 <p>If we call just <code>water_df[1,]</code> we will get the entire first row with all the columns of our dataframe</p>
 <pre class="r"><code>water_df[1,]  # row 1, column 2</code></pre>
 <pre><code>## # A tibble: 1 x 14
-##      X1 `Public Supply` Domestic Industrial Irrigation `Irrigation-Cro~
-##   &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
-## 1     1            49.9     0.52       6.36       56.0             53.0
-## # ... with 8 more variables: `Irrigation-Golf` &lt;dbl&gt;, Livestock &lt;dbl&gt;,
-## #   Aquaculture &lt;dbl&gt;, Mining &lt;dbl&gt;, Thermo &lt;dbl&gt;, `Thermo: Once
-## #   Through` &lt;dbl&gt;, `Thermo: Recirc` &lt;dbl&gt;, Total &lt;dbl&gt;</code></pre>
+##   `1`   `49.94` `0.52` `6.36` `55.95` `52.95` `3`   `0.88` `0`   `0.04` `0_1`
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;
+## 1 &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; 
+## # ... with 3 more variables: `0_2` &lt;chr&gt;, `0_3` &lt;chr&gt;, `113.69` &lt;chr&gt;</code></pre>
 <p><br></p>
 <p>You can use <code>:</code> to subset a range of columns, the structure to do this is <code>dataframe[column1:column(n)]</code></p>
 <pre class="r"><code>water_df[1:4]</code></pre>
-<pre><code>## # A tibble: 1 x 4
-##      X1 `Public Supply` Domestic Industrial
-##   &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
-## 1     1            49.9     0.52       6.36</code></pre>
+<pre><code>## # A tibble: 0 x 4
+## # ... with 4 variables: `1` &lt;chr&gt;, `49.94` &lt;chr&gt;, `0.52` &lt;chr&gt;, `6.36` &lt;chr&gt;</code></pre>
 <p><br></p>
 <p>Let’s subset the first row and the second column using the <code>$</code></p>
 <pre class="r"><code>water_df$&quot;Public Supply&quot;[1]</code></pre>
-<pre><code>## [1] 49.94</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `Public Supply`.</code></pre>
+<pre><code>## NULL</code></pre>
 <p>And then the fourth column and all the rows (we only have 1 row in our dataframe so we will only get the first row)</p>
 <pre class="r"><code>water_df$Industrial</code></pre>
-<pre><code>## [1] 6.36</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `Industrial`.</code></pre>
+<pre><code>## NULL</code></pre>
 <p>You’ll notice when we wanted to subset the first row and second column, <code>water_df$"Public Supply"[1]</code> we had to use quotations around the column name, but we didnt need to do this in the following example, <code>water_df$Industrial</code>. This is because the “Public Supply” has column has a space between the two words.</p>
 <p><strong>Try running the same code without the quotations and see what happens. </strong></p>
 <p><strong>Did you receive an error?</strong></p>
@@ -525,11 +516,13 @@ list2</code></pre>
 </blockquote>
 <p>THe data type for the values in the <code>Public Supply</code> column</p>
 <pre class="r"><code>class(water_df$&quot;Public Supply&quot;)</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `Public Supply`.</code></pre>
+<pre><code>## [1] &quot;NULL&quot;</code></pre>
 <p><br></p>
 <p>And for the <code>Industrial</code> column</p>
 <pre class="r"><code>class(water_df$Industrial)</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `Industrial`.</code></pre>
+<pre><code>## [1] &quot;NULL&quot;</code></pre>
 <p>All of our columns contain <code>numeric</code> data types but you will encounter situations where you may have a column with character data types that you wish to be numeric, and vice versa.</p>
 <p><br></p>
 <p><strong>The following example shows why this is important to know</strong></p>

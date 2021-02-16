@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="ENVS 193" />
+    
+    
+    <title>Lab 2</title>
+
+        <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+    <script src="site_libs/navigation-1.1/tabsets.js"></script>
+    <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+    <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+    <link href="site_libs/downcute-0.1/downcute.css" rel="stylesheet" />
+    <link href="site_libs/downcute-0.1/downcute_fonts_embed.css" rel="stylesheet" />
+    <script src="site_libs/downcute-0.1/downcute.js"></script>
+    <script src="site_libs/prism-1.22/prism.js"></script>
+    
+    
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+                  <!-- downcute start -->   
+   <div id="docute" class="Root">
+     <div class="Page layout-narrow">
+      <div class="Wrap">
+        <div class="Sidebar">
+          <div class="SidebarItems" id="toc">
+            <ul>
+            <li><a href="#lab-05">Lab 05</a><ul>
+            <li><a href="#step-1-load-libraries">Step 1: Load libraries</a></li>
+            <li><a href="#step-2-read-in-your-data-and-join-water_use-with-centroids">Step 2: Read in your data and join water_use with centroids</a></li>
+            <li><a href="#step-3-select-freshwater-total-columns-and-summarize">Step 3: Select freshwater total columns and summarize</a></li>
+            <li><a href="#step-4-add-latitudelongitude-columns-to-sectors">Step 4: Add latitude/longitude columns to sectors</a></li>
+            <li><a href="#step-5-stacked-bar-graph-withdrawals-by-sector">Step 5: Stacked bar graph – withdrawals by sector</a></li>
+            <li><a href="#step-6-stacked-bar-graph-total-surface-and-groundwater-withdrawals">Step 6: Stacked bar graph – Total surface and groundwater withdrawals</a></li>
+            <li><a href="#step-7-sf-and-usa-boundaries-packages">Step 7: Sf and USA boundaries packages</a></li>
+            <li><a href="#step-8-mapping---estimated-use-of-water-in-the-us">Step 8: Mapping - Estimated Use of water in the US</a></li>
+            <li><a href="#step-9-mapping-sector-within-each-state-with-the-greatest-water-withdrawals">Step 9: Mapping – Sector within each state with the greatest water withdrawals</a></li>
+            </ul></li>
+            </ul>
+          </div>
+          <div data-position="sidebar:post-end" class="InjectedComponents"><div class="dark-theme-toggler"><div class="toggle"><div class="toggle-track"><div class="toggle-track-check"><img  src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div> <div class="toggle-track-x"><img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div></div> <div class="toggle-thumb"></div></div> <input type="checkbox" aria-label="Switch between Dark and Default theme" class="toggler-screen-reader-only"></div></div>
+        </div>
+        <div class="Main">
+          <div class="Content" id="content"> 
+   
+   
+      
+   <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="index.html">ENVS 193</a>
+       </div>
+       <div id="navbar" class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+           <li>
+     <a href="git-bash.html">GitHub-RStudio</a>
+   </li>
+   <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+       Lab 2
+        
+       <span class="caret"></span>
+     </a>
+     <ul class="dropdown-menu" role="menu">
+       <li>
+         <a href="lab-02-prelab.html">Prelab</a>
+       </li>
+       <li>
+         <a href="lab-02-guide.html">Lab 2</a>
+       </li>
+     </ul>
+   </li>
+         </ul>
+         <ul class="nav navbar-nav navbar-right">
+           
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div><!--/.container -->
+   </div><!--/.navbar -->
+        
+      <h1 class="title">Lab 2</h1>
+         <h1 class="subtitle">RScripts, data types, data structures and subsetting</h1>
+   
+      <p class="authors">
+           <span class="glyphicon glyphicon-user"></span> <a href="index.html">ENVS 193</a>
+      </p>
+         <p class="date"><span class="glyphicon glyphicon-calendar"></span> Angus Watters - based off material from Mike Johnson and input from Debra Perrone</p>
+         
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div class="page-content has-page-title">
+<style type="text/css">
+span.code {
+      background:rgba(240,128,128, 0.2);
+      border-radius: 5px 5px 5px 5px;
+      padding-left:5px;
+      padding-top:2px;
+      padding-right:5px;
+      padding-bottom:2px;
+      color:red;
+     } 
+</style>
+<div id="lab-05" class="section level1">
+<h1>Lab 05</h1>
+<p>WRITTEN BY ANGUS WATTERS AND PROFESSOR PERRONE</p>
+<p>Goals - Explore more ggplot features – Geom_col() – Scale_fill_gradient() – Guides() – Geom_sf() – Geom_sf_text() – Theme()</p>
+<ul>
+<li><p>Practice data cleaning, wrangling, and manipulation</p></li>
+<li><p>Introduction to sf package and using R as a GIS</p></li>
+<li><p>Create spatial feature objects</p></li>
+<li><p>Assign lat/long coordinates to a coordinate reference system (CRS)</p></li>
+<li><p>Change the CRS of an object</p></li>
+<li><p>Create maps</p></li>
+<li><p>Practice using the sf package: – st_as_sf() – st_transform()</p></li>
+</ul>
+<p>Lab legend Steps Shown in bolded dark blue text, numbered Functions Shown in bolded blue text Questions you must answer Shown in burgundy bolded text Check points Shown in bolded green text Code examples Grey highlighted lines of text Code comment (i.e., #) Green text, highlighted in grey YOUR ANSWERS Black text, highlighted in yellow</p>
+<p>Note that all of your responses to the questions in this lab must be in black text, highlighted in yellow.</p>
+<div id="step-1-load-libraries" class="section level2">
+<h2>Step 1: Load libraries</h2>
+<p>Load the following libraries into your Rscript:</p>
+<pre class="r"><code># Data prep &amp; cleaning
+library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(here)</code></pre>
+<pre><code>## Warning: package &#39;here&#39; was built under R version 4.0.3</code></pre>
+<pre><code>## here() starts at C:/Users/angus/OneDrive/Desktop/github/big-water-data</code></pre>
+<pre class="r"><code># Data manipulation
+library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## v ggplot2 3.3.2     v purrr   0.3.4
+## v tibble  3.0.3     v dplyr   1.0.2
+## v tidyr   1.1.1     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.5.0</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code># Spatial packages
+library(USAboundaries)
+library(sf)</code></pre>
+<pre><code>## Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1</code></pre>
+</div>
+<div id="step-2-read-in-your-data-and-join-water_use-with-centroids" class="section level2">
+<h2>Step 2: Read in your data and join water_use with centroids</h2>
+<p>Now read in the USGS excel file and the centroids.rds file and assign them to water_use and centroids, respectively.</p>
+<div id="step-2.1" class="section level3">
+<h3>Step 2.1:</h3>
+<p>Use clean_names() and rename() to clean water_use in the same way you did in labs 3 and 4. Make sure the necessary columns are all numerics and no characters using mutate() and across().</p>
+<p>water_use &lt;- water_use %&gt;% mutate(across(c(8:141), as.numeric))</p>
+</div>
+<div id="step-2.2" class="section level3">
+<h3>Step 2.2:</h3>
+<p>Create a data_dictionary object, clean the names, pivot_wider(), clean the names again, and pivot_longer() so you have a clean and easily readable dictionary. This is also the same procedure you did in lab 4.</p>
+</div>
+</div>
+<div id="step-3-select-freshwater-total-columns-and-summarize" class="section level2">
+<h2>Step 3: Select freshwater total columns and summarize</h2>
+<p>Now use select() to select the state column and the columns with data on total freshwater withdrawals, and assign this to a new object named freshwater_select</p>
+<div id="step-3.1" class="section level3">
+<h3>Step 3.1:</h3>
+<p>From your freshwater_select object, create a new object named sectors and assign it to the freshwater_select dataframe. Then use mutate to calculate and add 5 columns: domestic, industrial, agricultural, mining, and thermoelectric. Finally, select the state column and these new columns. This should leave you with a dataframe with 3223 observations and 7 variables.</p>
+<p>freshwater_select = select(water_use, state, contains(‘w_fr_to’))</p>
+<p>sectors &lt;- freshwater_select %&gt;% mutate(Domestic = ps_w_fr_to + do_w_fr_to, Industrial = in_w_fr_to, Agriculture = ir_w_fr_to + li_w_fr_to + aq_w_fr_to, Mining = mi_w_fr_to, Thermoelectric = pt_w_fr_to, Total = Domestic + Industrial + Agriculture + Mining + Thermoelectric) %&gt;% select(1, 15:20)</p>
+</div>
+<div id="step-3.2" class="section level3">
+<h3>Step 3.2:</h3>
+<p>Now in a new pipeline, group the sectors data frame by state, use summarize to sum across the 5 columns. Then pivot_longer so that you now have 3 columns: state, sector, and withdrawals. After this, the sectors data frame should have 318 rows and 3 columns.</p>
+<p>sectors &lt;- sectors %&gt;% group_by(state) %&gt;% summarise(across(Domestic:Total, sum)) %&gt;% pivot_longer(cols = c(2:7), names_to = “sector”, values_to = “withdrawal”)</p>
+</div>
+</div>
+<div id="step-4-add-latitudelongitude-columns-to-sectors" class="section level2">
+<h2>Step 4: Add latitude/longitude columns to sectors</h2>
+<p>Now we are going to add latitude and longitude columns to our sectors data frame. To do this, inner join sectors with the centroids data frame. (HINT: Join them by state) The sectors data frame should now have 312 rows and 5 columns.</p>
+<p>sectors &lt;- inner_join(sectors, centroids, by = ‘state’)</p>
+</div>
+<div id="step-5-stacked-bar-graph-withdrawals-by-sector" class="section level2">
+<h2>Step 5: Stacked bar graph – withdrawals by sector</h2>
+<p>We will use our sectors data frame to create a plot similar to the one you made in lab 4, but instead of having the each state’s sector bars side by side, we will have each state be a stacked bar. When we created the sectors data frame you may remember we add a “Total” column. For this particular plot, we don’t want to include this data, thus we will want to filter on the sector column. This would be a good place to make an “intermediary object,” that you will use just for your ggplot. An intermediary object means you create a new object and assign it to the data frame you performed a subsetting operation on. In this case, create a new object that contains the filtered sectors for our ggplot, rather than filtering sectors and reassigning it to sectors. This is good practice as it lets you easily go back to the original data frame that contains all the data. For example, in later steps we will use the “Total” column. Making intermediary objects that stem from your main data frame saves you time and improves your workflow/data frame/ workspace organization. Just be consistent in your naming choice, and make it clear by the name that they’re temporary/single use. Common generic object names: • df1, df2, etc. • test1, test2, etc. • tmp1, tmp2, etc.</p>
+<div id="step-5.1" class="section level3">
+<h3>Step 5.1:</h3>
+<p>Create an intermediary object filtering out the Total sector rows df1 = sectors %&gt;% filter(sector != “Total”)</p>
+</div>
+<div id="step-5.2" class="section level3">
+<h3>Step 5.2:</h3>
+<p>Use your df1 data frame to build a ggplot with the following elements: • The state on the X axis • Withdrawals on the Y axis • A geom_col() layer with the fill representing each sector (TRY EXPERIMENTING WITH ALPHA PARAM AFTER FILL AESTHETIC, ALPHA CONTROLS TRANSPARENCY? NOT GREAT LOOK FOR THIS PLOT BUT A NICE FEATURE TO BE AWARE OF) • Add labels (title, caption, axis titles, legend title/no title) • Manually assign fill colors • Use theme() to adjust the layout of the plot (plot title, axis title, axis text, legend title, caption text/position)</p>
+<p>ggplot(df1, aes(x = state, y = withdrawal)) + geom_col(aes(fill = sector)) + labs(title = “Total sector water withdrawals by state”, caption = “Figure 1: Withdrawals by sector. Data from USGS (2015). Created by Angus Watters”, x = “State”, y = “Total withdrawals”, fill = "“) + scale_fill_manual(values = c(‘green4’, ‘dodgerblue3’, ‘red2’, ‘gray56’, ‘darkorange’)) + theme_bw() + theme(plot.title =element_text(size = 16, vjust = 2), axis.text = element_text(face =”bold“, size =10), axis.title = element_text(size = 12), legend.title = element_text(size = 12), legend.position = “top”, plot.caption = element_text(hjust = 0, face = “bold”, size = 12))</p>
+<p>Run your ggplot. How are the states on the X axis ordered? Columns will be in alphabetical order (A-Z)</p>
+</div>
+<div id="step-5.3" class="section level3">
+<h3>Step 5.3:</h3>
+<p>We want to put our data in order of the magnitude of withdrawals. Reorder your X axis so the highest total withdrawal is on the left and it descends in magnitude to the right.</p>
+<p>If they don’t put a negative infront of withdrawals there columns will appear from lowest to highest withdrawals and not highest to lowest</p>
+<p>ggplot(df1, aes(x = reorder(state, -withdrawal), y = withdrawal)) + geom_col(aes(fill = sector)) + labs(title = “Total sector water withdrawals by state”, caption = “Figure 1: Withdrawals by sector. Data from USGS (2015). Created by Angus Watters”, x = “State”, y = “Total withdrawals”, fill = "“) + scale_fill_manual(values = c(‘green4’, ‘dodgerblue3’, ‘red2’, ‘gray56’, ‘darkorange’)) + theme_bw() + theme(plot.title =element_text(size = 16, vjust = 2), axis.text = element_text(face =”bold“, size =10), axis.title = element_text(size = 12), legend.title = element_text(size = 12), legend.position = “top”, plot.caption = element_text(hjust = 0, face = “bold”, size = 12))</p>
+</div>
+</div>
+<div id="step-6-stacked-bar-graph-total-surface-and-groundwater-withdrawals" class="section level2">
+<h2>Step 6: Stacked bar graph – Total surface and groundwater withdrawals</h2>
+<p>Our goal is to make a stacked bar graph that shows the total surface water and groundwater withdrawals by state, in order of highest to lowest withdrawal volume.</p>
+<div id="step-6.1" class="section level3">
+<h3>Step 6.1:</h3>
+<p>Locate total water withdrawal columns: The first thing we will do is subset our water_use data frame and create a new object named withdrawal_total. Select the columns that contain “to_,” the character string that contains the total withdrawal columns. You’ll notice that we all selected the ps_to_pop column, we don’t want this column so select again, this time select all the columns except ps_to_pop. withdrawal_total &lt;- water_use %&gt;% select(state, contains(‘to_’)) %&gt;% select(!ps_to_pop)</p>
+</div>
+<div id="step-6.2" class="section level3">
+<h3>Step 6.2:</h3>
+<p>Select groundwater &amp; surface water columns: Next, we want to further subset our data, creating new object withdrawal_sw_gw from our withdrawal_total data frame, and select state, total groundwater withdrawals (fresh + saline), and total surface water withdrawals (fresh + saline). withdrawal_sw_gw &lt;- withdrawal_total %&gt;% select(state,to_wgw_to, to_wsw_to)</p>
+</div>
+<div id="step-6.3" class="section level3">
+<h3>Step 6.3:</h3>
+<p>Group, summarize, rename, pivot_longer: Now we will get our withdrawal_sw_gw data frame prepped for plotting. We want to group the data frame by state and summarise across the two withdrawal rows. Like we have done before, this is going to apply a function to each of our groups (states). That is, all the rows that have the same state column are one group, and the values in that groups rows will be summed. Follow your summary but renaming the to_wgw_to and to_wsw_to columns to “Groundwater” and “Surface water” respectively. The reason for this is that these will eventually be labels on our plot, and it is easier to change them at this point then it is when the data is plotted in ggplot. Lastly, pivot the data frame to be longer (names_to = “source”, values_to = “withdrawal”). withdrawal_sw_gw &lt;- withdrawal_sw_gw %&gt;% group_by(state) %&gt;% summarise(across(to_wgw_to:to_wsw_to, sum)) %&gt;% rename(Groundwater = to_wgw_to, “Surface water” = to_wsw_to) %&gt;% pivot_longer(cols = c(2:3), names_to = “source”, values_to = “withdrawal”)</p>
+</div>
+<div id="step-6.4" class="section level3">
+<h3>Step 6.4:</h3>
+<p>Use the withdrawal_sw_gw data frame to create a stacked bar graph: • X axis ordered from most to least withdrawals • Y axis total withdrawals • Geom_col() layer • Stacked bars filled by source (EXPERIMENT WITH ALPHA??) • Labels (title, caption, XY axis, legend title/no title) • Appropriate colors • Theme_ and adjust text size, face, position using theme()</p>
+<p>ggplot(withdrawal_sw_gw, aes(x = reorder(state, -withdrawal), y = withdrawal)) + geom_col(aes(fill = source), alpha = 0.7) + labs(title = “Groundwater and surface water withdrawals”, caption = “Figure 1: Total groundwater and surface water withdrawals. Data from USGS (2015). Created by Angus Watters”, x = “State”, y = “Total withdrawals”, fill = "“) + scale_fill_manual(values = c(‘green4’, ‘dodgerblue3’)) + theme_bw() + theme(plot.title =element_text(size = 16, vjust = 2), axis.text = element_text(face =”bold“, size =10), axis.title = element_text(size = 12), legend.title = element_text(size = 12), plot.caption = element_text(hjust = 0, face =”bold", size = 12))</p>
+</div>
+</div>
+<div id="step-7-sf-and-usa-boundaries-packages" class="section level2">
+<h2>Step 7: Sf and USA boundaries packages</h2>
+<p>Sf package: The Sf package allows R to create Simple Features objects. Simple features are a standardized way of encoding spatial vector data. A simple feature is a data frame in R that carries a geometry list column containing latitude and longitude information.</p>
+<p>Most common simple feature objects you will interact with:</p>
+<p>POINT zero-dimensional geometry containing a single point LINESTRING sequence of points connected by straight, non-self intersecting line pieces; one-dimensional geometry POLYGON geometry with a positive area (two-dimensional); sequence of points form a closed, non-self intersecting ring; the first ring denotes the exterior ring, zero or more subsequent rings denote holes in this exterior ring MULTIPOINT set of points; a MULTIPOINT is simple if no two Points in the MULTIPOINT are equal MULTILINESTRING set of linestrings MULTIPOLYGON set of polygons GEOMETRYCOLLECTION set of geometries of any type except GEOMETRYCOLLECTION</p>
+<p>USAboundaries package: The USAboundaries package (provided by the U.S. Census Buraeu) contains boundaries for the following US geographical units: • State • County • Congressional districts • Zipcodes</p>
+<div id="step-7.1" class="section level3">
+<h3>Step 7.1:</h3>
+<p>Let’s begin by creating a new object named conus (stands for continental United States). We can do this by accessing the us_states() function from within the USAboundaries package:</p>
+<p>conus = us_states()</p>
+<p>Run the class() function on your conus object. What class is the object?</p>
+<p>Now, run the conus object. You should notice several differences from your standard dataframe:</p>
+<p>• Simple feature collection with 52 features and 12 fields o Similar to a standard dataframe, this says that there are 52 rows with 12 columns o However the rows are now called features, this is because each row has its own unique geometry attached to it. • Geometry type: Multipolygon o The conus object is a multipolygon because it is made up of 52 features (individual polygons) • Bbox: xmin: -179.1743 ymin: 17.91377 xmax: 179.7739 ymax: 71.35256 o Bbox is your bounding box, these are the minimum and maximum XY coordinates that surround your conus multipolygon • Geographic CRS: WGS 84 o A coordinate system is a set of mathematical rules for specifying how coordinates are to be assigned to points, thus it defines your map projections o WGS 84 is denoted by the CRS code 4326 o The CRS codes you will use most:  4326 – (unit = degree)  4269 – (unit = degree, often used by US government agencies)  5070 – (unit = meter, best for data analysis on contiguous lower 48 states)</p>
+<p>We can use the plot() function to quickly inspect the geometry of a simple feature object. Run this code and see what happens. plot(conus$geometry)</p>
+<p>If you notice, the scale of your geometry features is thrown off by Alaska, Hawaii, and Puerto Rico. You can manipulate a Sf data frame object in the same way do a standard dataframe.</p>
+<p>Remove the Alaska, Hawaii, and Puerto Rico features from your conus object and then run the plot() function again.</p>
+<p>What happened?</p>
+</div>
+<div id="step-7.2" class="section level3">
+<h3>Step 7.2:</h3>
+<p>st_transform() The st_transform() function lets you change the CRS of a sf object. Whenever you’re working with Sf data frames, the rule of thumb is to keep your CRS’s consistent amongst your different sf objects. This is really important because any geographic calculations done in one CRS is incompatible with another. That is, analysis done in one CRS is based on a different starting point from another CRS. The other reason this is important is for mapping purposes. If you attempt to plot two Sf objects with differing CRS, the objects will not be mapped together as you would imagine. This difference in how the objects will be projected can be very large or very small, either way they are not painting an accurate picture of reality.</p>
+<p>Use st_transform to change the conus object from CRS 4326 to CRS 5070: conus &lt;- conus %&gt;% st_transform(5070)</p>
+<p>Now use the plot function to inspect how this changed the geometry of conus.</p>
+</div>
+<div id="step-7.3" class="section level3">
+<h3>Step 7.3:</h3>
+<p>St_as_sf() If we have a data frame that contains latitude and longitude columns, we can then create a Sf object using this information. The st_as_sf() will create a Sf object from columns containing XY coordinates. St_as_sf() function requires you to input the column names of the XY coordinates and a CRS code. If you recall, our centroids data frame contains latitude and longitude columns for the geographic centroid of each state!</p>
+<p>Let use st_as_sf() to create an sf object named centroids_spatial from our centroid dataframe: o The “coords=” argument requires the “X” column first and then the “Y” column o Enter 4326 into the “crs=” argument centroids_spatial = centroids %&gt;% st_as_sf(coords = c(‘lng’, ‘lat’), crs = 4326)</p>
+<p>Now run the centroids_spatial object. What is the geometry type? What do you notice about the columns in centroids_spatial vs. centroids? Geometry type = POINT. The lat/lng columns in centroids_spatial are gone, replaced by the geometry column. Centroids still has lat/lng columns.</p>
+<p>From your environment, open up the conus and centroids_spatial data frames. Look at the geometry columns in each data frame.</p>
+<p>What differences do you notice? Why do you think this is?</p>
+<p>The centroids_spatial object will have just 2 coordinates, one lat, one long. The conus object will have many lat/long pairings. This is because the centroids_spatial object are points, while conus is polygons.</p>
+<p>Use the plot() function on centroids_spatial.</p>
+<p>What do you see?</p>
+<p>Difference between an Sf object and a data frame with lat/lng columns: Even though a data frame contains columns named lat/lng, this does not mean it is a spatial object. R treats the lat/lng columns in our centroids data frame just as it would any other numeric column. These XY points have to be prescribed a coordinate reference system (CRS) to make any sense. The CRS gives coordinates a point of reference by which they can be positioned and form a geometry in space.<br />
+Thus the once we used st_as_sf() on the centroids data frame, assigning the “lat” and “lng” coordinates to a CRS, a geometry column was created from the latitude/longitude coordinates from each row! Objects with geometry columns (sf objects) carry more information, and thus memory. Therefore, sf objects have longer computation times and put more burden on your machine. This means it is important to be aware of when to create an Sf object and when it is better to proceed with data analysis/computations and put off adding your geometries until they’re needed (Mapping, geographic calculations, distances, buffers, elevation) We can ease a lot of computational overhead by being mindful of when we retain our geometry data with our attribute data.</p>
+</div>
+</div>
+<div id="step-8-mapping---estimated-use-of-water-in-the-us" class="section level2">
+<h2>Step 8: Mapping - Estimated Use of water in the US</h2>
+<div id="step-8.1" class="section level3">
+<h3>Step 8.1:</h3>
+<p>conus data frame: Start by making an object name conus from the us_states() function. Transform it to CRS 5070 and filter out Puerto Rico, Alaska, and Hawaii. Then select the state_name and state_abbr columns.</p>
+<p>conus = us_states() %&gt;% st_transform(5070) %&gt;% filter(!name %in% c(‘Puerto Rico’, ‘Alaska’, ‘Hawaii’)) %&gt;% select(state_name, state_abbr)</p>
+<p>Note: “sticky” geometries Open up your conus sf object. Notice that you have three columns (state_name, state_abbr, and geometry) even though you only selected the two columns state_name and state_abbr. This is because with sf objects, the geometries are “sticky,” which means that the geometries will follow their respective rows through all calculations you perform on the rest of the data frame.</p>
+</div>
+<div id="step-8.2" class="section level3">
+<h3>Step 8.2:</h3>
+<p>sector_spatial data frame: Make a second object named sector_spatial, and assign it to your sectors data frame. Use filter to obtain only the “Total” rows, and filter out “PR”, “VI”, “DC”, “HI”, and “AK”. Then rename that state column to “state_abbr.”</p>
+<p>sector_spatial = sectors %&gt;% filter(sector == ‘Total’, !state %in% c(“PR”, “VI”, “DC”, “HI”, “AK”)) %&gt;% rename(state_abbr = state)</p>
+</div>
+<div id="step-8.3" class="section level3">
+<h3>Step 8.3:</h3>
+<p>Join sector_spatial and conus: Next thing we want to do is have each state_abbr from our sector_spatial data frame be matched with their respective state polygon geometries from the conus sf object. To do this we will perform an inner_join on sector_spatial and conus by the state_abbr. Then</p>
+<p>sector_spatial &lt;- inner_join(sector_spatial, conus, by = “state_abbr”) %&gt;% st_as_sf()</p>
+</div>
+<div id="step-8.4" class="section level3">
+<h3>Step 8.4:</h3>
+<p>We can use ggplot to map sf objects. In ggplot, we use the geom_sf() function to create layers with sf objects.</p>
+<p>geom_sf() Create a ggplot with no inputs in the first ggplot() function, and add a geom_sf() layer, inputting your sector_spatial data frame as the data argument:</p>
+<p>ggplot() + geom_sf(data = sector_spatial)</p>
+<p>Run your ggplot and examine the output.</p>
+<p>Our first order of business is to get each state to reflect its total withdrawal data. Let’s now give our geom_sf layer a fill aesthetic. We want the color each state on our map represent the amount of total water withdrawals in that state. We can also outline our states with the color black, and with a thin line (size = 0.1).</p>
+<p>Give the geom_sf layer an aes to accomplish this.</p>
+<p>ggplot() + geom_sf(data = sector_spatial, aes(fill = withdrawal), col = “black”, size = .1))</p>
+<p>geom_sf_text() Now let’s use geom_sf_text() to add state labels. Each time we add a new geom, we need to give it a data frame so it has data to work off of. Input the sector_spatial data frame to geom_sf_text. Run this code.</p>
+<p>What happened?</p>
+<p>The error you received is because no aes label was given to the geom. The geom_sf_text() layer requires you give it an aes label argument. Use the appropriate column from the data frame to label each state.</p>
+<p>ggplot() + geom_sf(data = sector_spatial, aes(fill = withdrawal), col = “black”, size = .1) + geom_sf_text(data = sector_spatial, aes(label = state_abbr))</p>
+<p>It is hard to see the black text font. We can change the color of our label text with the col argument.</p>
+<p>ggplot() + geom_sf(data = sector_spatial, aes(fill = withdrawal), col = “black”, size = .1) + geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = “black”)</p>
+<p>labs() Let’s change the labels on our map using labs(). Add a title and a caption, change the legend title, and get rid of the x and y axis labels to give the map a cleaner look.</p>
+<p>ggplot() + geom_sf(data = sector_spatial, aes(fill = withdrawal), col = “black”, size = .1) + geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = “black”) + labs(title = “Estimated Water use in the United States”, caption = “Figure 1: Total state water withdrawals. Data from USGS (2015). Created by Angus Watters”, x = "“, y =”“, fill =”Water withdrawals (Mgal/day)")</p>
+<p>scale_fill_gradient() We can use the scale_fill_gradient() function to change our legends color scale with the low= and high= parameters. There are many colors available in R.</p>
+<p>I found these color hex codes on this website: RGB Color Codes Chart 🎨 (rapidtables.com)</p>
+<p>ggplot() + geom_sf(data = sector_spatial, aes(fill = withdrawal), col = “black”, size = .1) + geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = “black”) + labs(title = “Estimated Water use in the United States”, caption = “Figure 1: Total state water withdrawals. Data from USGS (2015). Created by Angus Watters”, x = "“, y =”“, fill =”Water withdrawals (Mgal/day)“) + scale_fill_gradient(low = ’#CCE5FF, high =”#003366")</p>
+<p>guides() The guides() function within ggplot gives you several options to “guide” your legend. In this case, we are going to use guide_legend() on the legend aesthetic(fill), this will break our legend up into categories, replacing the continuous scale we had before. The “reverse = TRUE” argument will reverse the order of our legends categories.</p>
+<p>Change the reverse from TRUE to FALSE and see what the effect was. Determine which order you think makes more sense to the viewer.</p>
+<p>ggplot() + geom_sf(data = sector_spatial, aes(fill = withdrawal), col = “black”, size = .1) + geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = “black”) + labs(title = “Estimated Water use in the United States”, caption = “Figure 1: Total state water withdrawals. Data from USGS (2015). Created by Angus Watters”, x = "“, y =”“, fill =”Water withdrawals (Mgal/day)“) + scale_fill_gradient(low = ‘#CCE5FF’, high =”#003366") + guides(fill = guide_legend(reverse = TRUE))</p>
+<p>theme() Last thing to do is use theme() to alter the positioning and size of text on your map. Then pick a theme that you think best improves presentation.</p>
+<p>ggplot() + geom_sf(data = sector_spatial, aes(fill = withdrawal), col = “black”, size = .1) + geom_sf_text(data = sector_spatial, aes(label = state_abbr), col = “black”) + labs(title = “Estimated Water use in the United States”, caption = “Figure 1: Total state water withdrawals. Data from USGS (2015). Created by Angus Watters”, x = "“, y =”“, fill =”Water withdrawals (Mgal/day)“) + scale_fill_gradient(low = ‘#CCE5FF’, high =”#003366“) + guides(fill = guide_legend(reverse = TRUE)) + theme_classic() + theme(plot.title =element_text(size = 16, vjust = 2), axis.text = element_text(face =”bold“, size =10), legend.title = element_text(size = 12), legend.position =”top“, plot.caption = element_text(hjust = 0, face =”bold", size = 12))</p>
+</div>
+</div>
+<div id="step-9-mapping-sector-within-each-state-with-the-greatest-water-withdrawals" class="section level2">
+<h2>Step 9: Mapping – Sector within each state with the greatest water withdrawals</h2>
+<p>The goal of this map is to find which sector accounts for the most water withdrawals in each state.</p>
+<div id="step-9.1" class="section level3">
+<h3>Step 9.1:</h3>
+<p>First lets create a new object that will be end up being the data frame with each state’s top water withdrawing sector. In the last map we made an object called sector_spatial so we don’t want to use that name again so instead we can go with sector_spatial2.</p>
+<p>Create a sector_spatial2 object and assign it your sectors data frame. • Rename the state column to “state_abbr,” • then group the data frame by state_abbr. • Then filter out the following states: (“PR”, “VI”, “DC”, “HI”, “AK”) and filter out the rows which contain a “Total” sector, as we don’t want this displayed on our map (plus it would clearly be the top sector for every state). • Close that pipeline. From sector_spatial2, create a new pipeline and filter the rows in the withdrawal column for only the max() withdrawal values sector_spatial2 = sectors %&gt;% rename(state_abbr = state)</p>
+<p>sector_spatial2 &lt;- sector_spatial2 %&gt;% group_by(state_abbr) %&gt;% filter(sector != ‘Total’, !state_abbr %in% c(“PR”, “VI”, “DC”, “HI”, “AK”))</p>
+<p>sector_spatial2 &lt;- sector_spatial2 %&gt;% filter(withdrawal == max(withdrawal))</p>
+</div>
+<div id="step-9.2" class="section level3">
+<h3>Step 9.2:</h3>
+<p>Now use inner_join() to join our conus sf data frame with our sector_spatial2 data frame by the state_abbr (This is why earlier we renamed the state column to state_abbr!)</p>
+<p>sector_spatial2 &lt;- inner_join(conus, sector_spatial2, by = “state_abbr”)</p>
+<p>Check the class of sector_spatial2 and then run the object to examine its output into the console.</p>
+<p>What is its class?</p>
+<p>Interpret what “Simple feature collection with 48 features and 6 fields” means.</p>
+<p>What is the geometry type?</p>
+<p>Why do you think it is a multipolygon rather than just a polygon? (HINT: Simple feature collection)</p>
+<p>What is the CRS?</p>
+</div>
+<div id="step-9.3" class="section level3">
+<h3>Step 9.3:</h3>
+<p>Now use this sector_spatial2 sf object to build a map with ggplot(). Include: • Geom_sf with each state fill represented by sector • State labels • Title, caption • Appropriate colors • Adjust theme elements (axis.text, plot.caption, etc.) ggplot() + geom_sf(data = sector_spatial2, aes(fill = sector), col = “black”, size = .1) + geom_sf_text(data = sector_spatial2, aes(label = state_abbr), col = “black”) + labs(title = “Top water users in each state”, caption = “Figure 1: Top water withdrawaling sector in each state. Data from USGS (2015). Created by Angus Watters”, x = "“, y =”“, fill =”“) + scale_fill_manual(values = c(‘green4’, ‘dodgerblue3’, ‘red2’, ‘darkorange’)) + theme_classic() + theme(plot.title =element_text(size = 16, vjust = 2), axis.text = element_text(face =”bold“, size =10), axis.title = element_text(size = 12), legend.title = element_text(size = 12), legend.position =”top“, plot.caption = element_text(hjust = 0, face =”bold", size = 12))</p>
+</div>
+</div>
+</div>
+</div>
+
+   
+   
+              </div>
+  </div>
+  </div>
+  </div>
+   
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 		
+	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

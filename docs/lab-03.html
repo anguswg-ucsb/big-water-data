@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="ENVS 193" />
+    
+    
+    <title>Lab 2</title>
+
+        <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+    <script src="site_libs/navigation-1.1/tabsets.js"></script>
+    <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+    <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+    <link href="site_libs/downcute-0.1/downcute.css" rel="stylesheet" />
+    <link href="site_libs/downcute-0.1/downcute_fonts_embed.css" rel="stylesheet" />
+    <script src="site_libs/downcute-0.1/downcute.js"></script>
+    <script src="site_libs/prism-1.22/prism.js"></script>
+    
+    
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+                  <!-- downcute start -->   
+   <div id="docute" class="Root">
+     <div class="Page layout-narrow">
+      <div class="Wrap">
+        <div class="Sidebar">
+          <div class="SidebarItems" id="toc">
+            <ul>
+            <li><a href="#goals"><strong>Goals</strong></a></li>
+            <li><a href="#load-in-libraries-and-data"><strong>Load in libraries and data</strong></a><ul>
+            <li><a href="#help"><strong><code>help()</code></strong></a></li>
+            </ul></li>
+            <li><a href="#step-1-explore-usgs-water-use-datafame"><strong>Step 1:</strong> Explore USGS water use datafame</a></li>
+            <li><a href="#step-2-cleaning-columns"><strong>Step 2:</strong> Cleaning columns</a><ul>
+            <li><a href="#clean_names"><code>clean_names()</code></a></li>
+            <li><a href="#rename"><code>rename()</code></a></li>
+            </ul></li>
+            <li><a href="#step-3-the-pipe-operator"><strong>Step 3:</strong> The pipe operator (%&gt;%)</a></li>
+            <li><a href="#step-4-change-column-data-type"><strong>Step 4:</strong> Change column data type</a><ul>
+            <li><a href="#mutate_at"><code>mutate_at()</code></a></li>
+            </ul></li>
+            <li><a href="#step-6-subset-by-column-only"><strong>Step 6:</strong> subset by column only</a><ul>
+            <li><a href="#select"><code>select()</code></a></li>
+            <li><a href="#contains"><code>contains()</code></a></li>
+            </ul></li>
+            <li><a href="#step-7-adding-columns"><strong>Step 7:</strong> Adding columns</a><ul>
+            <li><a href="#mutate"><code>mutate()</code></a></li>
+            <li><a href="#subset-method">Subset method</a></li>
+            </ul></li>
+            <li><a href="#step-8-filtering-grouping"><strong>Step 8:</strong> Filtering + grouping</a><ul>
+            <li><a href="#filter"><code>filter()</code></a></li>
+            <li><a href="#group_by"><code>group_by()</code></a></li>
+            <li><a href="#summarise"><code>summarise()</code></a></li>
+            </ul></li>
+            <li><a href="#step-9-bring-it-all-together-in-a-ggplot"><strong>Step 9:</strong> Bring it all together in a ggplot</a><ul>
+            <li><a href="#sectors">Sectors</a></li>
+            <li><a href="#check-point"><strong>Check point</strong></a></li>
+            <li><a href="#summarise-by-state"><strong>Summarise by state</strong></a></li>
+            <li><a href="#ggplot"><code>ggplot</code></a></li>
+            </ul></li>
+            </ul>
+          </div>
+          <div data-position="sidebar:post-end" class="InjectedComponents"><div class="dark-theme-toggler"><div class="toggle"><div class="toggle-track"><div class="toggle-track-check"><img  src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div> <div class="toggle-track-x"><img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div></div> <div class="toggle-thumb"></div></div> <input type="checkbox" aria-label="Switch between Dark and Default theme" class="toggler-screen-reader-only"></div></div>
+        </div>
+        <div class="Main">
+          <div class="Content" id="content"> 
+   
+   
+      
+   <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="index.html">ENVS 193</a>
+       </div>
+       <div id="navbar" class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+           <li>
+     <a href="git-bash.html">GitHub-RStudio</a>
+   </li>
+   <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+       Lab 2
+        
+       <span class="caret"></span>
+     </a>
+     <ul class="dropdown-menu" role="menu">
+       <li>
+         <a href="lab-02-prelab.html">Prelab</a>
+       </li>
+       <li>
+         <a href="lab-02-guide.html">Lab 2</a>
+       </li>
+     </ul>
+   </li>
+         </ul>
+         <ul class="nav navbar-nav navbar-right">
+           
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div><!--/.container -->
+   </div><!--/.navbar -->
+        
+      <h1 class="title">Lab 2</h1>
+         <h1 class="subtitle">RScripts, data types, data structures and subsetting</h1>
+   
+      <p class="authors">
+           <span class="glyphicon glyphicon-user"></span> <a href="index.html">ENVS 193</a>
+      </p>
+         <p class="date"><span class="glyphicon glyphicon-calendar"></span> Angus Watters - based off material from Mike Johnson and input from Debra Perrone</p>
+         
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div class="page-content has-page-title">
+<!-- kbl(criteria, col.names = c('Risk level', 'Daily new cases per 100,000 residents'), escape = F, align = "c") %>% -->
+<!--   kable_material(c("striped", "hover")) %>%  -->
+<!--   kable_styling(position = "center") -->
+<style type="text/css">
+span.code {
+      background:rgba(240,128,128, 0.2);
+      border-radius: 5px 5px 5px 5px;
+      padding-left:5px;
+      padding-top:2px;
+      padding-right:5px;
+      padding-bottom:2px;
+      color:red;
+     } 
+</style>
+<hr />
+<div id="goals" class="section level1">
+<h1><strong>Goals</strong></h1>
+<ul>
+<li><p>Read data into R and explore data frames</p></li>
+<li><p>Use the help() function</p></li>
+<li><p>Clean a data frame</p></li>
+<li><p>Explore the tidyr, dplyr, and ggplot packages</p></li>
+</ul>
+<hr />
+</div>
+<div id="load-in-libraries-and-data" class="section level1">
+<h1><strong>Load in libraries and data</strong></h1>
+<ul>
+<li>In this lab, we will be using the <span class="code">tidyverse</span>, <span class="code">here</span>, and <span class="code">janitor</span><br />
+<br></li>
+</ul>
+<p>Load these libraries in by using the <code>library</code> function</p>
+<pre class="r"><code>library(tidyverse)
+library(here)
+library(janitor)</code></pre>
+<p><br></p>
+<p>Load in your data using <code>here</code> and <code>read.csv</code> and</p>
+<pre class="r"><code>water_use &lt;-  read.csv(here(&#39;docs/data/usco2015v2.0.csv&#39;))</code></pre>
+<p><br></p>
+<div id="help" class="section level2">
+<h2><strong><code>help()</code></strong></h2>
+<p>The <code>help()</code> function is a tool for understanding what a function does, what inputs it takes, and what outputs it gives. When you call the help function, the help page for the function you called will appear in the bottom right pane, a tab to the right of the Files tab.</p>
+<p>The Help tab is great. At the bottom page you will find code examples for that function, you can run these yourself to get an idea of how to use a function! <strong>As you go through this lab, use the help() function to get more information on the functions we will be using.</strong> You can access the help for any function; for example, let’s use the help function to get information on the library function.</p>
+<p><br></p>
+</div>
+</div>
+<div id="step-1-explore-usgs-water-use-datafame" class="section level1">
+<h1><strong>Step 1:</strong> Explore USGS water use datafame</h1>
+<p>In your script, read in the .CSV file from the prelab and make sure it is assign it to an object named water_use. Let’s take a look at our water_use data frame in the Global Environment.</p>
+<p><strong>Notice anything unfriendly about our data frame?</strong> <br> In the console, use the <code>class</code> function to confirm that water_use is a data frame. Because of the way the data is currently being loaded, it will be difficult to use for data analysis. Let’s call <code>help</code> on <code>read.csv</code> and find the arguments section. Arguments are inputs for a function which will change the output; not all arguments are required for the function to run. The description of each argument will explain what it does and what values are required for an argument (i.e., the input into the function) and whether it is required.</p>
+<p>There is an argument that lets you <strong><em>skip</em></strong> lines of a data file before the data is read in. Find and implement this argument to have the data read in after skipping the first line. With this added argument you can run the code again, overriding the previous assignment made to the water_use object. That is, in your script, update your code so that it now has this additional argument; then run your code.</p>
+</div>
+<div id="step-2-cleaning-columns" class="section level1">
+<h1><strong>Step 2:</strong> Cleaning columns</h1>
+<div id="clean_names" class="section level2">
+<h2><code>clean_names()</code></h2>
+<p>Let’s take a look at our column names.<br> <br> The <code>clean_names</code> function from the janitor package can help us “clean up” the names of a data frame, creating unique column names consisting only of the underscore (i.e., _ character), numbers, and letters. This is very useful because, using the function, means that we will now have consistent column names that all have lower case letters and do not contain spaces or odd symbols that could create errors. In your script, let’s apply clean_names() to water_use.</p>
+<pre class="r"><code>water_use &lt;- clean_names(water_use)</code></pre>
+<p>Check your column names; you should see that all of your columns are now in <em>“snake_case”</em></p>
+<pre class="r"><code>&quot;ThisIsNotSnake.Case&quot;</code></pre>
+<pre class="r"><code>&quot;this_is_snake_case&quot;</code></pre>
+<p><br></p>
+</div>
+<div id="rename" class="section level2">
+<h2><code>rename()</code></h2>
+<p>The <code>rename()</code> function also allows you to rename column names. The first argument for the rename function is the data frame, the second argument is the column you’d like to rename. The format for using rename is:</p>
+<pre class="r"><code>object_name &lt;-  rename(data_frame_name, new_name = old_name)</code></pre>
+<p>From your water_use data frame, use <code>rename()</code> to change the tp_tot_pop column name to population. <strong>HINT:</strong> Make sure you assign this function to water_use so it is applied to your object, and not just outputted into the console.</p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="step-3-the-pipe-operator" class="section level1">
+<h1><strong>Step 3:</strong> The pipe operator (%&gt;%)</h1>
+<p>The pipe operator is denoted by this symbol <strong>%&gt;%</strong>. The RStudio keyboard shortcut is <strong>Cmd+Shift+M (Mac)</strong> and <strong>Ctrl+Shift+M(Windows)</strong>. The pipe operator passes the object on the left hand side of the pipe into the first argument of the right hand function. This will help consolidate your workflow in R and allows you to apply a series of functions to an object instead of having to continually reassign your function step to a new object and then perform the next function step.</p>
+<p><strong>Example:</strong><br> When we read in our data and then used the <code>clean_names</code> and <code>rename</code>, we did this in 3 separate steps, reassigning our function to the new output after applying each function like so:</p>
+<pre class="r"><code>water_use &lt;-  read.csv(here(&#39;data/usco2015v2.0.csv&#39;), skip = 1)
+water_use &lt;-  clean_names(water_use)
+water_use &lt;- rename(water_use, pop = tp_tot_pop)</code></pre>
+<p><br></p>
+<p><strong>And this is the same operation using the pipe:</strong></p>
+<pre class="r"><code>water_use &lt;- here(&#39;data/usco2015v2.0.csv&#39;) %&gt;%
+  read.csv(skip = 1) %&gt;%
+  clean_names() %&gt;% 
+  rename(pop = tp_tot_pop)</code></pre>
+<p>The pipe allows you to express a sequence of multiple operations without having to do a reassignment after each intermediate step. This simplifies your code, making it easier to read, and understand. <em>Going forward through this lab, all of the example code will be shown both with and without the pipe operator so you can get used to seeing how it works.</em></p>
+</div>
+<div id="step-4-change-column-data-type" class="section level1">
+<h1><strong>Step 4:</strong> Change column data type</h1>
+<p>In the Global Environment, click on the blue circle with a white arrow that is to the left our your water_use data frame. This should reveal information about your data frame for a quick view. Next to each column name, you will see that a data type has been assigned. Look through the columns and the data types.</p>
+<p><br> Before analyzing the data, it is important that we change the columns so that they match the data type expected. This will allow us to analyze the data later. To change from one data type to another we can use the set of functions: <code>as.numeric</code>, <code>as.character</code>, <code>as.integer</code>, <code>as.Date</code>, <code>as.factor</code>…there are many more!</p>
+<p><br></p>
+<p>Let’s try the following to see how these functions work. You can write this code in your script or console. If you do it in your script, make sure to comment it so that you know that it is an example.</p>
+<pre class="r"><code>x &lt;- &quot;3&quot;</code></pre>
+<p>Let’s use the <code>class</code> function to check the data type. What we do see? Does it make sense for use, in our application, to have a number classified as a character? Probably not – though there may be situations that we do want a number to be a character…can you think of one?</p>
+<p>To change x’s data type, we need to coerce it into a number. We can use the <code>as.numeric</code> function to do this and check the coercion with the <code>class</code> function.</p>
+<pre class="r"><code>x &lt;- as.numeric(x)
+class(x)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p><br> To do this for an entire column we can use a subsetting technique (from lab 02) to coerce a column from a character to numeric using <code>as.numeric.</code> To do this, we will want to make sure we are reassigning the column’s data type within water_use.</p>
+<p><br></p>
+<p>To start, let’s try this on one column – the column named <em>ps_gw_pop.</em> Before we start, in the console, type the following</p>
+<pre class="r"><code>class(water_use$ps_gw_pop)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>This should confirm that we selected a column whose data type is classified as a character. <br> Now, let’s coerce it into a numeric in our script</p>
+<pre class="r"><code>water_use &lt;- as.numeric(water_use$ps_gw_pop)</code></pre>
+<p>In the console, let’s confirm the coercion, using the <code>class</code> function.</p>
+<p><br></p>
+<div id="mutate_at" class="section level2">
+<h2><code>mutate_at()</code></h2>
+<p>You probably noticed that there are quite a few columns that are characters but should be numeric. It would not be efficient for us to write out each one of these columns! Instead, we can use the <code>mutate_at</code> function to select a number of columns all at once to coerce into numerics. There are many ways to do this; <code>mutate_at</code> is one of many.</p>
+<p>Before we apply <code>mutate_at</code>, we will want to identify the group of columns that will need to be coerced. The good news is that, if we apply <code>as.numeric</code> to a numeric, nothing happens. This will apply us to select all the columns after fips.</p>
+<pre class="r"><code>water_use &lt;- mutate_at(water_use, c(7:141), as.numeric)</code></pre>
+<p><br></p>
+<p><strong>Using the pipe:</strong></p>
+<pre class="r"><code>water_use &lt;- water_use %&gt;%
+  mutate_at(c(7:141), as.numeric)</code></pre>
+<p>Look at your console. There is a warning that pops up; note that warnings do not stop your code from running, but they are important. <strong><em>R is sending this warning as it was forced to deal with the “–” characters by coercing them into NAs and it wants to let you know!</em></strong> <br></p>
+</div>
+</div>
+<div id="step-6-subset-by-column-only" class="section level1">
+<h1><strong>Step 6:</strong> subset by column only</h1>
+<div id="select" class="section level2">
+<h2><code>select()</code></h2>
+<p>We can use the select function to subset the variables or columns that we want. It is important to know that the data frame you want to subset is <strong>ALWAYS</strong> the first argument in the function.</p>
+<p>Also, select allows you to enter the names or the indices (position) of column names in a data frame. <code>Select</code> is from the <span class="code">dplyr</span> package (i.e., a package within tidyverse) and is a simple way of subsetting columns.</p>
+<hr />
+<p><strong>NOTE:</strong> <strong><em>All subsetting done using <code>select</code> can also be accomplished using the <code>[]</code> and <code>$</code> methods. It is just a matter of convenience, preference, and situation. It should be noted that using select is NOT a replacement for the subsetting techniques we learned in the previous lab. The [] and $ methods are essential techniques that you will invariably need to use in the future when working in R.</em></strong></p>
+<hr />
+<p><br></p>
+<p><strong>Try these examples using <code>select</code> either in the console or the script. Do not assign these examples to your object water_use. </strong></p>
+<p><br> Selects only the state column:</p>
+<pre class="r"><code>select(water_use, state)
+
+water_use %&gt;% # pipe method
+select(state)</code></pre>
+<p><br></p>
+<p>Selects state, county, year, population:</p>
+<pre class="r"><code>select(water_use, state, county, year, population)
+
+water_use %&gt;% # pipe method
+select(state, county, year, population)</code></pre>
+<p><br> Select can be used to rename columns (new name = old name):</p>
+<pre class="r"><code>select(water_use, state, county, year, POP = population)
+
+# pipe method
+water_use %&gt;% 
+select(state, county, year, POP = population)</code></pre>
+<p><br> Select can remove columns, the ! will negate the selected column:</p>
+<pre class="r"><code>select(water_use, !county)
+
+# pipe method
+water_use %&gt;% 
+select(! county)</code></pre>
+<p><br> Select a range of columns (start:end), here all the columns from state to population</p>
+<pre class="r"><code>select(water_use, state:population)
+
+water_use %&gt;% # pipe method
+select(state:population)</code></pre>
+<p><br> You can also select by the columns index values, here columns 1 through 3 and 7 are selected</p>
+<pre class="r"><code>select(water_use, 1:3, 7)
+
+water_use %&gt;% 
+select(1:3, 7)</code></pre>
+<p><br></p>
+<p><strong>Create two data frames</strong> Use the <em>water_use</em> data frame and subset the <strong>state, county, fips, and population columns</strong> using <code>select</code>.<br> Assign this to a new object named <em>pop</em>.</p>
+<pre class="r"><code>pop &lt;- water_use %&gt;% select(state, county, fips, pop)</code></pre>
+<p><br> <br></p>
+<p>Again use the <em>water_use</em> data frame and subset <strong>state</strong>, <strong>county</strong>, <strong>fips</strong> and then the range of columns from <strong>population through do_w_delv</strong> using <code>select</code>. There are several ways to do this.<br> Assign this new object named <em>dom_water_use</em>.</p>
+<pre class="r"><code>dom_water_use &lt;- water_use %&gt;% select(state, county, fips, pop:do_w_delv)</code></pre>
+<p><br> <br></p>
+</div>
+<div id="contains" class="section level2">
+<h2><code>contains()</code></h2>
+<p>Select by character string <br> We are interested in locating the columns that contain data on freshwater totals. Thus we want to find all the columns whose names contain the character string <strong>“w_fr_to.”</strong></p>
+<p>Let’s call the <code>help</code> on <code>select</code> and find the arguments section. There is an argument that lets you section data that contains a literal string. Find and implement this argument to select all the columns that contain the string “w_fr_to.” Assign this data frame to a new object called freshwater_select.</p>
+<p><br></p>
+<pre class="r"><code>freshwater_total &lt;- select(water_use, state, contains(&quot;w_fr_to&quot;))</code></pre>
+<p><br></p>
+<p><strong>Using the pipe:</strong></p>
+<pre class="r"><code>freshwater_total &lt;- water_use %&gt;%
+  select(state, contains(&quot;w_fr_to&quot;))</code></pre>
+</div>
+</div>
+<div id="step-7-adding-columns" class="section level1">
+<h1><strong>Step 7:</strong> Adding columns</h1>
+<div id="mutate" class="section level2">
+<h2><code>mutate()</code></h2>
+<p>kbl(criteria, col.names = c(‘Risk level’, ‘Daily new cases per 100,000 residents’), escape = F, align = “c”) %&gt;% –&gt; <!--   kable_material(c("striped", "hover")) %>%  --> <!--   kable_styling(position = "center") --> We can use the <code>mutate</code> function to add variables (ie columns) to an existing dataframe. Mutate() builds new variables sequentially thus you can reference variables you’ve already made when defining a newer variable</p>
+<p><br></p>
+<p>A benefit of using mutate is that it allows you to create a second new column, based on the previously made column. To illustrate:</p>
+<pre class="r"><code>mutated_df &lt;- water_use %&gt;% 
+  mutate(pop2 = pop*100, pop3 = pop2/1000) %&gt;% 
+  select(pop, pop2, pop3)</code></pre>
+<p>By using <code>mutate</code>, I first created the new column pop2 which was based on our existing pop column, I then added another column using the information from our newly created pop2 column!</p>
+<p><br></p>
+</div>
+<div id="subset-method" class="section level2">
+<h2>Subset method</h2>
+<p>If you had a vector that was of the same length as the number of rows in your dataframe you can do this:</p>
+<pre class="r"><code>data_frame$new_column_to_add = vector_of_same_row_length_of_data_frame</code></pre>
+<p><br></p>
+<p>And if you wanted to add a column from another dataframe that had the same number of rows you could do this:</p>
+<pre class="r"><code>data_frame$new_column_to_add = data_frame$column_to_add</code></pre>
+</div>
+</div>
+<div id="step-8-filtering-grouping" class="section level1">
+<h1><strong>Step 8:</strong> Filtering + grouping</h1>
+<div id="filter" class="section level2">
+<h2><code>filter()</code></h2>
+<p>The filer() takes a logical (binary) expression and returns all rows which are TRUE. The filter function allows us to filter the rows of our data based on TRUE/FALSE conditions:</p>
+<p><br></p>
+<p>Here lets see what happens if we <strong>filter our water use dataframe for rows in which the state is equal to “CA.”</strong> Notice that we use the binary expression “==” instead of the “=”</p>
+<pre class="r"><code>filter(water_use,  state == &quot;CA&quot;)</code></pre>
+<pre><code>##   state statefips           county countyfips fips
+## 1    CA         6   Alameda County          1 6001
+## 2    CA         6    Alpine County          3 6003
+## 3    CA         6    Amador County          5 6005
+## 4    CA         6     Butte County          7 6007
+## 5    CA         6 Calaveras County          9 6009</code></pre>
+<p><br></p>
+<p>Now we’ll <strong>filter for all rows in which the state is NOT CA</strong> the binary expression “!=” means find all rows where the state column is NOT equal to the character string ‘CA’</p>
+<pre class="r"><code>filter(water_use,  state != &quot;CA&quot;)</code></pre>
+<p><br></p>
+<p><strong>Using the pipe:</strong></p>
+<pre class="r"><code>water_use %&gt;% 
+filter(state != &quot;CA&quot;)</code></pre>
+<pre><code>##   state statefips         county countyfips fips
+## 1    AL         1 Autauga County          1 1001
+## 2    AL         1 Baldwin County          3 1003
+## 3    AL         1 Barbour County          5 1005
+## 4    AL         1    Bibb County          7 1007
+## 5    AL         1  Blount County          9 1009</code></pre>
+<p><br></p>
+<p><strong>What if I wanted answer a specific question like which 10 counties in California, Arizona, Oregon, Washington, New Mexico, and Texas withdrawal the greatest amount of freshwater for irrigating golf courses? </strong></p>
+<pre class="r"><code>golfing_states &lt;-  filter(water_use, state %in% c( &quot;CA&quot;, &quot;AZ&quot;, &quot;OR&quot;, &quot;WA&quot;, &quot;NM&quot;, &quot;TX&quot; )) # filter to the states of interest:
+golfing_states &lt;-  arrange(golfing_states, -ig_w_fr_to) #arrange the rows from highest to lowest withdrawals for golfing irrigation
+golfing_states &lt;-  select(golfing_states, state, county, pop, ig_w_fr_to) # select the columns I am interested in
+golfing_states &lt;-  slice(golfing_states, n = 1:20) #slice the top 20 rows from the data frame</code></pre>
+<p><br></p>
+<p>This is a perfect example to illustrate the power of the pipe</p>
+<pre class="r"><code>golfing_states = water_use %&gt;%
+  filter(state %in% c( &quot;CA&quot;, &quot;AZ&quot;, &quot;OR&quot;, &quot;WA&quot;, &quot;NM&quot;, &quot;TX&quot; )) %&gt;%
+  arrange(-ig_w_fr_to) %&gt;%
+  select(state, county, pop, ig_w_fr_to) %&gt;%
+  slice(n = 1:10)
+golfing_states</code></pre>
+<pre><code>##    state                county       pop ig_w_fr_to
+## 1     AZ       Maricopa County  4167.947      83.73
+## 2     CA      Riverside County  2361.026      29.33
+## 3     CA    Los Angeles County 10170.292      16.97
+## 4     CA      San Diego County  3299.521      16.01
+## 5     AZ          Pinal County   406.584      10.18
+## 6     CA         Orange County  3169.776       9.35
+## 7     AZ           Pima County  1010.025       9.04
+## 8     CA San Bernardino County  2128.133       5.51
+## 9     CA        Ventura County   850.536       5.14
+## 10    WA           King County  2117.125       4.86</code></pre>
+</div>
+<div id="group_by" class="section level2">
+<h2><code>group_by()</code></h2>
+</div>
+<div id="summarise" class="section level2">
+<h2><code>summarise()</code></h2>
+</div>
+</div>
+<div id="step-9-bring-it-all-together-in-a-ggplot" class="section level1">
+<h1><strong>Step 9:</strong> Bring it all together in a ggplot</h1>
+<p>Now let’s use all the data manipulation skills we’ve learned throughout this lab to observe total freshwater withdrawals for each sector at the state level.<br> To do this, we will work off of our freshwater_total data frame we made earlier in the lab.</p>
+<p><br></p>
+<div id="sectors" class="section level2">
+<h2>Sectors</h2>
+<p>Within our freshwater_total data frame we want to combine several columns into the following sectors: - Domestic = public supply + domestic supply</p>
+<ul>
+<li><p>Industrial = in_w_fr_to</p></li>
+<li><p>Agricultural = irrigation + livestock + aquaculture</p></li>
+<li><p>Mining = mi_w_fr_to</p></li>
+<li><p>Thermoelectric = pt_w_fr_to</p></li>
+</ul>
+<p><br> To do this, create a new object named <em>sector_withdrawals</em> and assign it to your <em>freshwater_total</em> data frame. Then use <code>mutate</code> to calculate 5 new sector columns.<br></p>
+<p>Use these 5 categories as the names for your new columns. After that, <code>select</code> only the following columns: state, Domestic, Industrial, Agricultural, Mining, Thermoelectric.</p>
+<pre class="r"><code>sector_withdrawals &lt;-  freshwater_total %&gt;%
+  mutate(Domestic = ps_w_fr_to + do_w_fr_to,
+         Industrial = in_w_fr_to,
+         Agriculture = ir_w_fr_to + li_w_fr_to + aq_w_fr_to,
+         Mining = mi_w_fr_to,
+         Thermoeletric = pt_w_fr_to) %&gt;%
+  select(1, 15:19)</code></pre>
+</div>
+<div id="check-point" class="section level2">
+<h2><strong>Check point</strong></h2>
+<p>You should now have this data frame:</p>
+<pre class="r"><code>str(sector_withdrawals)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    3223 obs. of  6 variables:
+##  $ state        : chr  &quot;AL&quot; &quot;AL&quot; &quot;AL&quot; &quot;AL&quot; ...
+##  $ Domestic     : num  4.02 25.81 3.35 5.34 57.72 ...
+##  $ Industrial   : num  34.8 0 1.5 0 0 0 0.2 1.15 0 0 ...
+##  $ Agriculture  : num  3.71 58.67 3.73 0.26 1.98 ...
+##  $ Mining       : num  2.02 0.22 0.44 0.27 0.37 0 0 0.08 0 0 ...
+##  $ Thermoeletric: num  11.9 0 0 0 0 ...</code></pre>
+</div>
+<div id="summarise-by-state" class="section level2">
+<h2><strong>Summarise by state</strong></h2>
+<pre class="r"><code>sector_totals = sector_withdrawals %&gt;%
+  group_by(state) %&gt;%
+  summarise(across(Domestic:Thermoeletric, sum)) %&gt;%
+  pivot_longer(cols = c(2:6), names_to = &quot;sector&quot;, values_to = &quot;total_withdrawal&quot;)
+
+head(sector_totals)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   state sector        total_withdrawal
+##   &lt;chr&gt; &lt;chr&gt;                    &lt;dbl&gt;
+## 1 AK    Domestic                111.  
+## 2 AK    Industrial                8.35
+## 3 AK    Agriculture             411.  
+## 4 AK    Mining                   36.4 
+## 5 AK    Thermoeletric            66.7 
+## 6 AL    Domestic                798.</code></pre>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="ggplot" class="section level2">
+<h2><code>ggplot</code></h2>
+<pre class="r"><code>ggplot(sector_totals, aes(x = reorder(state, lng), y = total_withdrawal)) +
+  geom_col(aes(fill = sector),  width = .5) +
+  labs(title = &quot;Total sector water withdrawals by state&quot;,
+       subtitle = &quot;Data source: USGS&quot;,
+       x = &quot;State&quot;,
+       y = &quot;Total withdrawals&quot;,
+       fill = &quot;Sector&quot;) +
+  scale_fill_manual(values = c(&#39;green4&#39;, &#39;dodgerblue3&#39;, &#39;red2&#39;, &#39;gray56&#39;, &#39;darkorange&#39;)) +
+  theme_bw() + 
+  theme(aspect.ratio = 0.5)</code></pre>
+<p><img src="lab-03_files/figure-html/unnamed-chunk-40-1.png" width="100%" /></p>
+</div>
+</div>
+</div>
+
+   
+   
+              </div>
+  </div>
+  </div>
+  </div>
+   
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 		
+	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

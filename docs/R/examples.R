@@ -14,6 +14,8 @@ install.packages('here')
 # Read in data from gapminder package
 gapminder = gapminder
 
+across(mutate(()
+
 # 1. Grammar of Data Manipulation:
 # - dplyr is a package for data manipulation
 # - It is built to be fast, flexable and generic about how your data is stored.
@@ -170,7 +172,15 @@ df[1:2] # columns 1, 2 of dataframe
 
 
 
+constraints = matrix(c(x1, x2, x3, x4, x5, x6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), nrow=3)
 
+
+
+
+
+
+
+mverkuilen@ucsb.edu
 
 
 
