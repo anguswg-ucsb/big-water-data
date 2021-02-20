@@ -14,7 +14,44 @@ install.packages('here')
 # Read in data from gapminder package
 gapminder = gapminder
 
-across(mutate(()
+#--------------------- STEP 3: ------------------------
+#--------------- % CHANGE LINE GRAPH ------------------
+wu_all = readRDS("docs/data/data/wu_all.rds")
+# group by sectors and year, and sum the withdrawals, this gives you the total US withdrawals by sector per year
+conus_sum <- wu_all %>%
+  group_by(Sectors, Year) %>%
+  summarise(Withdrawals = sum(Withdrawals))
+
+# calculate percentage change in each sector from 1965 - 2015 withdrawals
+pct <- conus_sum %>%
+  filter(!Year %in% c(1950, 1955, 1960)) %>%
+  group_by(Sectors) %>%
+  mutate(pct_chg = (Withdrawals/lag(Withdrawals) - 1)*100) %>%
+  replace(is.na(.), 0)
+
+#------------------ % CHANGE PLOT 2 -------------------
+
+ggplot() +
+  geom_line(data = pct, aes(x = Year, y = pct_chg, col = Sectors), size = 1) +
+  geom_point(data = pct, aes(x = Year, y = pct_chg, col = Sectors), size = 2.5) +
+  # geom_line(data = pct, aes(x = Year, y = pct_chg, col = Totals), size = 1) +
+  # geom_point(data = pct, aes(x = Year, y = pct_chg), size = 2) +
+  geom_hline(yintercept = 0, color = "black", size = 1) +
+  scale_color_manual(values = c("gray39", "green4", "dodgerblue", "tomato3", "darkgoldenrod2")) +
+  scale_y_continuous(labels = scales::label_percent(scale = 1),
+                     breaks = scales::pretty_breaks(n = 10)) +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10),
+                     expand = c(0, 1)) +
+  labs(y = "Percent change in withdrawals",
+       col = "") +
+  theme_classic() +
+  theme(axis.text = element_text(size=10),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(size = 0.1, linetype = 'solid',
+                                        colour = "lightgrey"), # Changes grid style
+        plot.caption = element_text(hjust = 0, color = "black", size = 9, face = "bold"))
 
 # 1. Grammar of Data Manipulation:
 # - dplyr is a package for data manipulation

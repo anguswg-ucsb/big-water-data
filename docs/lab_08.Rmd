@@ -1,0 +1,487 @@
+---
+title: "Lab 06-07"
+author: "Debra Perrone"
+date: "2/10/2021"
+output: pdf_document
+---
+
+
+The data for this lab are available from the [United States Geological Survey](https://water.usgs.gov/watuse/data/index.html) for years 1950-2015. 
+
+### Step 1: Load libraries
+```{r, warning = FALSE, message = FALSE, echo = FALSE, error =  TRUE}
+library(tidyverse)
+library(here)
+library(janitor)
+library(readxl)
+library(sf)
+library(USAboundaries)
+library(ggnewscale)
+library(ggpubr)
+library(cowplot)
+
+# install.packages('ggnewscale')
+```
+
+### Step 2: Read data
+```{r, echo = FALSE, error = TRUE, message = FALSE, warning = FALSE}
+
+
+d_wu_1950 <- lapply(excel_sheets(here("docs/data/data/us1950.xlsx")),
+                    function(x) read_excel(here("docs/data/data/us1950.xlsx"),
+                                           skip = 3,
+                                           sheet = x)) %>%
+  reduce(left_join, by = "Area") %>%
+  clean_names() %>%
+  mutate(across(c(1:9), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 1955
+d_wu_1955 <- lapply(excel_sheets(here("docs/data/data/us1955.xlsx")),
+                    function(x) read_excel(here("docs/data/data/us1955.xlsx"),
+                                           skip = 3,
+                                           sheet = x)) %>%
+  reduce(left_join, by = "Area") %>%
+  clean_names() %>%
+  mutate(across(c(1:11), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 1960
+d_wu_1960 <- lapply(excel_sheets(here("docs/data/data/us1960.xlsx")),
+                    function(x) read_excel(here("docs/data/data/us1960.xlsx"),
+                                           skip = 3,
+                                           sheet = x)) %>%
+  reduce(left_join, by = "Area") %>%
+  clean_names() %>%
+  mutate(across(c(1:35), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 1965
+d_wu_1965 <- lapply(excel_sheets(here("docs/data/data/us1965.xlsx")),
+                    function(x) read_excel(here("docs/data/data/us1965.xlsx"),
+                                           skip = 3,
+                                           sheet = x)) %>%
+  reduce(left_join, by = "Area") %>%
+  clean_names() %>%
+  mutate(across(c(1:33), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 1970
+d_wu_1970 <- lapply(excel_sheets(here("docs/data/data/us1970.xlsx")),
+                    function(x) read_excel(here("docs/data/data/us1970.xlsx"),
+                                           skip = 3,
+                                           sheet = x)) %>%
+  reduce(left_join, by = "Area") %>%
+  clean_names() %>%
+  mutate(across(c(1:34), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+
+# Read data for 1975
+d_wu_1975 <- lapply(excel_sheets(here("docs/data/data/us1975.xlsx")),
+                    function(x) read_excel(here("docs/data/data/us1975.xlsx"),
+                                           skip = 3,
+                                           sheet = x)) %>%
+  reduce(left_join, by = "Area") %>%
+  clean_names() %>%
+  mutate(across(c(1:34), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 1980
+d_wu_1980 <- lapply(excel_sheets(here("docs/data/data/us1980.xlsx")),
+                    function(x) read_excel(here("docs/data/data/us1980.xlsx"),
+                                           skip = 3,
+                                           sheet = x)) %>%
+  reduce(left_join, by = "Area") %>%
+  clean_names() %>%
+  mutate(across(c(1:34), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 1985
+d_wu_1985 <- read_delim(here("docs/data/data/us1985.txt"), delim = "\t") %>%
+  clean_names() %>%
+  mutate(across(c(2, 4:163), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 1990
+d_wu_1990 <- read_excel(here("docs/data/data/us1990.xls"), sheet = 1) %>%
+  clean_names() %>%
+  filter(state != 3226) %>%
+  mutate(across(c(2, 4:163), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 1995
+d_wu_1995 <- read_excel(here("docs/data/data/us1995.xls"), sheet = 1) %>%
+  clean_names() %>%
+  mutate(across(c(1:4, 6:252), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 2000
+d_wu_2000 <- read_excel(here("docs/data/data/us2000.xls"), sheet = 1) %>%
+  clean_names() %>%
+  mutate(across(c(2:70), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 2005
+d_wu_2005 <- read_excel(here("docs/data/data/us2005.xls"), sheet = 1) %>%
+  clean_names() %>%
+  mutate(across(c(2:4, 6:108), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 2010
+d_wu_2010 <- read_excel(here("docs/data/data/us2010.xlsx"), sheet = 1) %>%
+  clean_names() %>%
+  mutate(across(c(2, 4:117), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+# Read data for 2015
+d_wu_2015 <- read_excel(here("docs/data/data/us2015.xlsx"), sheet = 1, skip = 1) %>%
+  clean_names() %>%
+  mutate(across(c(2, 4:141), as.numeric)) %>%
+  replace(is.na(.), 0)
+```
+
+
+
+### Step 3: Organize data by sector and FIPS (definition here)
+```{r, warning = FALSE, message = FALSE, error = TRUE, tidy = TRUE, echo = TRUE}
+
+# Find water use by sector, then pivot for ggplot
+wu_1950 <- d_wu_1950 %>%
+                mutate(State = area,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+                          "Rural" = NA,
+                          "Industrial" = inpt_wgw_fr + inpt_wsw_fr,
+                          "Thermoelectric" = NA, 
+                          "Year" = 1950) %>%
+               select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+               pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, then pivot for ggplot
+wu_1955 <- d_wu_1955 %>%
+                mutate(State = area,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+                          "Rural" = NA,
+                          "Industrial" = inpt_wgw_fr + inpt_wsw_fr,
+                          "Thermoelectric" = NA,
+                          "Year" = 1955) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, then pivot for ggplot
+# Note that ir_wgw_fr + ir_wsw_fr provide only 0s, so these column tags were replaced by ir_w_fr_to, which is not ideal because it combines sw and gw
+wu_1960 <- d_wu_1960 %>%
+                    mutate(State = area,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_w_fr_to,
+                          "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+                          "Industrial" = oi_wsw_fr + oi_wgw_fr,
+                          "Thermoelectric" = pt_wgw_fr + pt_wsw_fr, 
+                          "Year" = 1960) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, then pivot for ggplot
+wu_1965 <- d_wu_1965 %>%
+                    mutate(State = area,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+                          "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+                          "Industrial" = oi_wsw_fr + oi_wgw_fr,
+                          "Thermoelectric" = pt_wgw_fr + pt_wsw_fr, 
+                          "Year" = 1965) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, then pivot for ggplot
+wu_1970 <- d_wu_1970 %>%
+                    mutate(State = area,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+                          "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+                          "Industrial" = oi_wsw_fr + oi_wgw_fr,
+                          "Thermoelectric" = pt_wgw_fr + pt_wsw_fr, 
+                          "Year" = 1970) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, then pivot for ggplot
+wu_1975 <- d_wu_1975 %>%
+                    mutate(State = area,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+                          "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+                          "Industrial" = oi_wsw_fr + oi_wgw_fr,
+                          "Thermoelectric" = pt_wgw_fr + pt_wsw_fr, 
+                          "Year" = 1975) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, then pivot for ggplot
+wu_1980 <- d_wu_1980 %>%
+                    mutate(State = area,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+                          "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+                          "Industrial" = oi_wsw_fr + oi_wgw_fr,
+                          "Thermoelectric" = pt_wgw_fr + pt_wsw_fr, 
+                          "Year" = 1980) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year")%>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Starting with 1985, we cannot add year column until summarize function, or we will get a summed year for each state
+# Find water use by sector, group and summarize, then pivot for ggplot
+wu_1985 <- d_wu_1985 %>%
+                    mutate(State = scode,
+                          "Public Supply" = ps_wgwfr + ps_wswfr, 
+                          "Irrigation" = ir_wgwfr + ir_wswfr,
+                          "Rural" = do_ssgwf + do_ssswf + ls_gwtot + ls_swtot,
+                          "Industrial" = in_wgwfr + in_wswfr +	mi_wgwfr + mi_wgwfr ,
+                          "Thermoelectric" = pt_wgwfr + pt_wswfr)%>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+                group_by(State) %>%
+                summarize(across(1:5, sum), Year = 1985) %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+              
+# Find water use by sector, group and summarize, then pivot for ggplot
+wu_1990 <- d_wu_1990 %>%
+                    mutate(State = scode,
+                          "Public Supply" = ps_wgwfr + ps_wswfr, 
+                          "Irrigation" = ir_wgwfr + ir_wswfr,
+                          "Rural" = do_ssgwf + do_ssswf + ls_gwtot + ls_swtot,
+                          "Industrial" = in_wgwfr + in_wswfr +	mi_wgwfr + mi_wgwfr,
+                          "Thermoelectric" = pt_wgwfr + pt_wswfr) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+                group_by(State) %>%
+                summarize(across(1:5, sum), Year = 1990) %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, group and summarize, then pivot for ggplot
+wu_1995 <- d_wu_1995 %>%
+                    mutate(State = state_code,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+                          "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+                          "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+                          "Thermoelectric" = pt_wgw_fr + pt_wsw_fr) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+                group_by(State) %>%
+                summarize(across(1:5, sum), Year = 1995) %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, group and summarize, then pivot for ggplot
+wu_2000 <- d_wu_2000 %>%
+                    mutate(State = statefips,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = it_wgw_fr + it_wsw_fr,
+                          "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+                          "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+                          "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+                group_by(State) %>%
+                summarize(across(1:5, sum), Year = 2000) %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, group and summarize, then pivot for ggplot
+wu_2005 <- d_wu_2005 %>%
+                    mutate(State = statefips,
+                          "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+                          "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+                          "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+                          "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+                          "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+                group_by(State) %>%
+                summarize(across(1:5, sum), Year = 2005) %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, group and summarize, then pivot for ggplot
+wu_2010 <- d_wu_2010 %>%
+      mutate(State = statefips,
+            "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+            "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+            "Rural" = do_wgw_fr + do_wsw_fr + li_wgw_fr + li_wsw_fr,
+            "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+            "Thermoelectric" = pt_wgw_fr + pt_wsw_fr) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+                group_by(State) %>%
+                summarize(across(1:5, sum), Year = 2010) %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+# Find water use by sector, group and summarize, then pivot for ggplot
+wu_2015 <- d_wu_2015 %>%
+      mutate(State = statefips,
+            "Public Supply" = ps_wgw_fr + ps_wsw_fr, 
+            "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+            "Rural" = do_wgw_fr + do_wsw_fr + li_wgw_fr + li_wsw_fr,
+            "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+            "Thermoelectric" = pt_wgw_fr + pt_wsw_fr) %>%
+                select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+                group_by(State) %>%
+                summarize(across(1:5, sum), Year = 2015) %>%
+                pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+```
+
+
+**WEEK 8 LAB: turn off display for STEP 4 off** 
+
+### Step 4: Combine data
+```{r, warning = FALSE, message = FALSE, error = TRUE, echo = FALSE}
+# Use rbind() to combine all data, then filter out fips codes not linked to one of 50 states
+# 5 variables, 14 years, 50 states = 3500
+wu_all <- rbind(wu_1950, wu_1955, wu_1960, wu_1965, wu_1970, wu_1975, 
+                wu_1980, wu_1985, wu_1990, wu_1995, wu_2000, wu_2005, wu_2010, 
+                wu_2015) %>%
+          filter(!State %in% c(0, 11, 72, 78)) 
+
+wu_all_plot <- wu_all %>%
+    select(!"Sectors") %>%
+    replace(is.na(.), 0) %>%
+    group_by(Year) %>%
+    summarize(across(2, sum))
+
+# layers, scales, labels, **theme**
+ggplot() + 
+  geom_line(data = wu_all_plot, aes(x = Year, y = Withdrawals), 
+            color = "dodgerblue", size = 2) + 
+
+# Edit the tick marks: x -- add tick for each year of data; 
+# y -- add tick for 1,000 interval
+    scale_x_continuous(breaks = scales::pretty_breaks(n = 20)) +
+    scale_y_continuous(label = scales::comma, breaks = scales::pretty_breaks(n = 10), limits = c(0,380000)) +
+
+# Add caption and labels
+      geom_label(data = wu_all_plot, 
+                 aes(x = Year, 
+                 y = Withdrawals, 
+                 label = scales::comma(signif(Withdrawals,3))), size = 1.5) +
+     labs(x = "Year",
+             y = "Withdrawals (Mgal/day)",
+caption = "Figure 1: Total Fresh Withdrawals in the USA 1950-2015. 
+(Plot created by D. Perrone. Data from USGS (2015)).") +
+
+# Adjust background, axes and labels 
+  theme(axis.text = element_text(color="grey", size=8), 
+      axis.ticks.x = element_blank(),
+      axis.ticks.y = element_blank(),
+      panel.background = element_blank(),
+      panel.grid.major = element_line(size = 0.1, color = "grey"),
+      plot.caption = element_text(hjust = 0, size = 10, face = "bold"),
+      legend.position = "") 
+
+```
+
+
+**WEEK 8 LAB: STEP 5 onwards** 
+**Have students install.packages("ggnewscale") and ggpubr or cowplots?**
+
+
+### Step 5: Organize data for plotting
+```{r}
+
+
+fips <- d_wu_2015 %>%
+        select(state, State = statefips) %>%
+        unique() %>%
+        filter(!State %in% c(0, 11, 72, 78))
+
+# Check unique fips to see if we have others not needed -- we do: 0
+unique_check <- unique(wu_all$State)
+# Identify sector data
+ps_all <-wu_all %>%
+  filter(Sectors == "Public Supply") %>%
+  inner_join(fips, by = "State")
+
+ps_find <- ps_all %>% 
+  filter(Year == 2015) %>%
+  arrange(desc(Withdrawals)) %>%
+  slice(1:5) %>%
+  select(state) 
+
+ps_large <- ps_all %>%
+  filter(state %in% ps_find$state)
+```
+  
+```{r}
+#The inputs to data1 and data2 will be the different sectors
+data1 <- c("ps_all","ps_all","ps_all") 
+data2 <- c("ps_large","ps_large","ps_large") 
+cap <- c("Figure 1: Public supply by state. Data from USGS (2015). Created by Debra Perrone.", 
+         "Figure 2: Irrigation by state. Data from USGS (2015). Created by Debra Perrone.", 
+         "Figure 3: Rural by state. Data from USGS (2015). Created by Debra Perrone.", 
+         "Figure 4: Industrial by state. Data from USGS (2015). Created by Debra Perrone.", 
+         "Figure 5: Thermoelectric by state. Data from USGS (2015). Created by Debra Perrone.")
+
+myplot(data1, data2, cao)
+
+myplot <- function(data1, data2, cap)
+{
+  ggplot() +
+   geom_line(data = ps_all, aes(x = Year, y = Withdrawals, color = state), size = .25)  +
+      scale_color_manual(values = rep("grey", 50)) +
+      new_scale_color() +
+   geom_line(data = ps_large,
+             aes(x = Year, y = Withdrawals, color = state),
+             size = 1) +
+   geom_label(data = filter(ps_large, Year == max(Year)),
+              aes(x = Year, y = Withdrawals,label = state),
+              nudge_x = 1,
+              size = 3) 
+  
+# Edit the tick marks: x -- add tick for each year of data; y -- add tick for 1,000 interval
+    scale_x_continuous(breaks = scales::pretty_breaks(n = 20)) +
+    scale_y_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  
+# Add caption and labels
+    labs(caption = cap,
+       x = "Year",
+       y = "Withdrawals (Mgal/day)") +
+  
+# Adjust background, axes and labels 
+  theme(axis.text = element_text(color="dark grey", size=10), 
+      axis.ticks.x = element_blank(),
+      axis.ticks.y = element_blank(),
+      panel.background = element_blank(),
+      panel.grid.major = element_line(size = 0.1, linetype = 'solid', 
+                                      colour = "lightgrey"), # Changes grid style
+      plot.caption = element_text(hjust = 0, color = "black", size = 9, face = "bold"),
+      legend.position = "")
+}
+lst = list()
+for(i in seq_along(data1)){ 
+  plot = myplot(get(data1[i]), get(data2[i]), cap[i])
+  lst[[i]] = plot
+  print(lst)
+}
+class(lst[[1]])
+class(plot)
+gridExtra::
+gridExtra::grid.arrange(lst)
+cowplot::plot_grid(lst)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

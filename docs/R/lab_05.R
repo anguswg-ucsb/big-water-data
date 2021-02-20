@@ -16,12 +16,6 @@ library(sf)
 
 ############## STEP 2 ##############
 
-
-
-
-
-
-
 # *** STEP 2.1 ***
 
 water_use <-  readxl::read_xlsx(here('docs/data/usco2015v2.0.xlsx'), 1, skip = 1) %>%
@@ -187,7 +181,7 @@ ggplot() +
        fill = "Water withdrawals (Mgal/day)") +
   scale_fill_gradient(low = '#CCE5FF', high = "#003366") +
   guides(fill = guide_legend(reverse = TRUE)) +
-  theme_classic() +
+  # theme_classic() +
   theme(plot.title =element_text(size = 16, vjust = 2),
         axis.text = element_text(face = "bold", size =10),
         legend.title = element_text(size = 12),
@@ -226,7 +220,7 @@ ggplot() +
        y = "",
        fill = "") +
   scale_fill_manual(values = c('green4', 'dodgerblue3', 'red2', 'darkorange')) +
-  ggthemes::theme_fivethirtyeight() +
+  theme_classic() +
   theme(plot.title =element_text(size = 16, vjust = 2),
         axis.text = element_text(face = "bold", size =10),
         axis.title = element_text(size = 12),
@@ -239,31 +233,12 @@ ggplot() +
 
 
 
-for ( obj in ls() ) { print(get(obj)) }
 
 
-mget(ls())
-lsf.str()
 
-for ( obj in ls() ) {
-  cat('---',obj,'---\n');
-  if ( class(get(obj)) == 'matrix'  ){
-    print( get(obj)[1:min(ncol(get(obj)),10),1:min(ncol(get(obj)),10)] )
-  }else if ( class(get(obj)) == 'numeric' |  class(get(obj)) == 'integer'  ){
-    print( get(obj)[1:min(length(get(obj)),10)] )
-  }else if( class(get(obj)) == 'list'){
-    for (i in 1:length(get(obj))){
-      if ( class(get(obj)) == 'matrix'  ){
-        print( get(obj)[[i]][1:min(ncol(get(obj)[[i]]),10),1:min(ncol(get(obj)[[i]]),10)] )
-      }else if ( class(get(obj)[[i]]) == 'numeric' |  class(get(obj)[[i]]) == 'integer'  ){
-        print( get(obj)[[i]][1:min(length(get(obj)[[i]]),10)] )
-      }else{
-        print( get(obj)[[i]] )
-      }
-    }
-  }else{
-    print( get(obj) )
-  }
-}
 
-ls(objects())
+
+
+
+
+

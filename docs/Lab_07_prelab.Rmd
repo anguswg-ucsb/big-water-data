@@ -12,7 +12,7 @@ The data for this lab are available from the [United States Geological Survey](h
  
  
 
-Table 1: “Sets” of data, for which each of the sets have ALL column tags in common. Data from USGS (1950-2015). 
+Table 1: Sets of data, for which each of the sets have ALL column tags in common. Data from USGS (1950-2015). 
 
 year        | public supply           | irrigation              | rural                                             | industrial                                          | thermoelectric        | state
 ----        |----                     | ----                    | ----                                              | ----                                                | ----                  | ----
@@ -42,7 +42,7 @@ library(USAboundaries)
 wu_1950 <- lapply(excel_sheets(here("docs/data/data/us1950.xlsx")), 
               function(x) read_excel(here("docs/data/data/us1950.xlsx"), 
               skip = 3, 
-              sheet = x)) %>% 
+              sheet = x)) %>%
         reduce(left_join, by = "Area") %>%
         clean_names() %>%
         mutate(across(c(1:9), as.numeric)) %>%
@@ -154,6 +154,10 @@ wu_2015 <- read_excel(here("docs/data/data/us2015.xlsx"), sheet = 1, skip = 1) %
 ```
 
 
+
+```{r}
+merge(wu_2010, wu_2015, by = 1:117)
+'```
 
 
 
