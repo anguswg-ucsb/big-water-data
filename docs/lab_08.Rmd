@@ -419,6 +419,17 @@ myplot(data1, data2, cao)
 
 myplot <- function(data1, data2, cap)
 {
+  
+  
+  ggplot() +
+  geom_line(data = ps_all, aes(x = Year, y = Withdrawals, color = state), size = 1)  +
+  gghighlight::gghighlight(state %in% ps_find$state) + # this is the filter you used to make ps_large
+# Edit the tick marks: x -- add tick for each year of data; y -- add tick for 1,000 interval
+scale_x_continuous(breaks = scales::pretty_breaks(n = 20)) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10)) 
+  
+  
+  
   ggplot() +
    geom_line(data = ps_all, aes(x = Year, y = Withdrawals, color = state), size = .25)  +
       scale_color_manual(values = rep("grey", 50)) +

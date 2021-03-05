@@ -7,19 +7,19 @@
 library(janitor)
 library(here)
 library(readxl)
-
 # Data manipulation
 library(tidyverse)
-library(ggthemes)
+library(cowplot)
 
-# ggplot alterations
-library(scales)
-library(ggthemes)
+# Spatial packages
+library(USAboundaries)
+library(sf)
 
 # Step 1:
-# Read in RDS
+# Read in wu_all RDS
 wu_all = readRDS("docs/data/data/wu_all.rds")
-wu_all_source = readRDS("docs/data/data/wu_all_source.rds")
+
+wu_all_pop = readRDS("docs/data/data/wu_all_pop.rds")
 
 # Read data for 2015
 d_wu_2015 <- read_excel(here("docs/data/data/us2015.xlsx"), sheet = 1, skip = 1) %>%
@@ -34,11 +34,7 @@ fips <- d_wu_2015 %>%
 
 # add state names to data frame by inner joining
 wu_all <- inner_join(wu_all, fips, by= "State")
-
-# change the "State" column to fips to make things less confusing with the state abbr.
 wu_all <- rename(wu_all, fips = State)
-
-# replace NA w/ 0
 wu_all <- wu_all %>%
   replace(is.na(.), 0)
 
@@ -56,7 +52,6 @@ conus_total <- conus_sum %>%
   replace(is.na(.), 0) %>%
   summarise(Total = sum(Withdrawals))
 
-
 #--------------------- PLOT 1 ---------------------
 ggplot() +
   geom_col(data = conus_sum, aes(x = Year, y = Withdrawals, fill = Sectors),
@@ -69,23 +64,23 @@ ggplot() +
   geom_point(data = conus_total, aes(x = Year, y = Total),
              size = 4,
              col = "deepskyblue",
-             shape = 1) + # make an open circle point
+             shape = 1) +
   scale_fill_manual(values = c("darkgray", "green4", "dodgerblue", "tomato3", "darkgoldenrod2")) +
   scale_y_continuous(labels = scales::comma,
                      breaks = scales::pretty_breaks(n = 10),
                      expand = c(0, 0),
                      limits = c(0, NA),
-                     sec.axis = sec_axis(trans = ~.+150000, # transform the second axis by +150000 to give more scale to the total line
-                                         breaks = scales::pretty_breaks(n = 12), # increase num. breaks on second scale
-                                         name= "Total withdrawals (Mgal/day)",
-                                         labels = scales::comma)) + # give commas to second scale labels
-  expand_limits(y = max(conus_total$Total) + 20000) + # deals w/ line cut off by expanding the limits to 20000 greater than the max of the line
+                     sec.axis = sec_axis(trans = ~./2*(2.75),
+                                         breaks = scales::pretty_breaks(n = 12),
+                                         name= "Totalwithdrawals (Mgal/day)",
+                                         labels = scales::comma)) +
+  expand_limits(y = max(conus_total$Total) + 20000) +
   scale_x_continuous(breaks = scales::pretty_breaks(n = 20)) +
   labs(title = "Trends in total water withdrawals by water-use category (1950 - 2015)",
        x = "",
        y = "Withdrawals (Mgal/day)",
        fill = "") +
-  ggthemes::theme_few() + # matches USGS plot best
+  ggthemes::theme_few() +
   theme(axis.text = element_text(size=10),
         axis.ticks.x = element_blank(),
         axis.ticks.y = element_blank(),
@@ -97,12 +92,7 @@ ggplot() +
 #--------------------------- STEP 4: --------------------------
 #-------------------- GW vs. SW BAR PLOT ----------------------
 
-# Read in gw, sw, and pop water use data
 wu_all_source = readRDS("docs/data/data/wu_all_source.rds")
-
-# replace NA w/ 0
-wu_all_source <- wu_all_source %>%
-  replace(is.na(.), 0)
 
 # yearly US totals for groundwater & surface water
 sw_gw <- wu_all_source %>%
@@ -128,7 +118,7 @@ pop <- wu_all_source %>%
 # join back to sw_gw dataframe
 sw_gw <- inner_join(sw_gw, pop, by = "Year")
 
-#--------------------- PLOT 2 ---------------------
+
 
 ggplot(data = sw_gw, aes(x = Year, y = Withdrawals)) +
   geom_col(aes(fill = Source),  col = "black",
@@ -139,9 +129,9 @@ ggplot(data = sw_gw, aes(x = Year, y = Withdrawals)) +
   scale_fill_manual(values = c("lightsteelblue1", "deepskyblue", "midnightblue")) +
   # scale_color_manual(values = c("deeppink")) +
   scale_y_continuous(labels = scales::comma,
-                     breaks = scales::pretty_breaks(n = 10),
-                     expand = c(0, 0)) +
-  scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
+                     breaks = scales::pretty_breaks(n = 10)) +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10),
+                     expand = c(0, 1)) +
   labs(title = "Trends in population and freshwater withdrawals by source  (1960 - 2015)",
        fill = "EXPLANATION",
        col = " ",
@@ -157,8 +147,159 @@ ggplot(data = sw_gw, aes(x = Year, y = Withdrawals)) +
 
 
 
-# #######################################################################
-# --------------------------- # READ IN DATA ----------------------------
+
+
+
+
+# pct <- pct %>%
+#   filter(!Year %in% c(1950, 1955, 1960)) %>%
+#   group_by(Year) %>%
+#   arrange(Sectors)
+#
+# pct <- pct %>%
+#   pivot_longer(5, values_to = "Total_withdrawals", names_to = "Totals")
+#
+# pct <- pct %>%
+#   group_by(Totals) %>%
+#   mutate(pct_chg_total = (Total_withdrawals/lag(Total_withdrawals) - 1)*100) %>%
+#   replace(is.na(.), 0)
+
+# pct2 <- conus_total %>%
+#   mutate(pct_chg = (Total/lag(Total) - 1)*100) %>%
+#   replace(is.na(.), 0) %>%
+#   filter(!Year %in% c(1950, 1955, 1960))
+
+
+#--------------------- STEP 2: ---------------------
+#------------ YEARLY TOTALS BAR GRAPH --------------
+
+# conus_sum2 <- conus_sum2 %>%
+#   group_by(year) %>%
+#   arrange(desc(sector)) %>%
+#   mutate(sector2=factor(sector, levels= c("Domestic", "Agriculture", "Thermoelectric", "Industrial", "Mining")))
+# conus_total <- conus_sum2 %>%
+#   group_by(Year) %>%
+#   replace(is.na(.), 0) %>%
+#   summarise(Total = sum(Totals))
+
+#--------------------- PLOT 1 ---------------------
+ ggplot() +
+  geom_col(data = conus_sum2, aes(x = Year, y = Withdrawals, fill = Sectors),
+           col = "black",
+           position = position_dodge(3.2),
+           width = 3) +
+
+  geom_point(data = conus_total, aes(x = Year, y = Total),
+             size = 3.5,
+             col = "cyan4") +
+  geom_line(data = conus_total, aes(x = Year, y = Total),
+            size = 1,
+            col = "cyan4")  +
+  scale_fill_manual(values = c("darkgray", "green4", "dodgerblue", "tomato3", "darkgoldenrod2")) +
+  scale_y_continuous(labels = scales::comma,
+                     breaks = scales::pretty_breaks(n = 10),
+                     expand = c(0, 0),
+                     limits = c(0, NA)) +
+                     # sec.axis = sec_axis(trans = ~. + 100000, labels = scales::comma)) +
+  expand_limits(y = max(conus_total$Total) + 20000) +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 20)) +
+  labs(caption = "Figure 1: ",
+       x = "Year",
+       y = "Withdrawals (Mgal/day)",
+       fill = "") +
+  theme_classic() +
+  theme(axis.text = element_text(size=10),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(size = 0.1, linetype = 'solid',
+                                        colour = "lightgrey"), # Changes grid style
+        plot.caption = element_text(hjust = 0, color = "black", size = 9, face = "bold"))
+
+p2 <- ggplot() +
+  geom_col(data = conus_sum2, aes(x = Year, y = Withdrawals, fill = Sectors),
+           col = "black",
+           position = position_dodge(3.2),
+           width = 3) +
+
+  geom_point(data = conus_total, aes(x = Year, y = Total),
+             size = 3.5,
+             col = "cyan4") +
+  geom_line(data = conus_total, aes(x = Year, y = Total),
+            size = 1,
+            col = "cyan4")  +
+  scale_fill_manual(values = c("darkgray", "green4", "dodgerblue", "tomato3", "darkgoldenrod2")) +
+  scale_y_continuous(labels = scales::comma,
+                     breaks = scales::pretty_breaks(n = 10),
+                     expand = c(0, 0),
+                     limits = c(0, NA)) +
+  # sec.axis = sec_axis(trans = ~. + 100000, labels = scales::comma)) +
+  expand_limits(y = max(conus_total$Total) + 20000) +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 20)) +
+  theme_classic() +
+  theme(axis.text = element_text(size=10),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(size = 0.1, linetype = 'solid',
+                                        colour = "lightgrey"), # Changes grid style
+        plot.caption = element_text(hjust = 0, color = "black", size = 9, face = "bold"))
+
+
+wu_all_pop = readRDS("docs/data/data/wu_all_pop.rds")
+
+# Change population units
+wu_all_pop$Population <- (wu_all_pop$Population*1000)
+
+wu_all_pop$Withdrawals <- (wu_all_pop$Withdrawals*10000)
+
+wu_capita <- wu_all_pop %>%
+  group_by(state, Year) %>%
+  filter(Sectors == "Public Supply") %>%
+  mutate(wupc = Withdrawals/Population)
+hist(wu_capita$wupc, breaks = 20)
+
+wu_capita <- wu_all_pop %>%
+  group_by(state, Year) %>%
+  summarize(state_total = sum(Withdrawals), wupc = state_total/Population)
+
+
+df1 <- wu_capita %>%
+  filter(state %in% c("CA", "TX", "NYC", "AZ"))
+# wu_capita2 <- wu_all_pop %>%
+
+wu_capita2 <- wu_all_pop %>%
+  group_by(Year) %>%
+  mutate(Population = sum(Population), usa_total = sum(Withdrawals)) %>%
+  mutate(wupc = usa_total/Population)
+
+tmp1 <- wu_all_pop %>%
+  group_by(Year) %>%
+  summarize(pop = sum(Population), usa_total = sum(Wit))
+
+
+
+states_sectors <- wu_all %>%
+  filter(state %in% c("NY", "AZ", "WA")) %>%
+  group_by(state, Year) %>%
+  mutate(total = sum(Withdrawals)) %>%
+  group_by(state, Year) %>%
+  mutate(percentage = (Withdrawals/total)*100, size = abs(Withdrawals-mean(Withdrawals)/sd(Withdrawals)))
+ggplot(states_sectors, aes(x = Year, y = Withdrawals)) +
+  geom_col(aes(fill = Sectors)) +
+  facet_grid(state~Sectors)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 d_wu_1950 <- lapply(excel_sheets(here("docs/data/data/us1950.xlsx")),
@@ -274,12 +415,220 @@ d_wu_2015 <- read_excel(here("docs/data/data/us2015.xlsx"), sheet = 1, skip = 1)
   mutate(across(c(2, 4:141), as.numeric)) %>%
   replace(is.na(.), 0)
 
+source_GW_2015 <- st_transform(source_GW_2015, 4326)
+
+gw_2015 <- source_GW_2015 %>%
+  filter(Source == "GW")
+sw_2015 <- source_GW_2015 %>%
+  filter(Source == "SW")
+
+pal = colorNumeric("viridis", reverse= TRUE, domain = gw_2015$Withdrawals, n = 10)
+pal2 = colorNumeric("viridis", reverse= TRUE, domain = sw_2015$Withdrawals, n = 10)
+
+leaflet() %>%
+    addProviderTiles(providers$OpenStreetMap, group = 'Base') %>%
+    addProviderTiles(providers$Esri.WorldTopoMap, group = "Terrain") %>%
+    addPolygons(data = gw_2015,
+                fillColor = ~pal(Withdrawals),
+                fillOpacity = .5,
+                color = 'black',
+                group = 'GW') %>%
+    addPolygons(data = sw_2015,
+                fillColor = ~pal2(Withdrawals),
+                fillOpacity = .5,
+                color = 'black',
+                group = 'SW') %>%
+addLayersControl(overlayGroups = c('GW', 'SW'),
+                 options = layersControlOptions(collapsed = FALSE),
+                 baseGroups = c("Base", "Terrain")) %>%
+  addLegend(pal = pal,
+            values = gw_2015$Withdrawals,
+            opacity = .9,
+            title = 'Withdrawals', # Title
+            position = "bottomleft")
+            labFormat = function(type, cuts, p) {
+              paste0(labels)})
+
+### Step 3: Organize data by sector and FIPS (definition here)
 
 
+wu_1950 <- d_wu_1950 %>%
+  mutate(State = area,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = NA,
+         "Industrial" = inpt_wgw_fr + inpt_wsw_fr,
+         "Thermoelectric" = NA,
+         "Year" = 1950) %>%
+  select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+  pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_1955 <- d_wu_1955 %>%
+  mutate(State = area,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = NA,
+         "Industrial" = inpt_wgw_fr + inpt_wsw_fr,
+         "Thermoelectric" = NA,
+         "Year" = 1955) %>%
+  select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+  pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
 
 
+wu_1960 <- d_wu_1960 %>%
+  mutate(State = area,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_w_fr_to,
+         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+         "Industrial" = oi_wsw_fr + oi_wgw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
+         "Year" = 1960) %>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
 
-# ###########################################################################
+wu_1965 <- d_wu_1965 %>%
+  mutate(State = area,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+         "Industrial" = oi_wsw_fr + oi_wgw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
+         "Year" = 1965) %>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_1970 <- d_wu_1970 %>%
+  mutate(State = area,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+         "Industrial" = oi_wsw_fr + oi_wgw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
+         "Year" = 1970) %>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_1975 <- d_wu_1975 %>%
+  mutate(State = area,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+         "Industrial" = oi_wsw_fr + oi_wgw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
+         "Year" = 1975) %>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_1980 <- d_wu_1980 %>%
+  mutate(State = area,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+         "Industrial" = oi_wsw_fr + oi_wgw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
+         "Year" = 1980) %>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year")%>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+# Starting with 1985, we cannot add year column until summarize function, or we will get a summed year for each state
+wu_1985 <- d_wu_1985 %>%
+  mutate(State = scode,
+       Population = po_total,
+       "Public Supply" = ps_wgwfr + ps_wswfr,
+       "Irrigation" = ir_wgwfr + ir_wswfr,
+       "Rural" = do_ssgwf + do_ssswf + ls_gwtot + ls_swtot,
+       "Industrial" = in_wgwfr + in_wswfr +	mi_gwtot + mi_swtot,
+       "Thermoelectric" = pt_wgwfr + pt_wswfr)%>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+  group_by(State) %>%
+  summarize(across(1:6, sum), Year = 1985) %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_1990 <- d_wu_1990 %>%
+  mutate(State = scode,
+         Population = po_total,
+         "Public Supply" = ps_wgwfr + ps_wswfr,
+         "Irrigation" = ir_wgwfr + ir_wswfr,
+         "Rural" = do_ssgwf + do_ssswf + ls_gwtot + ls_swtot,
+         "Industrial" = in_wgwfr + in_wswfr +	mi_gwtot + mi_swtot,
+         "Thermoelectric" = pt_wgwfr + pt_wswfr)%>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+  group_by(State) %>%
+  summarize(across(1:6, sum), Year = 1990) %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_1995 <- d_wu_1995 %>%
+  mutate(State = state_code,
+         Population = total_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr) %>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+  group_by(State) %>%
+  summarize(across(1:6, sum), Year = 1995) %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_2000 <- d_wu_2000 %>%
+  mutate(State = statefips,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = it_wgw_fr + it_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
+  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+  group_by(State) %>%
+  summarize(across(1:6, sum), Year = 2000) %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_2005 <- d_wu_2005 %>%
+  mutate(State = statefips,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
+         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
+  select("State",Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+  group_by(State) %>%
+  summarize(across(1:6, sum), Year = 2005) %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_2010 <- d_wu_2010 %>%
+  mutate(State = statefips,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + li_wgw_fr + li_wsw_fr,
+         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
+  select("State",Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+  group_by(State) %>%
+  summarize(across(1:6, sum), Year = 2010) %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+wu_2015 <- d_wu_2015 %>%
+  mutate(State = statefips,
+         Population = tp_tot_pop,
+         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
+         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
+         "Rural" = do_wgw_fr + do_wsw_fr + li_wgw_fr + li_wsw_fr,
+         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
+         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
+  select("State",Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
+  group_by(State) %>%
+  summarize(across(1:6, sum), Year = 2015) %>%
+  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
+
+
+# ---------------------------------------------------------------------------
 # ---------- READ IN DATA W/ GROUNDWATER + SURFACE COLUMNS ------------------
 
 
@@ -403,19 +752,21 @@ wu_2015 <- d_wu_2015 %>%
   pivot_longer(3:4, values_to = "Withdrawals", names_to = "Source")
 
 
-# ##################################################################################
-# ------------------------ BIND DATAFRAMES + SAVE RDS ------------------------------
 
 
 ### Step 4: Combine data
 
 # Use rbind() to combine all data, then filter out fips codes not linked to one of 50 states
 
+### 1960 - 2015 population column
+wu_all_pop <- rbind(wu_1960, wu_1965, wu_1970, wu_1975, wu_1980, wu_1985, wu_1990, wu_1995, wu_2000, wu_2005, wu_2010, wu_2015) %>%
+  filter(!State %in% c(0, 11, 72, 78))
 
-
+saveRDS(wu_all_source, file = "docs/data/data/wu_all_source.rds")
 
 wu_all_source <- rbind(wu_1960, wu_1965, wu_1970, wu_1975, wu_1980, wu_1985, wu_1990, wu_1995, wu_2000, wu_2005, wu_2010, wu_2015) %>%
   filter(!State %in% c(0, 11, 72, 78))
+
 
 fips <- d_wu_2015 %>%
   select(state, State = statefips) %>%
@@ -424,189 +775,6 @@ fips <- d_wu_2015 %>%
 
 wu_all_source <- inner_join(wu_all_source, fips, by = "State")
 
-saveRDS(wu_all_source, file = "docs/data/data/wu_all_source.rds")
-
-
-# ###########################################################################
-# ------------------------ READ IN DATA WU_ALL ------------------------------
-
-###
-
-
-wu_1950 <- d_wu_1950 %>%
-  mutate(State = area,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = NA,
-         "Industrial" = inpt_wgw_fr + inpt_wsw_fr,
-         "Thermoelectric" = NA,
-         "Year" = 1950) %>%
-  select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
-  pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_1955 <- d_wu_1955 %>%
-  mutate(State = area,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = NA,
-         "Industrial" = inpt_wgw_fr + inpt_wsw_fr,
-         "Thermoelectric" = NA,
-         "Year" = 1955) %>%
-  select("State", "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
-  pivot_longer(2:6, values_to = "Withdrawals", names_to = "Sectors")
-
-
-wu_1960 <- d_wu_1960 %>%
-  mutate(State = area,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_w_fr_to,
-         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
-         "Industrial" = oi_wsw_fr + oi_wgw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
-         "Year" = 1960) %>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_1965 <- d_wu_1965 %>%
-  mutate(State = area,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
-         "Industrial" = oi_wsw_fr + oi_wgw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
-         "Year" = 1965) %>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_1970 <- d_wu_1970 %>%
-  mutate(State = area,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
-         "Industrial" = oi_wsw_fr + oi_wgw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
-         "Year" = 1970) %>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_1975 <- d_wu_1975 %>%
-  mutate(State = area,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
-         "Industrial" = oi_wsw_fr + oi_wgw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
-         "Year" = 1975) %>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year") %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_1980 <- d_wu_1980 %>%
-  mutate(State = area,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
-         "Industrial" = oi_wsw_fr + oi_wgw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr,
-         "Year" = 1980) %>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric", "Year")%>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-# Starting with 1985, we cannot add year column until summarize function, or we will get a summed year for each state
-wu_1985 <- d_wu_1985 %>%
-  mutate(State = scode,
-         Population = po_total,
-         "Public Supply" = ps_wgwfr + ps_wswfr,
-         "Irrigation" = ir_wgwfr + ir_wswfr,
-         "Rural" = do_ssgwf + do_ssswf + ls_gwtot + ls_swtot,
-         "Industrial" = in_wgwfr + in_wswfr +	mi_gwtot + mi_swtot,
-         "Thermoelectric" = pt_wgwfr + pt_wswfr)%>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
-  group_by(State) %>%
-  summarize(across(1:6, sum), Year = 1985) %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_1990 <- d_wu_1990 %>%
-  mutate(State = scode,
-         Population = po_total,
-         "Public Supply" = ps_wgwfr + ps_wswfr,
-         "Irrigation" = ir_wgwfr + ir_wswfr,
-         "Rural" = do_ssgwf + do_ssswf + ls_gwtot + ls_swtot,
-         "Industrial" = in_wgwfr + in_wswfr +	mi_gwtot + mi_swtot,
-         "Thermoelectric" = pt_wgwfr + pt_wswfr)%>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
-  group_by(State) %>%
-  summarize(across(1:6, sum), Year = 1990) %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_1995 <- d_wu_1995 %>%
-  mutate(State = state_code,
-         Population = total_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
-         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr) %>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
-  group_by(State) %>%
-  summarize(across(1:6, sum), Year = 1995) %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_2000 <- d_wu_2000 %>%
-  mutate(State = statefips,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = it_wgw_fr + it_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
-         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
-  select("State", Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
-  group_by(State) %>%
-  summarize(across(1:6, sum), Year = 2000) %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_2005 <- d_wu_2005 %>%
-  mutate(State = statefips,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + ls_wgw_fr + ls_wsw_fr,
-         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
-  select("State",Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
-  group_by(State) %>%
-  summarize(across(1:6, sum), Year = 2005) %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_2010 <- d_wu_2010 %>%
-  mutate(State = statefips,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + li_wgw_fr + li_wsw_fr,
-         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
-  select("State",Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
-  group_by(State) %>%
-  summarize(across(1:6, sum), Year = 2010) %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
-
-wu_2015 <- d_wu_2015 %>%
-  mutate(State = statefips,
-         Population = tp_tot_pop,
-         "Public Supply" = ps_wgw_fr + ps_wsw_fr,
-         "Irrigation" = ir_wgw_fr + ir_wsw_fr,
-         "Rural" = do_wgw_fr + do_wsw_fr + li_wgw_fr + li_wsw_fr,
-         "Industrial" = in_wgw_fr + in_wsw_fr +	mi_wgw_fr + mi_wsw_fr,
-         "Thermoelectric" = pt_wgw_fr + pt_wsw_fr)%>%
-  select("State",Population, "Public Supply", "Irrigation", "Rural", "Industrial", "Thermoelectric") %>%
-  group_by(State) %>%
-  summarize(across(1:6, sum), Year = 2015) %>%
-  pivot_longer(3:7, values_to = "Withdrawals", names_to = "Sectors")
 
 
 

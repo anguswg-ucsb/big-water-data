@@ -181,7 +181,7 @@ ggplot() +
        fill = "Water withdrawals (Mgal/day)") +
   scale_fill_gradient(low = '#CCE5FF', high = "#003366") +
   guides(fill = guide_legend(reverse = TRUE)) +
-  # theme_classic() +
+  theme_classic() +
   theme(plot.title =element_text(size = 16, vjust = 2),
         axis.text = element_text(face = "bold", size =10),
         legend.title = element_text(size = 12),

@@ -1,0 +1,167 @@
+---
+title: "Figure"
+author: "[ENVS 193](index.html)"
+date: "Angus Watters"
+mail: "adwattersgrubstein@ucsb.edu"
+github: "anguswg-ucsb"
+home: ""
+output:
+  rmdformats::downcute
+subtitle: "USGS Water use figures"
+---
+
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+# Angus Watters
+# ENVS 193
+# Lab 8
+
+# Data prep & cleaning
+library(janitor)
+library(here)
+library(readxl)
+# Data manipulation
+library(tidyverse)
+
+# Spatial packages
+library(USAboundaries)
+library(sf)
+```
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+# Step 1:
+# Read in wu_all RDS
+wu_all = readRDS("../docs/data/data/wu_all.rds")
+
+wu_all_pop = readRDS("../docs/data/data/wu_all_pop.rds")
+
+# Read data for 2015
+d_wu_2015 <- read_excel(here("docs/data/data/us2015.xlsx"), sheet = 1, skip = 1) %>%
+  clean_names() %>%
+  mutate(across(c(2, 4:141), as.numeric)) %>%
+  replace(is.na(.), 0)
+
+fips <- d_wu_2015 %>%
+  select(state, State = statefips) %>%
+  unique() %>%
+  filter(!State %in% c(0, 11,72, 78))
+
+# add state names to data frame by inner joining
+wu_all <- inner_join(wu_all, fips, by= "State")
+wu_all <- rename(wu_all, fips = State)
+wu_all <- wu_all %>%
+  replace(is.na(.), 0)
+
+#--------------------- STEP 2: ---------------------
+#------------ YEARLY TOTALS BAR GRAPH --------------
+
+  # group by sectors and year, and sum the withdrawals, this gives you the total US withdrawals by sector per year
+conus_sum <- wu_all %>%
+  group_by(Sectors, Year) %>%
+  summarise(Withdrawals = sum(Withdrawals))
+
+# Create another data frame to total withdrawals for all sectors in each year, this data frame will be used to add total withdrawals geom_line
+conus_total <- conus_sum %>%
+  group_by(Year) %>%
+  replace(is.na(.), 0) %>%
+  summarise(Total = sum(Withdrawals))
+
+#--------------------- PLOT 1 ---------------------
+ggplot() +
+  geom_col(data = conus_sum, aes(x = Year, y = Withdrawals, fill = Sectors),
+           col = "black",
+           position = position_dodge(3.2),
+           width = 3) +
+  geom_line(data = conus_total, aes(x = Year, y = Total),
+            size = 1,
+            col = "deepskyblue") +
+  geom_point(data = conus_total, aes(x = Year, y = Total),
+             size = 4,
+             col = "deepskyblue",
+             shape = 1) +
+  scale_fill_manual(values = c("darkgray", "green4", "dodgerblue", "tomato3", "darkgoldenrod2")) +
+  scale_y_continuous(labels = scales::comma,
+                     breaks = scales::pretty_breaks(n = 10),
+                     expand = c(0, 0),
+                     limits = c(0, NA),
+                     sec.axis = sec_axis(trans = ~./2*(2.75),
+                                         breaks = scales::pretty_breaks(n = 12),
+                                         name= "Totalwithdrawals (Mgal/day)",
+                                         labels = scales::comma)) +
+  expand_limits(y = max(conus_total$Total) + 20000) +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 20)) +
+  labs(title = "Trends in total water withdrawals by water-use category (1950 - 2015)",
+       x = "",
+       y = "Withdrawals (Mgal/day)",
+       fill = "") +
+  ggthemes::theme_few() +
+  theme(axis.text = element_text(size=10),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_blank(),# Changes grid style
+        plot.caption = element_text(hjust = 0, color = "black", size = 9, face = "bold"),
+        legend.position = "bottom")
+```
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, witdth = "100%"}
+
+#--------------------------- STEP 4: --------------------------
+#-------------------- GW vs. SW BAR PLOT ----------------------
+
+wu_all_source = readRDS("../docs/data/data/wu_all_source.rds")
+
+# yearly US totals for groundwater & surface water
+sw_gw <- wu_all_source %>%
+  group_by(Source, Year) %>%
+  summarize(Withdrawals = sum(Withdrawals))
+
+# Sum the final yearly total, pivot with the same column names in our other data so that we can bind the rows back onto sw_gw. This is so we can use one dataframe for the ggplot, so we can have the total value as another bar in our barchart
+sw_gw_total <- sw_gw %>%
+  group_by(Year) %>%
+  summarize(Total = sum(Withdrawals)) %>%
+  pivot_longer(2, values_to = "Withdrawals", names_to = "Source")
+
+# bind rows back with sw_gw
+sw_gw <- bind_rows(sw_gw, sw_gw_total)
+
+# calculate each year total US pop
+pop <- wu_all_source %>%
+  filter(Source == "Groundwater") %>%
+  group_by(Year) %>%
+  summarize(total_pop = sum(Population)) %>%
+  mutate(Population = "Population")
+
+# join back to sw_gw dataframe
+sw_gw <- inner_join(sw_gw, pop, by = "Year")
+
+
+
+ggplot(data = sw_gw, aes(x = Year, y = Withdrawals)) +
+  geom_col(aes(fill = Source),  col = "black",
+           position = position_dodge(3.2),
+           width = 3) +
+  geom_line(aes(y = total_pop, col = Population), size = 2) +
+  scale_color_manual(values = c("deeppink")) +
+  scale_fill_manual(values = c("lightsteelblue1", "deepskyblue", "midnightblue")) +
+  # scale_color_manual(values = c("deeppink")) +
+  scale_y_continuous(labels = scales::comma,
+                     breaks = scales::pretty_breaks(n = 10)) +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10),
+                     expand = c(0, 1)) +
+  labs(title = "Trends in population and freshwater withdrawals by source  (1960 - 2015)",
+       fill = "EXPLANATION",
+       col = " ",
+       x = "Year",
+       y = "Withdrawals (Mgal/day)") +
+  ggthemes::theme_few() +
+  theme(axis.text = element_text(size=10),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_blank(),
+        plot.caption = element_text(hjust = 0, color = "black", size = 9, face = "bold"))
+
+
+
+
+```
+
